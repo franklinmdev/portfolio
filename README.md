@@ -27,22 +27,26 @@ A modern, responsive portfolio website built with [Astro](https://astro.build/) 
 ## 🚀 Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/franklinmdev/portfolio.git
    cd portfolio
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start development server**
+
    ```bash
    npm run dev
    ```
 
 4. **Build for production**
+
    ```bash
    npm run build
    ```
@@ -143,4 +147,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Built with ❤️ using [Astro](https://astro.build/) by Franklin Martinez
-# Portfolio Update - Mon, Jun 30, 2025 10:40:36 PM
