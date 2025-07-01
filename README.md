@@ -53,7 +53,7 @@ A modern, responsive portfolio website built with [Astro](https://astro.build/) 
 
 ## 📁 Project Structure
 
-```
+```text
 /
 ├── public/
 │   ├── favicon.svg
