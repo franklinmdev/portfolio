@@ -1,0 +1,26 @@
+{
+  "name": "portfolio",
+  "description": "Franklin Martinez - Software Engineer and Web Developer Portfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "author": "Franklin Martinez <franklinmdev@hotmail.com>",
+  "homepage": "https://franklinmdev.me",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/franklinmdev/portfolio.git"
+  },
+  "keywords": ["portfolio", "astro", "web-developer", "frontend", "typescript", "franklin-martinez"],
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.10.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
