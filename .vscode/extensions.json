@@ -1,4 +1,32 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
+  "recommendations": [
+    // Core Astro
+    "astro-build.astro-vscode",
+
+    // Formatting & Linting
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+
+    // Tailwind CSS
+    "bradlc.vscode-tailwindcss",
+
+    // JavaScript/TypeScript
+    "ms-vscode.vscode-typescript-next",
+
+    // React (for Astro React components)
+    "ms-vscode.vscode-jsx",
+
+    // Utilities
+    "christian-kohler.path-intellisense",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-json",
+
+    // Git
+    "eamodio.gitlens",
+
+    // File icons
+    "vscode-icons-team.vscode-icons"
+  ],
   "unwantedRecommendations": []
 }

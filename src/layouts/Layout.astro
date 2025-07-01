@@ -1,0 +1,50 @@
+---
+import Footer from "@/components/Footer.astro"
+import Header from "@/components/Header.astro"
+import Spotlight from "@/components/react/Spotlight.tsx"
+import "@/styles/global.css"
+
+export interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description } = Astro.props
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content={description ||
+        "Franklin Martinez - Software Engineer and Web Developer Portfolio"}
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon and icons -->
+    <link rel="icon" type="image/png" href="/avatar.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/avatar.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/avatar.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/avatar.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/avatar.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/avatar.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="antialiased">
+    <Spotlight client:idle />
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>

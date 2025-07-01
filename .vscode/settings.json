@@ -1,0 +1,56 @@
+{
+  // Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+
+  // Astro specific - Use Prettier with astro plugin
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+
+  // File associations
+  "files.associations": {
+    "*.astro": "astro"
+  },
+
+  // Tailwind CSS
+  "tailwindCSS.includeLanguages": {
+    "astro": "html"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["class:list=\\{([^}]*)\\}", "[\"'`]([^\"'`]*)[\"'`]"]
+  ],
+
+  // Editor appearance
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.linkedEditing": true,
+  "editor.rulers": [80],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 80,
+
+  // File exclusions for cleaner workspace
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.astro": true,
+    "**/dist": true,
+    "**/.vercel": true,
+    "**/.netlify": true
+  },
+
+  // Search exclusions
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.astro": true,
+    "**/dist": true,
+    "**/.vercel": true,
+    "**/.netlify": true,
+    "**/package-lock.json": true
+  }
+}

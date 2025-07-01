@@ -1,0 +1,161 @@
+---
+import UserAvatar from "@/components/react/UserAvatar.tsx"
+// No imports needed for public assets
+---
+
+<header
+  id="header"
+  class="bg-opacity-80 fixed top-0 right-0 left-0 z-50 bg-[#111111] backdrop-blur-sm"
+>
+  <div class="container mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+    <nav class="flex items-center justify-between">
+      <a href="#home" class="text-xl font-bold tracking-tighter text-white">
+        <UserAvatar client:load />
+      </a>
+      <div class="hidden items-center space-x-8 md:flex">
+        <a
+          href="#experience"
+          class="nav-link text-sm font-medium text-zinc-400 transition-colors hover:text-white"
+          data-translate-key="nav_experience"
+        >
+          Experience
+        </a>
+        <a
+          href="#projects"
+          class="nav-link text-sm font-medium text-zinc-400 transition-colors hover:text-white"
+          data-translate-key="nav_projects"
+        >
+          Projects
+        </a>
+        <a
+          href="#contact"
+          class="inline-block rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-zinc-700"
+          data-translate-key="nav_contact"
+        >
+          Contact
+        </a>
+        <button
+          id="lang-switcher"
+          class="w-8 text-center text-sm font-semibold text-zinc-400 uppercase transition-colors hover:text-white"
+        >
+        </button>
+      </div>
+      <button
+        id="mobile-menu-btn"
+        class="flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-zinc-800/50 md:hidden"
+        aria-label="Toggle mobile menu"
+      >
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          >
+          </path>
+        </svg>
+      </button>
+    </nav>
+  </div>
+  <div id="mobile-menu" class="hidden px-4 pb-4 sm:px-6 md:hidden lg:px-8">
+    <a
+      href="#experience"
+      class="block py-2 text-zinc-300"
+      data-translate-key="nav_experience_mobile"
+    >
+      Experience
+    </a>
+    <a
+      href="#projects"
+      class="block py-2 text-zinc-300"
+      data-translate-key="nav_projects_mobile"
+    >
+      Projects
+    </a>
+    <a
+      href="#contact"
+      class="mt-2 block rounded-md bg-zinc-800 px-4 py-2 text-center text-white"
+      data-translate-key="nav_contact_mobile"
+    >
+      Contact
+    </a>
+    <button
+      id="lang-switcher-mobile"
+      class="mt-2 block w-full py-2 text-center text-zinc-300 uppercase"
+    >
+    </button>
+  </div>
+</header>
+
+<script>
+  // Mobile menu functionality
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn")
+  const mobileMenu = document.getElementById("mobile-menu")
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden")
+    })
+  }
+
+  // Language switcher functionality
+  const langSwitcher = document.getElementById("lang-switcher")
+  const langSwitcherMobile = document.getElementById("lang-switcher-mobile")
+
+  // Set initial language
+  let currentLang = localStorage.getItem("lang") || "en"
+
+  if (langSwitcher) {
+    langSwitcher.textContent = currentLang === "en" ? "es" : "en"
+  }
+  if (langSwitcherMobile) {
+    langSwitcherMobile.textContent = currentLang === "en" ? "es" : "en"
+  }
+
+  if (langSwitcher) {
+    langSwitcher.addEventListener("click", () => {
+      const newLang = currentLang === "en" ? "es" : "en"
+      currentLang = newLang
+      localStorage.setItem("lang", newLang)
+      langSwitcher.textContent = newLang === "en" ? "es" : "en"
+      if (langSwitcherMobile) {
+        langSwitcherMobile.textContent = newLang === "en" ? "es" : "en"
+      }
+    })
+  }
+
+  if (langSwitcherMobile) {
+    langSwitcherMobile.addEventListener("click", () => {
+      const newLang = currentLang === "en" ? "es" : "en"
+      currentLang = newLang
+      localStorage.setItem("lang", newLang)
+      langSwitcherMobile.textContent = newLang === "en" ? "es" : "en"
+      if (langSwitcher) {
+        langSwitcher.textContent = newLang === "en" ? "es" : "en"
+      }
+    })
+  }
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = (e.target as HTMLAnchorElement).getAttribute("href")
+      if (targetId && targetId.length > 1) {
+        e.preventDefault()
+        const targetElement = document.querySelector(targetId)
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" })
+        }
+      }
+      // Close mobile menu if open
+      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.add("hidden")
+      }
+    })
+  })
+</script>

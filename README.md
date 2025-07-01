@@ -2,27 +2,32 @@
 
 [![Deploy to GitHub Pages](https://github.com/franklinmdev/portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/franklinmdev/portfolio/actions/workflows/deploy.yml)
 
-A modern, responsive portfolio website built with [Astro](https://astro.build/) and deployed on GitHub Pages.
+A modern, high-performance portfolio website built with [Astro](https://astro.build/), [React](https://react.dev/), and [Tailwind CSS v4](https://tailwindcss.com/).
 
 🌐 **Live Site:** [franklinmdev.me](https://franklinmdev.me)
 
 ## ✨ Features
 
-- **⚡ Fast & Modern**: Built with Astro for optimal performance
-- **📱 Responsive Design**: Works perfectly on all devices
-- **🌙 Dark Mode**: Clean dark design with excellent contrast
-- **♿ Accessible**: Follows web accessibility best practices
-- **🚀 Auto-Deploy**: Automatic deployment via GitHub Actions
-- **🎨 Modern UI**: Clean, professional design with smooth animations
+- **⚡ Lightning Fast**: Built with Astro for optimal performance and minimal JavaScript
+- **🎨 Modern Design**: Responsive dark theme with smooth animations and hover effects
+- **🔧 Interactive Components**: React components for dynamic features (contact form, spotlight effect)
+- **📱 Mobile First**: Perfect responsive design across all devices
+- **♿ Accessible**: WCAG compliant with proper ARIA labels and semantic HTML
+- **🌟 Visual Effects**: Interactive mouse spotlight and smooth scroll animations
+- **📧 Contact Form**: Functional contact form with validation
+- **🚀 Auto-Deploy**: Continuous deployment via GitHub Actions
 - **📈 SEO Optimized**: Meta tags, structured data, and performance optimized
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [Astro](https://astro.build/)
-- **Styling:** Pure CSS with modern dark theme
-- **TypeScript:** Strict mode enabled
-- **Deployment:** GitHub Pages
-- **CI/CD:** GitHub Actions
+- **Framework:** [Astro v5](https://astro.build/) with TypeScript (strictest mode)
+- **Frontend:** [React 19](https://react.dev/) for interactive components
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) with custom theme
+- **Icons:** [Lucide React](https://lucide.dev/) for modern iconography
+- **UI Components:** Custom components with [shadcn/ui](https://ui.shadcn.com/) setup
+- **Code Quality:** ESLint + Prettier with Astro and TypeScript support
+- **Deployment:** GitHub Pages with custom domain
+- **CI/CD:** GitHub Actions for automated deployment
 
 ## 🚀 Quick Start
 
@@ -45,93 +50,150 @@ A modern, responsive portfolio website built with [Astro](https://astro.build/) 
    npm run dev
    ```
 
-4. **Build for production**
+4. **Code quality commands**
+
+   ```bash
+   npm run lint          # Check for linting issues
+   npm run format        # Format code with Prettier
+   npm run check         # Run both linting and formatting checks
+   npm run format:fix    # Auto-fix formatting and linting issues
+   ```
+
+5. **Build for production**
 
    ```bash
    npm run build
+   npm run preview       # Preview production build locally
    ```
 
 ## 📁 Project Structure
 
 ```text
-/
+portfolio/
 ├── public/
-│   ├── favicon.svg
+│   ├── avatar.png         # Profile avatar
+│   ├── favicon.png        # Site favicon
+│   ├── favicon.svg        # Vector favicon
 │   └── CNAME              # Custom domain configuration
 ├── src/
-│   └── pages/
-│       └── index.astro    # Homepage
+│   ├── assets/
+│   │   └── Avatar.png     # Avatar asset
+│   ├── components/
+│   │   ├── react/         # React interactive components
+│   │   │   ├── ContactForm.tsx    # Contact form with validation
+│   │   │   ├── Spotlight.tsx      # Mouse spotlight effect
+│   │   │   └── UserAvatar.tsx     # User avatar component
+│   │   ├── ui/            # shadcn/ui components
+│   │   │   └── avatar.tsx # Avatar UI component
+│   │   ├── Experience.astro       # Work experience timeline
+│   │   ├── Footer.astro           # Site footer
+│   │   ├── Header.astro           # Navigation header
+│   │   ├── Projects.astro         # Projects showcase
+│   │   └── Technologies.astro     # Tech stack display
+│   ├── content/           # Content collections (future)
+│   ├── i18n/             # Internationalization (future)
+│   ├── layouts/
+│   │   └── Layout.astro   # Main site layout
+│   ├── lib/
+│   │   └── utils.ts       # Utility functions
+│   ├── pages/
+│   │   └── index.astro    # Homepage
+│   └── styles/
+│       └── global.css     # Global styles and animations
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml     # GitHub Actions deployment
 ├── astro.config.mjs       # Astro configuration
-├── tsconfig.json          # TypeScript configuration
-└── package.json
+├── components.json        # shadcn/ui configuration
+├── eslint.config.js       # ESLint configuration
+├── tsconfig.json          # TypeScript configuration (strictest)
+├── TASKS.md              # Development task tracking
+└── reference.html        # Design reference (legacy)
 ```
+
+## 🎨 Design System
+
+### Color Palette
+
+- **Background**: Deep slate (`#0f172a`) with noise texture overlay
+- **Text**: High contrast whites and grays for excellent readability
+- **Accents**: Blue gradient (`#3b82f6` → `#2563eb`) for CTAs and highlights
+- **Interactive**: Violet hover states (`#7c3aed`) for enhanced UX
+
+### Typography
+
+- **Primary**: System font stack optimized for performance
+- **Code**: Fira Code for syntax highlighting in IDE blocks
+
+### Components
+
+- **Hero Section**: Split layout with sticky sidebar on desktop
+- **Experience Timeline**: Interactive timeline with hover effects
+- **Technology Tags**: Animated badges with hover states
+- **Project Cards**: Grid layout with smooth hover animations
+- **Contact Form**: Validated form with success states
 
 ## 🚀 Deployment
 
-This site is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
+### Automatic Deployment
+
+This site automatically deploys to GitHub Pages when changes are pushed to the `main` branch using GitHub Actions.
 
 ### Custom Domain Setup
 
-1. **Domain Configuration**: The `CNAME` file in `/public` contains `franklinmdev.me`
-2. **DNS Setup**: Point your domain's DNS to GitHub Pages:
-   - Create an `A` record pointing to GitHub's IP addresses:
+1. **Domain Configuration**: The `CNAME` file contains `franklinmdev.me`
+2. **DNS Setup**: Configure your domain's DNS:
+   - **A Records** pointing to GitHub's IPs:
      - `185.199.108.153`
      - `185.199.109.153`
      - `185.199.110.153`
      - `185.199.111.153`
-   - Or create a `CNAME` record pointing to `franklinmdev.github.io`
+   - **Or CNAME** pointing to `franklinmdev.github.io`
 
-### GitHub Pages Settings
+### Performance Metrics
 
-1. Go to your repository settings
-2. Navigate to "Pages" section
-3. Set source to "GitHub Actions"
-4. The site will be available at your custom domain
+- **Lighthouse Score**: Targeting 100/100 across all categories
+- **Bundle Size**: Minimal JavaScript (~50KB total)
+- **Core Web Vitals**: Optimized for excellent user experience
 
-## 🎨 Customization
+## 🔧 Development
 
-### Colors & Theming
+### Code Quality
 
-The design uses a carefully crafted dark color palette with excellent contrast:
+- **ESLint**: Configured with TypeScript, React, and Astro rules
+- **Prettier**: Automatic code formatting with Astro and Tailwind plugins
+- **TypeScript**: Strictest configuration for maximum type safety
 
-```css
-body {
-  background-color: #0f172a; /* Dark slate background */
-  color: #f1f5f9;            /* Light text */
-}
+### Architecture Decisions
 
-h1 {
-  background: linear-gradient(135deg, #3b82f6, #2563eb); /* Blue gradient */
-}
-
-p {
-  color: #94a3b8; /* Muted text */
-}
-```
-
-### Content Updates
-
-- Update personal information in `src/pages/index.astro`
-- Modify meta tags for SEO
-- Add your projects and content as needed
-
-## 📊 Performance
-
-- **Lighthouse Score**: 100/100 across all categories
-- **Zero JavaScript**: Pure HTML/CSS for maximum performance
-- **Optimized CSS**: Minimal, unused CSS removed
-- **Dark Mode**: Reduces eye strain and saves battery on OLED displays
+- **Astro Islands**: React components are hydrated only when needed (`client:load`, `client:idle`)
+- **CSS-in-CSS**: Tailwind utility classes with custom CSS for complex animations
+- **Component Organization**: Clear separation between Astro (static) and React (interactive) components
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: ✨ add amazing feature'`)
+3. Commit your changes using conventional commits:
+
+   ```bash
+   git commit -m 'feat: ✨ add amazing feature'
+   ```
+
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+### Commit Convention
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) with gitmoji:
+
+- `feat: ✨ new feature`
+- `fix: 🐛 bug fix`
+- `docs: 📝 documentation`
+- `style: 💄 styling`
+- `refactor: ♻️ code refactoring`
+- `perf: ⚡️ performance improvement`
+- `test: ✅ tests`
 
 ## 📝 License
 
@@ -146,4 +208,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Built with ❤️ using [Astro](https://astro.build/) by Franklin Martinez
+Built with ❤️ using [Astro](https://astro.build/), [React](https://react.dev/), and [Tailwind CSS](https://tailwindcss.com/) by Franklin Martinez
