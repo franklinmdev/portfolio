@@ -10,6 +10,7 @@ export default function PageLoader({
 
   useEffect(() => {
     let loadingTimer: NodeJS.Timeout
+    let shouldShowLoaderOnUnload = true
     let currentPath = window.location.pathname.endsWith("/")
       ? window.location.pathname
       : window.location.pathname + "/"
@@ -26,7 +27,11 @@ export default function PageLoader({
     }
 
     // Only show loading for actual page navigation, not hash changes
-    const handleBeforeUnload = () => startLoading()
+    const handleBeforeUnload = () => {
+      if (shouldShowLoaderOnUnload) {
+        startLoading()
+      }
+    }
 
     const handleLoad = () => stopLoading()
 
@@ -52,6 +57,16 @@ export default function PageLoader({
       // Skip loader for links that open in new tab
       const linkTarget = link.getAttribute("target")
       if (linkTarget === "_blank" || linkTarget === "_new") {
+        return
+      }
+
+      // Skip loader for mailto:, tel:, and other protocol links
+      if (/^(mailto:|tel:|sms:|whatsapp:)/i.test(href)) {
+        // Disable beforeunload loader temporarily
+        shouldShowLoaderOnUnload = false
+        setTimeout(() => {
+          shouldShowLoaderOnUnload = true
+        }, 100)
         return
       }
 
