@@ -15,6 +15,9 @@ export default function PageLoader({
       ? window.location.pathname
       : window.location.pathname + "/"
 
+    // Reset loading state on mount (handles Back-Forward Cache)
+    setIsLoading(false)
+
     const startLoading = () => {
       setIsLoading(true)
     }
@@ -24,6 +27,11 @@ export default function PageLoader({
       loadingTimer = setTimeout(() => {
         setIsLoading(false)
       }, 200)
+    }
+
+    // Check if page is already loaded when component mounts
+    if (document.readyState === "complete") {
+      stopLoading()
     }
 
     // Only show loading for actual page navigation, not hash changes
@@ -97,24 +105,45 @@ export default function PageLoader({
       const newPath = window.location.pathname.endsWith("/")
         ? window.location.pathname
         : window.location.pathname + "/"
+
       if (newPath !== currentPath) {
         currentPath = newPath
-        startLoading()
-        setTimeout(stopLoading, 300)
+        // Don't start loading if already loading
+        if (!isLoading) {
+          startLoading()
+        }
+        // Ensure we stop loading after navigation completes
+        requestAnimationFrame(() => {
+          if (document.readyState === "complete") {
+            stopLoading()
+          }
+        })
+      }
+    }
+
+    // Handle page visibility changes (for Back-Forward Cache)
+    const handleVisibilityChange = () => {
+      if (!document.hidden && isLoading) {
+        // Page became visible and loader is stuck - stop it
+        stopLoading()
       }
     }
 
     window.addEventListener("beforeunload", handleBeforeUnload)
     window.addEventListener("load", handleLoad)
     window.addEventListener("popstate", handlePopState)
+    window.addEventListener("pageshow", handleLoad)
     document.addEventListener("click", handleClick)
+    document.addEventListener("visibilitychange", handleVisibilityChange)
 
     return () => {
       clearTimeout(loadingTimer)
       window.removeEventListener("beforeunload", handleBeforeUnload)
       window.removeEventListener("load", handleLoad)
       window.removeEventListener("popstate", handlePopState)
+      window.removeEventListener("pageshow", handleLoad)
       document.removeEventListener("click", handleClick)
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
     }
   }, [])
 
