@@ -18,5 +18,9 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Deploy
-        run: echo "Add your deploy step here (e.g. upload to Vercel, Netlify, etc.)"
+      - name: Deploy to GitHub Pages
+        uses: withastro/action@v2
+        with:
+          deploy-branch: gh-pages
+          node-version: 20
+          package-manager: npm
