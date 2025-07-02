@@ -21,6 +21,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: withastro/action@v2
         with:
-          deploy-branch: gh-pages
           node-version: 20
           package-manager: npm
