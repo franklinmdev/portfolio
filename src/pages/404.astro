@@ -1,0 +1,139 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { getLangFromUrl, useTranslations, type Language } from "../i18n/utils"
+
+// Set 404 status for proper HTTP response
+Astro.response.status = 404
+Astro.response.statusText = "Not Found"
+
+// Detect language from URL or default to English
+const lang = getLangFromUrl(Astro.url) || "en"
+const t = useTranslations(lang as Language)
+---
+
+<Layout title={t("error.404.title")} description={t("error.404.description")}>
+  <main
+    class="flex justify-center items-center px-4 py-8 sm:py-16 pt-20 sm:pt-24 min-h-screen"
+  >
+    <div class="mx-auto max-w-xl text-center">
+      <!-- 404 Image -->
+      <div class="mb-6 sm:mb-8">
+        <img
+          src="/404.png"
+          alt="404 - Page Not Found"
+          class="opacity-90 mx-auto w-full max-w-48 sm:max-w-64 md:max-w-80 h-auto object-contain"
+          width="320"
+          height="320"
+        />
+      </div>
+
+      <!-- Error Content -->
+      <div class="space-y-4 sm:space-y-6">
+        <h1
+          class="bg-clip-text bg-gradient-to-r from-violet-500 to-emerald-500 font-bold text-transparent text-2xl sm:text-4xl lg:text-5xl leading-tight sm:leading-tight lg:leading-tight"
+        >
+          {t("error.404.heading")}
+        </h1>
+
+        <p
+          class="mx-auto max-w-lg text-zinc-400 text-base sm:text-lg leading-relaxed"
+        >
+          {t("error.404.description")}
+        </p>
+
+        <!-- Possible Reasons -->
+        <div
+          class="bg-zinc-900/50 mx-auto mt-6 sm:mt-8 p-4 sm:p-6 border border-zinc-800 rounded-lg max-w-sm sm:max-w-md text-left"
+        >
+          <h3
+            class="mb-2 sm:mb-3 font-semibold text-zinc-300 text-xs sm:text-sm"
+          >
+            {t("error.404.reasons.title")}
+          </h3>
+          <ul class="space-y-1.5 sm:space-y-2 text-zinc-400 text-xs sm:text-sm">
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 sm:mt-1 text-violet-400">•</span>
+              {t("error.404.reasons.typo")}
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 sm:mt-1 text-violet-400">•</span>
+              {t("error.404.reasons.moved")}
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 sm:mt-1 text-violet-400">•</span>
+              {t("error.404.reasons.outdated")}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div
+          class="flex sm:flex-row flex-col justify-center items-center gap-3 sm:gap-4 mt-6 sm:mt-8"
+        >
+          <a
+            href={lang === "en" ? "/" : `/${lang}/`}
+            class="group inline-flex justify-center items-center gap-2 bg-violet-500 hover:bg-violet-600 px-4 py-2 rounded-md w-full sm:w-auto h-9 font-medium text-white text-sm hover:scale-105 transition-all duration-200 cursor-pointer transform"
+          >
+            <svg
+              class="size-4 transition-transform group-hover:-translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              >
+              </path>
+            </svg>
+            {t("error.404.actions.home")}
+          </a>
+
+          <a
+            href={lang === "en" ? "/#projects" : `/${lang}/#projects`}
+            class="group inline-flex justify-center items-center gap-2 bg-background hover:bg-accent px-4 py-2 border border-zinc-700 hover:border-zinc-600 rounded-md w-full sm:w-auto h-9 font-medium text-zinc-300 hover:text-white text-sm transition-all duration-200 cursor-pointer"
+          >
+            <svg
+              class="size-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              >
+              </path>
+            </svg>
+            {t("error.404.actions.projects")}
+          </a>
+
+          <button
+            onclick="history.back()"
+            class="group inline-flex justify-center items-center gap-2 hover:bg-accent px-4 py-2 w-full sm:w-auto h-9 font-medium text-zinc-400 hover:text-zinc-300 text-sm transition-colors duration-200 cursor-pointer"
+          >
+            <svg
+              class="size-4 transition-transform group-hover:-translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              >
+              </path>
+            </svg>
+            {t("error.404.actions.previous")}
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

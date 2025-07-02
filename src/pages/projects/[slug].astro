@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content"
+
+// Generate static paths for all projects (for redirect purposes)
+export async function getStaticPaths() {
+  const projects = await getCollection("projects")
+  const paths: { params: { slug: string } }[] = []
+
+  for (const project of projects) {
+    // Extract just the slug part from the ID (e.g., "devflow" from "en/devflow")
+    const [...slugParts] = project.id.split("/").slice(1) // Skip the language part
+    const slug = slugParts.join("/")
+
+    // Only add unique slugs (avoid duplicates from different languages)
+    if (slug && !paths.some((path) => path.params.slug === slug)) {
+      paths.push({
+        params: { slug },
+      })
+    }
+  }
+
+  return paths
+}
+
+// Redirect old project URLs to localized version
+const { slug } = Astro.params
+return Astro.redirect(`/en/projects/${slug}`)
+---

@@ -1,6 +1,27 @@
 ---
 import UserAvatar from "@/components/react/UserAvatar.tsx"
-// No imports needed for public assets
+import {
+  getLangFromUrl,
+  useTranslations,
+  getLocalizedUrl,
+  languages,
+} from "@/i18n/utils"
+import type { Language } from "@/i18n/utils"
+
+// Get current language and translation function
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+// Generate locale-aware URLs - always link to home page sections
+const experienceUrl = getLocalizedUrl("", lang) + "#experience"
+const projectsUrl = getLocalizedUrl("", lang) + "#projects"
+const contactUrl = getLocalizedUrl("", lang) + "#contact"
+
+// Get the other language for language switcher
+const otherLang = (lang === "en" ? "es" : "en") as Language
+const currentPath = Astro.url.pathname.replace(`/${lang}`, "") || ""
+const otherLangUrl = getLocalizedUrl(currentPath, otherLang)
+const otherLangName = languages[otherLang]
 ---
 
 <header
@@ -9,36 +30,42 @@ import UserAvatar from "@/components/react/UserAvatar.tsx"
 >
   <div class="container mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
     <nav class="flex items-center justify-between">
-      <a href="#home" class="text-xl font-bold tracking-tighter text-white">
+      <button
+        id="avatar-home-btn"
+        class="cursor-pointer text-xl font-bold tracking-tighter text-white"
+      >
         <UserAvatar client:load />
-      </a>
+      </button>
       <div class="hidden items-center space-x-8 md:flex">
         <a
-          href="#experience"
+          href={experienceUrl}
           class="nav-link text-sm font-medium text-zinc-400 transition-colors hover:text-white"
-          data-translate-key="nav_experience"
+          data-section="experience"
         >
-          Experience
+          {t("nav.experience")}
         </a>
         <a
-          href="#projects"
+          href={projectsUrl}
           class="nav-link text-sm font-medium text-zinc-400 transition-colors hover:text-white"
-          data-translate-key="nav_projects"
+          data-section="projects"
         >
-          Projects
+          {t("nav.projects")}
         </a>
         <a
-          href="#contact"
-          class="inline-block rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-zinc-700"
-          data-translate-key="nav_contact"
+          href={contactUrl}
+          class="nav-link inline-block rounded-md bg-zinc-800 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700"
+          data-section="contact"
         >
-          Contact
+          {t("nav.contact")}
         </a>
-        <button
-          id="lang-switcher"
-          class="w-8 text-center text-sm font-semibold text-zinc-400 uppercase transition-colors hover:text-white"
+        <a
+          href={otherLangUrl}
+          class="w-8 cursor-pointer text-center text-sm font-semibold text-zinc-400 uppercase transition-colors hover:text-white"
+          title={`Switch to ${otherLangName}`}
+          data-lang-switch
         >
-        </button>
+          {otherLang.toUpperCase()}
+        </a>
       </div>
       <button
         id="mobile-menu-btn"
@@ -64,33 +91,52 @@ import UserAvatar from "@/components/react/UserAvatar.tsx"
   </div>
   <div id="mobile-menu" class="hidden px-4 pb-4 sm:px-6 md:hidden lg:px-8">
     <a
-      href="#experience"
-      class="block py-2 text-zinc-300"
-      data-translate-key="nav_experience_mobile"
+      href={experienceUrl}
+      class="mobile-nav-link block py-3 text-zinc-300 transition-colors"
+      data-section="experience"
     >
-      Experience
+      {t("nav.experience")}
     </a>
     <a
-      href="#projects"
-      class="block py-2 text-zinc-300"
-      data-translate-key="nav_projects_mobile"
+      href={projectsUrl}
+      class="mobile-nav-link block py-3 text-zinc-300 transition-colors"
+      data-section="projects"
     >
-      Projects
+      {t("nav.projects")}
     </a>
     <a
-      href="#contact"
-      class="mt-2 block rounded-md bg-zinc-800 px-4 py-2 text-center text-white"
-      data-translate-key="nav_contact_mobile"
+      href={contactUrl}
+      class="mobile-nav-link mt-3 block rounded-md bg-zinc-800 px-3 py-3 text-center font-medium text-white transition-colors hover:bg-zinc-700"
+      data-section="contact"
     >
-      Contact
+      {t("nav.contact")}
     </a>
-    <button
-      id="lang-switcher-mobile"
-      class="mt-2 block w-full py-2 text-center text-zinc-300 uppercase"
+    <a
+      href={otherLangUrl}
+      class="mt-3 block w-full cursor-pointer py-3 text-center font-medium text-zinc-300 uppercase"
+      title={`Switch to ${otherLangName}`}
+      data-lang-switch
     >
-    </button>
+      {otherLang.toUpperCase()}
+    </a>
   </div>
 </header>
+
+<script>
+  // Preserve URL fragment when switching languages
+  document.addEventListener("DOMContentLoaded", () => {
+    const langSwitchers = document.querySelectorAll("[data-lang-switch]")
+
+    langSwitchers.forEach((switcher) => {
+      switcher.addEventListener("click", (e) => {
+        e.preventDefault()
+        const baseUrl = switcher.getAttribute("href")
+        const currentHash = window.location.hash
+        window.location.href = baseUrl + currentHash
+      })
+    })
+  })
+</script>
 
 <script>
   // Mobile menu functionality
@@ -103,59 +149,177 @@ import UserAvatar from "@/components/react/UserAvatar.tsx"
     })
   }
 
-  // Language switcher functionality
-  const langSwitcher = document.getElementById("lang-switcher")
-  const langSwitcherMobile = document.getElementById("lang-switcher-mobile")
+  // Language switcher now handled by navigation links (no JS needed)
 
-  // Set initial language
-  let currentLang = localStorage.getItem("lang") || "en"
+  // Avatar home button functionality
+  const avatarHomeBtn = document.getElementById("avatar-home-btn")
+  if (avatarHomeBtn) {
+    avatarHomeBtn.addEventListener("click", () => {
+      // Detect current language from URL
+      const pathSegments = window.location.pathname.split("/").filter(Boolean)
+      const currentLang =
+        pathSegments[0] && ["en", "es"].includes(pathSegments[0])
+          ? pathSegments[0]
+          : "en"
+      const homeUrl = `/${currentLang}`
 
-  if (langSwitcher) {
-    langSwitcher.textContent = currentLang === "en" ? "es" : "en"
-  }
-  if (langSwitcherMobile) {
-    langSwitcherMobile.textContent = currentLang === "en" ? "es" : "en"
-  }
-
-  if (langSwitcher) {
-    langSwitcher.addEventListener("click", () => {
-      const newLang = currentLang === "en" ? "es" : "en"
-      currentLang = newLang
-      localStorage.setItem("lang", newLang)
-      langSwitcher.textContent = newLang === "en" ? "es" : "en"
-      if (langSwitcherMobile) {
-        langSwitcherMobile.textContent = newLang === "en" ? "es" : "en"
-      }
-    })
-  }
-
-  if (langSwitcherMobile) {
-    langSwitcherMobile.addEventListener("click", () => {
-      const newLang = currentLang === "en" ? "es" : "en"
-      currentLang = newLang
-      localStorage.setItem("lang", newLang)
-      langSwitcherMobile.textContent = newLang === "en" ? "es" : "en"
-      if (langSwitcher) {
-        langSwitcher.textContent = newLang === "en" ? "es" : "en"
-      }
-    })
-  }
-
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const targetId = (e.target as HTMLAnchorElement).getAttribute("href")
-      if (targetId && targetId.length > 1) {
-        e.preventDefault()
-        const targetElement = document.querySelector(targetId)
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: "smooth" })
-        }
+      // Check if we're on the home page or a different page
+      if (
+        window.location.pathname === homeUrl ||
+        window.location.pathname === `${homeUrl}/`
+      ) {
+        // We're on home page, just scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" })
+        // Update active states
+        updateActiveNavigation("home")
+      } else {
+        // We're on a different page, navigate to home
+        window.location.href = homeUrl
       }
       // Close mobile menu if open
       if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
         mobileMenu.classList.add("hidden")
       }
     })
+  }
+
+  // Smooth scrolling for navigation links following web best practices
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = (e.target as HTMLAnchorElement).getAttribute("href")
+      if (targetId && targetId.length > 1) {
+        e.preventDefault()
+        const targetElement = document.querySelector(targetId)
+
+        if (targetElement) {
+          const htmlElement = targetElement as HTMLElement
+
+          // Standard web practice: use fixed offset for header compensation
+          // Based on research from seanoliver.dev and ackee.agency
+          const headerOffset = 80 // Standard offset for fixed headers
+          const targetPosition = htmlElement.offsetTop - headerOffset
+
+          // Calculate maximum available scroll to prevent overshooting
+          const maxScroll =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight
+          const finalPosition = Math.min(Math.max(0, targetPosition), maxScroll)
+
+          window.scrollTo({
+            top: finalPosition,
+            behavior: "smooth",
+          })
+        }
+      }
+
+      // Close mobile menu if open
+      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.add("hidden")
+      }
+    })
+  })
+
+  // Active navigation management
+  function updateActiveNavigation(activeSection: string) {
+    // Desktop navigation
+    const navLinks = document.querySelectorAll(".nav-link")
+    navLinks.forEach((link) => {
+      const section = link.getAttribute("data-section")
+      const linkElement = link as HTMLElement
+
+      if (section === activeSection) {
+        // Add active styles
+        if (section === "contact") {
+          // Use inline styles to ensure background color changes
+          linkElement.style.backgroundColor = "#7c3aed" // violet-600
+        } else {
+          link.classList.remove("text-zinc-400")
+          link.classList.add("text-white", "font-semibold")
+        }
+      } else {
+        // Remove active styles
+        if (section === "contact") {
+          // Reset to default background color
+          linkElement.style.backgroundColor = "#27272a" // zinc-800
+        } else {
+          link.classList.remove("text-white", "font-semibold")
+          link.classList.add("text-zinc-400")
+        }
+      }
+    })
+
+    // Mobile navigation
+    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link")
+    mobileNavLinks.forEach((link) => {
+      const section = link.getAttribute("data-section")
+      const linkElement = link as HTMLElement
+
+      if (section === activeSection) {
+        if (section === "contact") {
+          // Use inline styles to ensure background color changes
+          linkElement.style.backgroundColor = "#7c3aed" // violet-600
+        } else {
+          link.classList.remove("text-zinc-300")
+          link.classList.add("text-white", "font-semibold")
+        }
+      } else {
+        if (section === "contact") {
+          // Reset to default background color
+          linkElement.style.backgroundColor = "#27272a" // zinc-800
+        } else {
+          link.classList.remove("text-white", "font-semibold")
+          link.classList.add("text-zinc-300")
+        }
+      }
+    })
+  }
+
+  // Intersection Observer for active navigation
+  const observerOptions = {
+    root: null,
+    rootMargin: "-80px 0px -70% 0px", // Account for header height and trigger when section is in upper portion
+    threshold: 0.1,
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const sectionId = entry.target.id
+        let activeSection = sectionId
+
+        // Map section IDs to navigation data-section values
+        if (sectionId === "home") {
+          activeSection = "home"
+        } else if (sectionId.includes("experience")) {
+          activeSection = "experience"
+        } else if (sectionId.includes("projects")) {
+          activeSection = "projects"
+        } else if (sectionId.includes("contact")) {
+          activeSection = "contact"
+        }
+
+        updateActiveNavigation(activeSection)
+      }
+    })
+  }, observerOptions)
+
+  // Observe sections when DOM is loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Wait a bit for elements to be rendered
+    setTimeout(() => {
+      const sections = [
+        document.getElementById("home"),
+        document.querySelector('[id*="experience"]'),
+        document.querySelector('[id*="projects"]'),
+        document.querySelector('[id*="contact"]'),
+      ].filter(Boolean)
+
+      sections.forEach((section) => {
+        if (section) observer.observe(section)
+      })
+
+      // Set initial active state
+      updateActiveNavigation("home")
+    }, 500)
   })
 </script>

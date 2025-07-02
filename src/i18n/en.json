@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Software Engineer",
+    "about": {
+      "p1": "My journey started with taking things apart, and now I put them together—turning complex problems into clean, intuitive digital experiences.",
+      "p2": "I find a lot of joy in the sweet spot where great design meets solid engineering. When I'm not untangling code, I'm probably geeking out over new AI models and the intricacies of MCP servers. It's a team sport, and I love playing."
+    }
+  },
+  "ide": {
+    "title_var": "title",
+    "title_val": "'Software Engineer'",
+    "location_var": "location",
+    "location_val": "'Santiago, DR'",
+    "education_var": "education",
+    "education_val1": "'Computer Science'",
+    "education_val2": "'Web Dev.'",
+    "interests_var": "fields_of_interests",
+    "interests_val1": "'Frontend'",
+    "interests_val2": "'Full Stack'",
+    "comment": "// I build bridges between intuitive design\n    // and high-performance engineering."
+  },
+  "sections": {
+    "experience_title": "Work Experience",
+    "tech_title": "Technologies",
+    "projects_title": "Selected Projects",
+    "contact_title": "Get In Touch"
+  },
+  "experience": {
+    "exp1": {
+      "date": "April 2023 - Present",
+      "title": "Software Developer,",
+      "company": "Nubeteck, S.R.L.",
+      "desc": "Served as a key collaborator on a unified design system, mentored junior developers, and optimized application data layers to deliver a faster, more responsive user experience."
+    },
+    "exp2": {
+      "date": "May 2021 - March 2023",
+      "title": "Frontend Developer,",
+      "company": "Innovatech Solutions",
+      "desc": "Developed and maintained responsive user interfaces for client-facing web applications using React and TypeScript, contributing to a 20% increase in user engagement."
+    }
+  },
+  "projects": {
+    "view_all_btn": "View All Projects",
+    "show_less_btn": "Show Less Projects",
+    "back_to_projects": "Back to Projects",
+    "published_on": "Published on",
+    "overview": "Overview",
+    "challenges": "Challenges",
+    "key_learnings": "Key Learnings",
+    "tech_stack": "Tech Stack",
+    "links": "Links",
+    "view_live": "View Live Project",
+    "view_source": "View Source Code",
+    "featured_project": "Featured Project",
+    "featured_description": "This project showcases advanced development skills and best practices.",
+    "work_together": "Let's Work Together"
+  },
+  "contact": {
+    "subtitle": "Have a project, or just want to connect? My inbox is open.",
+    "form": {
+      "name_placeholder": "Your Name",
+      "email_placeholder": "Your Email",
+      "message_placeholder": "Your Message",
+      "send_btn": "Send Message",
+      "sending_btn": "Sending...",
+      "success_msg": "Thank you! Your message has been sent successfully.",
+      "error_msg": "Sorry, there was an error sending your message. Please try again.",
+      "name_required": "Name is required",
+      "email_required": "Email is required",
+      "email_invalid": "Please enter a valid email address",
+      "message_required": "Message is required"
+    }
+  },
+  "footer": {
+    "credits": "Designed & Built by Franklin Martinez"
+  },
+  "error": {
+    "404": {
+      "title": "404 - Page Not Found",
+      "heading": "Oops! Page Not Found",
+      "description": "The page you're looking for seems to have gone on an adventure. Let's get you back on track!",
+      "reasons": {
+        "title": "This might have happened because:",
+        "typo": "There's a typo in the URL",
+        "moved": "The page has been moved or deleted",
+        "outdated": "You followed an outdated link"
+      },
+      "actions": {
+        "home": "Go Home",
+        "projects": "View Projects",
+        "contact": "Get in Touch",
+        "previous": "Go Back"
+      }
+    }
+  }
+}

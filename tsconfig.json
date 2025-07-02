@@ -12,7 +12,6 @@
       "@/layouts/*": ["./src/layouts/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/lib/*": ["./src/lib/*"],
-      "@/assets/*": ["./src/assets/*"],
       "@/content/*": ["./src/content/*"],
       "@/i18n/*": ["./src/i18n/*"],
       "@/pages/*": ["./src/pages/*"]

@@ -17,6 +17,7 @@ A modern, high-performance portfolio website built with [Astro](https://astro.bu
 - **📧 Contact Form**: Functional contact form with validation
 - **🚀 Auto-Deploy**: Continuous deployment via GitHub Actions
 - **📈 SEO Optimized**: Meta tags, structured data, and performance optimized
+- **🛡️ Type Safety**: Strictest TypeScript configuration, no usage of `any`, and up-to-date Astro context types
 
 ## 🛠️ Tech Stack
 
@@ -73,31 +74,43 @@ portfolio/
 ├── public/
 │   ├── avatar.png         # Profile avatar
 │   ├── favicon.png        # Site favicon
-│   ├── favicon.svg        # Vector favicon
+│   ├── favicon-16x16.png  # PNG favicon (16x16)
+│   ├── favicon-32x32.png  # PNG favicon (32x32)
+│   ├── apple-touch-icon.png # iOS home screen icon
+│   ├── android-chrome-192x192.png # Android icon
+│   ├── android-chrome-512x512.png # Android icon
+│   ├── site.webmanifest   # PWA manifest
 │   └── CNAME              # Custom domain configuration
 ├── src/
-│   ├── assets/
-│   │   └── Avatar.png     # Avatar asset
 │   ├── components/
 │   │   ├── react/         # React interactive components
 │   │   │   ├── ContactForm.tsx    # Contact form with validation
 │   │   │   ├── Spotlight.tsx      # Mouse spotlight effect
 │   │   │   └── UserAvatar.tsx     # User avatar component
 │   │   ├── ui/            # shadcn/ui components
-│   │   │   └── avatar.tsx # Avatar UI component
 │   │   ├── Experience.astro       # Work experience timeline
 │   │   ├── Footer.astro           # Site footer
 │   │   ├── Header.astro           # Navigation header
 │   │   ├── Projects.astro         # Projects showcase
 │   │   └── Technologies.astro     # Tech stack display
-│   ├── content/           # Content collections (future)
-│   ├── i18n/             # Internationalization (future)
+│   ├── content/           # Content collections (markdown, config)
+│   │   ├── config.ts      # Zod schema for projects
+│   │   └── projects/      # Project markdown files (en/es)
+│   ├── i18n/              # Internationalization utilities and translations
+│   │   ├── en.json        # English translations
+│   │   ├── es.json        # Spanish translations
+│   │   └── utils.ts       # Type-safe i18n helpers
 │   ├── layouts/
 │   │   └── Layout.astro   # Main site layout
 │   ├── lib/
 │   │   └── utils.ts       # Utility functions
+│   ├── middleware/
+│   │   └── index.ts       # Language detection and routing middleware (type-safe)
 │   ├── pages/
-│   │   └── index.astro    # Homepage
+│   │   ├── [locale]/      # Localized dynamic routes
+│   │   ├── 404.astro      # Main 404 page
+│   │   ├── index.astro    # Homepage
+│   │   └── projects/      # Project detail pages
 │   └── styles/
 │       └── global.css     # Global styles and animations
 ├── .github/
@@ -107,9 +120,16 @@ portfolio/
 ├── components.json        # shadcn/ui configuration
 ├── eslint.config.js       # ESLint configuration
 ├── tsconfig.json          # TypeScript configuration (strictest)
-├── TASKS.md              # Development task tracking
-└── reference.html        # Design reference (legacy)
+├── TASKS.md               # Development task tracking
+└── LICENSE                # MIT License
 ```
+
+## 🛡️ Type Safety & Code Comments
+
+- **Strict TypeScript**: The entire codebase uses the strictest TypeScript settings. All context and helper functions are fully typed—no usage of `any` remains.
+- **Astro Middleware**: Middleware and helpers use up-to-date Astro types (e.g., `MiddlewareHandler`), ensuring type safety for all context and cookies operations.
+- **i18n Utilities**: All translation utilities are type-safe, with translation keys and language codes strictly typed.
+- **Commenting Best Practices**: Only concise, essential comments are present. All unnecessary, verbose, or AI-generated comments have been removed. Comments are used only to clarify non-obvious logic or configuration.
 
 ## 🎨 Design System
 
