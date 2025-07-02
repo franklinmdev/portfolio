@@ -17,16 +17,12 @@ const experienceItems: readonly ExperienceItem[] = [
     id: "exp1",
     translationKey: "experience.exp1",
   },
-  {
-    id: "exp2",
-    translationKey: "experience.exp2",
-  },
 ] as const
 ---
 
-<section id="experience" class="scroll-mt-24 py-8 lg:pt-0 lg:pb-12">
+<section id="experience" class="py-8 lg:pt-0 lg:pb-12 scroll-mt-24">
   <h2
-    class="experience-title section-title mb-12 text-2xl font-bold tracking-tight text-zinc-100"
+    class="mb-12 font-bold text-zinc-100 text-2xl tracking-tight experience-title section-title"
   >
     {t("sections.experience_title")}
   </h2>
@@ -39,10 +35,10 @@ const experienceItems: readonly ExperienceItem[] = [
           style={`animation-delay: ${0.6 + index * 0.2}s`}
         >
           <div class="timeline-dot" />
-          <p class="mb-1 text-sm font-medium text-violet-400">
+          <p class="mb-1 font-medium text-violet-400 text-sm">
             {t(`${item.translationKey}.date`)}
           </p>
-          <h3 class="mb-1 text-xl font-bold text-white">
+          <h3 class="mb-1 font-bold text-white text-xl">
             {t(`${item.translationKey}.title`)}
             <span class="font-normal text-zinc-400">
               {t(`${item.translationKey}.company`)}
