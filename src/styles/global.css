@@ -7,7 +7,7 @@
 
   /* Extended colors */
   --color-zinc-300: #d4d4d8;
-  --color-zinc-400: #a1a1aa;
+  --color-zinc-400: #c4c4cc;
   --color-zinc-500: #71717a;
   --color-zinc-600: #52525b;
   --color-zinc-700: #3f3f46;
@@ -40,6 +40,27 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes spin-smooth {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
   }
 }
 
@@ -96,7 +117,7 @@
   .tech-tag {
     display: inline-block;
     background-color: #27272a;
-    color: #a1a1aa;
+    color: #c4c4cc;
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
     font-size: 0.875rem;
@@ -127,7 +148,7 @@
     line-height: 1.5;
     background-color: #18181b;
     border: 1px solid #3f3f46;
-    color: #d4d4d8;
+    color: #e4e4e7;
   }
 
   .ide-container pre {
@@ -168,7 +189,7 @@
       Cantarell,
       sans-serif;
     background-color: #111111;
-    color: #a1a1aa;
+    color: #c4c4cc;
     line-height: 1.6;
     overflow-x: hidden;
   }

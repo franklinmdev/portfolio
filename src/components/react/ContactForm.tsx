@@ -1,3 +1,4 @@
+import CustomLoader from "@/components/react/CustomLoader"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -146,12 +147,12 @@ export default function ContactForm({ translations }: ContactFormProps) {
   }
 
   return (
-    <section id="contact" className="py-8 lg:py-12 scroll-mt-24">
+    <section id="contact" className="scroll-mt-24 py-8 lg:py-12">
       <div className="mb-8 text-center">
-        <h2 className="mb-3 font-bold text-zinc-100 text-2xl tracking-tight">
+        <h2 className="mb-3 text-2xl font-bold tracking-tight text-zinc-100">
           {translations.title}
         </h2>
-        <p className="mx-auto max-w-2xl text-zinc-400 text-sm sm:text-base leading-relaxed">
+        <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
           {translations.subtitle}
         </p>
       </div>
@@ -169,7 +170,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
           </div>
         )}
 
-        <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 mb-4">
+        <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <Label htmlFor="name" className="sr-only">
               Name
@@ -185,7 +186,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
               placeholder={translations.namePlaceholder}
             />
             {errors.name && (
-              <p className="mt-1 text-red-400 text-sm">{errors.name}</p>
+              <p className="mt-1 text-sm text-red-400">{errors.name}</p>
             )}
           </div>
           <div>
@@ -203,7 +204,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
               placeholder={translations.emailPlaceholder}
             />
             {errors.email && (
-              <p className="mt-1 text-red-400 text-sm">{errors.email}</p>
+              <p className="mt-1 text-sm text-red-400">{errors.email}</p>
             )}
           </div>
         </div>
@@ -223,15 +224,20 @@ export default function ContactForm({ translations }: ContactFormProps) {
             placeholder={translations.messagePlaceholder}
           />
           {errors.message && (
-            <p className="mt-1 text-red-400 text-sm">{errors.message}</p>
+            <p className="mt-1 text-sm text-red-400">{errors.message}</p>
           )}
         </div>
 
         <div className="text-center">
           <Button type="submit" disabled={isSubmitting} className="form-button">
-            {isSubmitting
-              ? translations.sendingButton
-              : translations.sendButton}
+            {isSubmitting ? (
+              <div className="flex items-center gap-2">
+                <CustomLoader size="sm" />
+                {translations.sendingButton}
+              </div>
+            ) : (
+              translations.sendButton
+            )}
           </Button>
         </div>
       </form>

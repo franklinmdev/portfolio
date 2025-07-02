@@ -91,5 +91,6 @@
         "previous": "Go Back"
       }
     }
-  }
+  },
+  "loading": "Loading..."
 }

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content"
+import CustomLoader from "@/components/CustomLoader.astro"
 
 // Generate static paths for all projects (for redirect purposes)
 export async function getStaticPaths() {
@@ -24,5 +25,25 @@ export async function getStaticPaths() {
 
 // Redirect old project URLs to localized version
 const { slug } = Astro.params
-return Astro.redirect(`/en/projects/${slug}`)
 ---
+
+<head>
+  <title>Redirecting…</title>
+  <meta http-equiv="refresh" content={`0;url=/en/projects/${slug}`} />
+  <style is:inline>
+    body {
+      background: #111111;
+    }
+  </style>
+</head>
+
+<div
+  class="flex min-h-screen items-center justify-center bg-[#111111] text-zinc-400"
+>
+  <CustomLoader size="md" class="mx-auto" />
+  <script is:inline>
+    setTimeout(() => {
+      window.location.replace(`/en/projects/${slug}` + window.location.hash)
+    }, 700)
+  </script>
+</div>

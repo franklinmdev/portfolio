@@ -1,7 +1,9 @@
 ---
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
+import PageLoader from "@/components/react/PageLoader.tsx"
 import Spotlight from "@/components/react/Spotlight.tsx"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
 import "@/styles/global.css"
 
 export interface Props {
@@ -10,10 +12,12 @@ export interface Props {
 }
 
 const { title, description } = Astro.props
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -41,6 +45,7 @@ const { title, description } = Astro.props
     />
   </head>
   <body class="antialiased">
+    <PageLoader client:load loadingText={t("loading")} />
     <Spotlight client:idle />
     <Header />
     <slot />
