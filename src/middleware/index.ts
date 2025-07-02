@@ -31,6 +31,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return context.redirect(localizedPath, 302)
   }
 
+  // Redirect /en or /es (no trailing slash) to /en/ or /es/
+  if ((pathname === "/en" || pathname === "/es") && !pathname.endsWith("/")) {
+    return context.redirect(pathname + "/", 302)
+  }
+
   return next()
 })
 

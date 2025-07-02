@@ -2,7 +2,8 @@
 import { getCollection } from "astro:content"
 import CustomLoader from "@/components/CustomLoader.astro"
 
-// Generate static paths for all projects (for redirect purposes)
+// Generate static paths for all projects
+// Only add unique slugs
 export async function getStaticPaths() {
   const projects = await getCollection("projects")
   const paths: { params: { slug: string } }[] = []

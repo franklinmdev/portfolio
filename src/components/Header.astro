@@ -12,16 +12,29 @@ import type { Language } from "@/i18n/utils"
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-// Generate locale-aware URLs - always link to home page sections
-const experienceUrl = getLocalizedUrl("", lang) + "#experience"
-const projectsUrl = getLocalizedUrl("", lang) + "#projects"
-const contactUrl = getLocalizedUrl("", lang) + "#contact"
+// Always create locale-prefixed root (e.g. /en/, /es/)
+const baseLocalePath = lang === "en" ? "/en/" : getLocalizedUrl("/", lang)
+const experienceUrl = baseLocalePath + "#experience"
+const projectsUrl = baseLocalePath + "#projects"
+const contactUrl = baseLocalePath + "#contact"
 
 // Get the other language for language switcher
 const otherLang = (lang === "en" ? "es" : "en") as Language
 const currentPath = Astro.url.pathname.replace(`/${lang}`, "") || ""
 const otherLangUrl = getLocalizedUrl(currentPath, otherLang)
 const otherLangName = languages[otherLang]
+
+// Preserve URL fragment when switching languages
+// Mobile menu functionality
+// Language switcher handled by navigation links
+// Avatar home button functionality
+// Detect current language from URL
+// Check if we're on the home page or a different page
+// We're on home page, just scroll to top
+// Update active states
+// We're on a different page, navigate to home
+// Close mobile menu if open
+// Smooth scrolling for navigation links
 ---
 
 <header
@@ -204,10 +217,18 @@ const otherLangName = languages[otherLang]
     }
 
     // Handle cross-page navigation (e.g., from project pages to home#section)
-    if (basePath && basePath !== window.location.pathname) {
-      // Navigate to the new page with hash
-      window.location.href = href
-      return
+    if (typeof basePath === "string" && basePath) {
+      const normalizedBasePath = basePath.endsWith("/")
+        ? basePath
+        : basePath + "/"
+      const normalizedCurrentPath = window.location.pathname.endsWith("/")
+        ? window.location.pathname
+        : window.location.pathname + "/"
+      if (normalizedBasePath !== normalizedCurrentPath) {
+        // Navigate to the new page with hash
+        window.location.href = href
+        return
+      }
     }
 
     // Handle same-page navigation

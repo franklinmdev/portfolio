@@ -10,7 +10,9 @@ export default function PageLoader({
 
   useEffect(() => {
     let loadingTimer: NodeJS.Timeout
-    let currentPath = window.location.pathname
+    let currentPath = window.location.pathname.endsWith("/")
+      ? window.location.pathname
+      : window.location.pathname + "/"
 
     const startLoading = () => {
       setIsLoading(true)
@@ -35,7 +37,7 @@ export default function PageLoader({
 
       if (!link) return
 
-      // Language switching - always show loading
+      // Language switching: always show loading
       if (
         target.hasAttribute("data-lang-switch") ||
         link.hasAttribute("data-lang-switch")
@@ -47,27 +49,39 @@ export default function PageLoader({
       const href = link.getAttribute("href")
       if (!href) return
 
-      // External links - show loading
-      if (href.startsWith("http")) {
+      // Skip loader for links that open in new tab
+      const linkTarget = link.getAttribute("target")
+      if (linkTarget === "_blank" || linkTarget === "_new") {
+        return
+      }
+
+      // External absolute URL (starts with http)
+      if (/^https?:\/\//i.test(href)) {
         startLoading()
         return
       }
 
-      // Same-page hash navigation - NO loading
-      if (href.startsWith("#")) {
+      // Compare pathnames (ignore trailing slashes)
+      const tempAnchor = document.createElement("a")
+      tempAnchor.href = href
+      const targetPathname = tempAnchor.pathname.replace(/\/+$/, "") || "/"
+      const currentPathname =
+        window.location.pathname.replace(/\/+$/, "") || "/"
+
+      // Same-page navigation: no loader
+      if (targetPathname === currentPathname) {
         return
       }
 
-      // Cross-page navigation - show loading
-      const [targetPath] = href.split("#")
-      if (targetPath && targetPath !== currentPath) {
-        startLoading()
-      }
+      // Different page within site: start loader
+      startLoading()
     }
 
     // Handle browser back/forward - only if path actually changes
     const handlePopState = () => {
-      const newPath = window.location.pathname
+      const newPath = window.location.pathname.endsWith("/")
+        ? window.location.pathname
+        : window.location.pathname + "/"
       if (newPath !== currentPath) {
         currentPath = newPath
         startLoading()
