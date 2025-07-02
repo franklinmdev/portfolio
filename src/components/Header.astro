@@ -184,39 +184,54 @@ const otherLangName = languages[otherLang]
   }
 
   // Smooth scrolling for navigation links following web best practices
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const targetId = (e.target as HTMLAnchorElement).getAttribute("href")
-      if (targetId && targetId.length > 1) {
-        e.preventDefault()
-        const targetElement = document.querySelector(targetId)
+  document.addEventListener("click", (e) => {
+    if (!e.target) return
+    const target = (e.target as Element).closest("a")
+    if (!target) return
 
-        if (targetElement) {
-          const htmlElement = targetElement as HTMLElement
+    const href = target.getAttribute("href")
+    if (!href || !href.includes("#")) return
 
-          // Standard web practice: use fixed offset for header compensation
-          // Based on research from seanoliver.dev and ackee.agency
-          const headerOffset = 80 // Standard offset for fixed headers
-          const targetPosition = htmlElement.offsetTop - headerOffset
+    e.preventDefault()
 
-          // Calculate maximum available scroll to prevent overshooting
-          const maxScroll =
-            document.documentElement.scrollHeight -
-            document.documentElement.clientHeight
-          const finalPosition = Math.min(Math.max(0, targetPosition), maxScroll)
+    // Parse the URL to handle both same-page and cross-page navigation
+    const [basePath, hash] = href.split("#")
+    const targetId = hash
 
-          window.scrollTo({
-            top: finalPosition,
-            behavior: "smooth",
-          })
+    // Close mobile menu
+    if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+      mobileMenu.classList.add("hidden")
+    }
+
+    // Handle cross-page navigation (e.g., from project pages to home#section)
+    if (basePath && basePath !== window.location.pathname) {
+      // Navigate to the new page with hash
+      window.location.href = href
+      return
+    }
+
+    // Handle same-page navigation
+    if (targetId) {
+      const targetElement = document.getElementById(targetId)
+      if (targetElement) {
+        const headerOffset = 80
+        const targetPosition = targetElement.offsetTop - headerOffset
+        const maxScroll =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight
+        const finalPosition = Math.min(Math.max(0, targetPosition), maxScroll)
+
+        window.scrollTo({
+          top: finalPosition,
+          behavior: "smooth",
+        })
+
+        // Update URL hash
+        if (history.replaceState) {
+          history.replaceState(null, "", `#${targetId}`)
         }
       }
-
-      // Close mobile menu if open
-      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
-        mobileMenu.classList.add("hidden")
-      }
-    })
+    }
   })
 
   // Active navigation management

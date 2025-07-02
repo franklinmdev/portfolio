@@ -10,61 +10,82 @@ export default function PageLoader({
 
   useEffect(() => {
     let loadingTimer: NodeJS.Timeout
+    let currentPath = window.location.pathname
 
     const startLoading = () => {
       setIsLoading(true)
     }
 
     const stopLoading = () => {
+      clearTimeout(loadingTimer)
       loadingTimer = setTimeout(() => {
         setIsLoading(false)
-      }, 300)
+      }, 200)
     }
 
+    // Only show loading for actual page navigation, not hash changes
     const handleBeforeUnload = () => startLoading()
+
     const handleLoad = () => stopLoading()
 
-    const handlePopState = () => {
-      startLoading()
-      setTimeout(stopLoading, 500)
+    // Smart navigation detection - only show loading for real page changes
+    const handleClick = (e: Event) => {
+      const target = e.target as HTMLElement
+      const link = target.closest("a")
+
+      if (!link) return
+
+      // Language switching - always show loading
+      if (
+        target.hasAttribute("data-lang-switch") ||
+        link.hasAttribute("data-lang-switch")
+      ) {
+        startLoading()
+        return
+      }
+
+      const href = link.getAttribute("href")
+      if (!href) return
+
+      // External links - show loading
+      if (href.startsWith("http")) {
+        startLoading()
+        return
+      }
+
+      // Same-page hash navigation - NO loading
+      if (href.startsWith("#")) {
+        return
+      }
+
+      // Cross-page navigation - show loading
+      const [targetPath] = href.split("#")
+      if (targetPath && targetPath !== currentPath) {
+        startLoading()
+      }
     }
 
-    const handleLangSwitch = (e: Event) => {
-      const target = e.target as HTMLElement
-      if (target.hasAttribute("data-lang-switch")) {
+    // Handle browser back/forward - only if path actually changes
+    const handlePopState = () => {
+      const newPath = window.location.pathname
+      if (newPath !== currentPath) {
+        currentPath = newPath
         startLoading()
+        setTimeout(stopLoading, 300)
       }
     }
 
     window.addEventListener("beforeunload", handleBeforeUnload)
     window.addEventListener("load", handleLoad)
     window.addEventListener("popstate", handlePopState)
-    document.addEventListener("click", handleLangSwitch)
-
-    const originalPushState = history.pushState
-    const originalReplaceState = history.replaceState
-
-    history.pushState = function (...args) {
-      startLoading()
-      originalPushState.apply(history, args)
-      setTimeout(stopLoading, 300)
-    }
-
-    history.replaceState = function (...args) {
-      startLoading()
-      originalReplaceState.apply(history, args)
-      setTimeout(stopLoading, 300)
-    }
+    document.addEventListener("click", handleClick)
 
     return () => {
       clearTimeout(loadingTimer)
       window.removeEventListener("beforeunload", handleBeforeUnload)
       window.removeEventListener("load", handleLoad)
       window.removeEventListener("popstate", handlePopState)
-      document.removeEventListener("click", handleLangSwitch)
-
-      history.pushState = originalPushState
-      history.replaceState = originalReplaceState
+      document.removeEventListener("click", handleClick)
     }
   }, [])
 
