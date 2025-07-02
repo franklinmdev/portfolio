@@ -44,10 +44,7 @@
 }
 
 @keyframes spin-smooth {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
+  100% {
     transform: rotate(360deg);
   }
 }
@@ -56,12 +53,18 @@
   0%,
   100% {
     opacity: 0.75;
-    transform: scale(1);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.1);
+    opacity: 0.4;
   }
+}
+
+.spin-smooth {
+  animation: spin-smooth 1s linear infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 /* Component utilities */
