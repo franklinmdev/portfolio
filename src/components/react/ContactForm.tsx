@@ -101,7 +101,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
     // Check if EmailJS is properly configured
     if (!isEmailJSConfigured()) {
       console.error(
-        "EmailJS is not properly configured. Check your environment variablesf."
+        "EmailJS is not properly configured. Check your environment variables."
       )
       setResult(translations.errorMessage)
       return
