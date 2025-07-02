@@ -42,9 +42,9 @@ const { slug } = Astro.params
   class="flex min-h-screen items-center justify-center bg-[#111111] text-zinc-400"
 >
   <CustomLoader size="md" class="mx-auto" />
-  <script is:inline>
-    setTimeout(() => {
-      window.location.replace(`/en/projects/${slug}` + window.location.hash)
-    }, 700)
+  <script is:inline define:vars={{ slug }}>
+    // Preserve the hash when redirecting
+    const hash = window.location.hash
+    window.location.replace(`/en/projects/${slug}${hash}`)
   </script>
 </div>

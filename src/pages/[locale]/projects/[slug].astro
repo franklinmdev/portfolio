@@ -1,11 +1,6 @@
 ---
 import type { Language } from "@/i18n/utils"
-import {
-  getLangFromUrl,
-  getLocalizedUrl,
-  languages,
-  useTranslations,
-} from "@/i18n/utils"
+import { getLangFromUrl, languages, useTranslations } from "@/i18n/utils"
 import Layout from "@/layouts/Layout.astro"
 import { getCollection, render } from "astro:content"
 
@@ -59,8 +54,9 @@ const formatDate = (date: Date, locale: Language) => {
 }
 
 // Generate localized URLs for navigation
-const projectsUrl = getLocalizedUrl("", lang) + "#projects"
-const contactUrl = getLocalizedUrl("", lang) + "#contact"
+const baseUrl = lang === "en" ? "/" : `/${lang}/`
+const projectsUrl = baseUrl + "#projects"
+const contactUrl = baseUrl + "#contact"
 ---
 
 <Layout title={`${project.data.title} - Franklin Martinez`}>
