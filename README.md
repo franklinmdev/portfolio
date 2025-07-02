@@ -190,31 +190,6 @@ This site automatically deploys to GitHub Pages when changes are pushed to the `
 - **CSS-in-CSS**: Tailwind utility classes with custom CSS for complex animations
 - **Component Organization**: Clear separation between Astro (static) and React (interactive) components
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes using conventional commits:
-
-   ```bash
-   git commit -m 'feat: ✨ add amazing feature'
-   ```
-
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Commit Convention
-
-This project uses [Conventional Commits](https://www.conventionalcommits.org/) with gitmoji:
-
-- `feat: ✨ new feature`
-- `fix: 🐛 bug fix`
-- `docs: 📝 documentation`
-- `style: 💄 styling`
-- `refactor: ♻️ code refactoring`
-- `perf: ⚡️ performance improvement`
-- `test: ✅ tests`
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
