@@ -17,7 +17,7 @@
     "location_var": "ubicacion",
     "location_val": "'Santiago, RD'",
     "education_var": "educacion",
-    "education_val1": "'Ciencias de la Comp.'",
+    "education_val1": "'Ingeniería de Software'",
     "education_val2": "'Desarrollo Web'",
     "interests_var": "intereses",
     "interests_val1": "'Frontend'",
@@ -28,7 +28,7 @@
     "experience_title": "Experiencia Laboral",
     "tech_title": "Tecnologías",
     "projects_title": "Proyectos Destacados",
-    "contact_title": "Ponte en Contacto"
+    "contact_title": "Ponte En Contacto"
   },
   "experience": {
     "exp1": {
@@ -39,28 +39,28 @@
     }
   },
   "projects": {
-    "view_all_btn": "Ver Todos los Proyectos",
-    "show_less_btn": "Mostrar Menos Proyectos",
-    "back_to_projects": "Volver a Proyectos",
-    "published_on": "Publicado el",
+    "view_all_btn": "Ver todos los proyectos",
+    "show_less_btn": "Mostrar menos proyectos",
+    "back_to_projects": "Volver a proyectos",
+    "published_on": "Publicado el ",
     "overview": "Resumen",
     "challenges": "Desafíos",
     "key_learnings": "Aprendizajes Clave",
-    "tech_stack": "Stack Tecnológico",
+    "tech_stack": "Stack tecnológico",
     "links": "Enlaces",
-    "view_live": "Ver Proyecto en Vivo",
-    "view_source": "Ver Código Fuente",
-    "featured_project": "Proyecto Destacado",
+    "view_live": "Ver proyecto en vivo",
+    "view_source": "Ver código fuente",
+    "featured_project": "Proyecto destacado",
     "featured_description": "Este proyecto muestra habilidades de desarrollo avanzadas y mejores prácticas.",
-    "work_together": "Trabajemos Juntos"
+    "work_together": "Trabajemos juntos"
   },
   "contact": {
     "subtitle": "¿Tienes un proyecto o solo quieres conectar? Estoy disponible para conversar.",
     "form": {
-      "name_placeholder": "Tu Nombre",
-      "email_placeholder": "Tu Correo Electrónico",
-      "message_placeholder": "Tu Mensaje",
-      "send_btn": "Enviar Mensaje",
+      "name_placeholder": "Tu nombre",
+      "email_placeholder": "Tu correo electrónico",
+      "message_placeholder": "Tu mensaje",
+      "send_btn": "Enviar mensaje",
       "sending_btn": "Enviando...",
       "success_msg": "¡Gracias! Tu mensaje ha sido enviado exitosamente.",
       "error_msg": "Lo siento, hubo un error al enviar tu mensaje. Por favor intenta de nuevo.",
@@ -71,12 +71,12 @@
     }
   },
   "footer": {
-    "credits": "Diseñado y Construido por Franklin Martinez"
+    "credits": "Diseñado y construido por Franklin Martinez"
   },
   "error": {
     "404": {
-      "title": "404 - Página No Encontrada",
-      "heading": "¡Ups! Página No Encontrada",
+      "title": "404 - Página no encontrada",
+      "heading": "¡Ups! Página no encontrada",
       "description": "La página que buscas parece haberse ido de aventura. ¡Te ayudamos a volver al camino correcto!",
       "reasons": {
         "title": "Esto podría haber pasado porque:",
@@ -85,10 +85,10 @@
         "outdated": "Seguiste un enlace desactualizado"
       },
       "actions": {
-        "home": "Ir al Inicio",
-        "projects": "Ver Proyectos",
+        "home": "Ir al inicio",
+        "projects": "Ver proyectos",
         "contact": "Contactar",
-        "previous": "Volver Atrás"
+        "previous": "Volver atrás"
       }
     }
   },

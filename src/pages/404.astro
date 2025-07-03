@@ -1,11 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import { getLangFromUrl, useTranslations, type Language } from "../i18n/utils"
+import Layout from "@/layouts/Layout.astro"
+import { getLangFromUrl, createTranslations, type Language } from "@/i18n/utils"
+import { Image } from "astro:assets"
+import errorImage from "@/assets/404.png"
+import { Home, Archive, ArrowLeft } from "@lucide/astro"
 
-// Set 404 status for HTTP response
-// Detect language from URL or default to English
 const lang = getLangFromUrl(Astro.url) || "en"
-const t = useTranslations(lang as Language)
+const t = createTranslations(lang as Language)
 ---
 
 <Layout title={t("error.404.title")} description={t("error.404.description")}>
@@ -13,10 +14,9 @@ const t = useTranslations(lang as Language)
     class="flex min-h-screen items-center justify-center px-4 py-8 pt-20 sm:py-16 sm:pt-24"
   >
     <div class="mx-auto max-w-xl text-center">
-      <!-- 404 Image -->
       <div class="mb-6 sm:mb-8">
-        <img
-          src="/404.png"
+        <Image
+          src={errorImage}
           alt="404 - Page Not Found"
           class="mx-auto h-auto w-full max-w-48 object-contain opacity-90 sm:max-w-64 md:max-w-80"
           width="320"
@@ -24,7 +24,6 @@ const t = useTranslations(lang as Language)
         />
       </div>
 
-      <!-- Error Content -->
       <div class="space-y-4 sm:space-y-6">
         <h1
           class="bg-gradient-to-r from-violet-500 to-emerald-500 bg-clip-text text-2xl leading-tight font-bold text-transparent sm:text-4xl sm:leading-tight lg:text-5xl lg:leading-tight"
@@ -38,7 +37,6 @@ const t = useTranslations(lang as Language)
           {t("error.404.description")}
         </p>
 
-        <!-- Possible Reasons -->
         <div
           class="mx-auto mt-6 max-w-sm rounded-lg border border-zinc-800 bg-zinc-900/50 p-4 text-left sm:mt-8 sm:max-w-md sm:p-6"
         >
@@ -48,22 +46,21 @@ const t = useTranslations(lang as Language)
             {t("error.404.reasons.title")}
           </h3>
           <ul class="space-y-1.5 text-xs text-zinc-400 sm:space-y-2 sm:text-sm">
-            <li class="flex items-start gap-2">
-              <span class="mt-0.5 text-violet-400 sm:mt-1">•</span>
+            <li class="flex items-center gap-2">
+              <span class="text-violet-400">•</span>
               {t("error.404.reasons.typo")}
             </li>
-            <li class="flex items-start gap-2">
-              <span class="mt-0.5 text-violet-400 sm:mt-1">•</span>
+            <li class="flex items-center gap-2">
+              <span class="text-violet-400">•</span>
               {t("error.404.reasons.moved")}
             </li>
-            <li class="flex items-start gap-2">
-              <span class="mt-0.5 text-violet-400 sm:mt-1">•</span>
+            <li class="flex items-center gap-2">
+              <span class="text-violet-400">•</span>
               {t("error.404.reasons.outdated")}
             </li>
           </ul>
         </div>
 
-        <!-- Action Buttons -->
         <div
           class="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row sm:gap-4"
         >
@@ -71,20 +68,9 @@ const t = useTranslations(lang as Language)
             href={lang === "en" ? "/" : `/${lang}/`}
             class="group inline-flex h-9 w-full transform cursor-pointer items-center justify-center gap-2 rounded-md bg-violet-500 px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:scale-105 hover:bg-violet-600 sm:w-auto"
           >
-            <svg
+            <Home
               class="size-4 transition-transform group-hover:-translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              >
-              </path>
-            </svg>
+            />
             {t("error.404.actions.home")}
           </a>
 
@@ -92,20 +78,7 @@ const t = useTranslations(lang as Language)
             href={lang === "en" ? "/#projects" : `/${lang}/#projects`}
             class="group bg-background hover:bg-accent inline-flex h-9 w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-300 transition-all duration-200 hover:border-zinc-600 hover:text-white sm:w-auto"
           >
-            <svg
-              class="size-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-              >
-              </path>
-            </svg>
+            <Archive class="size-4" />
             {t("error.404.actions.projects")}
           </a>
 
@@ -113,20 +86,9 @@ const t = useTranslations(lang as Language)
             onclick="history.back()"
             class="group hover:bg-accent inline-flex h-9 w-full cursor-pointer items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-zinc-300 sm:w-auto"
           >
-            <svg
+            <ArrowLeft
               class="size-4 transition-transform group-hover:-translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              >
-              </path>
-            </svg>
+            />
             {t("error.404.actions.previous")}
           </button>
         </div>

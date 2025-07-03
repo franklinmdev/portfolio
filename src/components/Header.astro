@@ -1,40 +1,31 @@
 ---
-import UserAvatar from "@/components/react/UserAvatar.tsx"
+import { Image } from "astro:assets"
+import avatar from "@/assets/avatar.webp"
+import { getRelativeLocaleUrl } from "astro:i18n"
 import {
+  createTranslations,
   getLangFromUrl,
-  useTranslations,
-  getLocalizedUrl,
   languages,
+  removeLocalePrefix,
 } from "@/i18n/utils"
 import type { Language } from "@/i18n/utils"
 
-// Get current language and translation function
 const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const t = createTranslations(lang)
 
-// Always create locale-prefixed root (e.g. /en/, /es/)
-const baseLocalePath = lang === "en" ? "/en/" : getLocalizedUrl("/", lang)
-const experienceUrl = baseLocalePath + "#experience"
-const projectsUrl = baseLocalePath + "#projects"
-const contactUrl = baseLocalePath + "#contact"
+const isHomePage =
+  removeLocalePrefix(Astro.url.pathname) === "/" ||
+  removeLocalePrefix(Astro.url.pathname) === ""
 
-// Get the other language for language switcher
+const homeUrl = getRelativeLocaleUrl(lang, "/")
+const experienceUrl = isHomePage ? "#experience" : `${homeUrl}#experience`
+const projectsUrl = isHomePage ? "#projects" : `${homeUrl}#projects`
+const contactUrl = isHomePage ? "#contact" : `${homeUrl}#contact`
+
 const otherLang = (lang === "en" ? "es" : "en") as Language
-const currentPath = Astro.url.pathname.replace(`/${lang}`, "") || ""
-const otherLangUrl = getLocalizedUrl(currentPath, otherLang)
+const currentPath = removeLocalePrefix(Astro.url.pathname)
+const otherLangUrl = getRelativeLocaleUrl(otherLang, currentPath)
 const otherLangName = languages[otherLang]
-
-// Preserve URL fragment when switching languages
-// Mobile menu functionality
-// Language switcher handled by navigation links
-// Avatar home button functionality
-// Detect current language from URL
-// Check if we're on the home page or a different page
-// We're on home page, just scroll to top
-// Update active states
-// We're on a different page, navigate to home
-// Close mobile menu if open
-// Smooth scrolling for navigation links
 ---
 
 <header
@@ -43,12 +34,22 @@ const otherLangName = languages[otherLang]
 >
   <div class="container mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
     <nav class="flex items-center justify-between">
-      <button
+      <a
+        href={homeUrl}
         id="avatar-home-btn"
         class="cursor-pointer text-xl font-bold tracking-tighter text-white"
+        aria-label="Go to homepage"
       >
-        <UserAvatar client:load />
-      </button>
+        <Image
+          src={avatar}
+          width={80}
+          height={80}
+          alt="Franklin Martinez"
+          priority
+          quality={100}
+          class="h-10 w-10 rounded-full ring-2 ring-violet-400/20 transition-all duration-300 hover:ring-violet-400/40"
+        />
+      </a>
       <div class="hidden items-center space-x-8 md:flex">
         <a
           href={experienceUrl}
@@ -136,226 +137,103 @@ const otherLangName = languages[otherLang]
 </header>
 
 <script>
-  // Preserve URL fragment when switching languages
-  document.addEventListener("DOMContentLoaded", () => {
-    const langSwitchers = document.querySelectorAll("[data-lang-switch]")
+  import { navigate } from "astro:transitions/client"
 
-    langSwitchers.forEach((switcher) => {
-      switcher.addEventListener("click", (e) => {
-        e.preventDefault()
-        const baseUrl = switcher.getAttribute("href")
+  function initializeHeader() {
+    document.querySelectorAll("[data-lang-switch]").forEach((link) => {
+      if (!(link instanceof HTMLAnchorElement)) return
+      if (link.dataset.listenerAdded === "true") return
+
+      link.addEventListener("click", (event) => {
+        event.preventDefault()
+        const href = link.href
         const currentHash = window.location.hash
-        window.location.href = baseUrl + currentHash
+        const targetUrl = new URL(href)
+        if (currentHash) {
+          targetUrl.hash = currentHash
+        }
+        navigate(targetUrl.pathname + targetUrl.hash)
       })
+      link.dataset.listenerAdded = "true"
     })
-  })
-</script>
 
-<script>
-  // Mobile menu functionality
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn")
-  const mobileMenu = document.getElementById("mobile-menu")
+    const updateActiveNavigation = (activeSection: string) => {
+      document
+        .querySelectorAll(".nav-link, .mobile-nav-link")
+        .forEach((link) => {
+          const section = link.getAttribute("data-section")
+          const isContact = section === "contact"
+          const isActive = section === activeSection
 
-  if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden")
-    })
-  }
-
-  // Language switcher now handled by navigation links (no JS needed)
-
-  // Avatar home button functionality
-  const avatarHomeBtn = document.getElementById("avatar-home-btn")
-  if (avatarHomeBtn) {
-    avatarHomeBtn.addEventListener("click", () => {
-      // Detect current language from URL
-      const pathSegments = window.location.pathname.split("/").filter(Boolean)
-      const currentLang =
-        pathSegments[0] && ["en", "es"].includes(pathSegments[0])
-          ? pathSegments[0]
-          : "en"
-      const homeUrl = `/${currentLang}`
-
-      // Check if we're on the home page or a different page
-      if (
-        window.location.pathname === homeUrl ||
-        window.location.pathname === `${homeUrl}/`
-      ) {
-        // We're on home page, just scroll to top
-        window.scrollTo({ top: 0, behavior: "smooth" })
-        // Update active states
-        updateActiveNavigation("home")
-      } else {
-        // We're on a different page, navigate to home
-        window.location.href = homeUrl
-      }
-      // Close mobile menu if open
-      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
-        mobileMenu.classList.add("hidden")
-      }
-    })
-  }
-
-  // Smooth scrolling for navigation links following web best practices
-  document.addEventListener("click", (e) => {
-    if (!e.target) return
-    const target = (e.target as Element).closest("a")
-    if (!target) return
-
-    const href = target.getAttribute("href")
-    if (!href || !href.includes("#")) return
-
-    e.preventDefault()
-
-    // Parse the URL to handle both same-page and cross-page navigation
-    const [basePath, hash] = href.split("#")
-    const targetId = hash
-
-    // Close mobile menu
-    if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
-      mobileMenu.classList.add("hidden")
-    }
-
-    // Handle cross-page navigation (e.g., from project pages to home#section)
-    if (typeof basePath === "string" && basePath) {
-      const normalizedBasePath = basePath.endsWith("/")
-        ? basePath
-        : basePath + "/"
-      const normalizedCurrentPath = window.location.pathname.endsWith("/")
-        ? window.location.pathname
-        : window.location.pathname + "/"
-      if (normalizedBasePath !== normalizedCurrentPath) {
-        // Navigate to the new page with hash
-        window.location.href = href
-        return
-      }
-    }
-
-    // Handle same-page navigation
-    if (targetId) {
-      const targetElement = document.getElementById(targetId)
-      if (targetElement) {
-        const headerOffset = 80
-        const targetPosition = targetElement.offsetTop - headerOffset
-        const maxScroll =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight
-        const finalPosition = Math.min(Math.max(0, targetPosition), maxScroll)
-
-        window.scrollTo({
-          top: finalPosition,
-          behavior: "smooth",
+          if (isContact) {
+            link.classList.toggle("bg-violet-600", isActive)
+            link.classList.toggle("bg-zinc-800", !isActive)
+          } else {
+            link.classList.toggle("text-white", isActive)
+            link.classList.toggle("font-semibold", isActive)
+            link.classList.toggle(
+              "text-zinc-400",
+              !isActive && link.classList.contains("nav-link")
+            )
+            link.classList.toggle(
+              "text-zinc-300",
+              !isActive && link.classList.contains("mobile-nav-link")
+            )
+          }
         })
+    }
 
-        // Update URL hash
-        if (history.replaceState) {
-          history.replaceState(null, "", `#${targetId}`)
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn")
+    const mobileMenu = document.getElementById("mobile-menu")
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.onclick = () => mobileMenu.classList.toggle("hidden")
+    }
+
+    const avatarHomeBtn = document.getElementById("avatar-home-btn")
+    if (avatarHomeBtn instanceof HTMLAnchorElement) {
+      avatarHomeBtn.onclick = (event) => {
+        if (window.location.pathname === avatarHomeBtn.pathname) {
+          event.preventDefault()
+          window.scrollTo({ top: 0, behavior: "smooth" })
         }
+        if (mobileMenu) mobileMenu.classList.add("hidden")
       }
     }
-  })
 
-  // Active navigation management
-  function updateActiveNavigation(activeSection: string) {
-    // Desktop navigation
-    const navLinks = document.querySelectorAll(".nav-link")
-    navLinks.forEach((link) => {
-      const section = link.getAttribute("data-section")
-      const linkElement = link as HTMLElement
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const intersecting = entries.filter((e) => e.isIntersecting)
+        if (intersecting.length === 0) return
 
-      if (section === activeSection) {
-        // Add active styles
-        if (section === "contact") {
-          // Use inline styles to ensure background color changes
-          linkElement.style.backgroundColor = "#7c3aed" // violet-600
-        } else {
-          link.classList.remove("text-zinc-400")
-          link.classList.add("text-white", "font-semibold")
-        }
-      } else {
-        // Remove active styles
-        if (section === "contact") {
-          // Reset to default background color
-          linkElement.style.backgroundColor = "#27272a" // zinc-800
-        } else {
-          link.classList.remove("text-white", "font-semibold")
-          link.classList.add("text-zinc-400")
-        }
-      }
-    })
+        intersecting.sort(
+          (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
+        )
+        const activeEntry = intersecting[0]
+        if (!activeEntry) return
 
-    // Mobile navigation
-    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link")
-    mobileNavLinks.forEach((link) => {
-      const section = link.getAttribute("data-section")
-      const linkElement = link as HTMLElement
+        const sectionId = activeEntry.target.id
 
-      if (section === activeSection) {
-        if (section === "contact") {
-          // Use inline styles to ensure background color changes
-          linkElement.style.backgroundColor = "#7c3aed" // violet-600
-        } else {
-          link.classList.remove("text-zinc-300")
-          link.classList.add("text-white", "font-semibold")
-        }
-      } else {
-        if (section === "contact") {
-          // Reset to default background color
-          linkElement.style.backgroundColor = "#27272a" // zinc-800
-        } else {
-          link.classList.remove("text-white", "font-semibold")
-          link.classList.add("text-zinc-300")
-        }
-      }
-    })
-  }
-
-  // Intersection Observer for active navigation
-  const observerOptions = {
-    root: null,
-    rootMargin: "-80px 0px -70% 0px", // Account for header height and trigger when section is in upper portion
-    threshold: 0.1,
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const sectionId = entry.target.id
-        let activeSection = sectionId
-
-        // Map section IDs to navigation data-section values
-        if (sectionId === "home") {
-          activeSection = "home"
-        } else if (sectionId.includes("experience")) {
-          activeSection = "experience"
-        } else if (sectionId.includes("projects")) {
-          activeSection = "projects"
-        } else if (sectionId.includes("contact")) {
-          activeSection = "contact"
-        }
+        let activeSection = "home"
+        if (sectionId.includes("experience")) activeSection = "experience"
+        else if (sectionId.includes("projects")) activeSection = "projects"
+        else if (sectionId.includes("contact")) activeSection = "contact"
 
         updateActiveNavigation(activeSection)
-      }
-    })
-  }, observerOptions)
+      },
+      { root: null, rootMargin: "-80px 0px -40% 0px", threshold: 0.1 }
+    )
 
-  // Observe sections when DOM is loaded
-  document.addEventListener("DOMContentLoaded", () => {
-    // Wait a bit for elements to be rendered
     setTimeout(() => {
-      const sections = [
-        document.getElementById("home"),
-        document.querySelector('[id*="experience"]'),
-        document.querySelector('[id*="projects"]'),
-        document.querySelector('[id*="contact"]'),
-      ].filter(Boolean)
+      const sections = document.querySelectorAll(
+        "#home, [id*='experience'], [id*='projects'], [id*='contact']"
+      )
+      if (sections.length > 0) {
+        sections.forEach((section) => observer.observe(section))
+        if (window.scrollY === 0) updateActiveNavigation("home")
+      }
+    }, 100)
+  }
 
-      sections.forEach((section) => {
-        if (section) observer.observe(section)
-      })
-
-      // Set initial active state
-      updateActiveNavigation("home")
-    }, 500)
-  })
+  document.addEventListener("DOMContentLoaded", initializeHeader)
+  document.addEventListener("astro:after-swap", initializeHeader)
 </script>

@@ -21,7 +21,7 @@ export const ui = {
 } as const
 
 /**
- * Extract language from URL pathname
+ * Extract language from URL pathname using Astro's routing logic
  */
 export function getLangFromUrl(url: URL): Language {
   const [, lang] = url.pathname.split("/")
@@ -49,7 +49,7 @@ function getNestedValue(obj: Record<string, unknown>, path: string): string {
 /**
  * Create translation function for a specific language
  */
-export function useTranslations(lang: Language) {
+export function createTranslations(lang: Language) {
   return function t(key: string): string {
     const translation = getNestedValue(ui[lang], key)
     if (translation) return translation
@@ -59,7 +59,6 @@ export function useTranslations(lang: Language) {
     if (fallback) return fallback
 
     // Return key if no translation found
-    console.warn(`Missing translation for key: ${key} in language: ${lang}`)
     return key
   }
 }
@@ -69,11 +68,12 @@ export function useTranslations(lang: Language) {
  */
 export function getTranslationFromUrl(url: URL) {
   const lang = getLangFromUrl(url)
-  return useTranslations(lang)
+  return createTranslations(lang)
 }
 
 /**
- * Generate localized route URLs
+ * Generate localized route URLs using Astro's built-in helper
+ * This replaces the custom getLocalizedUrl function
  */
 export function getLocalizedUrl(path: string, lang: Language): string {
   return getRelativeLocaleUrl(lang, path)

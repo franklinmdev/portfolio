@@ -1,26 +1,12 @@
-import CustomLoader from "@/components/react/CustomLoader"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import emailjs from "@emailjs/browser"
-import { useState } from "react"
-
-// EmailJS configuration from environment variables
-const EMAILJS_CONFIG = {
-  serviceId: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-  templateId: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
-  publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
-}
-
-// Validate EmailJS configuration
-const isEmailJSConfigured = () => {
-  return !!(
-    EMAILJS_CONFIG.serviceId &&
-    EMAILJS_CONFIG.templateId &&
-    EMAILJS_CONFIG.publicKey
-  )
-}
+import { EMAILJS_CONFIG, isEmailJSConfigured } from "@/lib/email"
+import { cn } from "@/lib/utils"
+import emailjs, { EmailJSResponseStatus } from "@emailjs/browser"
+import { Loader2 } from "lucide-react"
+import { useCallback, useState } from "react"
 
 interface ContactTranslations {
   title: string
@@ -52,7 +38,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [result, setResult] = useState("")
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     const newErrors: Record<string, string> = {}
 
     if (!formData.name.trim()) {
@@ -71,80 +57,86 @@ export default function ContactForm({ translations }: ContactFormProps) {
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
-  }
+  }, [formData, translations])
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors((prev) => ({
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target
+      setFormData((prev) => ({
         ...prev,
-        [name]: "",
+        [name]: value,
       }))
-    }
-  }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+      if (errors[name]) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: "",
+        }))
+      }
+    },
+    [errors]
+  )
 
-    if (!validateForm()) {
-      return
-    }
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault()
 
-    // Check if EmailJS is properly configured
-    if (!isEmailJSConfigured()) {
-      console.error(
-        "EmailJS is not properly configured. Check your environment variables."
-      )
-      setResult(translations.errorMessage)
-      return
-    }
+      if (!validateForm()) {
+        return
+      }
 
-    setIsSubmitting(true)
+      if (!isEmailJSConfigured()) {
+        console.error(
+          "EmailJS is not properly configured. Check your environment variables."
+        )
+        setResult(translations.errorMessage)
+        return
+      }
 
-    try {
-      // Send email using EmailJS
-      await emailjs.send(
-        EMAILJS_CONFIG.serviceId,
-        EMAILJS_CONFIG.templateId,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_name: "Franklin Martinez", // Your name
-        },
-        {
-          publicKey: EMAILJS_CONFIG.publicKey,
+      setIsSubmitting(true)
+
+      try {
+        await emailjs.send(
+          EMAILJS_CONFIG.serviceId,
+          EMAILJS_CONFIG.templateId,
+          {
+            from_name: formData.name,
+            from_email: formData.email,
+            message: formData.message,
+            to_name: "Franklin Martinez",
+          },
+          { publicKey: EMAILJS_CONFIG.publicKey }
+        )
+
+        setResult(translations.successMessage)
+        setFormData({ name: "", email: "", message: "" })
+        setErrors({})
+
+        setTimeout(() => {
+          setResult("")
+        }, 5000)
+      } catch (error) {
+        if (error instanceof EmailJSResponseStatus) {
+          console.error("EmailJS Error:", error)
+        } else {
+          console.error(error)
         }
-      )
+        setResult(translations.errorMessage)
 
-      setResult(translations.successMessage)
-      setFormData({ name: "", email: "", message: "" })
-      setErrors({})
-
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        setResult("")
-      }, 5000)
-    } catch (error) {
-      console.error("EmailJS Error:", error)
-      setResult(translations.errorMessage)
-
-      // Clear error message after 5 seconds
-      setTimeout(() => {
-        setResult("")
-      }, 5000)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+        setTimeout(() => {
+          setResult("")
+        }, 5000)
+      } finally {
+        setIsSubmitting(false)
+      }
+    },
+    [
+      formData,
+      translations.errorMessage,
+      translations.successMessage,
+      validateForm,
+    ]
+  )
 
   return (
     <section id="contact" className="scroll-mt-24 py-8 lg:py-12">
@@ -160,11 +152,14 @@ export default function ContactForm({ translations }: ContactFormProps) {
       <form onSubmit={handleSubmit} noValidate className="mx-auto max-w-2xl">
         {result && (
           <div
-            className={`mb-4 text-center text-sm ${
+            role="status"
+            aria-live="polite"
+            className={cn(
+              "mb-4 text-center text-sm",
               result.includes("error") || result.includes("Sorry")
                 ? "text-red-400"
                 : "text-green-400"
-            }`}
+            )}
           >
             {result}
           </div>
@@ -182,7 +177,10 @@ export default function ContactForm({ translations }: ContactFormProps) {
               required
               value={formData.name}
               onChange={handleChange}
-              className={`form-input md:h-10 md:px-4 md:py-2 md:text-base lg:h-11 lg:px-4 lg:py-3 ${errors.name ? "!border-red-500 !ring-red-500/20" : ""}`}
+              className={cn(
+                "form-input md:h-10 md:px-4 md:py-2 md:text-base lg:h-11 lg:px-4 lg:py-3",
+                errors.name && "!border-red-500 !ring-red-500/20"
+              )}
               placeholder={translations.namePlaceholder}
             />
             {errors.name && (
@@ -200,7 +198,10 @@ export default function ContactForm({ translations }: ContactFormProps) {
               required
               value={formData.email}
               onChange={handleChange}
-              className={`form-input md:h-10 md:px-4 md:py-2 md:text-base lg:h-11 lg:px-4 lg:py-3 ${errors.email ? "!border-red-500 !ring-red-500/20" : ""}`}
+              className={cn(
+                "form-input md:h-10 md:px-4 md:py-2 md:text-base lg:h-11 lg:px-4 lg:py-3",
+                errors.email && "!border-red-500 !ring-red-500/20"
+              )}
               placeholder={translations.emailPlaceholder}
             />
             {errors.email && (
@@ -220,7 +221,10 @@ export default function ContactForm({ translations }: ContactFormProps) {
             required
             value={formData.message}
             onChange={handleChange}
-            className={`form-textarea md:min-h-24 md:px-4 md:py-2 md:text-base lg:min-h-28 lg:px-4 lg:py-3 ${errors.message ? "!border-red-500 !ring-red-500/20" : ""}`}
+            className={cn(
+              "form-textarea md:min-h-24 md:px-4 md:py-2 md:text-base lg:min-h-28 lg:px-4 lg:py-3",
+              errors.message && "!border-red-500 !ring-red-500/20"
+            )}
             placeholder={translations.messagePlaceholder}
           />
           {errors.message && (
@@ -229,10 +233,15 @@ export default function ContactForm({ translations }: ContactFormProps) {
         </div>
 
         <div className="text-center">
-          <Button type="submit" disabled={isSubmitting} className="form-button">
+          <Button
+            type="submit"
+            variant="ghostDark"
+            size="full"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? (
               <div className="flex items-center gap-2">
-                <CustomLoader size="sm" />
+                <Loader2 className="size-4 animate-spin" />
                 {translations.sendingButton}
               </div>
             ) : (

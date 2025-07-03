@@ -17,7 +17,7 @@
     "location_var": "location",
     "location_val": "'Santiago, DR'",
     "education_var": "education",
-    "education_val1": "'Computer Science'",
+    "education_val1": "'Software Engineering'",
     "education_val2": "'Web Dev.'",
     "interests_var": "fields_of_interests",
     "interests_val1": "'Frontend'",
@@ -39,28 +39,28 @@
     }
   },
   "projects": {
-    "view_all_btn": "View All Projects",
-    "show_less_btn": "Show Less Projects",
-    "back_to_projects": "Back to Projects",
-    "published_on": "Published on",
+    "view_all_btn": "View all projects",
+    "show_less_btn": "Show less projects",
+    "back_to_projects": "Back to projects",
+    "published_on": "Published on ",
     "overview": "Overview",
     "challenges": "Challenges",
     "key_learnings": "Key Learnings",
-    "tech_stack": "Tech Stack",
+    "tech_stack": "Tech stack",
     "links": "Links",
-    "view_live": "View Live Project",
-    "view_source": "View Source Code",
-    "featured_project": "Featured Project",
+    "view_live": "View live project",
+    "view_source": "View source code",
+    "featured_project": "Featured project",
     "featured_description": "This project showcases advanced development skills and best practices.",
-    "work_together": "Let's Work Together"
+    "work_together": "Let's work together"
   },
   "contact": {
     "subtitle": "Have a project, or just want to connect? My inbox is open.",
     "form": {
-      "name_placeholder": "Your Name",
-      "email_placeholder": "Your Email",
-      "message_placeholder": "Your Message",
-      "send_btn": "Send Message",
+      "name_placeholder": "Your name",
+      "email_placeholder": "Your email",
+      "message_placeholder": "Your message",
+      "send_btn": "Send message",
       "sending_btn": "Sending...",
       "success_msg": "Thank you! Your message has been sent successfully.",
       "error_msg": "Sorry, there was an error sending your message. Please try again.",
@@ -75,8 +75,8 @@
   },
   "error": {
     "404": {
-      "title": "404 - Page Not Found",
-      "heading": "Oops! Page Not Found",
+      "title": "404 - Page not found",
+      "heading": "Oops! Page not found",
       "description": "The page you're looking for seems to have gone on an adventure. Let's get you back on track!",
       "reasons": {
         "title": "This might have happened because:",
@@ -85,10 +85,10 @@
         "outdated": "You followed an outdated link"
       },
       "actions": {
-        "home": "Go Home",
-        "projects": "View Projects",
-        "contact": "Get in Touch",
-        "previous": "Go Back"
+        "home": "Go home",
+        "projects": "View projects",
+        "contact": "Get in touch",
+        "previous": "Go back"
       }
     }
   },

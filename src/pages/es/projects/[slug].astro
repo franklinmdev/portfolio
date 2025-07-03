@@ -1,7 +1,5 @@
 ---
-import enTranslations from "@/i18n/en.json"
 import esTranslations from "@/i18n/es.json"
-import { getLangFromUrl } from "@/i18n/utils"
 import Layout from "@/layouts/Layout.astro"
 import { formatDate } from "@/lib/utils"
 import { ArrowLeft, ArrowRight } from "@lucide/astro"
@@ -11,17 +9,22 @@ import { getRelativeLocaleUrl } from "astro:i18n"
 
 export async function getStaticPaths() {
   const allProjects = await getCollection("projects")
+  const paths = []
 
-  return allProjects.map((project) => {
+  for (const project of allProjects) {
     const [, ...slugParts] = project.id.split("/")
     const slugWithExt = slugParts.join("/")
     const slug = slugWithExt.replace(/\.md$/, "")
 
-    return {
-      params: { slug },
-      props: { project },
+    if (project.id.startsWith("es/")) {
+      paths.push({
+        params: { slug },
+        props: { project },
+      })
     }
-  })
+  }
+
+  return paths
 }
 
 const { project } = Astro.props
@@ -34,12 +37,9 @@ const pageDescription = Array.isArray(project.data.description)
 
 const pageImage = project.data.image
 
-const lang = getLangFromUrl(Astro.url)
+const t = esTranslations.projects
 
-const translations = lang === "es" ? esTranslations : enTranslations
-const t = translations.projects
-
-const homeUrl = getRelativeLocaleUrl(lang, "/")
+const homeUrl = getRelativeLocaleUrl("es", "/")
 const projectsUrl = `${homeUrl}#projects`
 const contactUrl = `${homeUrl}#contact`
 ---
@@ -47,7 +47,10 @@ const contactUrl = `${homeUrl}#contact`
 <Layout
   title={pageTitle}
   description={pageDescription}
-  image={{ url: pageImage.src, alt: `Screenshot of ${project.data.title}` }}
+  image={{
+    url: pageImage.src,
+    alt: `Captura de pantalla de ${project.data.title}`,
+  }}
 >
   <main
     class="mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12"
@@ -71,7 +74,7 @@ const contactUrl = `${homeUrl}#contact`
               project.data.iconAsset && (
                 <Image
                   src={project.data.iconAsset}
-                  alt={`${project.data.title} icon`}
+                  alt={`Icono de ${project.data.title}`}
                   class="h-10 w-10"
                   width="40"
                   height="40"
@@ -98,7 +101,7 @@ const contactUrl = `${homeUrl}#contact`
             <p class="text-sm text-zinc-400">
               {t.published_on}
               <time datetime={project.data.publishDate.toISOString()}>
-                {formatDate(project.data.publishDate, lang)}
+                {formatDate(project.data.publishDate, "es")}
               </time>
             </p>
           </div>
@@ -108,11 +111,8 @@ const contactUrl = `${homeUrl}#contact`
       <div class="mb-12 overflow-hidden rounded-lg border border-zinc-700">
         <Image
           src={pageImage}
-          alt={`Screenshot of ${project.data.title}`}
+          alt={`Captura de pantalla de ${project.data.title}`}
           class="h-auto w-full"
-          width={1600}
-          quality={80}
-          sizes="(max-width: 768px) 100vw, 768px"
           loading="eager"
           fetchpriority="high"
         />

@@ -72,47 +72,58 @@ A modern, high-performance portfolio website built with [Astro](https://astro.bu
 ```text
 portfolio/
 ├── public/
-│   ├── avatar.png         # Profile avatar
-│   ├── favicon.png        # Site favicon
-│   ├── favicon-16x16.png  # PNG favicon (16x16)
-│   ├── favicon-32x32.png  # PNG favicon (32x32)
-│   ├── apple-touch-icon.png # iOS home screen icon
-│   ├── android-chrome-192x192.png # Android icon
-│   ├── android-chrome-512x512.png # Android icon
-│   ├── site.webmanifest   # PWA manifest
-│   └── CNAME              # Custom domain configuration
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512.png
+│   ├── apple-touch-icon.png
+│   ├── CNAME
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── favicon.ico
+│   ├── favicon.png
+│   └── site.webmanifest
 ├── src/
+│   ├── assets/
+│   │   ├── avatar.webp            # Profile avatar
+│   │   └── projects/              # Project-specific assets
 │   ├── components/
-│   │   ├── react/         # React interactive components
+│   │   ├── react/                 # React interactive components
 │   │   │   ├── ContactForm.tsx    # Contact form with validation
-│   │   │   ├── Spotlight.tsx      # Mouse spotlight effect
-│   │   │   └── UserAvatar.tsx     # User avatar component
-│   │   ├── ui/            # shadcn/ui components
+│   │   │   ├── ProjectCard.tsx      # Project card component
+│   │   │   ├── ProjectsSection.tsx  # Grid of project cards
+│   │   │   └── Spotlight.tsx      # Mouse spotlight effect
+│   │   ├── ui/                    # shadcn/ui components
 │   │   ├── Experience.astro       # Work experience timeline
 │   │   ├── Footer.astro           # Site footer
 │   │   ├── Header.astro           # Navigation header
 │   │   ├── Projects.astro         # Projects showcase
 │   │   └── Technologies.astro     # Tech stack display
-│   ├── content/           # Content collections (markdown, config)
-│   │   ├── config.ts      # Zod schema for projects
-│   │   └── projects/      # Project markdown files (en/es)
-│   ├── i18n/              # Internationalization utilities and translations
-│   │   ├── en.json        # English translations
-│   │   ├── es.json        # Spanish translations
-│   │   └── utils.ts       # Type-safe i18n helpers
+│   ├── content/                   # Content collections (markdown, config)
+│   │   ├── config.ts              # Zod schema for projects
+│   │   └── projects/              # Project markdown files (en/es)
+│   ├── i18n/                      # Internationalization utilities and translations
+│   │   ├── en.json                # English translations
+│   │   ├── es.json                # Spanish translations
+│   │   └── utils.ts               # Type-safe i18n helpers
 │   ├── layouts/
-│   │   └── Layout.astro   # Main site layout
+│   │   └── Layout.astro           # Main site layout
 │   ├── lib/
-│   │   └── utils.ts       # Utility functions
+│   │   ├── email.ts               # EmailJS sending logic
+│   │   └── utils.ts               # Utility functions
 │   ├── middleware/
-│   │   └── index.ts       # Language detection and routing middleware (type-safe)
+│   │   └── index.ts               # Language detection and routing middleware
 │   ├── pages/
-│   │   ├── [locale]/      # Localized dynamic routes
-│   │   ├── 404.astro      # Main 404 page
-│   │   ├── index.astro    # Homepage
-│   │   └── projects/      # Project detail pages
-│   └── styles/
-│       └── global.css     # Global styles and animations
+│   │   ├── es/                    # Spanish pages
+│   │   │   ├── index.astro
+│   │   │   └── projects/
+│   │   │       └── [slug].astro
+│   │   ├── 404.astro              # Main 404 page
+│   │   ├── index.astro            # Homepage (English)
+│   │   └── projects/
+│   │       └── [slug].astro       # Project detail pages (English)
+│   ├── styles/
+│   │   └── global.css             # Global styles and animations
+│   └── types/
+│       └── astro-transitions.d.ts # Type definitions for Astro transitions
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml     # GitHub Actions deployment

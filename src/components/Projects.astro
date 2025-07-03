@@ -1,40 +1,47 @@
 ---
-import { getLangFromUrl, getLocalizedUrl, useTranslations } from "@/i18n/utils"
+import {
+  createTranslations,
+  getLangFromUrl,
+  getLocalizedUrl,
+} from "@/i18n/utils"
+import { getImage } from "astro:assets"
 import { getCollection } from "astro:content"
 import ProjectsSection from "./react/ProjectsSection"
 
-// Get current language and translation function
 const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const t = createTranslations(lang)
 
-// Fetch all projects from content collections and filter by current language
 const allProjects = await getCollection("projects")
 
-const projectsForCurrentLang = allProjects.filter((project) => {
-  // Extract language from project ID (e.g., "en/devflow" -> "en")
-  const [projectLang] = project.id.split("/")
-  return projectLang === lang
-})
+const projectsForCurrentLang = await Promise.all(
+  allProjects
+    .filter((project) => {
+      const [projectLang] = project.id.split("/")
+      return projectLang === lang
+    })
+    .map(async (project) => {
+      const [, ...slugParts] = project.id.split("/")
+      const slugWithExt = slugParts.join("/")
+      const slug = slugWithExt.replace(/\.md$/, "")
 
-// Map to the format expected by the React component
-const projects = projectsForCurrentLang.map((project) => {
-  // Extract slug from project ID (e.g., "en/devflow" -> "devflow")
-  const [, ...slugParts] = project.id.split("/")
-  const slug = slugParts.join("/")
+      const projectData = {
+        id: slug || project.id,
+        title: project.data.title,
+        description: Array.isArray(project.data.description)
+          ? project.data.description[0] || ""
+          : project.data.description || "",
+        featured: project.data.featured,
+        href: getLocalizedUrl(`projects/${slug}`, lang),
+        ...(project.data.icon && { icon: project.data.icon }),
+        ...(project.data.iconAsset && {
+          iconAsset: await getImage({ src: project.data.iconAsset }),
+        }),
+      }
 
-  return {
-    id: slug || project.id,
-    title: project.data.title,
-    description: Array.isArray(project.data.description)
-      ? project.data.description[0] || ""
-      : project.data.description || "",
-    icon: project.data.icon,
-    featured: project.data.featured,
-    href: getLocalizedUrl(`projects/${slug}`, lang),
-  }
-})
+      return projectData
+    })
+)
 
-// Pass translations to React component
 const translations = {
   title: t("sections.projects_title"),
   viewAllBtn: t("projects.view_all_btn"),
@@ -42,4 +49,8 @@ const translations = {
 }
 ---
 
-<ProjectsSection client:load projects={projects} translations={translations} />
+<ProjectsSection
+  client:load
+  projects={projectsForCurrentLang}
+  translations={translations}
+/>

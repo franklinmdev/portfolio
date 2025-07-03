@@ -4,23 +4,14 @@ import Experience from "@/components/Experience.astro"
 import Technologies from "@/components/Technologies.astro"
 import Projects from "@/components/Projects.astro"
 import ContactForm from "@/components/react/ContactForm.tsx"
-import { languages, getLangFromUrl, useTranslations } from "@/i18n/utils"
+import { createTranslations } from "@/i18n/utils"
 
-// Generate static paths for all locales
-export async function getStaticPaths() {
-  return Object.keys(languages).map((locale) => ({
-    params: { locale },
-  }))
-}
-
-// Get current language and translation function
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
-
-// Hash navigation handler
+// This is the Spanish locale home page
+const lang = "es"
+const t = createTranslations(lang)
 ---
 
-<Layout title={`Franklin Martinez - ${t("hero.subtitle")}`}>
+<Layout title='Franklin "franklinmdev" Martinez – Ingeniero de Software'>
   <!-- Main Container with better responsive handling -->
   <div
     class="mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12"
@@ -89,7 +80,7 @@ const t = useTranslations(lang)
             href="https://github.com/franklinmdev"
             target="_blank"
             rel="noopener"
-            class="cursor-pointer text-zinc-500 transition-colors hover:text-white"
+            class="cursor-pointer text-zinc-400 transition-colors hover:text-white"
             aria-label="GitHub Profile"
           >
             <svg
@@ -107,7 +98,7 @@ const t = useTranslations(lang)
             href="https://www.linkedin.com/in/franklin-martinez-0a697a253"
             target="_blank"
             rel="noopener"
-            class="cursor-pointer text-zinc-500 transition-colors hover:text-white"
+            class="cursor-pointer text-zinc-400 transition-colors hover:text-white"
             aria-label="LinkedIn Profile"
           >
             <svg
@@ -125,7 +116,7 @@ const t = useTranslations(lang)
             href="https://x.com/franklinmdev"
             target="_blank"
             rel="noopener"
-            class="cursor-pointer text-zinc-500 transition-colors hover:text-white"
+            class="cursor-pointer text-zinc-400 transition-colors hover:text-white"
             aria-label="X Profile"
           >
             <svg
@@ -172,7 +163,7 @@ const t = useTranslations(lang)
               </div>
               <a
                 href="mailto:franklinmdev@hotmail.com"
-                class="block cursor-pointer p-2 text-right text-xs text-zinc-500 transition-colors hover:text-zinc-300 sm:text-sm"
+                class="block cursor-pointer p-2 text-right text-xs text-zinc-400 transition-colors hover:text-zinc-300 sm:text-sm"
               >
                 franklinmdev@hotmail.com
               </a>
@@ -192,7 +183,7 @@ const t = useTranslations(lang)
             <Projects />
 
             <ContactForm
-              client:load
+              client:visible
               translations={{
                 title: t("sections.contact_title"),
                 subtitle: t("contact.subtitle"),

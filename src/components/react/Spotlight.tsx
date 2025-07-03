@@ -1,36 +1,42 @@
-import { useRef, useCallback, useEffect } from "react"
+import { useCallback, useEffect, useRef } from "react"
 
 export default function Spotlight() {
   const spotlightRef = useRef<HTMLDivElement>(null)
   const rafId = useRef<number | null>(null)
 
   const updateSpotlight = useCallback((e: MouseEvent) => {
-    if (rafId.current) {
+    if (rafId.current !== null) {
       cancelAnimationFrame(rafId.current)
     }
 
     rafId.current = requestAnimationFrame(() => {
-      if (spotlightRef.current) {
-        spotlightRef.current.style.setProperty("--x", `${e.clientX}px`)
-        spotlightRef.current.style.setProperty("--y", `${e.clientY}px`)
+      const element = spotlightRef.current
+      if (element) {
+        element.style.setProperty("--x", `${e.clientX}px`)
+        element.style.setProperty("--y", `${e.clientY}px`)
       }
+      rafId.current = null
     })
   }, [])
 
   const handleMouseEnter = useCallback(() => {
-    if (spotlightRef.current) {
-      spotlightRef.current.style.opacity = "1"
+    const element = spotlightRef.current
+    if (element) {
+      element.style.opacity = "1"
     }
     document.addEventListener("mousemove", updateSpotlight)
   }, [updateSpotlight])
 
   const handleMouseLeave = useCallback(() => {
-    if (spotlightRef.current) {
-      spotlightRef.current.style.opacity = "0"
+    const element = spotlightRef.current
+    if (element) {
+      element.style.opacity = "0"
     }
     document.removeEventListener("mousemove", updateSpotlight)
-    if (rafId.current) {
+
+    if (rafId.current !== null) {
       cancelAnimationFrame(rafId.current)
+      rafId.current = null
     }
   }, [updateSpotlight])
 
@@ -42,8 +48,10 @@ export default function Spotlight() {
       document.body.removeEventListener("mouseenter", handleMouseEnter)
       document.body.removeEventListener("mouseleave", handleMouseLeave)
       document.removeEventListener("mousemove", updateSpotlight)
-      if (rafId.current) {
+
+      if (rafId.current !== null) {
         cancelAnimationFrame(rafId.current)
+        rafId.current = null
       }
     }
   }, [handleMouseEnter, handleMouseLeave, updateSpotlight])

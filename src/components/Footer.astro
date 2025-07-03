@@ -1,5 +1,11 @@
+---
+import { getTranslationFromUrl } from "@/i18n/utils"
+
+const t = getTranslationFromUrl(Astro.url)
+---
+
 <footer class="mt-20 px-4 pb-8 sm:px-6 lg:px-8">
-  <p class="text-center text-sm text-zinc-600">
-    Designed & Built by Franklin Martinez
+  <p class="text-center text-sm text-zinc-400">
+    {t("footer.credits")}
   </p>
 </footer>

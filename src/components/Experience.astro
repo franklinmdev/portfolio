@@ -1,17 +1,14 @@
 ---
-import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+import { createTranslations, getLangFromUrl } from "@/i18n/utils"
 
-// Get current language and translation function
 const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const t = createTranslations(lang)
 
-// TypeScript interface definitions for timeline data
 interface ExperienceItem {
   readonly id: string
   readonly translationKey: string
 }
 
-// Define the experience items that reference translations
 const experienceItems: readonly ExperienceItem[] = [
   {
     id: "exp1",
@@ -20,9 +17,9 @@ const experienceItems: readonly ExperienceItem[] = [
 ] as const
 ---
 
-<section id="experience" class="py-8 lg:pt-0 lg:pb-12 scroll-mt-24">
+<section id="experience" class="scroll-mt-24 py-8 lg:pt-0 lg:pb-12">
   <h2
-    class="mb-12 font-bold text-zinc-100 text-2xl tracking-tight experience-title section-title"
+    class="experience-title section-title mb-12 text-2xl font-bold tracking-tight text-zinc-100"
   >
     {t("sections.experience_title")}
   </h2>
@@ -35,10 +32,10 @@ const experienceItems: readonly ExperienceItem[] = [
           style={`animation-delay: ${0.6 + index * 0.2}s`}
         >
           <div class="timeline-dot" />
-          <p class="mb-1 font-medium text-violet-400 text-sm">
+          <p class="mb-1 text-sm font-medium text-violet-400">
             {t(`${item.translationKey}.date`)}
           </p>
-          <h3 class="mb-1 font-bold text-white text-xl">
+          <h3 class="mb-1 text-xl font-bold text-white">
             {t(`${item.translationKey}.title`)}
             <span class="font-normal text-zinc-400">
               {t(`${item.translationKey}.company`)}
@@ -50,80 +47,3 @@ const experienceItems: readonly ExperienceItem[] = [
     }
   </div>
 </section>
-
-<!--
-ALTERNATIVE: Scroll-Triggered Animation Implementation
-Replace the above section with this code for scroll-triggered animations:
-
-<section id="experience" class="py-8 lg:pt-0 lg:pb-12 scroll-mt-24">
-  <h2
-    class="mb-12 font-bold text-zinc-100 text-2xl tracking-tight experience-title-scroll section-title"
-    data-animate="title"
-  >
-    Work Experience
-  </h2>
-
-  <div class="space-y-0">
-    {
-      experienceData.map((item, index) => (
-        <div
-          class={`timeline-item experience-item-scroll ${index === experienceData.length - 1 ? "last-item" : ""}`}
-          data-animate="timeline-item"
-          data-delay={index * 200}
-        >
-          <div class="timeline-dot" />
-          <p class="mb-1 font-medium text-violet-400 text-sm">{item.date}</p>
-          <h3 class="mb-1 font-bold text-white text-xl">
-            {item.title},
-            <span class="font-normal text-zinc-400">{item.company}</span>
-          </h3>
-          <p class="text-zinc-400">{item.description}</p>
-        </div>
-      ))
-    }
-  </div>
-</section>
-
-<script>
-  // Intersection Observer for scroll-triggered animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const element = entry.target as HTMLElement;
-        const delay = parseInt(element.dataset.delay || '0');
-
-        setTimeout(() => {
-          element.classList.add('animate-in');
-        }, delay);
-
-        observer.unobserve(element);
-      }
-    });
-  }, observerOptions);
-
-  // Observe all animatable elements
-  document.querySelectorAll('[data-animate]').forEach((el) => {
-    observer.observe(el);
-  });
-</script>
-
-And add these CSS classes to global.css:
-
-.experience-title-scroll,
-.experience-item-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.experience-title-scroll.animate-in,
-.experience-item-scroll.animate-in {
-  opacity: 1;
-  transform: translateY(0);
-}
--->
