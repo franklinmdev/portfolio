@@ -25,10 +25,10 @@ A modern Q&A platform that combines traditional community features with AI assis
 
 ## Key Features
 
-- **AI-Enhanced Questions**: Groq AI integration for clearer, more effective queries
-- **Modern Authentication**: GitHub, Google, and email login via NextAuth v5
-- **Community Features**: Voting, reputation tracking, and user profiles
-- **Smart Organization**: Advanced tagging and search functionality
+- **AI-Enhanced questions**: Groq AI integration for clearer, more effective queries
+- **Modern authentication**: GitHub, Google, and email login via NextAuth v5
+- **Community features**: Voting, reputation tracking, and user profiles
+- **Smart organization**: Advanced tagging and search functionality
 
 ## Technical Stack
 

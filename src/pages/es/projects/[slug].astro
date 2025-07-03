@@ -8,23 +8,19 @@ import { getCollection, render } from "astro:content"
 import { getRelativeLocaleUrl } from "astro:i18n"
 
 export async function getStaticPaths() {
-  const allProjects = await getCollection("projects")
-  const paths = []
+  const esProjects = await getCollection("projects", ({ id }) =>
+    id.startsWith("es/")
+  )
 
-  for (const project of allProjects) {
-    const [, ...slugParts] = project.id.split("/")
-    const slugWithExt = slugParts.join("/")
-    const slug = slugWithExt.replace(/\.md$/, "")
+  return esProjects.map((project) => {
+    // The slug for es/devflow.md should be "devflow"
+    const slug = project.slug.slice(3) // "es/".length
 
-    if (project.id.startsWith("es/")) {
-      paths.push({
-        params: { slug },
-        props: { project },
-      })
+    return {
+      params: { slug },
+      props: { project },
     }
-  }
-
-  return paths
+  })
 }
 
 const { project } = Astro.props

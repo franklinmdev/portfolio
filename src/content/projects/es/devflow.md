@@ -25,10 +25,10 @@ Una plataforma moderna de P&R que combina características tradicionales de comu
 
 ## Características Principales
 
-- **Preguntas Mejoradas por IA**: Integración de IA Groq para consultas más claras y efectivas
-- **Autenticación Moderna**: Inicio de sesión con GitHub, Google y email via NextAuth v5
-- **Características de Comunidad**: Votación, seguimiento de reputación y perfiles de usuario
-- **Organización Inteligente**: Funcionalidad avanzada de etiquetado y búsqueda
+- **Preguntas mejoradas por IA**: Integración de IA Groq para consultas más claras y efectivas
+- **Autenticación moderna**: Inicio de sesión con GitHub, Google y email via NextAuth v5
+- **Características de comunidad**: Votación, seguimiento de reputación y perfiles de usuario
+- **Organización inteligente**: Funcionalidad avanzada de etiquetado y búsqueda
 
 ## Stack Técnico
 

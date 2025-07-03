@@ -10,12 +10,12 @@ import { getCollection, render } from "astro:content"
 import { getRelativeLocaleUrl } from "astro:i18n"
 
 export async function getStaticPaths() {
-  const allProjects = await getCollection("projects")
+  const enProjects = await getCollection("projects", ({ id }) =>
+    id.startsWith("en/")
+  )
 
-  return allProjects.map((project) => {
-    const [, ...slugParts] = project.id.split("/")
-    const slugWithExt = slugParts.join("/")
-    const slug = slugWithExt.replace(/\.md$/, "")
+  return enProjects.map((project) => {
+    const slug = project.slug.slice(3) // "en/".length
 
     return {
       params: { slug },
@@ -39,7 +39,7 @@ const lang = getLangFromUrl(Astro.url)
 const translations = lang === "es" ? esTranslations : enTranslations
 const t = translations.projects
 
-const homeUrl = getRelativeLocaleUrl(lang, "/")
+const homeUrl = getRelativeLocaleUrl("en", "/")
 const projectsUrl = `${homeUrl}#projects`
 const contactUrl = `${homeUrl}#contact`
 ---
@@ -98,7 +98,7 @@ const contactUrl = `${homeUrl}#contact`
             <p class="text-sm text-zinc-400">
               {t.published_on}
               <time datetime={project.data.publishDate.toISOString()}>
-                {formatDate(project.data.publishDate, lang)}
+                {formatDate(project.data.publishDate, "en")}
               </time>
             </p>
           </div>
