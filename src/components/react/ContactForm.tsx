@@ -178,7 +178,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
               value={formData.name}
               onChange={handleChange}
               className={cn(
-                "form-input md:h-10 md:px-4 md:py-2 md:text-base lg:h-11 lg:px-4 lg:py-3",
+                "form-input py-5 md:h-10 md:px-4 md:text-base lg:h-11 lg:px-4",
                 errors.name && "!border-red-500 !ring-red-500/20"
               )}
               placeholder={translations.namePlaceholder}
@@ -199,7 +199,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
               value={formData.email}
               onChange={handleChange}
               className={cn(
-                "form-input md:h-10 md:px-4 md:py-2 md:text-base lg:h-11 lg:px-4 lg:py-3",
+                "form-input py-5 md:h-10 md:px-4 md:text-base lg:h-11 lg:px-4",
                 errors.email && "!border-red-500 !ring-red-500/20"
               )}
               placeholder={translations.emailPlaceholder}
@@ -222,7 +222,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
             value={formData.message}
             onChange={handleChange}
             className={cn(
-              "form-textarea md:min-h-24 md:px-4 md:py-2 md:text-base lg:min-h-28 lg:px-4 lg:py-3",
+              "form-textarea pt-3 md:min-h-24 md:px-4 md:text-base lg:min-h-28 lg:px-4",
               errors.message && "!border-red-500 !ring-red-500/20"
             )}
             placeholder={translations.messagePlaceholder}
