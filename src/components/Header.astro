@@ -187,6 +187,13 @@ const otherLangName = languages[otherLang]
     const mobileMenu = document.getElementById("mobile-menu")
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.onclick = () => mobileMenu.classList.toggle("hidden")
+
+      const mobileNavLinks = mobileMenu.querySelectorAll("a")
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden")
+        })
+      })
     }
 
     const avatarHomeBtn = document.getElementById("avatar-home-btn")
