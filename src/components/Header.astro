@@ -198,11 +198,7 @@ const otherLangName = languages[otherLang]
 
     const avatarHomeBtn = document.getElementById("avatar-home-btn")
     if (avatarHomeBtn instanceof HTMLAnchorElement) {
-      avatarHomeBtn.onclick = (event) => {
-        if (window.location.pathname === avatarHomeBtn.pathname) {
-          event.preventDefault()
-          window.scrollTo({ top: 0, behavior: "smooth" })
-        }
+      avatarHomeBtn.onclick = () => {
         if (mobileMenu) mobileMenu.classList.add("hidden")
       }
     }
