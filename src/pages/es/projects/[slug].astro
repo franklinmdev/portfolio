@@ -1,11 +1,7 @@
 ---
-import esTranslations from "@/i18n/es.json"
+import ProjectPage from "@/components/ProjectPage.astro"
 import Layout from "@/layouts/Layout.astro"
-import { formatDate } from "@/lib/utils"
-import { ArrowLeft, ArrowRight } from "@lucide/astro"
-import { Image } from "astro:assets"
 import { getCollection, render } from "astro:content"
-import { getRelativeLocaleUrl } from "astro:i18n"
 
 export async function getStaticPaths() {
   const esProjects = await getCollection("projects", ({ id }) =>
@@ -33,11 +29,7 @@ const pageDescription = Array.isArray(project.data.description)
 
 const pageImage = project.data.image
 
-const t = esTranslations.projects
-
-const homeUrl = getRelativeLocaleUrl("es", "/")
-const projectsUrl = `${homeUrl}#projects`
-const contactUrl = `${homeUrl}#contact`
+const lang = "es"
 ---
 
 <Layout
@@ -48,192 +40,9 @@ const contactUrl = `${homeUrl}#contact`
     alt: `Captura de pantalla de ${project.data.title}`,
   }}
 >
-  <main
-    class="mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12"
-  >
-    <div class="pt-24 pb-16">
-      <a
-        href={projectsUrl}
-        class="group mb-8 inline-flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
-      >
-        <ArrowLeft
-          class="h-5 w-5 transition-transform group-hover:-translate-x-1"
-          aria-hidden="true"
-        />
-        {t.back_to_projects}
-      </a>
-
-      <header class="mb-12">
-        <div class="mb-6 flex items-start gap-6">
-          <div class="icon-container">
-            {
-              project.data.iconAsset && (
-                <Image
-                  src={project.data.iconAsset}
-                  alt={`Icono de ${project.data.title}`}
-                  class="h-10 w-10"
-                  width="40"
-                  height="40"
-                  loading="lazy"
-                />
-              )
-            }
-            {
-              project.data.icon && !project.data.iconAsset && (
-                <Fragment set:html={project.data.icon} />
-              )
-            }
-          </div>
-
-          <div class="flex-1">
-            <h1
-              class="mb-3 text-3xl font-bold tracking-tight text-zinc-100 md:text-4xl"
-            >
-              {project.data.title}
-            </h1>
-            <p class="mb-4 text-lg text-zinc-400">
-              {project.data.subtitle}
-            </p>
-            <p class="text-sm text-zinc-400">
-              {t.published_on}
-              <time datetime={project.data.publishDate.toISOString()}>
-                {formatDate(project.data.publishDate, "es")}
-              </time>
-            </p>
-          </div>
-        </div>
-      </header>
-
-      <div class="mb-12 overflow-hidden rounded-lg border border-zinc-700">
-        <Image
-          src={pageImage}
-          alt={`Captura de pantalla de ${project.data.title}`}
-          class="h-auto w-full"
-          loading="eager"
-          fetchpriority="high"
-        />
-      </div>
-
-      <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
-        <div class="space-y-8 lg:col-span-2">
-          <section>
-            <h2 class="mb-4 text-2xl font-bold text-zinc-100">
-              {t.overview}
-            </h2>
-            <div class="space-y-4 leading-relaxed text-zinc-300">
-              {
-                Array.isArray(project.data.description) ? (
-                  project.data.description.map((paragraph) => (
-                    <p>{paragraph}</p>
-                  ))
-                ) : (
-                  <p>{project.data.description}</p>
-                )
-              }
-            </div>
-          </section>
-
-          <section>
-            <div class="prose-invert prose prose-zinc max-w-none">
-              <Content />
-            </div>
-          </section>
-
-          <section class="space-y-6">
-            <div>
-              <h2 class="mb-4 text-2xl font-bold text-zinc-100">
-                {t.challenges}
-              </h2>
-              <p class="leading-relaxed text-zinc-300">
-                {project.data.challenges}
-              </p>
-            </div>
-
-            <div>
-              <h2 class="mb-4 text-2xl font-bold text-zinc-100">
-                {t.key_learnings}
-              </h2>
-              <p class="leading-relaxed text-zinc-300">
-                {project.data.learnings}
-              </p>
-            </div>
-          </section>
-        </div>
-
-        <div class="lg:col-span-1">
-          <div class="sticky top-24 space-y-8">
-            <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-6">
-              <h3 class="mb-4 text-lg font-bold text-zinc-100">
-                {t.tech_stack}
-              </h3>
-              <div class="flex flex-wrap gap-2">
-                {
-                  project.data.tags.map((tag) => (
-                    <span class="tech-tag text-xs">{tag}</span>
-                  ))
-                }
-              </div>
-            </div>
-
-            <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-6">
-              <h3 class="mb-4 text-lg font-bold text-zinc-100">
-                {t.links}
-              </h3>
-              <div class="space-y-3">
-                <a
-                  href={project.data.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex w-full items-center justify-center rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-violet-700"
-                >
-                  {t.view_live}
-                </a>
-                <a
-                  href={project.data.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex w-full items-center justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-zinc-700"
-                >
-                  {t.view_source}
-                </a>
-              </div>
-            </div>
-
-            {
-              project.data.featured && (
-                <div class="rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 p-6 text-center">
-                  <div class="mb-2 font-semibold text-white">
-                    ✨ {t.featured_project}
-                  </div>
-                  <p class="text-sm text-violet-100">
-                    {t.featured_description}
-                  </p>
-                </div>
-              )
-            }
-          </div>
-        </div>
-      </div>
-
-      <nav class="mt-16 border-t border-zinc-700 pt-8">
-        <div class="flex flex-col gap-4 sm:flex-row sm:justify-between">
-          <a
-            href={projectsUrl}
-            class="inline-flex items-center justify-center gap-2 rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-zinc-700"
-          >
-            <ArrowLeft class="h-4 w-4" aria-hidden="true" />
-            {t.view_all_btn}
-          </a>
-
-          <a
-            href={contactUrl}
-            class="inline-flex items-center justify-center gap-2 rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-violet-700"
-          >
-            {t.work_together}
-            <ArrowRight class="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-      </nav>
-    </div>
-  </main>
+  <ProjectPage project={project} lang={lang}>
+    <Fragment slot="content">
+      <Content />
+    </Fragment>
+  </ProjectPage>
 </Layout>

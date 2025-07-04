@@ -1,0 +1,79 @@
+---
+import Experience from "@/components/Experience.astro"
+import Hero from "@/components/Hero.astro"
+import IDEBlock from "@/components/IDEBlock.astro"
+import Projects from "@/components/Projects.astro"
+import ContactForm from "@/components/react/ContactForm.tsx"
+import ScrollToTop from "@/components/react/ScrollToTop"
+import Technologies from "@/components/Technologies.astro"
+import { createTranslations } from "@/i18n/utils"
+
+export interface Props {
+  lang: "en" | "es"
+}
+
+const { lang } = Astro.props
+const t = createTranslations(lang)
+---
+
+<!-- Main Container with better responsive handling -->
+<div
+  class="mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12"
+>
+  <div class="xl:flex xl:justify-between xl:gap-20">
+    <!-- Left Column: Hero Section -->
+    <Hero t={t} />
+
+    <!-- Right Column: Main Content -->
+    <main class="xl:w-3/5 2xl:w-[62%]">
+      <div class="xl:pt-24">
+        <!-- Mobile IDE Code Block -->
+        <div id="about-content-mobile" class="mb-16 xl:hidden">
+          <div class="w-full">
+            <IDEBlock t={t} variant="mobile" />
+            <a
+              href="mailto:franklinmdev@hotmail.com"
+              class="block cursor-pointer p-2 text-right text-xs text-zinc-400 transition-colors hover:text-zinc-300 sm:text-sm"
+            >
+              franklinmdev@hotmail.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-11 md:space-y-14 xl:space-y-11 2xl:space-y-14">
+          <Experience />
+
+          <hr class="hidden border-zinc-700 xl:block" />
+
+          <Technologies />
+
+          <hr class="hidden border-zinc-700 xl:block" />
+
+          <Projects />
+
+          <ContactForm
+            client:visible
+            translations={{
+              title: t("sections.contact_title"),
+              subtitle: t("contact.subtitle"),
+              namePlaceholder: t("contact.form.name_placeholder"),
+              emailPlaceholder: t("contact.form.email_placeholder"),
+              messagePlaceholder: t("contact.form.message_placeholder"),
+              sendButton: t("contact.form.send_btn"),
+              sendingButton: t("contact.form.sending_btn"),
+              successMessage: t("contact.form.success_msg"),
+              errorMessage: t("contact.form.error_msg"),
+              nameRequired: t("contact.form.name_required"),
+              emailRequired: t("contact.form.email_required"),
+              emailInvalid: t("contact.form.email_invalid"),
+              messageRequired: t("contact.form.message_required"),
+            }}
+          />
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<ScrollToTop client:load />

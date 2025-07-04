@@ -1,0 +1,42 @@
+---
+export interface Props {
+  /** "desktop" or "mobile" determines sizing & spacing */
+  variant: "desktop" | "mobile"
+  /** translation helper coming from parent */
+  t: (key: string) => string
+}
+
+const { variant, t } = Astro.props
+const isMobile = variant === "mobile"
+---
+
+<div class={isMobile ? undefined : "hidden xl:block"}>
+  <div class="ide-container overflow-hidden rounded-lg shadow-2xl">
+    <div class="flex h-8 items-center space-x-2 bg-zinc-800 px-4">
+      <div class="h-3 w-3 rounded-full bg-red-500"></div>
+      <div class="h-3 w-3 rounded-full bg-yellow-500"></div>
+      <div class="h-3 w-3 rounded-full bg-green-500"></div>
+    </div>
+    <div
+      class={isMobile
+        ? "overflow-x-auto p-5 pr-8 text-left md:p-6"
+        : "overflow-x-auto p-4 text-left 2xl:p-6"}
+    >
+      <pre
+        class={isMobile
+          ? "ide-code-mobile"
+          : "text-xs 2xl:text-sm"}><code><span class="keyword">const</span> <span class="variable">developer</span> = &#123;
+  <span class="variable">{t("ide.title_var")}</span>: <span class="string">{t("ide.title_val")}</span>,
+  <span class="variable">{t("ide.location_var")}</span>: <span class="string">{t("ide.location_val")}</span>,
+  <span class="variable">{t("ide.education_var")}</span>: [
+    <span class="string">{t("ide.education_val1")}</span>, <span class="string">{t("ide.education_val2")}</span>
+  ],
+  <span class="variable">{t("ide.interests_var")}</span>: [
+    <span class="string">{t("ide.interests_val1")}</span>, <span class="string">{t("ide.interests_val2")}</span>, <span class="string">'AI'</span>
+  ]
+&#125;;
+
+<span class="comment">{t("ide.comment")}</span></code></pre>
+    </div>
+  </div>
+</div>

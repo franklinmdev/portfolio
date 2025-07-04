@@ -1,0 +1,66 @@
+---
+import type enTranslations from "@/i18n/en.json"
+import { formatDate } from "@/lib/utils"
+import { ArrowLeft } from "@lucide/astro"
+import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+
+export interface Props {
+  project: CollectionEntry<"projects">
+  lang: "en" | "es"
+  t: typeof enTranslations.projects
+  projectsUrl: string
+}
+
+const { project, lang, t, projectsUrl } = Astro.props
+---
+
+<a
+  href={projectsUrl}
+  class="group mb-8 inline-flex items-center gap-2 text-zinc-400 transition-colors hover:text-white"
+>
+  <ArrowLeft
+    class="h-5 w-5 transition-transform group-hover:-translate-x-1"
+    aria-hidden="true"
+  />
+  {t.back_to_projects}
+</a>
+
+<header class="mb-12">
+  <div class="mb-6 flex items-start gap-6">
+    <div class="icon-container">
+      {
+        project.data.iconAsset && (
+          <Image
+            src={project.data.iconAsset}
+            alt={`${project.data.title} icon`}
+            class="h-10 w-10"
+            width="40"
+            height="40"
+            loading="lazy"
+          />
+        )
+      }
+      {
+        project.data.icon && !project.data.iconAsset && (
+          <Fragment set:html={project.data.icon} />
+        )
+      }
+    </div>
+
+    <div class="flex-1">
+      <h1
+        class="mb-3 text-3xl font-bold tracking-tight text-zinc-100 md:text-4xl"
+      >
+        {project.data.title}
+      </h1>
+      <p class="mb-4 text-lg text-zinc-400">{project.data.subtitle}</p>
+      <p class="text-sm text-zinc-400">
+        {t.published_on}
+        <time datetime={project.data.publishDate.toISOString()}>
+          {formatDate(project.data.publishDate, lang)}
+        </time>
+      </p>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,39 @@
+---
+import type enTranslations from "@/i18n/en.json"
+import type { CollectionEntry } from "astro:content"
+export interface Props {
+  project: CollectionEntry<"projects">
+  t: typeof enTranslations.projects
+}
+const { project, t } = Astro.props
+---
+
+<section>
+  <h2 class="mb-4 text-2xl font-bold text-zinc-100">{t.overview}</h2>
+  <div class="space-y-4 leading-relaxed text-zinc-300">
+    {
+      Array.isArray(project.data.description) ? (
+        project.data.description.map((p: string) => <p>{p}</p>)
+      ) : (
+        <p>{project.data.description}</p>
+      )
+    }
+  </div>
+</section>
+
+<section>
+  <div class="prose-invert prose prose-zinc max-w-none">
+    <slot name="content" />
+  </div>
+</section>
+
+<section class="space-y-6">
+  <div>
+    <h2 class="mb-4 text-2xl font-bold text-zinc-100">{t.challenges}</h2>
+    <p class="leading-relaxed text-zinc-300">{project.data.challenges}</p>
+  </div>
+  <div>
+    <h2 class="mb-4 text-2xl font-bold text-zinc-100">{t.key_learnings}</h2>
+    <p class="leading-relaxed text-zinc-300">{project.data.learnings}</p>
+  </div>
+</section>

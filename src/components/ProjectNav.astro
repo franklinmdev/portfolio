@@ -1,0 +1,29 @@
+---
+import type enTranslations from "@/i18n/en.json"
+import { ArrowLeft, ArrowRight } from "@lucide/astro"
+export interface Props {
+  projectsUrl: string
+  contactUrl: string
+  t: typeof enTranslations.projects
+}
+const { projectsUrl, contactUrl, t } = Astro.props
+---
+
+<nav class="mt-16 border-t border-zinc-700 pt-8">
+  <div class="flex flex-col gap-4 sm:flex-row sm:justify-between">
+    <a
+      href={projectsUrl}
+      class="inline-flex items-center justify-center gap-2 rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-zinc-700"
+    >
+      <ArrowLeft class="h-4 w-4" aria-hidden="true" />
+      {t.view_all_btn}
+    </a>
+    <a
+      href={contactUrl}
+      class="inline-flex items-center justify-center gap-2 rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-violet-700"
+    >
+      {t.work_together}
+      <ArrowRight class="h-4 w-4" aria-hidden="true" />
+    </a>
+  </div>
+</nav>

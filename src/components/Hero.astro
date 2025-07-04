@@ -1,0 +1,58 @@
+---
+import IDEBlock from "@/components/IDEBlock.astro"
+import SocialLinks from "@/components/SocialLinks.astro"
+
+export interface Props {
+  t: (key: string) => string
+}
+
+const { t } = Astro.props
+---
+
+<!-- Sticky hero column -->
+<div
+  id="home"
+  class="pt-24 pb-16 xl:sticky xl:top-0 xl:flex xl:max-h-[125vh] xl:w-2/5 xl:flex-col xl:justify-between xl:py-24 2xl:w-[38%]"
+>
+  <div class="space-y-8">
+    <!-- Hero Content -->
+    <div>
+      <h1
+        class="hero-headline gradient-text mb-4 text-4xl font-extrabold tracking-tighter text-white sm:text-5xl lg:text-6xl xl:text-4xl 2xl:text-5xl"
+      >
+        Franklin <span class="sr-only">“franklinmdev”</span> Martinez
+      </h1>
+      <h2
+        class="hero-subtitle mb-6 text-2xl font-bold text-zinc-300 sm:text-3xl lg:text-4xl xl:text-2xl 2xl:text-3xl"
+      >
+        {t("hero.subtitle")}
+      </h2>
+      <div
+        class="hero-about space-y-4 text-base leading-relaxed text-zinc-400 sm:text-lg xl:text-base 2xl:text-lg"
+      >
+        <p>{t("hero.about.p1")}</p>
+        <p>{t("hero.about.p2")}</p>
+      </div>
+    </div>
+
+    <!-- IDE code block (desktop) -->
+    <IDEBlock t={t} variant="desktop" />
+  </div>
+
+  <!-- Social links -->
+  <SocialLinks />
+</div>
+
+<style>
+  .hero-headline {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+  .hero-subtitle {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+  }
+</style>

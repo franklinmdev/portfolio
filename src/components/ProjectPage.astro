@@ -1,0 +1,67 @@
+---
+import ProjectBody from "@/components/ProjectBody.astro"
+import ProjectHeader from "@/components/ProjectHeader.astro"
+import ProjectNav from "@/components/ProjectNav.astro"
+import ProjectSidebar from "@/components/ProjectSidebar.astro"
+import ScrollToTop from "@/components/react/ScrollToTop"
+import enTranslations from "@/i18n/en.json"
+import esTranslations from "@/i18n/es.json"
+import { Picture } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+import { getRelativeLocaleUrl } from "astro:i18n"
+
+export interface Props {
+  project: CollectionEntry<"projects">
+  lang: "en" | "es"
+}
+
+const { project, lang } = Astro.props
+const translations = lang === "es" ? esTranslations : enTranslations
+const t = translations.projects
+
+const baseUrl = getRelativeLocaleUrl(lang, "/")
+const url = (hash: string) => `${baseUrl}${hash}`
+const projectsUrl = url("#projects")
+const contactUrl = url("#contact")
+const pageImage = project.data.image
+---
+
+<main
+  class="mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12"
+>
+  <div class="pt-24 pb-16">
+    <ProjectHeader
+      project={project}
+      lang={lang}
+      t={t}
+      projectsUrl={projectsUrl}
+    />
+
+    <div class="mb-12 overflow-hidden rounded-lg border border-zinc-700">
+      <Picture
+        src={pageImage}
+        formats={["avif", "webp", "jpeg"]}
+        alt={`${lang === "es" ? "Captura de pantalla de" : "Screenshot of"} ${project.data.title}`}
+        class="h-auto w-full"
+        width={1600}
+        quality={80}
+        sizes="(max-width: 768px) 100vw, 768px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+      <div class="space-y-8 lg:col-span-2">
+        <ProjectBody project={project} t={t} />
+      </div>
+      <div class="lg:col-span-1">
+        <ProjectSidebar project={project} t={t} />
+      </div>
+    </div>
+
+    <ProjectNav projectsUrl={projectsUrl} contactUrl={contactUrl} t={t} />
+  </div>
+</main>
+
+<ScrollToTop client:load />
