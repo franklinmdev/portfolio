@@ -67,17 +67,6 @@ Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
     <link rel="dns-prefetch" href="//linkedin.com" />
     <link rel="dns-prefetch" href="//x.com" />
 
-    <!-- Preload critical assets for better performance -->
-    <!--
-    <link
-      rel="preload"
-      href={avatarImage.src}
-      as="image"
-      type="image/webp"
-      fetchpriority="high"
-    />
-    -->
-
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
     <!-- Optimized favicon set with proper sizes -->
