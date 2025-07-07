@@ -1,16 +1,29 @@
-# Site Performance Feedback
+# Performance Reference
 
-## 1. Unused Preloaded Resource
+> 📄 This document tracks known hosting/performance constraints and the decisions I've taken to work around them.
 
-One resource is being preloaded but is not used during the initial page load. Preloaded resources are fetched at a high priority, which can delay the arrival of more critical resources. If the resource is never actually used, it should be removed from the preload list to avoid slowing down the initial load.
+## Current constraint: short TTL on GitHub Pages assets
 
-- **/assets/avatar-D_f-EGS3.webp**
+| Header        | Value                 |
+| ------------- | --------------------- |
+| Cache-Control | `public, max-age=600` |
 
-_Recommended action_: Remove the `<link rel="preload" ...>` tag for this asset (or ensure the asset is actually used during initial rendering).
+GitHub Pages' CDN always returns the header above and offers **no override mechanism** (for example, `_headers`, `.htaccess`, or GitHub Actions). See [Back Alley Coder – S(GH)PA](http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/) for background on other Pages quirks.
 
----
+### Impact
 
-## 2. Static Files with Inadequate Cache Settings
+- Repeat-visit performance is OK (files are fingerprinted), but the first revisit after 10 minutes triggers a revalidation round trip.
+- Flagged by Lighthouse as "Static assets with an inefficient cache policy."
+
+### Future options
+
+1. **Accept the 10-minute TTL** (status quo).  
+   Pros: zero work.  
+   Cons: keeps Lighthouse warning.
+2. **Front Pages with a CDN/reverse proxy** (for example, Cloudflare Free, Bunny, or Fastly) and inject `max-age=31536000, immutable` for `/assets/*`, fonts, and images.
+3. **Move hosting** to Netlify, Cloudflare Pages, or Vercel — all of these respect `public/_headers` (already present in the repo).
+
+## Static Files with Inadequate Cache Settings
 
 25 static files have insufficient cache headers (currently cached for only ~10 minutes). Proper cache settings instruct browsers and intermediaries to store and reuse these resources, reducing page weight and latency.
 
@@ -42,8 +55,6 @@ List of affected files:
 24. <https://franklinmdev.me/assets/js/Header.astro_astro_type_script_index_0_lang-CYmHLB3c.js>
 25. <https://franklinmdev.me/assets/img/devflow-logo-XWy35P2Z_2jfU7N.svg>
 
-_Recommended action_: Configure longer cache lifetimes (e.g., 1 year) for these static assets via appropriate `Cache-Control` headers (e.g., `public, max-age=31536000, immutable`). This will allow browsers to reuse previously downloaded resources, improving repeat-visit performance.
+### Last updated
 
----
-
-_Generated on:_ <!-- NOTE: You can update this date when addressing the feedback -->
+2025-07-07
