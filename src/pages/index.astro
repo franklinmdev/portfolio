@@ -1,4 +1,5 @@
 ---
+import avatarImage from "@/assets/avatar.webp"
 import HomePage from "@/components/HomePage.astro"
 import Layout from "@/layouts/Layout.astro"
 ---
@@ -6,6 +7,10 @@ import Layout from "@/layouts/Layout.astro"
 <Layout
   title='Franklin "franklinmdev" Martinez – Software Engineer'
   description="Portfolio of Franklin Martinez (franklinmdev), a software engineer and web developer specializing in React, Next.js, Astro, and modern web technologies."
+  image={{
+    url: avatarImage.src,
+    alt: "Franklin Martinez - Software Engineer Profile Picture",
+  }}
 >
   <HomePage lang="en" />
 </Layout>

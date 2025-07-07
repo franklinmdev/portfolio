@@ -23,9 +23,15 @@ const { project } = Astro.props
 const { Content } = await render(project)
 
 const pageTitle = `${project.data.title} - Franklin Martinez`
-const pageDescription = Array.isArray(project.data.description)
+
+let pageDescription = Array.isArray(project.data.description)
   ? (project.data.description[0] ?? "")
   : (project.data.description as string)
+
+// Ensure description is ≤160 chars for SEO
+if (pageDescription.length > 160) {
+  pageDescription = pageDescription.slice(0, 157).trimEnd() + "…"
+}
 
 const pageImage = project.data.image
 

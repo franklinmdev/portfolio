@@ -1,4 +1,5 @@
 ---
+import avatarImage from "@/assets/avatar.webp"
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import Spotlight from "@/components/react/Spotlight.tsx"
@@ -19,6 +20,31 @@ export interface Props {
 
 const { title, description, publishDate, image } = Astro.props
 const lang = getLangFromUrl(Astro.url)
+
+const ogImageUrl = image?.url
+  ? new URL(image.url, Astro.site)
+  : new URL(avatarImage.src, Astro.site)
+
+// Set caching headers for better performance
+if (Astro.url.pathname !== "/") {
+  // Cache static pages for 1 hour in browser, 1 day in CDN
+  Astro.response.headers.set(
+    "Cache-Control",
+    "public, max-age=3600, s-maxage=86400"
+  )
+} else {
+  // Cache homepage for 5 minutes in browser, 1 hour in CDN
+  Astro.response.headers.set(
+    "Cache-Control",
+    "public, max-age=300, s-maxage=3600"
+  )
+}
+
+// Set performance and security headers
+Astro.response.headers.set("X-Content-Type-Options", "nosniff")
+Astro.response.headers.set("X-Frame-Options", "DENY")
+Astro.response.headers.set("X-XSS-Protection", "1; mode=block")
+Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
 ---
 
 <!doctype html>
@@ -32,11 +58,44 @@ const lang = getLangFromUrl(Astro.url)
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Critical resource hints for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//github.com" />
+    <link rel="dns-prefetch" href="//linkedin.com" />
+    <link rel="dns-prefetch" href="//x.com" />
+
+    <!-- Preload critical assets for better performance -->
+    <link
+      rel="preload"
+      href={avatarImage.src}
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/inter-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/inter-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <!-- Optimized favicon set with proper sizes -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.png" sizes="192x192" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
@@ -54,11 +113,14 @@ const lang = getLangFromUrl(Astro.url)
     />
     <meta name="color-scheme" content="dark light" />
     <meta name="robots" content="index,follow" />
+    <meta
+      name="googlebot"
+      content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
     <meta property="og:site_name" content="Franklin Martinez Portfolio" />
     <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
-    {image?.alt && <meta property="og:image:alt" content={image.alt} />}
 
     <!-- hreflang alternate links -->
     <link
@@ -75,13 +137,34 @@ const lang = getLangFromUrl(Astro.url)
     <!-- Standard OG/Twitter tags -->
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
-    {image?.url && <meta property="og:image" content={image.url} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta
+      property="og:image:alt"
+      content={image?.alt || "Franklin Martinez - Software Engineer Portfolio"}
+    />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
     {
       publishDate && (
         <meta property="article:published_time" content={publishDate} />
       )
     }
     <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:creator" content="@franklinmdev" />
+    <meta property="twitter:image" content={ogImageUrl} />
+    <!-- Complete Twitter card metadata -->
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:site" content="@franklinmdev" />
+    <meta
+      name="twitter:url"
+      content={new URL(Astro.url.pathname, Astro.site)}
+    />
+    <meta
+      name="twitter:domain"
+      content={new URL(Astro.url.pathname, Astro.site).hostname}
+    />
+
     <!-- Keywords for extra SEO relevance -->
     <meta
       name="keywords"
@@ -91,6 +174,7 @@ const lang = getLangFromUrl(Astro.url)
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 
+    <!-- Structured data for better SEO -->
     <script
       type="application/ld+json"
       is:inline
@@ -99,7 +183,26 @@ const lang = getLangFromUrl(Astro.url)
         "@type": "Person",
         name: "Franklin Martinez",
         alternateName: "franklinmdev",
+        description:
+          "Software engineer specialising in React, Astro & TypeScript.",
+        image: new URL(avatarImage.src, Astro.site),
         jobTitle: "Software Engineer & Web Developer",
+        worksFor: {
+          "@type": "Organization",
+          name: "Nubeteck S.R.L.",
+        },
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: "Universidad Central del Este",
+          url: "https://www.uce.edu.do/",
+        },
+        email: "mailto:franklinmdev@hotmail.com",
+        telephone: "+1-849-493-4351",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Santiago de los Caballeros",
+          addressCountry: "DO",
+        },
         knowsAbout: [
           "React",
           "Next.js",

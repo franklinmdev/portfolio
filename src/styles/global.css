@@ -145,10 +145,20 @@
   }
 
   .gradient-text {
-    background: linear-gradient(to right, #e0e7ff, #c7d2fe);
+    background: linear-gradient(to right, #ffffff, #e2e8f0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Fallback for browsers that don't support background-clip */
+    color: #ffffff;
+  }
+
+  /* Ensure high contrast fallback for accessibility */
+  @supports not (-webkit-background-clip: text) {
+    .gradient-text {
+      background: none;
+      color: #ffffff !important;
+    }
   }
 
   .ide-container {

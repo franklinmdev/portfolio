@@ -18,17 +18,18 @@ const { t } = Astro.props
     <!-- Hero Content -->
     <div>
       <h1
-        class="hero-headline gradient-text mb-4 text-4xl font-extrabold tracking-tighter text-white sm:text-5xl lg:text-6xl xl:text-4xl 2xl:text-5xl"
+        class="hero-headline mb-4 text-4xl font-extrabold tracking-tighter text-white sm:text-5xl lg:text-6xl xl:text-4xl 2xl:text-5xl"
+        style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);"
       >
-        Franklin <span class="sr-only">“franklinmdev”</span> Martinez
+        Franklin <span class="sr-only">"franklinmdev"</span> Martinez
       </h1>
-      <h2
-        class="hero-subtitle mb-6 text-2xl font-bold text-zinc-300 sm:text-3xl lg:text-4xl xl:text-2xl 2xl:text-3xl"
+      <p
+        class="hero-subtitle mb-6 text-2xl font-bold text-zinc-200 sm:text-3xl lg:text-4xl xl:text-2xl 2xl:text-3xl"
       >
         {t("hero.subtitle")}
-      </h2>
+      </p>
       <div
-        class="hero-about space-y-4 text-base leading-relaxed text-zinc-400 sm:text-lg xl:text-base 2xl:text-lg"
+        class="hero-about space-y-4 text-base leading-relaxed text-zinc-300 sm:text-lg xl:text-base 2xl:text-lg"
       >
         <p>{t("hero.about.p1")}</p>
         <p>{t("hero.about.p2")}</p>
@@ -49,6 +50,7 @@ const { t } = Astro.props
     line-height: 2.5rem;
     font-weight: 800;
     letter-spacing: -0.04em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   }
   .hero-subtitle {
     font-size: 1.5rem;
