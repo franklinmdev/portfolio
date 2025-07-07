@@ -2,17 +2,13 @@
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
 import tailwindcss from "@tailwindcss/vite"
-import min from "astro-min"
 import { defineConfig } from "astro/config"
 
 export default defineConfig({
   site: "https://franklinmdev.me",
 
   // Enable prefetching for better performance
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: "hover",
-  },
+  prefetch: true,
 
   // Internationalization configuration
   i18n: {
@@ -25,16 +21,11 @@ export default defineConfig({
   },
 
   // Integrations - order matters for optimization
-  integrations: [
-    react(),
-    sitemap(),
-    // Advanced minification - use default optimized settings
-    min(),
-  ],
+  integrations: [react(), sitemap()],
 
   // Build optimizations
   build: {
-    inlineStylesheets: "auto",
+    inlineStylesheets: "always",
     concurrency: 2,
   },
 
@@ -54,10 +45,6 @@ export default defineConfig({
       minify: "esbuild",
       rollupOptions: {
         output: {
-          manualChunks: {
-            vendor: ["react", "react-dom"],
-            framework: ["astro"],
-          },
           chunkFileNames: "assets/js/[name]-[hash].js",
           entryFileNames: "assets/js/[name]-[hash].js",
           assetFileNames: (assetInfo) => {

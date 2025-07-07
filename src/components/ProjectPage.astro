@@ -44,6 +44,8 @@ const pageImage = project.data.image
         alt={`${lang === "es" ? "Captura de pantalla de" : "Screenshot of"} ${project.data.title}`}
         class="h-auto w-full"
         width={1600}
+        layout="constrained"
+        widths={[320, 640, 768, 1024, 1200, 1600]}
         quality={80}
         sizes="(max-width: 768px) 100vw, 768px"
         loading="eager"
@@ -64,4 +66,4 @@ const pageImage = project.data.image
   </div>
 </main>
 
-<ScrollToTop client:load />
+<ScrollToTop client:idle />
