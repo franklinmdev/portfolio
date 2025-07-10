@@ -1,12 +1,42 @@
 ---
+import Layout from "@/layouts/Layout.astro"
 import NotFoundPage from "@/components/NotFoundPage.astro"
 import { createTranslations } from "@/i18n/utils"
-import Layout from "@/layouts/Layout.astro"
 
-const lang = "en"
-const t = createTranslations(lang)
+const t = createTranslations("en")
 ---
 
 <Layout title={t("error.404.title")} description={t("error.404.description")}>
-  <NotFoundPage lang={lang} />
+  <div id="404-container" class="isolate">
+    <!-- English (default) -->
+    <div id="404-en">
+      <NotFoundPage lang="en" />
+    </div>
+
+    <!-- Spanish -->
+    <div id="404-es" style="display: none;">
+      <NotFoundPage lang="es" />
+    </div>
+  </div>
+
+  <script is:inline>
+    function showCorrectLanguage() {
+      const lang = window.location.pathname.startsWith("/es/") ? "es" : "en"
+      const enContainer = document.getElementById("404-en")
+      const esContainer = document.getElementById("404-es")
+
+      if (enContainer && esContainer) {
+        if (lang === "es") {
+          enContainer.style.display = "none"
+          esContainer.style.display = "block"
+        } else {
+          enContainer.style.display = "block"
+          esContainer.style.display = "none"
+        }
+      }
+    }
+
+    showCorrectLanguage()
+    document.addEventListener("astro:page-load", showCorrectLanguage)
+  </script>
 </Layout>
