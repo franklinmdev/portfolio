@@ -17,6 +17,10 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false,
       redirectToDefaultLocale: true,
+      fallbackType: "rewrite",
+    },
+    fallback: {
+      es: "en",
     },
   },
 

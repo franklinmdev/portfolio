@@ -1,9 +1,9 @@
 ---
 import NotFoundPage from "@/components/NotFoundPage.astro"
-import { createTranslations, getLangFromUrl } from "@/i18n/utils"
+import { createTranslations } from "@/i18n/utils"
 import Layout from "@/layouts/Layout.astro"
 
-const lang = getLangFromUrl(Astro.url)
+const lang = "en"
 const t = createTranslations(lang)
 ---
 
