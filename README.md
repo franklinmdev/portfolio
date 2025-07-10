@@ -88,14 +88,23 @@ portfolio/
 │   ├── components/
 │   │   ├── react/                 # React interactive components
 │   │   │   ├── ContactForm.tsx    # Contact form with validation
-│   │   │   ├── ProjectCard.tsx      # Project card component
-│   │   │   ├── ProjectsSection.tsx  # Grid of project cards
+│   │   │   ├── ProjectCard.tsx    # Project card component
+│   │   │   ├── ProjectsSection.tsx# Grid of project cards
 │   │   │   └── Spotlight.tsx      # Mouse spotlight effect
 │   │   ├── ui/                    # shadcn/ui components
 │   │   ├── Experience.astro       # Work experience timeline
 │   │   ├── Footer.astro           # Site footer
 │   │   ├── Header.astro           # Navigation header
+│   │   ├── HomePage.astro         # Home page content
+│   │   ├── NotFoundPage.astro     # 404 error page content (used by both languages)
 │   │   ├── Projects.astro         # Projects showcase
+│   │   ├── ProjectPage.astro      # Project detail wrapper
+│   │   ├── ProjectHeader.astro    # Project header
+│   │   ├── ProjectBody.astro      # Project body
+│   │   ├── ProjectNav.astro       # Project navigation
+│   │   ├── ProjectSidebar.astro   # Project sidebar
+│   │   ├── SocialLinks.astro      # Social links
+│   │   ├── IDEBlock.astro         # IDE code block
 │   │   └── Technologies.astro     # Tech stack display
 │   ├── content/                   # Content collections (markdown, config)
 │   │   ├── config.ts              # Zod schema for projects
@@ -112,11 +121,12 @@ portfolio/
 │   ├── middleware/
 │   │   └── index.ts               # Language detection and routing middleware
 │   ├── pages/
-│   │   ├── es/                    # Spanish pages
-│   │   │   ├── index.astro
+│   │   ├── 404.astro              # Main 404 page (English, used for /404)
+│   │   ├── es/
+│   │   │   ├── 404.astro          # Spanish 404 page (used for /es/404)
+│   │   │   ├── index.astro        # Spanish homepage
 │   │   │   └── projects/
-│   │   │       └── [slug].astro
-│   │   ├── 404.astro              # Main 404 page
+│   │   │       └── [slug].astro   # Project detail pages (Spanish)
 │   │   ├── index.astro            # Homepage (English)
 │   │   └── projects/
 │   │       └── [slug].astro       # Project detail pages (English)
@@ -126,13 +136,13 @@ portfolio/
 │       └── astro-transitions.d.ts # Type definitions for Astro transitions
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml     # GitHub Actions deployment
-├── astro.config.mjs       # Astro configuration
-├── components.json        # shadcn/ui configuration
-├── eslint.config.js       # ESLint configuration
-├── tsconfig.json          # TypeScript configuration (strictest)
-├── TASKS.md               # Development task tracking
-└── LICENSE                # MIT License
+│       └── deploy.yml             # GitHub Actions deployment
+├── astro.config.mjs               # Astro configuration
+├── components.json                # shadcn/ui configuration
+├── eslint.config.js               # ESLint configuration
+├── tsconfig.json                  # TypeScript configuration (strictest)
+├── TODO.md                        # Development task tracking
+└── LICENSE                        # MIT License
 ```
 
 ## 🛡️ Type Safety & Code Comments
