@@ -5,24 +5,24 @@
     "contact": "Contacto"
   },
   "hero": {
-    "subtitle": "Ingeniero de Software",
+    "subtitle": "Ingeniero Full-Stack AI",
     "about": {
-      "p1": "Mi viaje comenzó desarmando cosas, y ahora las construyo, convirtiendo problemas complejos en experiencias digitales limpias e intuitivas.",
-      "p2": "Encuentro una gran alegría en el punto ideal donde un gran diseño se une con una ingeniería sólida. Cuando no estoy programando, probablemente estoy sumergiéndome en nuevos modelos de IA u optimizando mi flujo de trabajo. Es un deporte de equipo, y me encanta jugar."
+      "p1": "Mi viaje comenzó desarmando cosas, y ahora las construyo—convirtiendo problemas complejos en soluciones full-stack escalables potenciadas por IA.",
+      "p2": "Destaco en la intersección entre la ingeniería sólida y la inteligencia artificial. Cuando no estoy construyendo sistemas de punta a punta, estoy integrando herramientas de IA en los flujos de desarrollo y mentorizando equipos para ser más productivos. Es un deporte de equipo, y me encanta jugar."
     }
   },
   "ide": {
     "title_var": "titulo",
-    "title_val": "'Ingeniero de Software'",
+    "title_val": "'Ingeniero Full-Stack AI'",
     "location_var": "ubicacion",
     "location_val": "'Santiago, RD'",
     "education_var": "educacion",
     "education_val1": "'Ingeniería de Software'",
     "education_val2": "'Desarrollo Web'",
     "interests_var": "intereses",
-    "interests_val1": "'Frontend'",
-    "interests_val2": "'Full Stack'",
-    "comment": "// Construyo puentes entre el diseño intuitivo \n    // y la ingeniería de alto rendimiento."
+    "interests_val1": "'Full Stack'",
+    "interests_val2": "'IA'",
+    "comment": "// Construyo sistemas de punta a punta potenciados por IA,\n    // uniendo diseño e ingeniería de alto rendimiento."
   },
   "sections": {
     "experience_title": "Experiencia Laboral",
@@ -32,7 +32,13 @@
   },
   "experience": {
     "exp1": {
-      "date": "Abril 2023 - Presente",
+      "date": "Julio 2024 - Presente",
+      "title": "Ingeniero Full-Stack AI,",
+      "company": "Nubeteck, S.R.L.",
+      "desc": "Opero con total autonomía como Ingeniero Full-Stack AI, entregando sistemas completos de punta a punta. Construí el sistema UCE Unidades Administrativas en solitario—29 módulos de backend, 225 endpoints, lógica presupuestaria multi-moneda con flujos de aprobación, y todo el frontend—en 8 días laborables. Impulsé la integración de herramientas de IA (incluyendo Claude Code) en el equipo, aumentando la productividad. Gestiono de forma independiente soluciones de reportes con Fast Reports y mentorizo pasantes y desarrolladores junior."
+    },
+    "exp2": {
+      "date": "Abril 2023 - Julio 2024",
       "title": "Desarrollador de Software,",
       "company": "Nubeteck, S.R.L.",
       "desc": "Colaborador clave en un sistema de diseño unificado, mentor de desarrolladores junior y optimizador de las capas de datos de la aplicación para ofrecer una experiencia de usuario más rápida y receptiva."
