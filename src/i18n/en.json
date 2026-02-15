@@ -7,8 +7,8 @@
   "hero": {
     "subtitle": "Full-Stack AI Engineer",
     "about": {
-      "p1": "My journey started with taking things apart, and now I put them together—turning complex problems into clean, scalable full-stack solutions powered by AI.",
-      "p2": "I thrive at the intersection of solid engineering and artificial intelligence. When I'm not building end-to-end systems, I'm integrating AI tools into development workflows and mentoring teams to be more productive. It's a team sport, and I love playing."
+      "p1": "I grew up taking things apart to see how they worked. Now I put them together, building full-stack systems that are clean, scalable, and powered by AI.",
+      "p2": "I like working where solid engineering meets AI. When I'm not shipping end-to-end features, I'm bringing AI tools into our dev workflow or helping teammates level up. Software is a team sport, and I love being part of it."
     }
   },
   "ide": {
@@ -22,7 +22,7 @@
     "interests_var": "fields_of_interests",
     "interests_val1": "'Full Stack'",
     "interests_val2": "'AI'",
-    "comment": "// I build end-to-end systems enhanced by AI,\n    // bridging design and high-performance engineering."
+    "comment": "// I build end-to-end systems enhanced by AI,\n// bridging design and high-performance engineering."
   },
   "sections": {
     "experience_title": "Work Experience",
@@ -35,13 +35,13 @@
       "date": "July 2024 - Present",
       "title": "Full-Stack AI Engineer,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Operate with full autonomy as a Full-Stack AI Engineer, delivering complete end-to-end systems. Built an enterprise administrative management platform solo—29 backend modules, 225 endpoints, multi-currency budgetary logic with approval flows, and a full frontend—in 8 business days. Championed AI tool integration (including Claude Code) across the team, boosting developer productivity. Independently manage reporting solutions with Fast Reports and mentor interns and junior developers."
+      "desc": "I own projects end to end as a Full-Stack AI Engineer. Built an enterprise admin platform on my own: 29 backend modules, 225 endpoints, multi-currency budgeting with approval flows, and the full frontend, all in 8 business days. Drove adoption of AI tools (including Claude Code) across the team, which made a real difference in productivity. I also handle reporting with Fast Reports and mentor interns and junior devs."
     },
     "exp2": {
       "date": "April 2023 - July 2024",
       "title": "Software Developer,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Served as a key collaborator on a unified design system, mentored junior developers, and optimized application data layers to deliver a faster, more responsive user experience."
+      "desc": "Played a key role in building a unified design system, mentored junior developers, and optimized application data layers to improve performance and responsiveness."
     }
   },
   "projects": {

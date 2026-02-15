@@ -7,8 +7,8 @@
   "hero": {
     "subtitle": "Ingeniero Full-Stack AI",
     "about": {
-      "p1": "Mi viaje comenzó desarmando cosas, y ahora las construyo—convirtiendo problemas complejos en soluciones full-stack escalables potenciadas por IA.",
-      "p2": "Destaco en la intersección entre la ingeniería sólida y la inteligencia artificial. Cuando no estoy construyendo sistemas de punta a punta, estoy integrando herramientas de IA en los flujos de desarrollo y mentorizando equipos para ser más productivos. Es un deporte de equipo, y me encanta jugar."
+      "p1": "Crecí desarmando cosas para ver cómo funcionaban. Ahora las construyo: sistemas full-stack que son limpios, escalables y potenciados por IA.",
+      "p2": "Me gusta trabajar donde la ingeniería sólida se encuentra con la IA. Cuando no estoy construyendo sistemas de punta a punta, estoy integrando herramientas de IA en el flujo del equipo o ayudando a otros devs a crecer. El software es un deporte de equipo, y me encanta ser parte."
     }
   },
   "ide": {
@@ -22,7 +22,7 @@
     "interests_var": "intereses",
     "interests_val1": "'Full Stack'",
     "interests_val2": "'IA'",
-    "comment": "// Construyo sistemas de punta a punta potenciados por IA,\n    // uniendo diseño e ingeniería de alto rendimiento."
+    "comment": "// Construyo sistemas de punta a punta potenciados por IA,\n// uniendo diseño e ingeniería de alto rendimiento."
   },
   "sections": {
     "experience_title": "Experiencia Laboral",
@@ -35,13 +35,13 @@
       "date": "Julio 2024 - Presente",
       "title": "Ingeniero Full-Stack AI,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Opero con total autonomía como Ingeniero Full-Stack AI, entregando sistemas completos de punta a punta. Construí una plataforma empresarial de gestión administrativa en solitario—29 módulos de backend, 225 endpoints, lógica presupuestaria multi-moneda con flujos de aprobación, y todo el frontend—en 8 días laborables. Impulsé la integración de herramientas de IA (incluyendo Claude Code) en el equipo, aumentando la productividad. Gestiono de forma independiente soluciones de reportes con Fast Reports y mentorizo pasantes y desarrolladores junior."
+      "desc": "Llevo proyectos de principio a fin como Ingeniero Full-Stack AI. Construí una plataforma empresarial de gestión administrativa por mi cuenta: 29 módulos de backend, 225 endpoints, lógica presupuestaria multi-moneda con flujos de aprobación y todo el frontend, en 8 días laborables. Impulsé la adopción de herramientas de IA (incluyendo Claude Code) en el equipo, lo cual marcó una diferencia real en productividad. También manejo reportes con Fast Reports y mentorizo pasantes y devs junior."
     },
     "exp2": {
       "date": "Abril 2023 - Julio 2024",
       "title": "Desarrollador de Software,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Colaborador clave en un sistema de diseño unificado, mentor de desarrolladores junior y optimizador de las capas de datos de la aplicación para ofrecer una experiencia de usuario más rápida y receptiva."
+      "desc": "Colaboré activamente en un sistema de diseño unificado, mentoricé desarrolladores junior y optimicé las capas de datos de la aplicación para mejorar el rendimiento y la experiencia de usuario."
     }
   },
   "projects": {
