@@ -32,13 +32,13 @@
   },
   "experience": {
     "exp1": {
-      "date": "July 2024 - Present",
+      "date": "February 2026 - Present",
       "title": "Full-Stack AI Engineer,",
       "company": "Nubeteck, S.R.L.",
       "desc": "I own projects end to end as a Full-Stack AI Engineer. Built an enterprise admin platform on my own: 29 backend modules, 225 endpoints, multi-currency budgeting with approval flows, and the full frontend, all in 8 business days. Drove adoption of AI tools (including Claude Code) across the team, which made a real difference in productivity. I also handle reporting with Fast Reports and mentor interns and junior devs."
     },
     "exp2": {
-      "date": "April 2023 - July 2024",
+      "date": "April 2023 - February 2026",
       "title": "Software Developer,",
       "company": "Nubeteck, S.R.L.",
       "desc": "Played a key role in building a unified design system, mentored junior developers, and optimized application data layers to improve performance and responsiveness."
