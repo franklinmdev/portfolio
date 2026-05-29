@@ -25,7 +25,7 @@ const { project, t } = Astro.props
       <a
         href={project.data.liveUrl}
         target="_blank"
-        rel="noopener noreferrer prefetch"
+        rel="noopener noreferrer"
         class="inline-flex w-full items-center justify-center rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-violet-700"
       >
         {t.view_live}
@@ -33,7 +33,7 @@ const { project, t } = Astro.props
       <a
         href={project.data.githubUrl}
         target="_blank"
-        rel="noopener noreferrer prefetch"
+        rel="noopener noreferrer"
         class="inline-flex w-full items-center justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-zinc-700"
       >
         {t.view_source}

@@ -150,6 +150,8 @@ const otherLangName = languages[otherLang]
 <script>
   import { navigate } from "astro:transitions/client"
 
+  let activeObserver: IntersectionObserver | null = null
+
   function initializeHeader() {
     document.querySelectorAll("[data-lang-switch]").forEach((link) => {
       if (!(link instanceof HTMLAnchorElement)) return
@@ -224,6 +226,9 @@ const otherLangName = languages[otherLang]
       }
     }
 
+    // Disconnect any observer left over from a previous page before
+    // creating a new one, so client navigations don't leak observers.
+    activeObserver?.disconnect()
     const observer = new IntersectionObserver(
       (entries) => {
         const intersecting = entries.filter((e) => e.isIntersecting)
@@ -246,6 +251,7 @@ const otherLangName = languages[otherLang]
       },
       { root: null, rootMargin: "-80px 0px -40% 0px", threshold: 0.1 }
     )
+    activeObserver = observer
 
     setTimeout(() => {
       const sections = document.querySelectorAll(
@@ -260,4 +266,8 @@ const otherLangName = languages[otherLang]
 
   document.addEventListener("DOMContentLoaded", initializeHeader)
   document.addEventListener("astro:after-swap", initializeHeader)
+  document.addEventListener("astro:before-swap", () => {
+    activeObserver?.disconnect()
+    activeObserver = null
+  })
 </script>

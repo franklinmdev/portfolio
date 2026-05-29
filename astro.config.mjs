@@ -80,11 +80,6 @@ export default defineConfig({
     },
   },
 
-  // Security - CSRF protection enabled by default in v5
-  security: {
-    checkOrigin: true,
-  },
-
   // HTML compression
   compressHTML: true,
 })

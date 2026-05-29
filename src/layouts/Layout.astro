@@ -45,10 +45,6 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Critical resource hints for better performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <!-- DNS prefetch for external domains -->
     <link rel="dns-prefetch" href="//github.com" />
     <link rel="dns-prefetch" href="//linkedin.com" />
@@ -106,9 +102,9 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
         <meta property="article:published_time" content={publishDate} />
       )
     }
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:creator" content="@franklinmdev" />
-    <meta property="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@franklinmdev" />
+    <meta name="twitter:image" content={ogImageUrl} />
     <!-- Complete Twitter card metadata -->
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
@@ -132,6 +128,9 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     <title>{title}</title>
 
     <!-- Structured data for better SEO -->
+    {
+      /* eslint-disable astro/no-set-html-directive -- JSON-LD payload is a static, trusted JSON.stringify, not user input */
+    }
     <script
       type="application/ld+json"
       is:inline
@@ -154,7 +153,6 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
           url: "https://www.uce.edu.do/",
         },
         email: "mailto:franklinmdev@hotmail.com",
-        telephone: "+1-849-493-4351",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Santiago de los Caballeros",
@@ -176,6 +174,7 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
         ],
       })}
     />
+    {/* eslint-enable astro/no-set-html-directive */}
 
     <ClientRouter fallback="swap" />
   </head>
