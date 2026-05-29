@@ -28,8 +28,9 @@ export default defineConfig({
         defaultLocale: "en",
         locales: { en: "en", es: "es" },
       },
-      // Keep the 404 routes out of the sitemap.
-      filter: (page) => !page.includes("/404"),
+      // Keep the 404 routes out of the sitemap. Match a path segment (not a
+      // substring) so real URLs containing "404" are not dropped.
+      filter: (page) => !/(^|\/)404(\/|\.html)?$/.test(new URL(page).pathname),
     }),
   ],
 
