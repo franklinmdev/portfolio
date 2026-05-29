@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets"
 import errorImage from "@/assets/404.png"
-import { Home, Archive, ArrowLeft } from "@lucide/astro"
+import { House, Archive, ArrowLeft } from "@lucide/astro"
 import { createTranslations, type Language } from "@/i18n/utils"
 
 export interface Props {
@@ -68,7 +68,7 @@ const t = createTranslations(lang)
           href={lang === "en" ? "/" : `/${lang}/`}
           class="group inline-flex h-9 w-full transform cursor-pointer items-center justify-center gap-2 rounded-md bg-violet-500 px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:scale-105 hover:bg-violet-600 sm:w-auto"
         >
-          <Home
+          <House
             class="size-4 transition-transform group-hover:-translate-x-1"
           />
           {t("error.404.actions.home")}
