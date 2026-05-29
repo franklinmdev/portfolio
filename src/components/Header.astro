@@ -81,6 +81,7 @@ const otherLangName = languages[otherLang]
           class="w-8 cursor-pointer text-center text-sm font-semibold text-zinc-400 uppercase transition-colors hover:text-white"
           title={`Switch to ${otherLangName}`}
           data-lang-switch
+          data-target-lang={otherLang}
           data-astro-prefetch
         >
           {otherLang.toUpperCase()}
@@ -138,6 +139,7 @@ const otherLangName = languages[otherLang]
       class="mt-3 block w-full cursor-pointer py-3 text-center font-medium text-zinc-300 uppercase"
       title={`Switch to ${otherLangName}`}
       data-lang-switch
+      data-target-lang={otherLang}
       data-astro-prefetch
     >
       {otherLang.toUpperCase()}
@@ -155,6 +157,16 @@ const otherLangName = languages[otherLang]
 
       link.addEventListener("click", (event) => {
         event.preventDefault()
+        // Remember the explicit choice so the "/" redirect honours it on a
+        // full reload instead of falling back to the browser language.
+        const targetLang = link.dataset.targetLang
+        if (targetLang) {
+          try {
+            localStorage.setItem("preferred-lang", targetLang)
+          } catch {
+            /* localStorage unavailable: choice simply is not persisted */
+          }
+        }
         const href = link.href
         const currentHash = window.location.hash
         const targetUrl = new URL(href)
