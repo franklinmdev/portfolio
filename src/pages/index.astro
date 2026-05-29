@@ -12,11 +12,10 @@ import Layout from "@/layouts/Layout.astro"
     alt: "Franklin Martinez - Full-Stack AI Engineer Profile Picture",
   }}
 >
-  <script is:inline>
-    // Client-side language preference redirect. Static hosting has no server,
-    // so language detection runs in the browser: an explicit choice in
-    // localStorage wins, otherwise fall back to the browser language. Only
-    // the bare "/" redirects, mirroring the previous default-locale behaviour.
+  <script is:inline slot="head">
+    // Language redirect. Runs in <head> before the body paints. An explicit
+    // choice in localStorage wins; otherwise fall back to the browser language.
+    // Only the bare "/" redirects; the query string and hash are preserved.
     ;(function () {
       try {
         let choice = localStorage.getItem("preferred-lang")
@@ -24,7 +23,8 @@ import Layout from "@/layouts/Layout.astro"
           choice = (navigator.language || "en").toLowerCase().slice(0, 2)
         }
         if (choice === "es") {
-          window.location.replace("/es/")
+          const target = "/es/" + window.location.search + window.location.hash
+          window.location.replace(target)
         }
       } catch {
         /* localStorage unavailable: stay on the default locale */

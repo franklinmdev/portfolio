@@ -45,6 +45,8 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <slot name="head" />
+
     <!-- DNS prefetch for external domains -->
     <link rel="dns-prefetch" href="//github.com" />
     <link rel="dns-prefetch" href="//linkedin.com" />
