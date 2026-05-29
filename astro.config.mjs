@@ -21,7 +21,18 @@ export default defineConfig({
   },
 
   // Integrations - order matters for optimization
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      // Emit hreflang alternates; locale values match the on-page hreflang.
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", es: "es" },
+      },
+      // Keep the 404 routes out of the sitemap.
+      filter: (page) => !page.includes("/404"),
+    }),
+  ],
 
   // Build optimizations
   build: {
