@@ -87,7 +87,7 @@ function ProjectCardContent({
 }: Pick<ProjectCardProps, "title" | "description" | "icon" | "iconColor">) {
   return (
     <div className="flex items-start gap-3 sm:gap-4">
-      <div className="icon-container flex-shrink-0">
+      <div className="icon-container shrink-0">
         <div
           className={`size-6 sm:size-7 lg:size-8 ${iconColor}`}
           aria-hidden="true"

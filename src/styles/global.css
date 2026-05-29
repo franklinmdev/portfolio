@@ -6,10 +6,12 @@
 @import "@fontsource/inter/latin-800.css";
 @import "@fontsource/fira-code";
 
+/* shadcn/ui dark variant: dark: utilities key off an ancestor .dark class. */
+@custom-variant dark (&:is(.dark *));
+
 /* Tailwind v4 Theme Configuration */
 @theme {
-  --font-family-mono:
-    "Fira Code", ui-monospace, SFMono-Regular, "SF Mono", monospace;
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, "SF Mono", monospace;
 
   /* Extended colors */
   --color-zinc-300: #d4d4d8;
@@ -36,6 +38,60 @@
 
   /* Animation */
   --animate-fade-in-slide-up: fadeInSlideUp 0.8s ease-out forwards;
+}
+
+/* shadcn/ui semantic tokens (neutral base, new-york). Mapped inline so the
+   utilities resolve to var(--token) and switch with the .dark scope. Tuned
+   to the site identity: violet primary/ring, #111111-family background. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.18 0 0);
+  --foreground: oklch(0.985 0 0);
+  --primary: #7c3aed;
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: #a78bfa;
 }
 
 @keyframes fadeInSlideUp {
@@ -339,12 +395,6 @@
     animation: fadeInSlideUp 0.8s ease-out forwards;
   }
 
-  .hero-headline {
-    @apply text-4xl leading-10 font-extrabold tracking-tight;
-  }
-  .hero-subtitle {
-    @apply text-2xl leading-8 font-bold;
-  }
   .hero-about {
     animation-delay: 0.6s;
   }
