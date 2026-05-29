@@ -41,8 +41,6 @@ function ProjectCard({
     const linkProps: ComponentPropsWithoutRef<"a"> = {
       ...baseProps,
       href,
-      role: "button",
-      tabIndex: 0,
       "aria-label": `View project: ${title}`,
     }
 

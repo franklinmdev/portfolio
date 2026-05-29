@@ -25,10 +25,10 @@
     "comment": "// Construyo sistemas de punta a punta potenciados por IA,\n// uniendo diseño e ingeniería de alto rendimiento."
   },
   "sections": {
-    "experience_title": "Experiencia Laboral",
+    "experience_title": "Experiencia laboral",
     "tech_title": "Tecnologías",
-    "projects_title": "Proyectos Destacados",
-    "contact_title": "Ponte En Contacto"
+    "projects_title": "Proyectos destacados",
+    "contact_title": "Ponte en contacto"
   },
   "experience": {
     "exp1": {
@@ -51,7 +51,7 @@
     "published_on": "Publicado el ",
     "overview": "Resumen",
     "challenges": "Desafíos",
-    "key_learnings": "Aprendizajes Clave",
+    "key_learnings": "Aprendizajes clave",
     "tech_stack": "Stack tecnológico",
     "links": "Enlaces",
     "view_live": "Ver proyecto en vivo",
@@ -66,6 +66,9 @@
       "name_placeholder": "Tu nombre",
       "email_placeholder": "Tu correo electrónico",
       "message_placeholder": "Tu mensaje",
+      "name_label": "Nombre",
+      "email_label": "Correo electrónico",
+      "message_label": "Mensaje",
       "send_btn": "Enviar mensaje",
       "sending_btn": "Enviando...",
       "success_msg": "¡Gracias! Tu mensaje ha sido enviado exitosamente.",
@@ -76,12 +79,19 @@
       "message_required": "El mensaje es requerido"
     }
   },
+  "social": {
+    "github": "Perfil de GitHub",
+    "linkedin": "Perfil de LinkedIn",
+    "x": "Perfil de X",
+    "email": "Correo electrónico"
+  },
   "footer": {
     "credits": "Diseñado y construido por Franklin Martinez"
   },
   "error": {
     "404": {
       "title": "404 - Página no encontrada",
+      "image_alt": "404 - Página no encontrada",
       "heading": "¡Ups! Página no encontrada",
       "description": "La página que buscas parece haberse ido de aventura. ¡Te ayudamos a volver al camino correcto!",
       "reasons": {

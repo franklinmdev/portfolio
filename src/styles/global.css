@@ -485,6 +485,10 @@
 
   /* Reduced motion preferences */
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
     .hero-headline,
     .hero-subtitle,
     .hero-about,

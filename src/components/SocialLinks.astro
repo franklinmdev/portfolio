@@ -1,10 +1,18 @@
+---
+export interface Props {
+  t: (key: string) => string
+}
+
+const { t } = Astro.props
+---
+
 <div class="hero-socials mt-12 flex items-center space-x-6 xl:mt-8">
   <a
     href="https://github.com/franklinmdev"
     target="_blank"
     rel="noopener"
     class="cursor-pointer text-zinc-400 transition-colors hover:text-white"
-    aria-label="GitHub Profile"
+    aria-label={t("social.github")}
   >
     <svg
       class="h-6 w-6 2xl:h-7 2xl:w-7"
@@ -22,7 +30,7 @@
     target="_blank"
     rel="noopener"
     class="cursor-pointer text-zinc-400 transition-colors hover:text-white"
-    aria-label="LinkedIn Profile"
+    aria-label={t("social.linkedin")}
   >
     <svg
       class="h-6 w-6 2xl:h-7 2xl:w-7"
@@ -40,7 +48,7 @@
     target="_blank"
     rel="noopener"
     class="cursor-pointer text-zinc-400 transition-colors hover:text-white"
-    aria-label="X Profile"
+    aria-label={t("social.x")}
   >
     <svg
       class="h-6 w-6 2xl:h-7 2xl:w-7"
@@ -56,7 +64,7 @@
   <a
     href="mailto:franklinmdev@hotmail.com"
     class="cursor-pointer text-zinc-400 transition-colors hover:text-white"
-    aria-label="Email"
+    aria-label={t("social.email")}
   >
     <svg
       class="h-6 w-6 2xl:h-7 2xl:w-7"
