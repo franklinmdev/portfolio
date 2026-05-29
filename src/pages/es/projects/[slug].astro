@@ -9,8 +9,8 @@ export async function getStaticPaths() {
   )
 
   return esProjects.map((project) => {
-    // The slug for es/devflow.md should be "devflow"
-    const slug = project.id.slice(3) // "es/".length
+    // Strip the locale segment: "es/devflow" -> "devflow"
+    const slug = project.id.split("/").slice(1).join("/")
 
     return {
       params: { slug },
