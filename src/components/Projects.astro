@@ -21,8 +21,7 @@ const projectsForCurrentLang = await Promise.all(
     })
     .map(async (project) => {
       const [, ...slugParts] = project.id.split("/")
-      const slugWithExt = slugParts.join("/")
-      const slug = slugWithExt.replace(/\.md$/, "")
+      const slug = slugParts.join("/")
 
       const projectData = {
         id: slug || project.id,
@@ -32,7 +31,6 @@ const projectsForCurrentLang = await Promise.all(
           : project.data.description || "",
         featured: project.data.featured,
         href: getLocalizedUrl(`projects/${slug}`, lang),
-        ...(project.data.icon && { icon: project.data.icon }),
         ...(project.data.iconAsset && {
           iconAsset: await getImage({ src: project.data.iconAsset }),
         }),

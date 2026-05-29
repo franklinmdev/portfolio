@@ -8,7 +8,6 @@ interface Project {
   id: string
   title: string
   description: string
-  icon?: { src: string; width?: number; height?: number }
   iconAsset?: { src: string; width?: number; height?: number }
   featured: boolean
   href: string
@@ -26,7 +25,7 @@ interface ProjectsSectionProps {
 }
 
 const parseIcon = (project: Project): React.ReactNode => {
-  const iconMeta = project.iconAsset ?? project.icon
+  const iconMeta = project.iconAsset
 
   if (iconMeta?.src) {
     const { src, width, height } = iconMeta as {

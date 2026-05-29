@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 
   return esProjects.map((project) => {
     // The slug for es/devflow.md should be "devflow"
-    const slug = project.slug.slice(3) // "es/".length
+    const slug = project.id.slice(3) // "es/".length
 
     return {
       params: { slug },

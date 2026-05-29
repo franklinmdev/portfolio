@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   )
 
   return enProjects.map((project) => {
-    const slug = project.slug.slice(3) // "en/".length
+    const slug = project.id.slice(3) // "en/".length
 
     return {
       params: { slug },

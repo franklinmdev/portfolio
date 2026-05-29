@@ -41,11 +41,6 @@ const { project, lang, t, projectsUrl } = Astro.props
           />
         )
       }
-      {
-        project.data.icon && !project.data.iconAsset && (
-          <Fragment set:html={project.data.icon} />
-        )
-      }
     </div>
 
     <div class="flex-1">
