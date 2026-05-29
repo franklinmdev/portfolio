@@ -158,7 +158,7 @@ guide.
 - Evidence: the scoped rule compiles to
   `.hero-headline[data-astro-cid-...]{font-size:2.25rem}`, whose
   specificity beats the responsive utilities `sm:text-5xl lg:text-6xl
-  2xl:text-5xl`. The headline is locked at 2.25rem at every breakpoint.
+2xl:text-5xl`. The headline is locked at 2.25rem at every breakpoint.
 - Root cause: size is declared in three places (scoped style,
   `@layer base`, utility classes) and `text-shadow` twice.
 - Fix: keep one source of truth (the responsive utility classes on the
@@ -295,7 +295,7 @@ guide.
 ### L13. security.checkOrigin has no effect on static output
 
 - Where: `astro.config.mjs` (~line 73). `security: { checkOrigin: true
-  }` only applies to on-demand pages. Remove it, or comment why it is
+}` only applies to on-demand pages. Remove it, or comment why it is
   kept.
 
 ## SEO
@@ -319,7 +319,7 @@ Re-verify with the `seo-audit` skill.
 - The `xhtml:` namespace is declared but no `xhtml:link` entries exist
   (`@astrojs/sitemap` has no i18n config). Configure
   `sitemap({ i18n: { defaultLocale: "en", locales: { en: "en", es:
-  "es" } } })` (verify the option shape via `find-docs`).
+"es" } } })` (verify the option shape via `find-docs`).
 
 ### S4. Spanish project descriptions are not truncated
 
@@ -343,16 +343,16 @@ along with the Astro/Tailwind bumps).
 
 - astro 5.11 -> 5.18+ (newest v5, NOT 6)
 - tailwindcss + @tailwindcss/vite 4.1 -> 4.3
-- react + react-dom 19.1 -> 19.2; @types/react* -> 19.2
+- react + react-dom 19.1 -> 19.2; @types/react\* -> 19.2
 - @astrojs/sitemap 3.4 -> 3.7 (also needed for S3)
 - @astrojs/check, @radix-ui/react-{label,slot}, tailwind-merge,
-  @fontsource/*
+  @fontsource/\*
 
 Runtime deps use `^` ranges, so `npm update` moves them. Several devDeps
 are pinned exactly (eslint, typescript-eslint, eslint-plugin-astro,
-prettier, prettier-plugin-*) and must be bumped by editing package.json:
+prettier, prettier-plugin-_) and must be bumped by editing package.json:
 prettier 3.8, eslint-config-prettier 10.1.8, eslint-plugin-astro 1.7,
-@typescript-eslint/* + typescript-eslint 8.60. Then run `npm audit fix`.
+@typescript-eslint/_ + typescript-eslint 8.60. Then run `npm audit fix`.
 
 ### Tier 2 — remove, do not update
 
