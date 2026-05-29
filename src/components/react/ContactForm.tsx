@@ -39,10 +39,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [feedback, setFeedback] = useState<{
-    status: "idle" | "success" | "error"
-    message: string
-  }>({ status: "idle", message: "" })
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
   const validateForm = useCallback(() => {
     const newErrors: Record<string, string> = {}
@@ -95,7 +92,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
         console.error(
           "EmailJS is not properly configured. Check your environment variables."
         )
-        setFeedback({ status: "error", message: translations.errorMessage })
+        setStatus("error")
         return
       }
 
@@ -114,12 +111,12 @@ export default function ContactForm({ translations }: ContactFormProps) {
           { publicKey: EMAILJS_CONFIG.publicKey }
         )
 
-        setFeedback({ status: "success", message: translations.successMessage })
+        setStatus("success")
         setFormData({ name: "", email: "", message: "" })
         setErrors({})
 
         setTimeout(() => {
-          setFeedback({ status: "idle", message: "" })
+          setStatus("idle")
         }, 5000)
       } catch (error) {
         if (error instanceof EmailJSResponseStatus) {
@@ -127,21 +124,16 @@ export default function ContactForm({ translations }: ContactFormProps) {
         } else {
           console.error(error)
         }
-        setFeedback({ status: "error", message: translations.errorMessage })
+        setStatus("error")
 
         setTimeout(() => {
-          setFeedback({ status: "idle", message: "" })
+          setStatus("idle")
         }, 5000)
       } finally {
         setIsSubmitting(false)
       }
     },
-    [
-      formData,
-      translations.errorMessage,
-      translations.successMessage,
-      validateForm,
-    ]
+    [formData, validateForm]
   )
 
   return (
@@ -156,16 +148,18 @@ export default function ContactForm({ translations }: ContactFormProps) {
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="mx-auto max-w-2xl">
-        {feedback.status !== "idle" && (
+        {status !== "idle" && (
           <div
             role="status"
             aria-live="polite"
             className={cn(
               "mb-4 text-center text-sm",
-              feedback.status === "error" ? "text-red-400" : "text-green-400"
+              status === "error" ? "text-red-400" : "text-green-400"
             )}
           >
-            {feedback.message}
+            {status === "error"
+              ? translations.errorMessage
+              : translations.successMessage}
           </div>
         )}
 
