@@ -3,6 +3,7 @@ import {
   createTranslations,
   getLangFromUrl,
   getLocalizedUrl,
+  getProjectSlug,
 } from "@/i18n/utils"
 import { getImage } from "astro:assets"
 import { getCollection } from "astro:content"
@@ -20,8 +21,7 @@ const projectsForCurrentLang = await Promise.all(
       return projectLang === lang
     })
     .map(async (project) => {
-      const [, ...slugParts] = project.id.split("/")
-      const slug = slugParts.join("/")
+      const slug = getProjectSlug(project.id)
 
       const projectData = {
         id: slug || project.id,
