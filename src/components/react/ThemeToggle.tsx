@@ -45,7 +45,7 @@ export default function ThemeToggle({
       onClick={toggle}
       aria-label={label}
       title={label}
-      className="group border-border text-muted-foreground hover:border-primary/40 hover:bg-accent hover:text-primary relative inline-flex h-9 items-center gap-2 rounded border bg-transparent px-2 transition-colors focus-visible:outline-none"
+      className="group border-border text-muted-foreground hover:border-primary/40 hover:bg-accent hover:text-primary relative inline-flex size-9 items-center justify-center rounded border bg-transparent transition-colors lg:w-auto lg:justify-start lg:gap-2 lg:px-2"
     >
       <span className="relative grid size-[18px] place-items-center">
         {/* SunIcon = shown in dark mode (switch to blueprint/light) */}
