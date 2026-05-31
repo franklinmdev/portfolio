@@ -23,6 +23,22 @@ const projectsForCurrentLang = await Promise.all(
     .map(async (project) => {
       const slug = getProjectSlug(project.id)
 
+      // Island props cross the hydration boundary and must be JSON
+      // serializable. Flatten each getImage() result to plain primitives
+      // (src + numeric dimensions) instead of passing the optimization
+      // object itself, which the client prop deserializer cannot parse.
+      const icon = project.data.iconAsset
+        ? await getImage({ src: project.data.iconAsset })
+        : null
+      const shot =
+        project.data.featured && project.data.image
+          ? await getImage({
+              src: project.data.image,
+              width: 1280,
+              format: "webp",
+            })
+          : null
+
       const projectData = {
         id: slug || project.id,
         title: project.data.title,
@@ -31,19 +47,22 @@ const projectsForCurrentLang = await Promise.all(
           : project.data.description || "",
         featured: project.data.featured,
         href: getLocalizedUrl(`projects/${slug}`, lang),
-        ...(project.data.iconAsset && {
-          iconAsset: await getImage({ src: project.data.iconAsset }),
+        ...(icon && {
+          iconAsset: {
+            src: icon.src,
+            width: Number(icon.attributes.width),
+            height: Number(icon.attributes.height),
+          },
         }),
         // Featured projects carry a real product screenshot for the
         // editorial-feature card on the home deck.
-        ...(project.data.featured &&
-          project.data.image && {
-            imageAsset: await getImage({
-              src: project.data.image,
-              width: 1280,
-              format: "webp",
-            }),
-          }),
+        ...(shot && {
+          imageAsset: {
+            src: shot.src,
+            width: Number(shot.attributes.width),
+            height: Number(shot.attributes.height),
+          },
+        }),
       }
 
       return projectData
