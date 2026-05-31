@@ -9,9 +9,13 @@ import {
   removeLocalePrefix,
 } from "@/i18n/utils"
 import type { Language } from "@/i18n/utils"
+import ThemeToggle from "@/components/react/ThemeToggle"
 
 const lang = getLangFromUrl(Astro.url)
 const t = createTranslations(lang)
+const themeLabel = lang === "es" ? "Cambiar tema" : "Toggle theme"
+const deckLabel = t("hud.status.theme_deck")
+const blueprintLabel = t("hud.status.theme_blueprint")
 
 const isHomePage =
   removeLocalePrefix(Astro.url.pathname) === "/" ||
@@ -30,14 +34,14 @@ const otherLangName = languages[otherLang]
 
 <header
   id="header"
-  class="fixed top-0 right-0 left-0 z-50 bg-[#111111]/80 backdrop-blur-sm"
+  class="border-border/70 bg-background/75 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-md"
 >
-  <div class="container mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+  <div class="container mx-auto max-w-6xl px-4 py-3 sm:px-6 lg:px-8">
     <nav class="flex items-center justify-between">
       <a
         href={homeUrl}
         id="avatar-home-btn"
-        class="cursor-pointer text-xl font-bold tracking-tighter text-white"
+        class="group text-foreground flex cursor-pointer items-center gap-3"
         aria-label="Go to homepage"
       >
         <Image
@@ -48,13 +52,18 @@ const otherLangName = languages[otherLang]
           priority
           loading="eager"
           quality={100}
-          class="h-10 w-10 rounded-full ring-2 ring-violet-400/20 transition-all duration-300 hover:ring-violet-400/40"
+          class="ring-border group-hover:ring-primary/60 h-9 w-9 rounded-sm ring-1 transition-all duration-300 group-hover:ring-2"
         />
+        <span
+          class="text-muted-foreground group-hover:text-foreground hidden font-mono text-[0.6875rem] font-semibold tracking-[0.18em] uppercase transition-colors sm:block"
+        >
+          Franklin Martinez
+        </span>
       </a>
-      <div class="hidden items-center space-x-8 md:flex">
+      <div class="hidden items-center gap-6 md:flex">
         <a
           href={experienceUrl}
-          class="nav-link text-sm font-medium text-zinc-400 transition-colors hover:text-white"
+          class="nav-link text-muted-foreground hover:text-primary font-mono text-xs font-medium tracking-wide uppercase transition-colors"
           data-section="experience"
           data-astro-prefetch
         >
@@ -62,7 +71,7 @@ const otherLangName = languages[otherLang]
         </a>
         <a
           href={projectsUrl}
-          class="nav-link text-sm font-medium text-zinc-400 transition-colors hover:text-white"
+          class="nav-link text-muted-foreground hover:text-primary font-mono text-xs font-medium tracking-wide uppercase transition-colors"
           data-section="projects"
           data-astro-prefetch
         >
@@ -70,49 +79,68 @@ const otherLangName = languages[otherLang]
         </a>
         <a
           href={contactUrl}
-          class="nav-link inline-block rounded-md bg-zinc-800 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700"
+          class="nav-link border-border bg-secondary text-foreground hover:border-primary/50 hover:text-primary inline-block rounded-sm border px-3 py-1.5 font-mono text-xs font-medium tracking-wide uppercase transition-colors"
           data-section="contact"
           data-astro-prefetch
         >
           {t("nav.contact")}
         </a>
-        <a
-          href={otherLangUrl}
-          class="w-8 cursor-pointer text-center text-sm font-semibold text-zinc-400 uppercase transition-colors hover:text-white"
-          title={`Switch to ${otherLangName}`}
-          data-lang-switch
-          data-target-lang={otherLang}
-          data-astro-prefetch
-        >
-          {otherLang.toUpperCase()}
-        </a>
-      </div>
-      <button
-        id="mobile-menu-btn"
-        class="flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-zinc-800/50 md:hidden"
-        aria-label="Toggle mobile menu"
-      >
-        <svg
-          class="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16m-7 6h7"
+        <div class="border-border flex items-center gap-2 border-l pl-4">
+          <a
+            href={otherLangUrl}
+            class="text-muted-foreground hover:border-primary/40 hover:text-primary border-border grid size-9 cursor-pointer place-items-center rounded-sm border bg-transparent font-mono text-xs font-semibold uppercase transition-colors"
+            title={`Switch to ${otherLangName}`}
+            data-lang-switch
+            data-target-lang={otherLang}
+            data-astro-prefetch
           >
-          </path>
-        </svg>
-      </button>
+            {otherLang.toUpperCase()}
+          </a>
+          <ThemeToggle
+            client:load
+            label={themeLabel}
+            deckLabel={deckLabel}
+            blueprintLabel={blueprintLabel}
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 md:hidden">
+        <ThemeToggle
+          client:load
+          label={themeLabel}
+          deckLabel={deckLabel}
+          blueprintLabel={blueprintLabel}
+        />
+        <button
+          id="mobile-menu-btn"
+          class="text-foreground hover:border-primary/40 hover:text-primary border-border flex h-10 w-10 items-center justify-center rounded-sm border bg-transparent transition-colors"
+          aria-label="Toggle mobile menu"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            >
+            </path>
+          </svg>
+        </button>
+      </div>
     </nav>
   </div>
-  <div id="mobile-menu" class="hidden px-4 pb-4 sm:px-6 md:hidden lg:px-8">
+  <div
+    id="mobile-menu"
+    class="border-border hidden border-t px-4 pb-4 sm:px-6 md:hidden lg:px-8"
+  >
     <a
       href={experienceUrl}
-      class="mobile-nav-link block py-3 text-zinc-300 transition-colors"
+      class="mobile-nav-link text-muted-foreground block py-3 font-mono text-sm uppercase transition-colors"
       data-section="experience"
       data-astro-prefetch
     >
@@ -120,7 +148,7 @@ const otherLangName = languages[otherLang]
     </a>
     <a
       href={projectsUrl}
-      class="mobile-nav-link block py-3 text-zinc-300 transition-colors"
+      class="mobile-nav-link text-muted-foreground block py-3 font-mono text-sm uppercase transition-colors"
       data-section="projects"
       data-astro-prefetch
     >
@@ -128,7 +156,7 @@ const otherLangName = languages[otherLang]
     </a>
     <a
       href={contactUrl}
-      class="mobile-nav-link mt-3 block rounded-md bg-zinc-800 px-3 py-3 text-center font-medium text-white transition-colors hover:bg-zinc-700"
+      class="mobile-nav-link border-border bg-secondary text-foreground hover:border-primary/50 hover:text-primary mt-3 block rounded-sm border px-3 py-3 text-center font-mono text-sm font-medium uppercase transition-colors"
       data-section="contact"
       data-astro-prefetch
     >
@@ -136,7 +164,7 @@ const otherLangName = languages[otherLang]
     </a>
     <a
       href={otherLangUrl}
-      class="mt-3 block w-full cursor-pointer py-3 text-center font-medium text-zinc-300 uppercase"
+      class="text-muted-foreground hover:text-primary mt-3 block w-full cursor-pointer py-3 text-center font-mono text-sm font-medium uppercase transition-colors"
       title={`Switch to ${otherLangName}`}
       data-lang-switch
       data-target-lang={otherLang}
@@ -189,21 +217,25 @@ const otherLangName = languages[otherLang]
           const isActive = section === activeSection
 
           if (isContact) {
-            link.classList.toggle("bg-violet-600", isActive)
-            link.classList.toggle("bg-zinc-800", !isActive)
+            link.classList.toggle("border-primary/60", isActive)
+            link.classList.toggle("text-primary", isActive)
           } else {
-            link.classList.toggle("text-white", isActive)
+            link.classList.toggle("text-primary", isActive)
             link.classList.toggle("font-semibold", isActive)
-            link.classList.toggle(
-              "text-zinc-400",
-              !isActive && link.classList.contains("nav-link")
-            )
-            link.classList.toggle(
-              "text-zinc-300",
-              !isActive && link.classList.contains("mobile-nav-link")
-            )
+            link.classList.toggle("text-muted-foreground", !isActive)
           }
         })
+
+      // Catalog rail: a single filled square marks the current section.
+      document.querySelectorAll("[data-rail-section]").forEach((link) => {
+        const section = link.getAttribute("data-rail-section")
+        link.classList.toggle("is-active", section === activeSection)
+        if (section === activeSection) {
+          link.setAttribute("aria-current", "true")
+        } else {
+          link.removeAttribute("aria-current")
+        }
+      })
     }
 
     const mobileMenuBtn = document.getElementById("mobile-menu-btn")
@@ -244,6 +276,8 @@ const otherLangName = languages[otherLang]
 
         let activeSection = "home"
         if (sectionId.includes("experience")) activeSection = "experience"
+        else if (sectionId.includes("technologies"))
+          activeSection = "technologies"
         else if (sectionId.includes("projects")) activeSection = "projects"
         else if (sectionId.includes("contact")) activeSection = "contact"
 
@@ -255,7 +289,7 @@ const otherLangName = languages[otherLang]
 
     setTimeout(() => {
       const sections = document.querySelectorAll(
-        "#home, [id*='experience'], [id*='projects'], [id*='contact']"
+        "#home, [id*='experience'], [id*='technologies'], [id*='projects'], [id*='contact']"
       )
       if (sections.length > 0) {
         sections.forEach((section) => observer.observe(section))

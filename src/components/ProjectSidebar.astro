@@ -8,9 +8,9 @@ export interface Props {
 const { project, t } = Astro.props
 ---
 
-<div class="sticky top-24 space-y-8">
-  <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-6">
-    <h3 class="mb-4 text-lg font-bold text-zinc-100">{t.tech_stack}</h3>
+<div class="sticky top-24 space-y-6">
+  <div class="panel p-6">
+    <h3 class="text-foreground mb-4 text-lg font-semibold">{t.tech_stack}</h3>
     <div class="flex flex-wrap gap-2">
       {
         project.data.tags.map((tag) => (
@@ -19,14 +19,14 @@ const { project, t } = Astro.props
       }
     </div>
   </div>
-  <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-6">
-    <h3 class="mb-4 text-lg font-bold text-zinc-100">{t.links}</h3>
+  <div class="panel p-6">
+    <h3 class="text-foreground mb-4 text-lg font-semibold">{t.links}</h3>
     <div class="space-y-3">
       <a
         href={project.data.liveUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex w-full items-center justify-center rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-violet-700"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex w-full items-center justify-center rounded-sm px-4 py-2 font-mono text-sm font-semibold tracking-wide uppercase transition-colors"
       >
         {t.view_live}
       </a>
@@ -34,7 +34,7 @@ const { project, t } = Astro.props
         href={project.data.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex w-full items-center justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-zinc-700"
+        class="border-border bg-secondary text-foreground hover:border-primary/50 hover:text-primary inline-flex w-full items-center justify-center rounded-sm border px-4 py-2 font-mono text-sm font-semibold tracking-wide uppercase transition-colors"
       >
         {t.view_source}
       </a>
@@ -42,9 +42,23 @@ const { project, t } = Astro.props
   </div>
   {
     project.data.featured && (
-      <div class="rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 p-6 text-center">
-        <div class="mb-2 font-semibold text-white">✨ {t.featured_project}</div>
-        <p class="text-sm text-violet-100">{t.featured_description}</p>
+      <div class="panel border-primary/30 bg-accent overflow-hidden">
+        <div class="panel-header text-primary">
+          <span class="inline-flex items-center gap-2">
+            <svg
+              class="size-3.5"
+              viewBox="0 0 256 256"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M244,128a12,12,0,0,1-12,12H207.42l-36.69,73.37A12,12,0,0,1,160,220h-.6a12,12,0,0,1-10.61-7.72L95,71.15,66.92,133A12,12,0,0,1,56,140H24a12,12,0,0,1,0-24H48.27L85.08,35a12,12,0,0,1,22.13.7l54.28,142.46,27.78-55.56A12,12,0,0,1,200,116h32A12,12,0,0,1,244,128Z" />
+            </svg>
+            {t.featured_project}
+          </span>
+        </div>
+        <p class="text-muted-foreground p-6 text-sm">
+          {t.featured_description}
+        </p>
       </div>
     )
   }

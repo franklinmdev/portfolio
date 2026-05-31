@@ -9,18 +9,18 @@ export interface Props {
 const { projectsUrl, contactUrl, t } = Astro.props
 ---
 
-<nav class="mt-16 border-t border-zinc-700 pt-8">
+<nav class="border-border mt-16 border-t pt-8">
   <div class="flex flex-col gap-4 sm:flex-row sm:justify-between">
     <a
       href={projectsUrl}
-      class="inline-flex items-center justify-center gap-2 rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-zinc-700"
+      class="border-border bg-secondary text-foreground hover:border-primary/50 hover:text-primary inline-flex items-center justify-center gap-2 rounded-sm border px-4 py-2 font-mono text-sm font-semibold tracking-wide uppercase transition-colors"
     >
       <ArrowLeft class="h-4 w-4" aria-hidden="true" />
       {t.view_all_btn}
     </a>
     <a
       href={contactUrl}
-      class="inline-flex items-center justify-center gap-2 rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-violet-700"
+      class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center gap-2 rounded-sm px-4 py-2 font-mono text-sm font-semibold tracking-wide uppercase transition-colors"
     >
       {t.work_together}
       <ArrowRight class="h-4 w-4" aria-hidden="true" />

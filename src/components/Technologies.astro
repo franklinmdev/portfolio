@@ -5,9 +5,12 @@ const lang = getLangFromUrl(Astro.url)
 const t = createTranslations(lang)
 ---
 
-<section id="technologies" class="section-content scroll-mt-24">
-  <h2 class="section-heading mb-6">{t("sections.tech_title")}</h2>
-  <div class="flex max-w-5xl flex-wrap items-center justify-start gap-3">
+<section id="technologies" class="scroll-mt-24">
+  <span class="module-label">{t("hud.modules.tech")}</span>
+  <h2 class="module-title text-foreground mt-3 mb-6">
+    {t("sections.tech_title")}
+  </h2>
+  <div class="flex max-w-5xl flex-wrap items-center justify-start gap-2.5">
     <span class="tech-tag">React & Next.js</span>
     <span class="tech-tag">TypeScript</span>
     <span class="tech-tag">JavaScript</span>

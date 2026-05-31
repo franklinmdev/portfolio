@@ -37,7 +37,7 @@ const pageImage = project.data.image
       projectsUrl={projectsUrl}
     />
 
-    <div class="mb-12 overflow-hidden rounded-lg border border-zinc-700">
+    <div class="panel mb-12 overflow-hidden">
       <Picture
         src={pageImage}
         formats={["avif", "webp", "jpeg"]}
@@ -66,4 +66,4 @@ const pageImage = project.data.image
   </div>
 </main>
 
-<ScrollToTop client:idle />
+<ScrollToTop client:idle label={translations.a11y.scroll_to_top} />

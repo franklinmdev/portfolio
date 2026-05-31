@@ -34,6 +34,16 @@ const projectsForCurrentLang = await Promise.all(
         ...(project.data.iconAsset && {
           iconAsset: await getImage({ src: project.data.iconAsset }),
         }),
+        // Featured projects carry a real product screenshot for the
+        // editorial-feature card on the home deck.
+        ...(project.data.featured &&
+          project.data.image && {
+            imageAsset: await getImage({
+              src: project.data.image,
+              width: 1280,
+              format: "webp",
+            }),
+          }),
       }
 
       return projectData
@@ -42,8 +52,13 @@ const projectsForCurrentLang = await Promise.all(
 
 const translations = {
   title: t("sections.projects_title"),
+  moduleLabel: t("hud.modules.projects"),
   viewAllBtn: t("projects.view_all_btn"),
   showLessBtn: t("projects.show_less_btn"),
+  openLabel: t("hud.projects.open"),
+  viewLabel: t("a11y.view_project"),
+  cardLabel: t("a11y.project_label"),
+  screenshotAlt: t("a11y.project_screenshot"),
 }
 ---
 

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { ChevronDown, HelpCircle } from "lucide-react"
+import { CaretDownIcon, QuestionIcon } from "@phosphor-icons/react"
 import React, { memo, useCallback, useMemo, useState } from "react"
 import ProjectCard from "./ProjectCard"
 
@@ -9,14 +9,20 @@ interface Project {
   title: string
   description: string
   iconAsset?: { src: string; width?: number; height?: number }
+  imageAsset?: { src: string; width?: number; height?: number }
   featured: boolean
   href: string
 }
 
 interface Translations {
   title: string
+  moduleLabel: string
   viewAllBtn: string
   showLessBtn: string
+  openLabel: string
+  viewLabel: string
+  cardLabel: string
+  screenshotAlt: string
 }
 
 interface ProjectsSectionProps {
@@ -47,7 +53,9 @@ const parseIcon = (project: Project): React.ReactNode => {
     )
   }
 
-  return <HelpCircle className="h-full w-full" aria-hidden="true" />
+  return (
+    <QuestionIcon className="h-full w-full" weight="bold" aria-hidden="true" />
+  )
 }
 
 function ProjectsSection({ projects, translations }: ProjectsSectionProps) {
@@ -68,21 +76,39 @@ function ProjectsSection({ projects, translations }: ProjectsSectionProps) {
     setShowAll((prev) => !prev)
   }, [])
 
+  // Below three visible cards there is no second column to fill, so a forced
+  // two-up grid leaves an empty cell. Stack a single left-aligned column
+  // instead; only fan out to two columns once a row can actually be filled.
+  const isSparse = visibleProjects.length < 3
+  const gridClass = isSparse
+    ? "grid grid-cols-1 gap-6"
+    : "grid grid-cols-1 gap-5 sm:grid-cols-2"
+
   return (
     <section id="projects" className="scroll-mt-24 py-8 lg:py-12">
-      <h2 className="mb-8 text-2xl font-bold tracking-tight text-zinc-100">
+      <span className="module-label">{translations.moduleLabel}</span>
+      <h2 className="module-title text-foreground mt-3 mb-8">
         {translations.title}
       </h2>
 
-      <div className="grid grid-cols-1 gap-6 sm:gap-8">
+      <div className={gridClass}>
         {visibleProjects.map((project) => (
           <ProjectCard
             key={project.id}
             title={project.title}
             description={project.description}
             icon={parseIcon(project)}
-            iconColor="text-violet-400"
+            iconColor="text-muted-foreground"
             href={project.href}
+            featured={project.featured}
+            screenshot={project.imageAsset?.src}
+            screenshotAlt={translations.screenshotAlt.replace(
+              "{title}",
+              project.title
+            )}
+            openLabel={translations.openLabel}
+            viewLabel={translations.viewLabel}
+            cardLabel={translations.cardLabel}
           />
         ))}
 
@@ -93,8 +119,12 @@ function ProjectsSection({ projects, translations }: ProjectsSectionProps) {
               title={project.title}
               description={project.description}
               icon={parseIcon(project)}
-              iconColor="text-violet-400"
+              iconColor="text-muted-foreground"
               href={project.href}
+              featured={project.featured}
+              openLabel={translations.openLabel}
+              viewLabel={translations.viewLabel}
+              cardLabel={translations.cardLabel}
               className="hidden"
             />
           ))}
@@ -104,7 +134,8 @@ function ProjectsSection({ projects, translations }: ProjectsSectionProps) {
         <div className="mt-8 text-center">
           <Button variant="ghostDark" onClick={handleToggle} className="gap-2">
             {showAll ? translations.showLessBtn : translations.viewAllBtn}
-            <ChevronDown
+            <CaretDownIcon
+              weight="bold"
               className={cn(
                 "size-4 transition-transform duration-200",
                 showAll && "rotate-180"

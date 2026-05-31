@@ -1,7 +1,7 @@
 ---
+import CatalogRail from "@/components/CatalogRail.astro"
 import Experience from "@/components/Experience.astro"
 import Hero from "@/components/Hero.astro"
-import IDEBlock from "@/components/IDEBlock.astro"
 import Projects from "@/components/Projects.astro"
 import ContactForm from "@/components/react/ContactForm.tsx"
 import ScrollToTop from "@/components/react/ScrollToTop"
@@ -16,6 +16,9 @@ const { lang } = Astro.props
 const t = createTranslations(lang)
 ---
 
+<!-- Signature spine: catalog rail down the left margin (xl+). -->
+<CatalogRail t={t} />
+
 <!-- Main Container with better responsive handling -->
 <div
   class="mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12"
@@ -26,29 +29,16 @@ const t = createTranslations(lang)
 
     <!-- Right Column: Main Content -->
     <main class="xl:w-3/5 2xl:w-[62%]">
-      <div class="xl:pt-24">
-        <!-- Mobile IDE Code Block -->
-        <div id="about-content-mobile" class="mb-16 xl:hidden">
-          <div class="w-full">
-            <IDEBlock t={t} variant="mobile" />
-            <a
-              href="mailto:franklinmdev@hotmail.com"
-              class="block cursor-pointer p-2 text-right text-xs text-zinc-400 transition-colors hover:text-zinc-300 sm:text-sm"
-            >
-              franklinmdev@hotmail.com
-            </a>
-          </div>
-        </div>
-
+      <div class="xl:pt-28">
         <!-- Content Sections -->
         <div class="space-y-11 md:space-y-14 xl:space-y-11 2xl:space-y-14">
           <Experience />
 
-          <hr class="hidden border-zinc-700 xl:block" />
+          <hr class="border-border hidden xl:block" />
 
           <Technologies />
 
-          <hr class="hidden border-zinc-700 xl:block" />
+          <hr class="border-border hidden xl:block" />
 
           <Projects />
 
@@ -57,6 +47,8 @@ const t = createTranslations(lang)
             translations={{
               title: t("sections.contact_title"),
               subtitle: t("contact.subtitle"),
+              moduleLabel: t("hud.modules.contact"),
+              channel: t("hud.contact.channel"),
               namePlaceholder: t("contact.form.name_placeholder"),
               emailPlaceholder: t("contact.form.email_placeholder"),
               messagePlaceholder: t("contact.form.message_placeholder"),
@@ -79,4 +71,4 @@ const t = createTranslations(lang)
   </div>
 </div>
 
-<ScrollToTop client:idle />
+<ScrollToTop client:idle label={t("a11y.scroll_to_top")} />

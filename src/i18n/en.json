@@ -4,31 +4,43 @@
     "projects": "Projects",
     "contact": "Contact"
   },
+  "rail": {
+    "stack": "Stack"
+  },
+  "hud": {
+    "status": {
+      "theme_deck": "Deck",
+      "theme_blueprint": "Blueprint"
+    },
+    "modules": {
+      "experience": "01 — Experience",
+      "tech": "02 — Stack",
+      "projects": "03 — Projects",
+      "contact": "04 — Contact"
+    },
+    "hero": {
+      "id": "Santiago, Dominican Republic"
+    },
+    "projects": {
+      "open": "Open project"
+    },
+    "contact": {
+      "channel": "Direct line"
+    }
+  },
   "hero": {
-    "subtitle": "Full-Stack AI Engineer",
+    "subtitle": "Full-stack AI engineer",
+    "statement": "Built a 29-module, 225-endpoint enterprise admin platform — solo, in 8 business days.",
     "about": {
       "p1": "I grew up taking things apart to see how they worked. Now I put them together, building full-stack systems that are clean, scalable, and powered by AI.",
       "p2": "I like working where solid engineering meets AI. When I'm not shipping end-to-end features, I'm bringing AI tools into our dev workflow or helping teammates level up. Software is a team sport, and I love being part of it."
     }
   },
-  "ide": {
-    "title_var": "title",
-    "title_val": "'Full-Stack AI Engineer'",
-    "location_var": "location",
-    "location_val": "'Santiago, DR'",
-    "education_var": "education",
-    "education_val1": "'Software Engineering'",
-    "education_val2": "'Web Dev.'",
-    "interests_var": "fields_of_interests",
-    "interests_val1": "'Full Stack'",
-    "interests_val2": "'AI'",
-    "comment": "// I build end-to-end systems enhanced by AI,\n// bridging design and high-performance engineering."
-  },
   "sections": {
-    "experience_title": "Work Experience",
+    "experience_title": "Work experience",
     "tech_title": "Technologies",
-    "projects_title": "Selected Projects",
-    "contact_title": "Get In Touch"
+    "projects_title": "Selected projects",
+    "contact_title": "Get in touch"
   },
   "experience": {
     "exp1": {
@@ -71,7 +83,7 @@
       "message_label": "Message",
       "send_btn": "Send message",
       "sending_btn": "Sending...",
-      "success_msg": "Thank you! Your message has been sent successfully.",
+      "success_msg": "Signal received — reply within 24h",
       "error_msg": "Sorry, there was an error sending your message. Please try again.",
       "name_required": "Name is required",
       "email_required": "Email is required",
@@ -85,8 +97,15 @@
     "x": "X profile",
     "email": "Email"
   },
+  "a11y": {
+    "scroll_to_top": "Scroll to top",
+    "section_index": "Section index",
+    "view_project": "Open project: {title}",
+    "project_label": "Project: {title}",
+    "project_screenshot": "Screenshot of {title}"
+  },
   "footer": {
-    "credits": "Designed & Built by Franklin Martinez"
+    "credits": "Designed & built by Franklin Martinez"
   },
   "error": {
     "404": {

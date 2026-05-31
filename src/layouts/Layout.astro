@@ -2,8 +2,8 @@
 import avatarImage from "@/assets/avatar.webp"
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
-import Spotlight from "@/components/react/Spotlight.tsx"
-import { getLangFromUrl, removeLocalePrefix } from "@/i18n/utils"
+import { getLangFromUrl } from "@/i18n/utils"
+import { removeLocalePrefix } from "@/i18n/utils"
 import "@/styles/global.css"
 import { ClientRouter } from "astro:transitions"
 
@@ -35,9 +35,31 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
 ---
 
 <!doctype html>
-<html lang={lang} class="dark">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
+    {
+      /* No-flash theme: explicit choice wins, else the OS preference. Runs
+        before paint and re-runs after each view transition swap. */
+    }
+    <script is:inline>
+      ;(() => {
+        const apply = () => {
+          let saved = null
+          try {
+            saved = localStorage.getItem("theme")
+          } catch {}
+          const dark = saved
+            ? saved === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+          document.documentElement.classList.toggle("dark", dark)
+          const meta = document.querySelector('meta[name="theme-color"]')
+          if (meta) meta.setAttribute("content", dark ? "#0c0f16" : "#f3f1ec")
+        }
+        apply()
+        document.addEventListener("astro:after-swap", apply)
+      })()
+    </script>
     <meta
       name="description"
       content={description ||
@@ -63,16 +85,8 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Enhanced SEO & PWA Meta -->
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#111111"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#ffffff"
-    />
+    {/* Single dynamic theme-color; the inline script keeps it in sync. */}
+    <meta name="theme-color" content="#0c0f16" />
     <meta name="color-scheme" content="dark light" />
     <meta name="robots" content="index,follow" />
     <meta
@@ -181,8 +195,6 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     <ClientRouter fallback="swap" />
   </head>
   <body class="antialiased">
-    <!-- Load Spotlight JS when browser idle, not during initial paint -->
-    <Spotlight client:idle />
     <Header />
     <slot />
     <Footer />
