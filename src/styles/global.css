@@ -224,17 +224,14 @@
     pointer-events: none;
   }
 
-  /* xl+ : a quiet numeric spine sits in the outer gutter. */
-  @media (min-width: 1280px) {
-    .catalog-rail {
-      display: flex;
-    }
-  }
-
-  /* 2xl+ : the gutter opens wide enough to anchor the rail beside the
-     centred container and let labels unfurl without touching content. */
+  /* The rail lives in the OUTER gutter beside the centred 80rem container.
+     It only appears at 2xl, where that gutter is finally wide enough to hold
+     the spine — and unfurl labels — without touching content. Below 2xl the
+     header nav covers wayfinding. (At exactly 1280px the container fills the
+     viewport, so showing the rail there overlapped the hero copy.) */
   @media (min-width: 1536px) {
     .catalog-rail {
+      display: flex;
       left: max(1.5rem, calc((100vw - 80rem) / 2 - 7rem));
     }
   }
