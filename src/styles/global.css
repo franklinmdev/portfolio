@@ -224,14 +224,19 @@
     pointer-events: none;
   }
 
-  /* The rail lives in the OUTER gutter beside the centred 80rem container.
-     It only appears at 2xl, where that gutter is finally wide enough to hold
-     the spine — and unfurl labels — without touching content. Below 2xl the
-     header nav covers wayfinding. (At exactly 1280px the container fills the
-     viewport, so showing the rail there overlapped the hero copy.) */
-  @media (min-width: 1536px) {
+  /* xl–2xl : the spine shows in a left lane that HomePage reserves via
+     xl:pl-20. That lane is what keeps it off the hero copy at 1280px, where
+     the centred 80rem container fills the viewport and has no outer gutter. */
+  @media (min-width: 1280px) {
     .catalog-rail {
       display: flex;
+    }
+  }
+
+  /* 2xl+ : the real outer gutter opens up, so the rail anchors beside the
+     container (and labels can unfurl) and HomePage drops the reserved lane. */
+  @media (min-width: 1536px) {
+    .catalog-rail {
       left: max(1.5rem, calc((100vw - 80rem) / 2 - 7rem));
     }
   }
