@@ -10,10 +10,9 @@ githubUrl: "https://github.com/franklinmdev/dgii-ts"
 tags:
   - "TypeScript"
   - "Node.js"
-  - "Paquete npm"
   - "Web scraping"
-  - "DGII"
-  - "Licencia MIT"
+  - "Circuit breaker"
+  - "Validación offline"
 featured: false
 publishDate: "2026-05-20"
 iconAsset: "@/assets/projects/dgii-ts-icon.svg"
