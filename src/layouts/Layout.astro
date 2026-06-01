@@ -2,6 +2,7 @@
 import avatarImage from "@/assets/avatar.webp"
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
+import WebMCP from "@/components/react/WebMCP"
 import { getLangFromUrl } from "@/i18n/utils"
 import { removeLocalePrefix } from "@/i18n/utils"
 import "@/styles/global.css"
@@ -198,5 +199,6 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     <Header />
     <slot />
     <Footer />
+    <WebMCP client:idle />
   </body>
 </html>
