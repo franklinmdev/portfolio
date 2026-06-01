@@ -4,6 +4,10 @@ import { createTranslations, getLangFromUrl } from "@/i18n/utils"
 const lang = getLangFromUrl(Astro.url)
 const t = createTranslations(lang)
 
+// The differentiator leads: how the work gets done with AI. The stack below
+// is baseline. Practice keys resolve to practice.items.<key>.{title,body}.
+const practices = ["prd", "quality", "models"] as const
+
 interface TechGroup {
   readonly labelKey: string
   readonly items: readonly string[]
@@ -42,9 +46,40 @@ const techGroups: readonly TechGroup[] = [
 
 <section id="technologies" class="scroll-mt-24">
   <span class="module-label">{t("hud.modules.tech")}</span>
-  <h2 class="module-title text-foreground mt-3 mb-8">
-    {t("sections.tech_title")}
+  <h2 class="module-title text-foreground mt-3 mb-4">
+    {t("practice.title")}
   </h2>
+  <p class="text-muted-foreground mb-10 max-w-3xl leading-relaxed">
+    {t("practice.intro")}
+  </p>
+
+  <div class="mb-12 max-w-3xl space-y-7">
+    {
+      practices.map((key, index) => (
+        <div class="flex gap-4">
+          <span class="text-muted-foreground pt-1 font-mono text-xs font-medium tabular-nums">
+            {`0${index + 1}`}
+          </span>
+          <div>
+            <h3 class="text-foreground mb-1 text-base font-semibold">
+              {t(`practice.items.${key}.title`)}
+            </h3>
+            <p class="text-muted-foreground leading-relaxed">
+              {t(`practice.items.${key}.body`)}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <hr class="border-border mb-8" />
+
+  <p
+    class="text-foreground mb-6 font-mono text-xs font-semibold tracking-wide uppercase"
+  >
+    {t("sections.tech_title")}
+  </p>
   <div class="max-w-5xl space-y-6">
     {
       techGroups.map((group) => (

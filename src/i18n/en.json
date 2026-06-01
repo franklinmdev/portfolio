@@ -50,6 +50,24 @@
     "projects_title": "Selected projects",
     "contact_title": "Get in touch"
   },
+  "practice": {
+    "title": "How I work with AI",
+    "intro": "Picking technologies is table stakes now. With the right workflow anyone can ship in any stack. What sets the work apart is the system I build around the model, so I can take a brief and deliver a finished product fast without dropping quality.",
+    "items": {
+      "prd": {
+        "title": "From PRD to shipped product",
+        "body": "Hand me a brief or a PRD and I deliver the whole thing: data model, backend, API, and a UI that non-technical people can actually use. Written research and a plan go in, a working product and a QA guide come out, with little back-and-forth."
+      },
+      "quality": {
+        "title": "Quality is enforced, not hoped for",
+        "body": "Every project carries codified rules and edit hooks. Each change typechecks, lints, and validates the schema before it lands, so a type error or a stray console.log never reaches a commit."
+      },
+      "models": {
+        "title": "The right model for the job",
+        "body": "I split work across AI models, deep reasoning to plan and fast models to execute, so delivery stays fast without trading away rigor."
+      }
+    }
+  },
   "experience": {
     "exp1": {
       "date": "February 2026 - Present",

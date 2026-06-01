@@ -50,6 +50,24 @@
     "projects_title": "Proyectos destacados",
     "contact_title": "Ponte en contacto"
   },
+  "practice": {
+    "title": "Cómo trabajo con IA",
+    "intro": "Elegir tecnologías ya es lo mínimo. Con el flujo correcto, cualquiera puede entregar en cualquier stack. Lo que marca la diferencia es el sistema que armo alrededor del modelo, para tomar un brief y entregar un producto terminado rápido sin bajar la calidad.",
+    "items": {
+      "prd": {
+        "title": "Del PRD al producto entregado",
+        "body": "Dame un brief o un PRD y entrego todo: modelo de datos, backend, API y una interfaz que la gente no técnica de verdad puede usar. Entran investigación y un plan escritos, y sale un producto funcionando con su guía de QA, con poco ida y vuelta."
+      },
+      "quality": {
+        "title": "La calidad se exige, no se espera",
+        "body": "Cada proyecto lleva reglas codificadas y hooks de edición. Cada cambio pasa el typecheck, el linter y la validación de esquema antes de entrar, así un error de tipos o un console.log perdido nunca llega a un commit."
+      },
+      "models": {
+        "title": "El modelo correcto para cada tarea",
+        "body": "Reparto el trabajo entre modelos de IA, el razonamiento profundo planifica y los modelos rápidos ejecutan, así la entrega sigue siendo rápida sin sacrificar el rigor."
+      }
+    }
+  },
   "experience": {
     "exp1": {
       "date": "Febrero 2026 - Presente",
