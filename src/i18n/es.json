@@ -4,44 +4,64 @@
     "projects": "Proyectos",
     "contact": "Contacto"
   },
-  "hero": {
-    "subtitle": "Ingeniero Full-Stack AI",
-    "about": {
-      "p1": "Crecí desarmando cosas para ver cómo funcionaban. Ahora las construyo: sistemas full-stack que son limpios, escalables y potenciados por IA.",
-      "p2": "Me gusta trabajar donde la ingeniería sólida se encuentra con la IA. Cuando no estoy construyendo sistemas de punta a punta, estoy integrando herramientas de IA en el flujo del equipo o ayudando a otros devs a crecer. El software es un deporte de equipo, y me encanta ser parte."
+  "rail": {
+    "stack": "Stack"
+  },
+  "tech": {
+    "groups": {
+      "languages": "Lenguajes",
+      "frontend": "Frontend",
+      "backend": "Backend y datos",
+      "workflow": "Flujo de trabajo"
     }
   },
-  "ide": {
-    "title_var": "titulo",
-    "title_val": "'Ingeniero Full-Stack AI'",
-    "location_var": "ubicacion",
-    "location_val": "'Santiago, RD'",
-    "education_var": "educacion",
-    "education_val1": "'Ingeniería de Software'",
-    "education_val2": "'Desarrollo Web'",
-    "interests_var": "intereses",
-    "interests_val1": "'Full Stack'",
-    "interests_val2": "'IA'",
-    "comment": "// Construyo sistemas de punta a punta potenciados por IA,\n// uniendo diseño e ingeniería de alto rendimiento."
+  "hud": {
+    "status": {
+      "theme_deck": "Consola",
+      "theme_blueprint": "Plano"
+    },
+    "modules": {
+      "experience": "01 — Experiencia",
+      "tech": "02 — Stack",
+      "projects": "03 — Proyectos",
+      "contact": "04 — Contacto"
+    },
+    "hero": {
+      "id": "Santiago, República Dominicana"
+    },
+    "projects": {
+      "open": "Abrir proyecto"
+    },
+    "contact": {
+      "channel": "Línea directa"
+    }
+  },
+  "hero": {
+    "subtitle": "Ingeniero full-stack",
+    "statement": "Construyo productos de principio a fin, desde la base de datos hasta la pantalla. Últimamente eso ha sido software fiscal y de cumplimiento para el mercado dominicano.",
+    "about": {
+      "p1": "Crecí desarmando cosas para ver cómo funcionaban, y construyo software de la misma forma. Empiezo por el problema y por las personas que de verdad lo tienen, y dejo que eso decida el resto.",
+      "p2": "La mayor parte de lo que construyo tiene que ver con reglas del mundo real bastante enredadas, como impuestos, cumplimiento y operaciones internas, donde acertar en los detalles pequeños importa más que el stack. También ayudo a mi equipo a sacarle provecho real a las herramientas de IA, y acompaño a los desarrolladores junior que tengo cerca."
+    }
   },
   "sections": {
-    "experience_title": "Experiencia Laboral",
+    "experience_title": "Experiencia laboral",
     "tech_title": "Tecnologías",
-    "projects_title": "Proyectos Destacados",
-    "contact_title": "Ponte En Contacto"
+    "projects_title": "Proyectos destacados",
+    "contact_title": "Ponte en contacto"
   },
   "experience": {
     "exp1": {
       "date": "Febrero 2026 - Presente",
       "title": "Ingeniero Full-Stack AI,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Llevo proyectos de principio a fin como Ingeniero Full-Stack AI. Construí una plataforma empresarial de gestión administrativa por mi cuenta: 29 módulos de backend, 225 endpoints, lógica presupuestaria multi-moneda con flujos de aprobación y todo el frontend, en 8 días laborables. Impulsé la adopción de herramientas de IA (incluyendo Claude Code) en el equipo, lo cual marcó una diferencia real en productividad. También manejo reportes con Fast Reports y mentorizo pasantes y devs junior."
+      "desc": "Soy dueño de los productos de principio a fin, del modelo de datos al frontend. Construyo una plataforma de gestión financiera que vendemos a nuestros clientes, con lógica presupuestaria multi-moneda y flujos de aprobación, y la sigo manteniendo y ampliando a medida que crece. También me encargo de las integraciones más difíciles, como proveedores de pago tipo Lemon Squeezy. Además, lidero cómo el equipo adopta herramientas de IA como Claude Code, y acompaño a nuestros pasantes y desarrolladores junior."
     },
     "exp2": {
       "date": "Abril 2023 - Febrero 2026",
       "title": "Desarrollador de Software,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Colaboré activamente en un sistema de diseño unificado, mentoricé desarrolladores junior y optimicé las capas de datos de la aplicación para mejorar el rendimiento y la experiencia de usuario."
+      "desc": "Ayudé a construir un sistema de diseño compartido que se usa en los productos de la empresa, ajusté las capas de datos para que la interfaz se sintiera más rápida y fluida, y acompañé a desarrolladores junior."
     }
   },
   "projects": {
@@ -51,13 +71,11 @@
     "published_on": "Publicado el ",
     "overview": "Resumen",
     "challenges": "Desafíos",
-    "key_learnings": "Aprendizajes Clave",
+    "key_learnings": "Aprendizajes clave",
     "tech_stack": "Stack tecnológico",
     "links": "Enlaces",
     "view_live": "Ver proyecto en vivo",
     "view_source": "Ver código fuente",
-    "featured_project": "Proyecto destacado",
-    "featured_description": "Este proyecto muestra habilidades de desarrollo avanzadas y mejores prácticas.",
     "work_together": "Trabajemos juntos"
   },
   "contact": {
@@ -66,9 +84,12 @@
       "name_placeholder": "Tu nombre",
       "email_placeholder": "Tu correo electrónico",
       "message_placeholder": "Tu mensaje",
+      "name_label": "Nombre",
+      "email_label": "Correo electrónico",
+      "message_label": "Mensaje",
       "send_btn": "Enviar mensaje",
       "sending_btn": "Enviando...",
-      "success_msg": "¡Gracias! Tu mensaje ha sido enviado exitosamente.",
+      "success_msg": "Señal recibida — te respondo en 24 h",
       "error_msg": "Lo siento, hubo un error al enviar tu mensaje. Por favor intenta de nuevo.",
       "name_required": "El nombre es requerido",
       "email_required": "El correo electrónico es requerido",
@@ -76,12 +97,26 @@
       "message_required": "El mensaje es requerido"
     }
   },
+  "social": {
+    "github": "Perfil de GitHub",
+    "linkedin": "Perfil de LinkedIn",
+    "x": "Perfil de X",
+    "email": "Correo electrónico"
+  },
+  "a11y": {
+    "scroll_to_top": "Volver arriba",
+    "section_index": "Índice de secciones",
+    "view_project": "Abrir proyecto: {title}",
+    "project_label": "Proyecto: {title}",
+    "project_screenshot": "Captura de {title}"
+  },
   "footer": {
     "credits": "Diseñado y construido por Franklin Martinez"
   },
   "error": {
     "404": {
       "title": "404 - Página no encontrada",
+      "image_alt": "404 - Página no encontrada",
       "heading": "¡Ups! Página no encontrada",
       "description": "La página que buscas parece haberse ido de aventura. ¡Te ayudamos a volver al camino correcto!",
       "reasons": {

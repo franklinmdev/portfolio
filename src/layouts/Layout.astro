@@ -2,8 +2,8 @@
 import avatarImage from "@/assets/avatar.webp"
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
-import Spotlight from "@/components/react/Spotlight.tsx"
 import { getLangFromUrl } from "@/i18n/utils"
+import { removeLocalePrefix } from "@/i18n/utils"
 import "@/styles/global.css"
 import { ClientRouter } from "astro:transitions"
 
@@ -25,32 +25,41 @@ const ogImageUrl = image?.url
   ? new URL(image.url, Astro.site)
   : new URL(avatarImage.src, Astro.site)
 
-// Set caching headers for better performance
-if (Astro.url.pathname !== "/") {
-  // Cache static pages for 1 hour in browser, 1 day in CDN
-  Astro.response.headers.set(
-    "Cache-Control",
-    "public, max-age=3600, s-maxage=86400"
-  )
-} else {
-  // Cache homepage for 5 minutes in browser, 1 hour in CDN
-  Astro.response.headers.set(
-    "Cache-Control",
-    "public, max-age=300, s-maxage=3600"
-  )
-}
-
-// Set performance and security headers
-Astro.response.headers.set("X-Content-Type-Options", "nosniff")
-Astro.response.headers.set("X-Frame-Options", "DENY")
-Astro.response.headers.set("X-XSS-Protection", "1; mode=block")
-Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
+// hreflang alternates: strip any active locale prefix, then rebuild the
+// en/es/x-default URLs from a single normalised path so the trailing slash
+// is consistent across both language versions.
+const cleanPath = removeLocalePrefix(Astro.url.pathname)
+const normalizedPath = cleanPath.endsWith("/") ? cleanPath : `${cleanPath}/`
+const enHref = new URL(normalizedPath, Astro.site)
+const esHref = new URL(`/es${normalizedPath}`, Astro.site)
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
+    {
+      /* No-flash theme: explicit choice wins, else the OS preference. Runs
+        before paint and re-runs after each view transition swap. */
+    }
+    <script is:inline>
+      ;(() => {
+        const apply = () => {
+          let saved = null
+          try {
+            saved = localStorage.getItem("theme")
+          } catch {}
+          const dark = saved
+            ? saved === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+          document.documentElement.classList.toggle("dark", dark)
+          const meta = document.querySelector('meta[name="theme-color"]')
+          if (meta) meta.setAttribute("content", dark ? "#0c0f16" : "#f3f1ec")
+        }
+        apply()
+        document.addEventListener("astro:after-swap", apply)
+      })()
+    </script>
     <meta
       name="description"
       content={description ||
@@ -58,9 +67,7 @@ Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Critical resource hints for better performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <slot name="head" />
 
     <!-- DNS prefetch for external domains -->
     <link rel="dns-prefetch" href="//github.com" />
@@ -78,16 +85,8 @@ Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Enhanced SEO & PWA Meta -->
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#111111"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#ffffff"
-    />
+    {/* Single dynamic theme-color; the inline script keeps it in sync. */}
+    <meta name="theme-color" content="#0c0f16" />
     <meta name="color-scheme" content="dark light" />
     <meta name="robots" content="index,follow" />
     <meta
@@ -100,16 +99,9 @@ Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
     <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
 
     <!-- hreflang alternate links -->
-    <link
-      rel="alternate"
-      hreflang="en"
-      href={`https://franklinmdev.me${Astro.url.pathname}`}
-    />
-    <link
-      rel="alternate"
-      hreflang="es"
-      href={`https://franklinmdev.me/es${Astro.url.pathname}`}
-    />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="es" href={esHref} />
+    <link rel="alternate" hreflang="x-default" href={enHref} />
 
     <!-- Standard OG/Twitter tags -->
     <meta property="og:title" content={title} />
@@ -126,9 +118,9 @@ Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
         <meta property="article:published_time" content={publishDate} />
       )
     }
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:creator" content="@franklinmdev" />
-    <meta property="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@franklinmdev" />
+    <meta name="twitter:image" content={ogImageUrl} />
     <!-- Complete Twitter card metadata -->
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
@@ -152,6 +144,9 @@ Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
     <title>{title}</title>
 
     <!-- Structured data for better SEO -->
+    {
+      /* eslint-disable astro/no-set-html-directive -- JSON-LD payload is a static, trusted JSON.stringify, not user input */
+    }
     <script
       type="application/ld+json"
       is:inline
@@ -174,7 +169,6 @@ Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
           url: "https://www.uce.edu.do/",
         },
         email: "mailto:franklinmdev@hotmail.com",
-        telephone: "+1-849-493-4351",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Santiago de los Caballeros",
@@ -196,12 +190,11 @@ Astro.response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
         ],
       })}
     />
+    {/* eslint-enable astro/no-set-html-directive */}
 
     <ClientRouter fallback="swap" />
   </head>
   <body class="antialiased">
-    <!-- Load Spotlight JS when browser idle, not during initial paint -->
-    <Spotlight client:idle />
     <Header />
     <slot />
     <Footer />

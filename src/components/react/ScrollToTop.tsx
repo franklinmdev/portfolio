@@ -1,6 +1,11 @@
+import { ArrowUpIcon } from "@phosphor-icons/react"
 import { useCallback, useEffect, useState } from "react"
 
-const ScrollToTop = () => {
+interface ScrollToTopProps {
+  label: string
+}
+
+const ScrollToTop = ({ label }: ScrollToTopProps) => {
   const [visible, setVisible] = useState(false)
 
   const handleScroll = useCallback(() => {
@@ -23,25 +28,20 @@ const ScrollToTop = () => {
     <button
       type="button"
       id="scroll-to-top"
-      className={`fixed right-4 bottom-4 flex h-12 w-12 transform cursor-pointer items-center justify-center rounded-full bg-zinc-800 text-white shadow-lg transition-all hover:bg-violet-600 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-900 focus:outline-none sm:right-8 sm:bottom-8 2xl:h-14 2xl:w-14 ${
+      className={`border-border bg-card/90 text-foreground hover:border-primary hover:text-primary focus-visible:ring-ring fixed right-4 bottom-10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-sm border shadow-lg backdrop-blur transition-all focus-visible:ring-2 focus-visible:outline-none sm:right-8 sm:bottom-12 2xl:h-14 2xl:w-14 ${
         visible
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"
       }`}
-      aria-label="Scroll to top"
-      title="Scroll to top"
+      aria-label={label}
+      title={label}
       onClick={handleClick}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 2xl:h-7 2xl:w-7"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-      </svg>
+      <ArrowUpIcon
+        className="size-5 2xl:size-6"
+        weight="bold"
+        aria-hidden="true"
+      />
     </button>
   )
 }

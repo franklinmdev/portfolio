@@ -1,0 +1,53 @@
+---
+export interface Props {
+  t: (key: string) => string
+}
+
+const { t } = Astro.props
+
+interface RailItem {
+  readonly section: string
+  readonly num: string
+  readonly href: string
+  readonly label: string
+}
+
+const items: readonly RailItem[] = [
+  {
+    section: "experience",
+    num: "01",
+    href: "#experience",
+    label: t("nav.experience"),
+  },
+  {
+    section: "technologies",
+    num: "02",
+    href: "#technologies",
+    label: t("rail.stack"),
+  },
+  {
+    section: "projects",
+    num: "03",
+    href: "#projects",
+    label: t("nav.projects"),
+  },
+  {
+    section: "contact",
+    num: "04",
+    href: "#contact",
+    label: t("nav.contact"),
+  },
+]
+---
+
+<nav class="catalog-rail" aria-label={t("a11y.section_index")}>
+  {
+    items.map((item) => (
+      <a href={item.href} class="catalog-link" data-rail-section={item.section}>
+        <span class="catalog-marker" aria-hidden="true" />
+        <span class="tabular-nums">{item.num}</span>
+        <span class="catalog-label">{item.label}</span>
+      </a>
+    ))
+  }
+</nav>

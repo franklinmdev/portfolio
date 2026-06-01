@@ -79,18 +79,11 @@ export default [
     },
   },
 
-  // Specific configuration for Astro files
+  // Extra Astro rules. The parser/languageOptions are already provided by
+  // eslintPluginAstro.configs.recommended above, which matches **/*.astro.
   {
-    files: ["*.astro"],
-    languageOptions: {
-      parser: "astro-eslint-parser",
-      parserOptions: {
-        parser: "@typescript-eslint/parser",
-        extraFileExtensions: [".astro"],
-      },
-    },
+    files: ["**/*.astro"],
     rules: {
-      // Astro-specific rules
       "astro/no-set-html-directive": "error",
       "astro/no-conflict-set-directives": "error",
       "astro/no-unused-define-vars-in-style": "error",

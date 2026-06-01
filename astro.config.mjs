@@ -16,12 +16,23 @@ export default defineConfig({
     defaultLocale: "en",
     routing: {
       prefixDefaultLocale: false,
-      redirectToDefaultLocale: true,
     },
   },
 
   // Integrations - order matters for optimization
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      // Emit hreflang alternates; locale values match the on-page hreflang.
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", es: "es" },
+      },
+      // Keep the 404 routes out of the sitemap. Match a path segment (not a
+      // substring) so real URLs containing "404" are not dropped.
+      filter: (page) => !/(^|\/)404(\/|\.html)?$/.test(new URL(page).pathname),
+    }),
+  ],
 
   // Build optimizations
   build: {
@@ -67,11 +78,6 @@ export default defineConfig({
     css: {
       devSourcemap: true,
     },
-  },
-
-  // Security - CSRF protection enabled by default in v5
-  security: {
-    checkOrigin: true,
   },
 
   // HTML compression

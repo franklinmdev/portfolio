@@ -1,14 +1,15 @@
 ---
+import avatarImage from "@/assets/avatar.webp"
 import HomePage from "@/components/HomePage.astro"
 import Layout from "@/layouts/Layout.astro"
 ---
 
 <Layout
-  title='Franklin "franklinmdev" Martinez – Ingeniero Full-Stack AI'
-  description="Portafolio de Franklin Martinez (franklinmdev), un Ingeniero Full-Stack AI especializado en React, Next.js, Node.js, .NET, y flujos de desarrollo potenciados por IA."
+  title='Franklin "franklinmdev" Martinez – Ingeniero full-stack'
+  description="Franklin Martinez (franklinmdev) es un ingeniero full-stack que construye software fiscal y de cumplimiento para el mercado dominicano, de principio a fin desde la base de datos hasta la pantalla."
   image={{
-    url: "https://franklinmdev.me/avatar.webp",
-    alt: "Franklin Martinez - Retrato de Ingeniero Full-Stack AI",
+    url: avatarImage.src,
+    alt: "Franklin Martinez - retrato de ingeniero full-stack",
   }}
 >
   <HomePage lang="es" />

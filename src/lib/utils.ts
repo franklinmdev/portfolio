@@ -20,3 +20,14 @@ export function formatDate(date: Date, locale: SupportedLocale): string {
     timeZone: "UTC",
   }).format(date)
 }
+
+/**
+ * Build a ≤160-char meta description from a project's `description` field,
+ * truncating with an ellipsis for SEO.
+ */
+export function getProjectMetaDescription(
+  description: string | string[]
+): string {
+  const text = Array.isArray(description) ? (description[0] ?? "") : description
+  return text.length > 160 ? text.slice(0, 157).trimEnd() + "…" : text
+}

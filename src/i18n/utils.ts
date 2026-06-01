@@ -102,6 +102,14 @@ export function removeLocalePrefix(pathname: string): string {
 }
 
 /**
+ * Derive a project's bare slug from its content-collection id
+ * (e.g. "en/devflow" -> "devflow").
+ */
+export function getProjectSlug(id: string): string {
+  return id.split("/").slice(1).join("/")
+}
+
+/**
  * Check if current locale is default
  */
 export function isDefaultLocale(lang: Language): boolean {

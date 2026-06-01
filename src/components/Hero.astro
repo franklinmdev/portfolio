@@ -1,5 +1,4 @@
 ---
-import IDEBlock from "@/components/IDEBlock.astro"
 import SocialLinks from "@/components/SocialLinks.astro"
 
 export interface Props {
@@ -12,49 +11,43 @@ const { t } = Astro.props
 <!-- Sticky hero column -->
 <div
   id="home"
-  class="pt-24 pb-16 xl:sticky xl:top-0 xl:flex xl:max-h-[125vh] xl:w-2/5 xl:flex-col xl:justify-between xl:py-24 2xl:w-[38%]"
+  class="pt-24 pb-16 xl:sticky xl:top-0 xl:flex xl:max-h-screen xl:w-2/5 xl:flex-col xl:justify-between xl:py-28 2xl:w-[38%]"
 >
-  <div class="space-y-8">
-    <!-- Hero Content -->
+  <div class="space-y-10">
+    <!-- Identity -->
     <div>
+      <span
+        class="hero-headline text-muted-foreground mb-5 block font-mono text-[0.6875rem] font-semibold tracking-[0.16em] uppercase"
+      >
+        {t("hud.hero.id")}
+      </span>
       <h1
-        class="hero-headline mb-4 text-4xl font-extrabold tracking-tighter text-white sm:text-5xl lg:text-6xl xl:text-4xl 2xl:text-5xl"
-        style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);"
+        class="hero-headline text-foreground mb-4 text-4xl font-semibold sm:text-5xl lg:text-6xl xl:text-5xl"
       >
         Franklin <span class="sr-only">"franklinmdev"</span> Martinez
       </h1>
       <p
-        class="hero-subtitle mb-6 text-2xl font-bold text-zinc-200 sm:text-3xl lg:text-4xl xl:text-2xl 2xl:text-3xl"
+        class="hero-subtitle text-muted-foreground mb-8 font-mono text-sm font-medium tracking-wide sm:text-base"
       >
         {t("hero.subtitle")}
       </p>
-      <div
-        class="hero-about space-y-4 text-base leading-relaxed text-zinc-300 sm:text-lg xl:text-base 2xl:text-lg"
+
+      <!-- The one real large-type statement — his actual proof. -->
+      <p
+        class="hero-headline text-foreground measure text-xl leading-snug font-medium text-balance sm:text-2xl xl:text-xl 2xl:text-2xl"
       >
-        <p>{t("hero.about.p1")}</p>
-        <p>{t("hero.about.p2")}</p>
-      </div>
+        {t("hero.statement")}
+      </p>
     </div>
 
-    <!-- IDE code block (desktop) -->
-    <IDEBlock t={t} variant="desktop" />
+    <div
+      class="hero-about text-muted-foreground measure space-y-4 text-base leading-relaxed"
+    >
+      <p>{t("hero.about.p1")}</p>
+      <p>{t("hero.about.p2")}</p>
+    </div>
   </div>
 
   <!-- Social links -->
-  <SocialLinks />
+  <SocialLinks t={t} />
 </div>
-
-<style>
-  .hero-headline {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  .hero-subtitle {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
-  }
-</style>

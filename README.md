@@ -2,7 +2,9 @@
 
 [![Deploy to GitHub Pages](https://github.com/franklinmdev/portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/franklinmdev/portfolio/actions/workflows/deploy.yml)
 
-A modern, high-performance portfolio website built with [Astro](https://astro.build/), [React](https://react.dev/), and [Tailwind CSS v4](https://tailwindcss.com/).
+A modern, high-performance portfolio website built with
+[Astro](https://astro.build/), [React](https://react.dev/), and
+[Tailwind CSS v4](https://tailwindcss.com/).
 
 🌐 **Live Site:** [franklinmdev.me](https://franklinmdev.me)
 
@@ -10,14 +12,16 @@ A modern, high-performance portfolio website built with [Astro](https://astro.bu
 
 - **⚡ Lightning Fast**: Built with Astro for optimal performance and minimal JavaScript
 - **🎨 Modern Design**: Responsive dark theme with smooth animations and hover effects
-- **🔧 Interactive Components**: React components for dynamic features (contact form, spotlight effect)
+- **🔧 Interactive Components**: React components for dynamic features
+  (contact form, spotlight effect)
 - **📱 Mobile First**: Perfect responsive design across all devices
 - **♿ Accessible**: WCAG compliant with proper ARIA labels and semantic HTML
 - **🌟 Visual Effects**: Interactive mouse spotlight and smooth scroll animations
 - **📧 Contact Form**: Functional contact form with validation
 - **🚀 Auto-Deploy**: Continuous deployment via GitHub Actions
 - **📈 SEO Optimized**: Meta tags, structured data, and performance optimized
-- **🛡️ Type Safety**: Strictest TypeScript configuration, no usage of `any`, and up-to-date Astro context types
+- **🛡️ Type Safety**: Strictest TypeScript configuration, no usage of
+  `any`, and up-to-date Astro context types
 
 ## 🛠️ Tech Stack
 
@@ -25,7 +29,8 @@ A modern, high-performance portfolio website built with [Astro](https://astro.bu
 - **Frontend:** [React 19](https://react.dev/) for interactive components
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) with custom theme
 - **Icons:** [Lucide React](https://lucide.dev/) for modern iconography
-- **UI Components:** Custom components with [shadcn/ui](https://ui.shadcn.com/) setup
+- **UI Components:** Custom components with
+  [shadcn/ui](https://ui.shadcn.com/) setup
 - **Code Quality:** ESLint + Prettier with Astro and TypeScript support
 - **Deployment:** GitHub Pages with custom domain
 - **CI/CD:** GitHub Actions for automated deployment
@@ -106,9 +111,9 @@ portfolio/
 │   │   ├── SocialLinks.astro      # Social links
 │   │   ├── IDEBlock.astro         # IDE code block
 │   │   └── Technologies.astro     # Tech stack display
-│   ├── content/                   # Content collections (markdown, config)
-│   │   ├── config.ts              # Zod schema for projects
+│   ├── content/
 │   │   └── projects/              # Project markdown files (en/es)
+│   ├── content.config.ts          # Content collection schema (glob loader)
 │   ├── i18n/                      # Internationalization utilities and translations
 │   │   ├── en.json                # English translations
 │   │   ├── es.json                # Spanish translations
@@ -118,8 +123,6 @@ portfolio/
 │   ├── lib/
 │   │   ├── email.ts               # EmailJS sending logic
 │   │   └── utils.ts               # Utility functions
-│   ├── middleware/
-│   │   └── index.ts               # Language detection and routing middleware
 │   ├── pages/
 │   │   ├── 404.astro              # Main 404 page (English, used for /404)
 │   │   ├── es/
@@ -130,10 +133,8 @@ portfolio/
 │   │   ├── index.astro            # Homepage (English)
 │   │   └── projects/
 │   │       └── [slug].astro       # Project detail pages (English)
-│   ├── styles/
-│   │   └── global.css             # Global styles and animations
-│   └── types/
-│       └── astro-transitions.d.ts # Type definitions for Astro transitions
+│   └── styles/
+│       └── global.css             # Global styles and animations
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml             # GitHub Actions deployment
@@ -141,29 +142,33 @@ portfolio/
 ├── components.json                # shadcn/ui configuration
 ├── eslint.config.js               # ESLint configuration
 ├── tsconfig.json                  # TypeScript configuration (strictest)
-├── TODO.md                        # Development task tracking
 └── LICENSE                        # MIT License
 ```
 
 ## 🛡️ Type Safety & Code Comments
 
-- **Strict TypeScript**: The entire codebase uses the strictest TypeScript settings. All context and helper functions are fully typed—no usage of `any` remains.
-- **Astro Middleware**: Middleware and helpers use up-to-date Astro types (e.g., `MiddlewareHandler`), ensuring type safety for all context and cookies operations.
-- **i18n Utilities**: All translation utilities are type-safe, with translation keys and language codes strictly typed.
-- **Commenting Best Practices**: Only concise, essential comments are present. All unnecessary, verbose, or AI-generated comments have been removed. Comments are used only to clarify non-obvious logic or configuration.
+- **Strict TypeScript**: The entire codebase uses the strictest
+  TypeScript settings. All context and helper functions are fully
+  typed—no usage of `any` remains.
+- **i18n Utilities**: All translation utilities are type-safe, with
+  translation keys and language codes strictly typed.
+- **Commenting Best Practices**: Only concise, essential comments are
+  present. All unnecessary, verbose, or AI-generated comments have been
+  removed. Comments are used only to clarify non-obvious logic or
+  configuration.
 
 ## 🎨 Design System
 
 ### Color Palette
 
-- **Background**: Deep slate (`#0f172a`) with noise texture overlay
+- **Background**: Near-black (`#111111`) with a subtle noise texture overlay
 - **Text**: High contrast whites and grays for excellent readability
-- **Accents**: Blue gradient (`#3b82f6` → `#2563eb`) for CTAs and highlights
+- **Accents**: Violet (`#7c3aed` / `#a78bfa`) for CTAs and highlights
 - **Interactive**: Violet hover states (`#7c3aed`) for enhanced UX
 
 ### Typography
 
-- **Primary**: System font stack optimized for performance
+- **Primary**: Inter, self-hosted via `@fontsource` for performance
 - **Code**: Fira Code for syntax highlighting in IDE blocks
 
 ### Components
@@ -178,7 +183,8 @@ portfolio/
 
 ### Automatic Deployment
 
-This site automatically deploys to GitHub Pages when changes are pushed to the `main` branch using GitHub Actions.
+This site automatically deploys to GitHub Pages when changes are pushed
+to the `main` branch using GitHub Actions.
 
 ### Custom Domain Setup
 
@@ -207,13 +213,17 @@ This site automatically deploys to GitHub Pages when changes are pushed to the `
 
 ### Architecture Decisions
 
-- **Astro Islands**: React components are hydrated only when needed (`client:load`, `client:idle`)
-- **CSS-in-CSS**: Tailwind utility classes with custom CSS for complex animations
-- **Component Organization**: Clear separation between Astro (static) and React (interactive) components
+- **Astro Islands**: React components are hydrated only when needed
+  (`client:idle`, `client:visible`)
+- **CSS-in-CSS**: Tailwind utility classes with custom CSS for complex
+  animations
+- **Component Organization**: Clear separation between Astro (static)
+  and React (interactive) components
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the
+[LICENSE](LICENSE) file for details.
 
 ## 🔗 Links
 
@@ -224,4 +234,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Built with ❤️ using [Astro](https://astro.build/), [React](https://react.dev/), and [Tailwind CSS](https://tailwindcss.com/) by Franklin Martinez
+Built with ❤️ using [Astro](https://astro.build/),
+[React](https://react.dev/), and
+[Tailwind CSS](https://tailwindcss.com/) by Franklin Martinez

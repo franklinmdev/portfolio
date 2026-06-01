@@ -5,7 +5,6 @@ description: "A modern Q&A platform built with Next.js 15 and React 19, enhanced
 challenges: "Designing a scalable MongoDB schema for complex user-question-answer relationships while integrating AI assistance without compromising performance. Working with Next.js 15 early release meant adapting to new App Router patterns with limited documentation."
 learnings: "Gained deep experience with Next.js 15, React 19, and AI integration. Learned to make AI features genuinely useful rather than gimmicky, and enhanced my NoSQL database design skills for complex relational data."
 image: "@/assets/projects/devflow-screenshot.png"
-liveUrl: "https://devflow-wheat.vercel.app/"
 githubUrl: "https://github.com/franklinmdev/devflow"
 tags:
   - "Next.js 15"
@@ -16,12 +15,13 @@ tags:
   - "AI/Groq"
   - "Tailwind CSS v4"
   - "Radix UI"
-featured: true
+featured: false
 publishDate: "2025-06-12"
 iconAsset: "@/assets/projects/devflow-logo.svg"
 ---
 
-A modern Q&A platform that combines traditional community features with AI assistance to help developers ask better questions and find solutions faster.
+A modern Q&A platform that combines traditional community features with AI
+assistance to help developers ask better questions and find solutions faster.
 
 ## Key Features
 
@@ -32,4 +32,6 @@ A modern Q&A platform that combines traditional community features with AI assis
 
 ## Technical Stack
 
-Built with Next.js 15, React 19, TypeScript, MongoDB, and Tailwind CSS v4. Features AI integration through Groq API and accessible component design with Radix UI.
+Built with Next.js 15, React 19, TypeScript, MongoDB, and Tailwind CSS v4.
+Features AI integration through Groq API and accessible component design with
+Radix UI.

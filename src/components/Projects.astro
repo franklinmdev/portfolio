@@ -3,6 +3,7 @@ import {
   createTranslations,
   getLangFromUrl,
   getLocalizedUrl,
+  getProjectSlug,
 } from "@/i18n/utils"
 import { getImage } from "astro:assets"
 import { getCollection } from "astro:content"
@@ -19,10 +20,35 @@ const projectsForCurrentLang = await Promise.all(
       const [projectLang] = project.id.split("/")
       return projectLang === lang
     })
+    // Newest first. The island then pins featured projects to the front while
+    // preserving this order, so non-featured projects read most-recent → oldest.
+    .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
     .map(async (project) => {
-      const [, ...slugParts] = project.id.split("/")
-      const slugWithExt = slugParts.join("/")
-      const slug = slugWithExt.replace(/\.md$/, "")
+      const slug = getProjectSlug(project.id)
+
+      // Island props cross the hydration boundary and must be JSON
+      // serializable. Flatten each getImage() result to plain primitives
+      // (src + numeric dimensions) instead of passing the optimization
+      // object itself, which the client prop deserializer cannot parse.
+      const icon = project.data.iconAsset
+        ? await getImage({ src: project.data.iconAsset })
+        : null
+      const shot = project.data.image
+        ? await getImage({
+            src: project.data.image,
+            width: 1280,
+            format: "webp",
+            quality: 85,
+          })
+        : null
+      const shotDark = project.data.imageDark
+        ? await getImage({
+            src: project.data.imageDark,
+            width: 1280,
+            format: "webp",
+            quality: 85,
+          })
+        : null
 
       const projectData = {
         id: slug || project.id,
@@ -32,9 +58,28 @@ const projectsForCurrentLang = await Promise.all(
           : project.data.description || "",
         featured: project.data.featured,
         href: getLocalizedUrl(`projects/${slug}`, lang),
-        ...(project.data.icon && { icon: project.data.icon }),
-        ...(project.data.iconAsset && {
-          iconAsset: await getImage({ src: project.data.iconAsset }),
+        ...(icon && {
+          iconAsset: {
+            src: icon.src,
+            width: Number(icon.attributes.width),
+            height: Number(icon.attributes.height),
+          },
+        }),
+        // Product screenshots for the horizontal project card. The dark
+        // variant, when present, is swapped in under the `.dark` class.
+        ...(shot && {
+          imageAsset: {
+            src: shot.src,
+            width: Number(shot.attributes.width),
+            height: Number(shot.attributes.height),
+          },
+        }),
+        ...(shotDark && {
+          imageAssetDark: {
+            src: shotDark.src,
+            width: Number(shotDark.attributes.width),
+            height: Number(shotDark.attributes.height),
+          },
         }),
       }
 
@@ -44,8 +89,13 @@ const projectsForCurrentLang = await Promise.all(
 
 const translations = {
   title: t("sections.projects_title"),
+  moduleLabel: t("hud.modules.projects"),
   viewAllBtn: t("projects.view_all_btn"),
   showLessBtn: t("projects.show_less_btn"),
+  openLabel: t("hud.projects.open"),
+  viewLabel: t("a11y.view_project"),
+  cardLabel: t("a11y.project_label"),
+  screenshotAlt: t("a11y.project_screenshot"),
 }
 ---
 

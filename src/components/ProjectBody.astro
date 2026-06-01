@@ -9,8 +9,8 @@ const { project, t } = Astro.props
 ---
 
 <section>
-  <h2 class="mb-4 text-2xl font-bold text-zinc-100">{t.overview}</h2>
-  <div class="space-y-4 leading-relaxed text-zinc-300">
+  <h2 class="text-foreground mb-4 text-2xl font-semibold">{t.overview}</h2>
+  <div class="text-muted-foreground space-y-4 leading-relaxed">
     {
       Array.isArray(project.data.description) ? (
         project.data.description.map((p: string) => <p>{p}</p>)
@@ -22,18 +22,24 @@ const { project, t } = Astro.props
 </section>
 
 <section>
-  <div class="prose-invert prose prose-zinc max-w-none">
+  <div class="prose max-w-none">
     <slot name="content" />
   </div>
 </section>
 
 <section class="space-y-6">
   <div>
-    <h2 class="mb-4 text-2xl font-bold text-zinc-100">{t.challenges}</h2>
-    <p class="leading-relaxed text-zinc-300">{project.data.challenges}</p>
+    <h2 class="text-foreground mb-4 text-2xl font-semibold">{t.challenges}</h2>
+    <p class="text-muted-foreground leading-relaxed">
+      {project.data.challenges}
+    </p>
   </div>
   <div>
-    <h2 class="mb-4 text-2xl font-bold text-zinc-100">{t.key_learnings}</h2>
-    <p class="leading-relaxed text-zinc-300">{project.data.learnings}</p>
+    <h2 class="text-foreground mb-4 text-2xl font-semibold">
+      {t.key_learnings}
+    </h2>
+    <p class="text-muted-foreground leading-relaxed">
+      {project.data.learnings}
+    </p>
   </div>
 </section>

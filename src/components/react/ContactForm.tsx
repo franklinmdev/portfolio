@@ -5,15 +5,20 @@ import { Textarea } from "@/components/ui/textarea"
 import { EMAILJS_CONFIG, isEmailJSConfigured } from "@/lib/email"
 import { cn } from "@/lib/utils"
 import emailjs, { EmailJSResponseStatus } from "@emailjs/browser"
-import { Loader2 } from "lucide-react"
+import { CircleNotchIcon } from "@phosphor-icons/react"
 import { useCallback, useState } from "react"
 
 interface ContactTranslations {
   title: string
   subtitle: string
+  moduleLabel: string
+  channel: string
   namePlaceholder: string
   emailPlaceholder: string
   messagePlaceholder: string
+  nameLabel: string
+  emailLabel: string
+  messageLabel: string
   sendButton: string
   sendingButton: string
   successMessage: string
@@ -36,7 +41,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [result, setResult] = useState("")
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
   const validateForm = useCallback(() => {
     const newErrors: Record<string, string> = {}
@@ -78,7 +83,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
   )
 
   const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
+    async (e: React.SyntheticEvent) => {
       e.preventDefault()
 
       if (!validateForm()) {
@@ -89,7 +94,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
         console.error(
           "EmailJS is not properly configured. Check your environment variables."
         )
-        setResult(translations.errorMessage)
+        setStatus("error")
         return
       }
 
@@ -108,12 +113,12 @@ export default function ContactForm({ translations }: ContactFormProps) {
           { publicKey: EMAILJS_CONFIG.publicKey }
         )
 
-        setResult(translations.successMessage)
+        setStatus("success")
         setFormData({ name: "", email: "", message: "" })
         setErrors({})
 
         setTimeout(() => {
-          setResult("")
+          setStatus("idle")
         }, 5000)
       } catch (error) {
         if (error instanceof EmailJSResponseStatus) {
@@ -121,54 +126,69 @@ export default function ContactForm({ translations }: ContactFormProps) {
         } else {
           console.error(error)
         }
-        setResult(translations.errorMessage)
+        setStatus("error")
 
         setTimeout(() => {
-          setResult("")
+          setStatus("idle")
         }, 5000)
       } finally {
         setIsSubmitting(false)
       }
     },
-    [
-      formData,
-      translations.errorMessage,
-      translations.successMessage,
-      validateForm,
-    ]
+    [formData, validateForm]
   )
 
   return (
     <section id="contact" className="scroll-mt-24 py-8 lg:py-12">
-      <div className="mb-8 text-center">
-        <h2 className="mb-3 text-2xl font-bold tracking-tight text-zinc-100">
+      <div className="mb-8 flex flex-col items-center text-center">
+        <span className="module-label">{translations.moduleLabel}</span>
+        <h2 className="module-title text-foreground mt-3 mb-3">
           {translations.title}
         </h2>
-        <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+        <p className="text-muted-foreground measure mx-auto text-sm leading-relaxed sm:text-base">
           {translations.subtitle}
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="mx-auto max-w-2xl">
-        {result && (
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="panel mx-auto max-w-2xl p-5 sm:p-6"
+      >
+        <div className="panel-header text-muted-foreground -mx-5 -mt-5 mb-5 sm:-mx-6 sm:-mt-6">
+          <span className="inline-flex items-center gap-2">
+            <span className="status-dot" />
+            <span>{translations.channel}</span>
+          </span>
+        </div>
+
+        {status !== "idle" && (
           <div
             role="status"
             aria-live="polite"
             className={cn(
-              "mb-4 text-center text-sm",
-              result.includes("error") || result.includes("Sorry")
-                ? "text-red-400"
-                : "text-green-400"
+              "mb-4 text-center font-mono text-sm",
+              status === "error" ? "text-alert" : "text-primary"
             )}
           >
-            {result}
+            {status === "error" ? (
+              translations.errorMessage
+            ) : (
+              <span className="inline-flex items-center">
+                <span className="text-muted-foreground mr-1.5 select-none">
+                  &gt;
+                </span>
+                {translations.successMessage}
+                <span className="caret" aria-hidden="true" />
+              </span>
+            )}
           </div>
         )}
 
         <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <Label htmlFor="name" className="sr-only">
-              Name
+              {translations.nameLabel}
             </Label>
             <Input
               type="text"
@@ -177,19 +197,23 @@ export default function ContactForm({ translations }: ContactFormProps) {
               required
               value={formData.name}
               onChange={handleChange}
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? "name-error" : undefined}
               className={cn(
                 "form-input py-5 md:h-10 md:px-4 md:text-base lg:h-11 lg:px-4",
-                errors.name && "!border-red-500 !ring-red-500/20"
+                errors.name && "!border-alert !ring-alert/20"
               )}
               placeholder={translations.namePlaceholder}
             />
             {errors.name && (
-              <p className="mt-1 text-sm text-red-400">{errors.name}</p>
+              <p id="name-error" className="text-alert mt-1 text-sm">
+                {errors.name}
+              </p>
             )}
           </div>
           <div>
             <Label htmlFor="email" className="sr-only">
-              Email
+              {translations.emailLabel}
             </Label>
             <Input
               type="email"
@@ -198,21 +222,25 @@ export default function ContactForm({ translations }: ContactFormProps) {
               required
               value={formData.email}
               onChange={handleChange}
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? "email-error" : undefined}
               className={cn(
                 "form-input py-5 md:h-10 md:px-4 md:text-base lg:h-11 lg:px-4",
-                errors.email && "!border-red-500 !ring-red-500/20"
+                errors.email && "!border-alert !ring-alert/20"
               )}
               placeholder={translations.emailPlaceholder}
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-400">{errors.email}</p>
+              <p id="email-error" className="text-alert mt-1 text-sm">
+                {errors.email}
+              </p>
             )}
           </div>
         </div>
 
         <div className="mb-6">
           <Label htmlFor="message" className="sr-only">
-            Message
+            {translations.messageLabel}
           </Label>
           <Textarea
             id="message"
@@ -221,14 +249,18 @@ export default function ContactForm({ translations }: ContactFormProps) {
             required
             value={formData.message}
             onChange={handleChange}
+            aria-invalid={!!errors.message}
+            aria-describedby={errors.message ? "message-error" : undefined}
             className={cn(
               "form-textarea pt-3 md:min-h-24 md:px-4 md:text-base lg:min-h-28 lg:px-4",
-              errors.message && "!border-red-500 !ring-red-500/20"
+              errors.message && "!border-alert !ring-alert/20"
             )}
             placeholder={translations.messagePlaceholder}
           />
           {errors.message && (
-            <p className="mt-1 text-sm text-red-400">{errors.message}</p>
+            <p id="message-error" className="text-alert mt-1 text-sm">
+              {errors.message}
+            </p>
           )}
         </div>
 
@@ -241,7 +273,10 @@ export default function ContactForm({ translations }: ContactFormProps) {
           >
             {isSubmitting ? (
               <div className="flex items-center gap-2">
-                <Loader2 className="size-4 animate-spin" />
+                <CircleNotchIcon
+                  className="size-4 animate-spin"
+                  weight="bold"
+                />
                 {translations.sendingButton}
               </div>
             ) : (

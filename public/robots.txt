@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://franklinmdev.me/sitemap-index.xml

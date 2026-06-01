@@ -1,6 +1,8 @@
 ---
 import ProjectPage from "@/components/ProjectPage.astro"
+import { getProjectSlug } from "@/i18n/utils"
 import Layout from "@/layouts/Layout.astro"
+import { getProjectMetaDescription } from "@/lib/utils"
 import { getCollection, render } from "astro:content"
 
 export async function getStaticPaths() {
@@ -9,8 +11,7 @@ export async function getStaticPaths() {
   )
 
   return esProjects.map((project) => {
-    // The slug for es/devflow.md should be "devflow"
-    const slug = project.slug.slice(3) // "es/".length
+    const slug = getProjectSlug(project.id)
 
     return {
       params: { slug },
@@ -23,9 +24,7 @@ const { project } = Astro.props
 const { Content } = await render(project)
 
 const pageTitle = `${project.data.title} - Franklin Martinez`
-const pageDescription = Array.isArray(project.data.description)
-  ? (project.data.description[0] ?? "")
-  : (project.data.description as string)
+const pageDescription = getProjectMetaDescription(project.data.description)
 
 const pageImage = project.data.image
 
@@ -35,10 +34,14 @@ const lang = "es"
 <Layout
   title={pageTitle}
   description={pageDescription}
-  image={{
-    url: pageImage.src,
-    alt: `Captura de pantalla de ${project.data.title}`,
-  }}
+  {...pageImage
+    ? {
+        image: {
+          url: pageImage.src,
+          alt: `Captura de pantalla de ${project.data.title}`,
+        },
+      }
+    : {}}
 >
   <ProjectPage project={project} lang={lang}>
     <Fragment slot="content">
