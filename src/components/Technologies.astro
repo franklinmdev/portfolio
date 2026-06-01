@@ -3,34 +3,61 @@ import { createTranslations, getLangFromUrl } from "@/i18n/utils"
 
 const lang = getLangFromUrl(Astro.url)
 const t = createTranslations(lang)
+
+interface TechGroup {
+  readonly labelKey: string
+  readonly items: readonly string[]
+}
+
+// Grouped by competency rather than a flat tag wall. Tech names are product
+// names — not translated. Group labels come from i18n.
+const techGroups: readonly TechGroup[] = [
+  {
+    labelKey: "tech.groups.languages",
+    items: ["TypeScript", "JavaScript", "C#", "Python", "SQL"],
+  },
+  {
+    labelKey: "tech.groups.frontend",
+    items: ["React", "Next.js", "Astro", "Tailwind CSS"],
+  },
+  {
+    labelKey: "tech.groups.backend",
+    items: [
+      "Node.js",
+      "NestJS",
+      ".NET",
+      "PostgreSQL",
+      "SQL Server",
+      "Prisma",
+      "REST APIs",
+    ],
+  },
+  {
+    labelKey: "tech.groups.workflow",
+    items: ["Git", "Jest", "Figma", "Vercel", "Claude Code"],
+  },
+] as const
 ---
 
 <section id="technologies" class="scroll-mt-24">
   <span class="module-label">{t("hud.modules.tech")}</span>
-  <h2 class="module-title text-foreground mt-3 mb-6">
+  <h2 class="module-title text-foreground mt-3 mb-8">
     {t("sections.tech_title")}
   </h2>
-  <div class="flex max-w-5xl flex-wrap items-center justify-start gap-2.5">
-    <span class="tech-tag">React & Next.js</span>
-    <span class="tech-tag">TypeScript</span>
-    <span class="tech-tag">JavaScript</span>
-    <span class="tech-tag">Node.js</span>
-    <span class="tech-tag">C# & .NET</span>
-    <span class="tech-tag">HTML5 & CSS3</span>
-    <span class="tech-tag">Tailwind CSS</span>
-    <span class="tech-tag">SQL Server</span>
-    <span class="tech-tag">MongoDB</span>
-    <span class="tech-tag">REST APIs</span>
-    <span class="tech-tag">Claude Code</span>
-    <span class="tech-tag">Gemini</span>
-    <span class="tech-tag">OpenCode</span>
-    <span class="tech-tag">Cursor</span>
-    <span class="tech-tag">Git & GitHub</span>
-    <span class="tech-tag">Jest</span>
-    <span class="tech-tag">Figma</span>
-    <span class="tech-tag">Notion</span>
-    <span class="tech-tag">Vercel</span>
-    <span class="tech-tag">Netlify</span>
-    <span class="tech-tag">Astro</span>
+  <div class="max-w-5xl space-y-6">
+    {
+      techGroups.map((group) => (
+        <div>
+          <p class="text-muted-foreground mb-3 font-mono text-xs font-medium tracking-wide uppercase">
+            {t(group.labelKey)}
+          </p>
+          <div class="flex flex-wrap items-center gap-2.5">
+            {group.items.map((tech) => (
+              <span class="tech-tag">{tech}</span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
   </div>
 </section>

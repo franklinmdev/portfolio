@@ -34,10 +34,14 @@ const lang = "es"
 <Layout
   title={pageTitle}
   description={pageDescription}
-  image={{
-    url: pageImage.src,
-    alt: `Captura de pantalla de ${project.data.title}`,
-  }}
+  {...pageImage
+    ? {
+        image: {
+          url: pageImage.src,
+          alt: `Captura de pantalla de ${project.data.title}`,
+        },
+      }
+    : {}}
 >
   <ProjectPage project={project} lang={lang}>
     <Fragment slot="content">

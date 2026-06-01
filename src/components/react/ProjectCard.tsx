@@ -16,9 +16,10 @@ interface ProjectCardProps {
   viewLabel: string
   /** Accessible label for the non-link card, "{title}" replaced. */
   cardLabel: string
-  /** Featured cards render the product screenshot as an editorial feature. */
-  featured?: boolean
+  /** Light-theme product screenshot. When absent, the icon is shown instead. */
   screenshot?: string | undefined
+  /** Dark-theme screenshot, swapped in under the `.dark` class. */
+  screenshotDark?: string | undefined
   screenshotAlt?: string
   href?: string
   className?: string
@@ -33,8 +34,8 @@ function ProjectCard({
   openLabel,
   viewLabel,
   cardLabel,
-  featured = false,
   screenshot,
+  screenshotDark,
   screenshotAlt = "",
   href,
   className = "",
@@ -42,7 +43,7 @@ function ProjectCard({
 }: ProjectCardProps) {
   const baseProps: HTMLAttributes<HTMLElement> = {
     className: [
-      "panel group block cursor-pointer overflow-hidden",
+      "panel group flex flex-col overflow-hidden sm:min-h-[13rem] sm:flex-row",
       "transition-all duration-300 ease-out",
       "hover:-translate-y-1 hover:border-primary/40",
       isHidden ? "hidden" : "",
@@ -59,8 +60,8 @@ function ProjectCard({
       icon={icon}
       iconColor={iconColor}
       openLabel={openLabel}
-      featured={featured}
       screenshot={screenshot}
+      screenshotDark={screenshotDark}
       screenshotAlt={screenshotAlt}
     />
   )
@@ -93,8 +94,8 @@ function ProjectCardContent({
   icon,
   iconColor,
   openLabel,
-  featured,
   screenshot,
+  screenshotDark,
   screenshotAlt,
 }: Pick<
   ProjectCardProps,
@@ -103,35 +104,64 @@ function ProjectCardContent({
   | "icon"
   | "iconColor"
   | "openLabel"
-  | "featured"
   | "screenshot"
+  | "screenshotDark"
   | "screenshotAlt"
 >) {
+  const hasScreenshot = Boolean(screenshot)
+
   return (
     <>
-      {featured && screenshot && (
-        <div className="border-border bg-secondary aspect-[16/9] w-full overflow-hidden border-b">
+      {/* Media rail: product screenshot, or the project icon framed as a
+          tile (matching the project page's icon treatment). */}
+      {hasScreenshot ? (
+        <div className="border-border bg-secondary relative aspect-[16/10] w-full shrink-0 overflow-hidden border-b sm:aspect-auto sm:w-2/5 sm:border-r sm:border-b-0">
           <img
             src={screenshot}
             alt={screenshotAlt ?? ""}
-            className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            className={`absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02] ${
+              screenshotDark ? "dark:hidden" : ""
+            }`}
             loading="lazy"
             decoding="async"
           />
+          {screenshotDark && (
+            <img
+              src={screenshotDark}
+              alt={screenshotAlt ?? ""}
+              className="absolute inset-0 hidden h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02] dark:block"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+        </div>
+      ) : (
+        <div className="border-border flex w-full shrink-0 items-center justify-center border-b p-8 sm:w-2/5 sm:border-r sm:border-b-0">
+          <div className="icon-container">
+            <div
+              className={`size-12 sm:size-14 ${iconColor}`}
+              aria-hidden="true"
+            >
+              {icon}
+            </div>
+          </div>
         </div>
       )}
 
-      <div className="p-5 sm:p-6">
-        <div className="mb-4 flex items-center justify-between gap-3">
+      {/* Content */}
+      <div className="flex flex-1 flex-col justify-center p-5 sm:p-6">
+        <div className="mb-3 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="icon-container shrink-0">
-              <div
-                className={`size-5 sm:size-6 ${iconColor}`}
-                aria-hidden="true"
-              >
-                {icon}
+            {hasScreenshot && (
+              <div className="icon-container shrink-0">
+                <div
+                  className={`size-5 sm:size-6 ${iconColor}`}
+                  aria-hidden="true"
+                >
+                  {icon}
+                </div>
               </div>
-            </div>
+            )}
             <h3 className="text-foreground group-hover:text-primary text-lg leading-tight font-semibold transition-colors sm:text-xl">
               {title}
             </h3>

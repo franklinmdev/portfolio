@@ -10,6 +10,7 @@ interface Project {
   description: string
   iconAsset?: { src: string; width?: number; height?: number }
   imageAsset?: { src: string; width?: number; height?: number }
+  imageAssetDark?: { src: string; width?: number; height?: number }
   featured: boolean
   href: string
 }
@@ -76,14 +77,7 @@ function ProjectsSection({ projects, translations }: ProjectsSectionProps) {
     setShowAll((prev) => !prev)
   }, [])
 
-  // Below three visible cards there is no second column to fill, so a forced
-  // two-up grid leaves an empty cell. Stack a single left-aligned column
-  // instead; only fan out to two columns once a row can actually be filled.
-  const isSparse = visibleProjects.length < 3
-  const gridClass = isSparse
-    ? "grid grid-cols-1 gap-6"
-    : "grid grid-cols-1 gap-5 sm:grid-cols-2"
-
+  // One project per row: full-width horizontal cards, no two-up grid.
   return (
     <section id="projects" className="scroll-mt-24 py-8 lg:py-12">
       <span className="module-label">{translations.moduleLabel}</span>
@@ -91,7 +85,7 @@ function ProjectsSection({ projects, translations }: ProjectsSectionProps) {
         {translations.title}
       </h2>
 
-      <div className={gridClass}>
+      <div className="flex flex-col gap-6">
         {visibleProjects.map((project) => (
           <ProjectCard
             key={project.id}
@@ -100,8 +94,8 @@ function ProjectsSection({ projects, translations }: ProjectsSectionProps) {
             icon={parseIcon(project)}
             iconColor="text-muted-foreground"
             href={project.href}
-            featured={project.featured}
             screenshot={project.imageAsset?.src}
+            screenshotDark={project.imageAssetDark?.src}
             screenshotAlt={translations.screenshotAlt.replace(
               "{title}",
               project.title
@@ -121,7 +115,12 @@ function ProjectsSection({ projects, translations }: ProjectsSectionProps) {
               icon={parseIcon(project)}
               iconColor="text-muted-foreground"
               href={project.href}
-              featured={project.featured}
+              screenshot={project.imageAsset?.src}
+              screenshotDark={project.imageAssetDark?.src}
+              screenshotAlt={translations.screenshotAlt.replace(
+                "{title}",
+                project.title
+              )}
               openLabel={translations.openLabel}
               viewLabel={translations.viewLabel}
               cardLabel={translations.cardLabel}

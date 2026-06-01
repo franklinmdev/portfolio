@@ -35,7 +35,14 @@ const lang = getLangFromUrl(Astro.url)
 <Layout
   title={pageTitle}
   description={pageDescription}
-  image={{ url: pageImage.src, alt: `Screenshot of ${project.data.title}` }}
+  {...pageImage
+    ? {
+        image: {
+          url: pageImage.src,
+          alt: `Screenshot of ${project.data.title}`,
+        },
+      }
+    : {}}
 >
   <ProjectPage project={project} lang={lang}>
     <Fragment slot="content">

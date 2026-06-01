@@ -7,6 +7,14 @@
   "rail": {
     "stack": "Stack"
   },
+  "tech": {
+    "groups": {
+      "languages": "Lenguajes",
+      "frontend": "Frontend",
+      "backend": "Backend y datos",
+      "workflow": "Flujo de trabajo"
+    }
+  },
   "hud": {
     "status": {
       "theme_deck": "Consola",
@@ -29,11 +37,11 @@
     }
   },
   "hero": {
-    "subtitle": "Ingeniero full-stack de IA",
-    "statement": "Construí una plataforma empresarial de gestión administrativa de 29 módulos y 225 endpoints — solo, en 8 días laborables.",
+    "subtitle": "Ingeniero full-stack",
+    "statement": "Construyo productos de principio a fin, desde la base de datos hasta la pantalla. Últimamente eso ha sido software fiscal y de cumplimiento para el mercado dominicano.",
     "about": {
-      "p1": "Crecí desarmando cosas para ver cómo funcionaban. Ahora las construyo: sistemas full-stack que son limpios, escalables y potenciados por IA.",
-      "p2": "Me gusta trabajar donde la ingeniería sólida se encuentra con la IA. Cuando no estoy construyendo sistemas de punta a punta, estoy integrando herramientas de IA en el flujo del equipo o ayudando a otros devs a crecer. El software es un deporte de equipo, y me encanta ser parte."
+      "p1": "Crecí desarmando cosas para ver cómo funcionaban, y construyo software de la misma forma. Empiezo por el problema y por las personas que de verdad lo tienen, y dejo que eso decida el resto.",
+      "p2": "La mayor parte de lo que construyo tiene que ver con reglas del mundo real bastante enredadas, como impuestos, cumplimiento y operaciones internas, donde acertar en los detalles pequeños importa más que el stack. También ayudo a mi equipo a sacarle provecho real a las herramientas de IA, y acompaño a los desarrolladores junior que tengo cerca."
     }
   },
   "sections": {
@@ -47,13 +55,13 @@
       "date": "Febrero 2026 - Presente",
       "title": "Ingeniero Full-Stack AI,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Llevo proyectos de principio a fin como Ingeniero Full-Stack AI. Construí una plataforma empresarial de gestión administrativa por mi cuenta: 29 módulos de backend, 225 endpoints, lógica presupuestaria multi-moneda con flujos de aprobación y todo el frontend, en 8 días laborables. Impulsé la adopción de herramientas de IA (incluyendo Claude Code) en el equipo, lo cual marcó una diferencia real en productividad. También manejo reportes con Fast Reports y mentorizo pasantes y devs junior."
+      "desc": "Soy dueño de los productos de principio a fin, del modelo de datos al frontend. Construyo una plataforma de gestión financiera que vendemos a nuestros clientes, con lógica presupuestaria multi-moneda y flujos de aprobación, y la sigo manteniendo y ampliando a medida que crece. También me encargo de las integraciones más difíciles, como proveedores de pago tipo Lemon Squeezy. Además, lidero cómo el equipo adopta herramientas de IA como Claude Code, y acompaño a nuestros pasantes y desarrolladores junior."
     },
     "exp2": {
       "date": "Abril 2023 - Febrero 2026",
       "title": "Desarrollador de Software,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Colaboré activamente en un sistema de diseño unificado, mentoricé desarrolladores junior y optimicé las capas de datos de la aplicación para mejorar el rendimiento y la experiencia de usuario."
+      "desc": "Ayudé a construir un sistema de diseño compartido que se usa en los productos de la empresa, ajusté las capas de datos para que la interfaz se sintiera más rápida y fluida, y acompañé a desarrolladores junior."
     }
   },
   "projects": {
@@ -68,8 +76,6 @@
     "links": "Enlaces",
     "view_live": "Ver proyecto en vivo",
     "view_source": "Ver código fuente",
-    "featured_project": "Proyecto destacado",
-    "featured_description": "Este proyecto muestra habilidades de desarrollo avanzadas y mejores prácticas.",
     "work_together": "Trabajemos juntos"
   },
   "contact": {

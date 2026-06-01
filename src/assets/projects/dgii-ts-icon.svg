@@ -1,0 +1,12 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dgiiTile" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3B82F6" />
+      <stop offset="1" stop-color="#1E3A8A" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="url(#dgiiTile)" />
+  <path d="M24 8.5 36 12.7 V24.4 C36 31.4 30.7 37.1 24 39.5 C17.3 37.1 12 31.4 12 24.4 V12.7 Z" fill="#FFFFFF" fill-opacity="0.14" />
+  <path d="M24 8.5 36 12.7 V24.4 C36 31.4 30.7 37.1 24 39.5 C17.3 37.1 12 31.4 12 24.4 V12.7 Z" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1.5" stroke-linejoin="round" />
+  <path d="M18.5 24 22.5 28 30 19.5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

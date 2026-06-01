@@ -24,6 +24,8 @@ const url = (hash: string) => `${baseUrl}${hash}`
 const projectsUrl = url("#projects")
 const contactUrl = url("#contact")
 const pageImage = project.data.image
+const pageImageDark = project.data.imageDark
+const screenshotAlt = `${lang === "es" ? "Captura de pantalla de" : "Screenshot of"} ${project.data.title}`
 ---
 
 <main
@@ -37,21 +39,44 @@ const pageImage = project.data.image
       projectsUrl={projectsUrl}
     />
 
-    <div class="panel mb-12 overflow-hidden">
-      <Picture
-        src={pageImage}
-        formats={["avif", "webp", "jpeg"]}
-        alt={`${lang === "es" ? "Captura de pantalla de" : "Screenshot of"} ${project.data.title}`}
-        class="h-auto w-full"
-        width={1600}
-        layout="constrained"
-        widths={[320, 640, 768, 1024, 1200, 1600]}
-        quality={80}
-        sizes="(max-width: 768px) 100vw, 768px"
-        loading="eager"
-        fetchpriority="high"
-      />
-    </div>
+    {
+      pageImage && (
+        <div class="panel mb-12 overflow-hidden">
+          <div class={pageImageDark ? "dark:hidden" : ""}>
+            <Picture
+              src={pageImage}
+              formats={["avif", "webp", "png"]}
+              alt={screenshotAlt}
+              class="h-auto w-full"
+              width={1600}
+              layout="constrained"
+              widths={[320, 640, 768, 1024, 1200, 1600]}
+              quality={85}
+              sizes="(max-width: 1024px) 100vw, 768px"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+          {pageImageDark && (
+            <div class="hidden dark:block">
+              <Picture
+                src={pageImageDark}
+                formats={["avif", "webp", "png"]}
+                alt={screenshotAlt}
+                class="h-auto w-full"
+                width={1600}
+                layout="constrained"
+                widths={[320, 640, 768, 1024, 1200, 1600]}
+                quality={85}
+                sizes="(max-width: 1024px) 100vw, 768px"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </div>
+          )}
+        </div>
+      )
+    }
 
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
       <div class="space-y-8 lg:col-span-2">

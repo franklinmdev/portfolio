@@ -20,6 +20,9 @@ const projectsForCurrentLang = await Promise.all(
       const [projectLang] = project.id.split("/")
       return projectLang === lang
     })
+    // Newest first. The island then pins featured projects to the front while
+    // preserving this order, so non-featured projects read most-recent → oldest.
+    .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
     .map(async (project) => {
       const slug = getProjectSlug(project.id)
 
@@ -30,14 +33,22 @@ const projectsForCurrentLang = await Promise.all(
       const icon = project.data.iconAsset
         ? await getImage({ src: project.data.iconAsset })
         : null
-      const shot =
-        project.data.featured && project.data.image
-          ? await getImage({
-              src: project.data.image,
-              width: 1280,
-              format: "webp",
-            })
-          : null
+      const shot = project.data.image
+        ? await getImage({
+            src: project.data.image,
+            width: 1280,
+            format: "webp",
+            quality: 85,
+          })
+        : null
+      const shotDark = project.data.imageDark
+        ? await getImage({
+            src: project.data.imageDark,
+            width: 1280,
+            format: "webp",
+            quality: 85,
+          })
+        : null
 
       const projectData = {
         id: slug || project.id,
@@ -54,13 +65,20 @@ const projectsForCurrentLang = await Promise.all(
             height: Number(icon.attributes.height),
           },
         }),
-        // Featured projects carry a real product screenshot for the
-        // editorial-feature card on the home deck.
+        // Product screenshots for the horizontal project card. The dark
+        // variant, when present, is swapped in under the `.dark` class.
         ...(shot && {
           imageAsset: {
             src: shot.src,
             width: Number(shot.attributes.width),
             height: Number(shot.attributes.height),
+          },
+        }),
+        ...(shotDark && {
+          imageAssetDark: {
+            src: shotDark.src,
+            width: Number(shotDark.attributes.width),
+            height: Number(shotDark.attributes.height),
           },
         }),
       }

@@ -7,6 +7,14 @@
   "rail": {
     "stack": "Stack"
   },
+  "tech": {
+    "groups": {
+      "languages": "Languages",
+      "frontend": "Frontend",
+      "backend": "Backend & data",
+      "workflow": "Workflow"
+    }
+  },
   "hud": {
     "status": {
       "theme_deck": "Deck",
@@ -29,11 +37,11 @@
     }
   },
   "hero": {
-    "subtitle": "Full-stack AI engineer",
-    "statement": "Built a 29-module, 225-endpoint enterprise admin platform — solo, in 8 business days.",
+    "subtitle": "Full-stack engineer",
+    "statement": "I build products end to end, from the database to the screen. Lately that's been tax and compliance software for the Dominican market.",
     "about": {
-      "p1": "I grew up taking things apart to see how they worked. Now I put them together, building full-stack systems that are clean, scalable, and powered by AI.",
-      "p2": "I like working where solid engineering meets AI. When I'm not shipping end-to-end features, I'm bringing AI tools into our dev workflow or helping teammates level up. Software is a team sport, and I love being part of it."
+      "p1": "I grew up taking things apart to see how they worked, and I build software the same way. I start with the problem and the people who actually have it, and let that decide the rest.",
+      "p2": "Most of what I build deals with messy real-world rules like taxes, compliance, and internal operations, where getting the small details right matters more than the tech stack. I also help my team adopt AI tools in a way that actually pays off, and I mentor the junior developers around me."
     }
   },
   "sections": {
@@ -47,13 +55,13 @@
       "date": "February 2026 - Present",
       "title": "Full-Stack AI Engineer,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "I own projects end to end as a Full-Stack AI Engineer. Built an enterprise admin platform on my own: 29 backend modules, 225 endpoints, multi-currency budgeting with approval flows, and the full frontend, all in 8 business days. Drove adoption of AI tools (including Claude Code) across the team, which made a real difference in productivity. I also handle reporting with Fast Reports and mentor interns and junior devs."
+      "desc": "I own products end to end, from the data model to the frontend. I build a commercial financial-management platform that we sell to clients, including multi-currency budgeting with approval workflows, and I keep maintaining and extending it as it grows. I also take on the harder integrations, like payment providers such as Lemon Squeezy. On top of that, I lead how the team adopts AI tools like Claude Code, and I mentor our interns and junior developers."
     },
     "exp2": {
       "date": "April 2023 - February 2026",
       "title": "Software Developer,",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Played a key role in building a unified design system, mentored junior developers, and optimized application data layers to improve performance and responsiveness."
+      "desc": "I helped build a shared design system used across the company's products, tuned the app's data layers so the interface felt faster and more responsive, and mentored junior developers."
     }
   },
   "projects": {
@@ -68,8 +76,6 @@
     "links": "Links",
     "view_live": "View live project",
     "view_source": "View source code",
-    "featured_project": "Featured project",
-    "featured_description": "This project showcases advanced development skills and best practices.",
     "work_together": "Let's work together"
   },
   "contact": {
