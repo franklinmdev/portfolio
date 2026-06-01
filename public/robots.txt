@@ -1,4 +1,7 @@
+# AI content preferences declared via Content Signals (https://contentsignals.org)
+# search: allow indexing. ai-input: let agents read and cite this site. ai-train: not training data.
 User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 
 Sitemap: https://franklinmdev.me/sitemap-index.xml
