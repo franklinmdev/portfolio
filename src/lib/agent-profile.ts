@@ -25,7 +25,7 @@ export const agentProfile: AgentProfile = {
   role: "Full-Stack AI Engineer at Nubeteck",
   location: "Santiago, Dominican Republic",
   summary:
-    "Full-stack AI engineer who takes a PRD and ships complete web applications end to end: data model, backend, API, and a UI that non-technical users can actually use. Claude Code is a daily driver.",
+    "Full-stack AI engineer who takes a PRD and ships complete web applications end to end: data model, backend, API, and a UI that non-technical users can actually use. Claude Code, Cursor CLI, Antigravity CLI, and Codex are daily drivers.",
   howIWork: [
     "From PRD to shipped product: written research and a plan go in, a working product and a QA guide come out, with little back-and-forth.",
     "Quality is enforced, not hoped for: codified rules and edit hooks typecheck, lint, and validate every change before it lands.",
@@ -44,7 +44,16 @@ export const agentProfile: AgentProfile = {
       "Entity Framework",
       "REST APIs",
     ],
-    Workflow: ["Jest", "Playwright", "CI/CD", "Vercel", "Claude Code"],
+    Workflow: [
+      "Jest",
+      "Playwright",
+      "CI/CD",
+      "Vercel",
+      "Claude Code",
+      "Cursor CLI",
+      "Antigravity CLI",
+      "Codex",
+    ],
   },
   projects: [
     {
