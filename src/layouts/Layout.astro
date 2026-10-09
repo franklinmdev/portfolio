@@ -17,9 +17,17 @@ export interface Props {
     url: string
     alt: string
   }
+  /** Set false for pages that exist in one language only. */
+  translated?: boolean
 }
 
-const { title, description, publishDate, image } = Astro.props
+const {
+  title,
+  description,
+  publishDate,
+  image,
+  translated = true,
+} = Astro.props
 const lang = getLangFromUrl(Astro.url)
 
 const ogImageUrl = image?.url
@@ -100,9 +108,15 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
 
     <!-- hreflang alternate links -->
-    <link rel="alternate" hreflang="en" href={enHref} />
-    <link rel="alternate" hreflang="es" href={esHref} />
-    <link rel="alternate" hreflang="x-default" href={enHref} />
+    {
+      translated && (
+        <>
+          <link rel="alternate" hreflang="en" href={enHref} />
+          <link rel="alternate" hreflang="es" href={esHref} />
+          <link rel="alternate" hreflang="x-default" href={enHref} />
+        </>
+      )
+    }
 
     <!-- Standard OG/Twitter tags -->
     <meta property="og:title" content={title} />

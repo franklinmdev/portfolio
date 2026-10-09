@@ -1,0 +1,54 @@
+---
+import Layout from "@/layouts/Layout.astro"
+
+const email = "franklinmdev@hotmail.com"
+---
+
+<Layout
+  title="Privacy policy for rclone | Franklin Martinez"
+  description="Privacy policy for rclone, a personal Google Cloud OAuth app used only to back up my own files to my own Google Drive."
+  translated={false}
+>
+  <main class="px-4 pt-24 pb-16 sm:pt-32 sm:pb-24">
+    <article class="measure mx-auto">
+      <h1 class="module-title text-foreground">Privacy policy for rclone</h1>
+      <p class="text-muted-foreground mt-3 text-sm">
+        Last updated <time datetime="2026-10-09">October 9, 2026</time>
+      </p>
+
+      <div class="prose mt-8">
+        <p>
+          "rclone" is a Google Cloud OAuth app that I, Franklin Martinez, set up
+          for my own personal use. It is not offered to anyone else, and I am
+          its only user.
+        </p>
+
+        <h2>What it accesses</h2>
+        <p>
+          The app accesses my own Google Drive solely to upload and sync my own
+          backup files.
+        </p>
+
+        <h2>Your data</h2>
+        <ul class="list-disc pl-5">
+          <li>No data is collected, sold, or shared with anyone.</li>
+          <li>
+            Nothing is stored anywhere other than my own computer and my own
+            Google Drive.
+          </li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about this policy:
+          <a
+            href={`mailto:${email}`}
+            class="text-foreground hover:text-primary underline underline-offset-4"
+          >
+            {email}
+          </a>
+        </p>
+      </div>
+    </article>
+  </main>
+</Layout>
