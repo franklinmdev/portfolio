@@ -280,6 +280,9 @@
     font-variant-numeric: tabular-nums;
     font-size: 0.75rem;
   }
+  .measured-note .source time {
+    white-space: nowrap;
+  }
   .measured-note .source a {
     text-decoration-color: var(--rule-strong);
   }

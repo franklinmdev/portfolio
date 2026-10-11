@@ -49,9 +49,17 @@ const projects = {
 
 // Each project's measured note: the numbers in the margin, with the commit
 // that produced them. Sources live in src/data/measured.ts.
-const sourceOf = (m: Measured) => ({
-  ...(m.date && { date: m.date }),
-  ...(m.source && { source: m.source }),
+// One source per distinct link, in row order.
+const sourcesOf = (...ms: Measured[]) => ({
+  sources: ms
+    .filter(
+      (m, i) =>
+        m.source && ms.findIndex((n) => n.source?.href === m.source?.href) === i
+    )
+    .map((m) => ({
+      ...(m.date && { date: m.date }),
+      ...(m.source && { source: m.source }),
+    })),
 })
 const notes = {
   justask: {
@@ -61,7 +69,7 @@ const notes = {
       { value: measured.justask.p95.value, label: t("work.justask.m_p95") },
       { value: measured.justask.cap.value, label: t("work.justask.m_cap") },
     ],
-    ...sourceOf(measured.justask.exact),
+    ...sourcesOf(measured.justask.exact, measured.justask.cap),
   },
   docmatch: {
     rows: [
@@ -72,14 +80,18 @@ const notes = {
         label: t("work.docmatch.m_review"),
       },
     ],
-    ...sourceOf(measured.docmatch.p95),
+    ...sourcesOf(measured.docmatch.p95),
   },
   dgii: {
     rows: [
       { value: measured.dgii.cedulas.value, label: t("work.dgii.m_cedulas") },
       { value: measured.dgii.rncs.value, label: t("work.dgii.m_rncs") },
+      {
+        value: measured.dgii.downloads.value,
+        label: t("work.dgii.m_downloads"),
+      },
     ],
-    ...sourceOf(measured.dgii.cedulas),
+    ...sourcesOf(measured.dgii.cedulas, measured.dgii.downloads),
   },
 }
 

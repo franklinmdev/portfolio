@@ -45,6 +45,14 @@ const WHITELIST: Source = {
     href: gh("dgii-ts", "ff60bd9", "src/validators/cedula-whitelist.ts"),
   },
 }
+// dgii-ts: all-time npm downloads, first publish to the last full day.
+const NPM_DOWNLOADS: Source = {
+  date: "2026-10-10",
+  source: {
+    label: "npm API",
+    href: "https://api.npmjs.org/downloads/point/2026-04-07:2026-10-10/dgii-ts",
+  },
+}
 
 export const measured = {
   justask: {
@@ -61,5 +69,6 @@ export const measured = {
   dgii: {
     cedulas: { value: "578", ...WHITELIST } as Measured,
     rncs: { value: "23", ...WHITELIST } as Measured,
+    downloads: { value: "3,157", ...NPM_DOWNLOADS } as Measured,
   },
 }

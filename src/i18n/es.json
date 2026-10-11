@@ -43,7 +43,8 @@
       "lead": "Una librería en TypeScript para la DGII. Valida RNC, cédula, NCF y e-NCF sin conexión, y consulta contribuyentes leyendo las páginas web de la DGII con reintentos y un circuit breaker, porque la DGII no tiene API pública y cerró su servicio SOAP en enero de 2025. La Fig. 4 es la librería misma, corriendo en esta página.",
       "note_skill": "Incluye una skill para agentes, así los agentes de código aprenden la librería con un comando:",
       "m_cedulas": "cédulas en la lista blanca: números reales que no cumplen el algoritmo",
-      "m_rncs": "RNC en la lista blanca"
+      "m_rncs": "RNC en la lista blanca",
+      "m_downloads": "descargas en npm, en total"
     },
     "also": "También en construcción",
     "domiprop": {

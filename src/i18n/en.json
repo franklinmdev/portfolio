@@ -43,7 +43,8 @@
       "lead": "A TypeScript library for the DGII, the Dominican tax authority. It validates RNC, cédula, NCF and e-NCF numbers offline, and looks up taxpayers by scraping DGII's web pages with retries and a circuit breaker, because DGII has no public API and shut down its SOAP service in January 2025. Fig. 4 is the library itself, running in this page.",
       "note_skill": "It ships an agent skill, so coding agents learn the library with one command:",
       "m_cedulas": "cédulas on the whitelist: real numbers that break the algorithm",
-      "m_rncs": "RNCs on the whitelist"
+      "m_rncs": "RNCs on the whitelist",
+      "m_downloads": "npm downloads, all time"
     },
     "also": "Also building",
     "domiprop": {
