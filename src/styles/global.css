@@ -175,15 +175,6 @@
 
 @layer components {
   /* Fig. 6: the portrait cutout sits on graph paper drawn in the rule color. */
-  .portrait-ground {
-    background-color: var(--figure);
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 1rem 1rem;
-    background-position: -1px -1px;
-  }
-
   /* The page: a reading column and a margin column. Figures span both. */
   .page {
     margin-inline: auto;

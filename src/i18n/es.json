@@ -172,7 +172,7 @@
     "p1": "Crecí desarmando cosas para ver cómo funcionaban, y construyo software de la misma forma: empiezo por el problema y por la gente que de verdad lo tiene, y dejo que eso decida el resto.",
     "p2": "Casi todo lo que construyo trata con reglas del mundo real que son complicadas, como impuestos, cumplimiento y operaciones internas, donde acertar en los detalles importa más que la tecnología.",
     "outside_title": "Fuera del trabajo.",
-    "outside": "Tengo {link}, un canal de YouTube que cuenta las historias más antiguas del mundo: mitos, monstruos e historia legendaria. El sistema de producción detrás también es mío, en Python y Remotion: cada afirmación del guion enlaza su fuente, cada nombre que dice el narrador tiene la pronunciación verificada, y cada episodio se detiene antes de gastar más de su presupuesto en modelos de pago."
+    "outside": "Tengo {link}, un canal de YouTube sobre mitos e historia legendaria."
   },
   "contact": {
     "title": "Contacto",
@@ -193,11 +193,6 @@
       "email_invalid": "Ese correo parece incompleto.",
       "message_required": "Escribe un mensaje."
     }
-  },
-  "references": {
-    "title": "Referencias",
-    "colophon": "Compuesto en Source Serif 4, Libre Franklin y Commit Mono. Hecho con Astro y React, publicado en GitHub Pages.",
-    "youtube": "Arkhelon en YouTube"
   },
   "projects": {
     "back": "Todo el trabajo",

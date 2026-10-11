@@ -172,7 +172,7 @@
     "p1": "I grew up taking things apart to see how they worked, and I build software the same way: I start with the problem and the people who actually have it, and let that decide the rest.",
     "p2": "Most of what I build deals with messy real-world rules, like taxes, compliance and internal operations, where getting the small details right matters more than the stack.",
     "outside_title": "Outside work.",
-    "outside": "I run {link}, a YouTube channel that tells the world's oldest stories: myths, monsters and legendary history. The production pipeline behind it is mine too, in Python and Remotion: every claim in a script links its source, every name the narrator says has a checked pronunciation, and each episode stops before it spends past its budget on paid models."
+    "outside": "I run {link}, a YouTube channel about myths and legendary history."
   },
   "contact": {
     "title": "Contact",
@@ -193,11 +193,6 @@
       "email_invalid": "That email doesn't look complete.",
       "message_required": "Write a message."
     }
-  },
-  "references": {
-    "title": "References",
-    "colophon": "Set in Source Serif 4, Libre Franklin and Commit Mono. Built with Astro and React, hosted on GitHub Pages.",
-    "youtube": "Arkhelon on YouTube"
   },
   "projects": {
     "back": "All work",

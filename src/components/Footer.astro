@@ -1,49 +1,5 @@
----
-import { getTranslationFromUrl } from "@/i18n/utils"
-
-const t = getTranslationFromUrl(Astro.url)
-
-const refs = [
-  { label: "github.com/franklinmdev", href: "https://github.com/franklinmdev" },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/franklin-martinez-0a697a253/",
-  },
-  { label: "npm: dgii-ts", href: "https://www.npmjs.com/package/dgii-ts" },
-  {
-    label: "npm: @justask/core",
-    href: "https://www.npmjs.com/package/@justask/core",
-  },
-  { label: t("references.youtube"), href: "https://www.youtube.com/@arkhelon" },
-]
----
-
 <footer class="border-rule-strong mt-24 border-t">
-  <div class="page page-grid py-10">
-    <div>
-      <h2 class="font-sans text-[0.9375rem] font-semibold">
-        {t("references.title")}
-      </h2>
-      <ol
-        class="mt-3 grid gap-x-8 gap-y-1.5 font-sans text-[0.875rem] sm:grid-cols-2"
-      >
-        {
-          refs.map((r, i) => (
-            <li class="flex gap-2">
-              <span class="data text-muted-foreground w-4 shrink-0 text-xs leading-6">
-                {i + 1}
-              </span>
-              <a class="link" href={r.href}>
-                {r.label}
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-    <p class="in-margin sidenote mt-6 lg:mt-0">
-      {t("references.colophon")}
-      <br />© {new Date().getFullYear()} Franklin Martinez
-    </p>
-  </div>
+  <p class="page text-muted-foreground py-8 font-sans text-[0.8125rem]">
+    © {new Date().getFullYear()} Franklin Martinez
+  </p>
 </footer>
