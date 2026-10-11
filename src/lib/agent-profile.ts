@@ -22,10 +22,10 @@ export interface AgentProfile {
 
 export const agentProfile: AgentProfile = {
   name: "Franklin Martinez",
-  role: "Full-Stack AI Engineer at Nubeteck",
+  role: "Full-Stack AI Engineer",
   location: "Santiago, Dominican Republic",
   summary:
-    "Full-stack AI engineer who takes a PRD and ships complete web applications end to end: data model, backend, API, and a UI that non-technical users can actually use. Claude Code, Cursor CLI, Antigravity CLI, and Codex are daily drivers.",
+    "Full-stack AI engineer who builds LLM systems and measures them before trusting them: frozen eval sets, measured gates, and benchmarks tied to commits. Also ships complete web applications end to end, from the data model to a UI non-technical users can use. Claude Code, Cursor CLI, Antigravity CLI, and Codex are daily drivers.",
   howIWork: [
     "From PRD to shipped product: written research and a plan go in, a working product and a QA guide come out, with little back-and-forth.",
     "Quality is enforced, not hoped for: codified rules and edit hooks typecheck, lint, and validate every change before it lands.",
@@ -69,10 +69,22 @@ export const agentProfile: AgentProfile = {
       url: "https://github.com/franklinmdev/dgii-ts",
     },
     {
-      name: "DevFlow",
+      name: "justask",
       description:
-        "AI-enhanced developer Q&A platform built with Next.js 15 and React 19, with Groq AI assistance for clearer questions.",
-      url: "https://github.com/franklinmdev/devflow",
+        "Turns plain-language requests into an app's own state (search results, table filters, a filled record card). Code finds candidates, a model picks one label per question with a probability for every label, and a field below its measured gate stays empty for the person. On npm as @justask/core, MIT.",
+      url: "https://github.com/franklinmdev/justask",
+    },
+    {
+      name: "docmatch",
+      description:
+        "Invoice reconciliation engine, in progress: vision-model extraction, a deterministic validation gate, three-way matching against purchase orders and receiving records, and human review, with every stage benchmarked in CI against the commit that produced it.",
+      url: "https://github.com/franklinmdev/docmatch",
+    },
+    {
+      name: "brook",
+      description:
+        "Upcoming mobile app (Expo) that turns saved links into a searchable, typed library. A landing page and waitlist demand test is running before the app is built.",
+      url: "https://brook.franklinmdev.workers.dev",
     },
   ],
   contact: {

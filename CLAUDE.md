@@ -30,10 +30,16 @@ alias `@/*` → `src/*`.
 - `.astro` components are static/server-rendered (`src/components/*.astro`).
   They receive either `lang` or a translation function `t` as props.
 - `src/components/react/*.tsx` are interactive islands, hydrated explicitly:
-  `Spotlight` and `ScrollToTop` use `client:idle`, `ContactForm` uses
-  `client:visible`. Match this — never hydrate eagerly without reason.
-- `src/components/ui/*` are shadcn/ui primitives (new-york style, neutral
-  base, CSS variables — see `components.json`).
+  `Spotlight` and `WebMCP` use `client:idle`, the project figures
+  (`DocmatchFigure`, `DgiiFigure`) use `client:visible`. Match this: never
+  hydrate eagerly without reason. Fig. 1 (`JustAskFigure.astro`) and Fig. 3
+  (`BenchmarkTable.astro`) are static on purpose: they sit on or near the
+  first screen, so React stays off the critical path. Static figures opt into
+  the plot-on-scroll motion with `data-autoplot`; the shared script lives in
+  `Layout.astro`.
+- Numbers shown on the site come from `src/data/measured.ts` (value, date,
+  commit link) and render through `MeasuredNote.astro`. In the deep dives
+  they are raw HTML `.noted` blocks in the markdown.
 
 ### Layout owns the document head
 
@@ -79,13 +85,10 @@ no `tailwind.config.js`** — theme tokens (colors, mono font, animation
 keyframes) live in the `@theme` block of `src/styles/global.css`. Add design
 tokens there. Merge classes with `cn()` from `src/lib/utils.ts`.
 
-### Contact form / email
+### Contact
 
-`ContactForm.tsx` sends via EmailJS in the browser. Config comes from
-`PUBLIC_EMAILJS_{SERVICE_ID,TEMPLATE_ID,PUBLIC_KEY}` env vars
-(`src/lib/email.ts`, guarded by `isEmailJSConfigured()`). Copy `.env-example`
-→ `.env` for local dev. In CI these are injected from GitHub secrets
-(`.github/workflows/deploy.yml`).
+Contact is a `mailto:` line only (`Contact.astro`). There is no form and no
+email service.
 
 ## Conventions & gotchas
 

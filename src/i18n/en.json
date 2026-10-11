@@ -1,155 +1,192 @@
 {
+  "meta": {
+    "title": "Franklin Martinez, applied AI engineer",
+    "description": "Franklin Martinez builds LLM systems and measures them before trusting them: justask, docmatch and dgii-ts, with live figures and the numbers behind them."
+  },
   "nav": {
-    "experience": "Experience",
-    "projects": "Projects",
-    "contact": "Contact"
-  },
-  "rail": {
-    "stack": "Stack"
-  },
-  "tech": {
-    "groups": {
-      "languages": "Languages",
-      "frontend": "Frontend",
-      "backend": "Backend & data",
-      "workflow": "Workflow"
-    }
-  },
-  "hud": {
-    "status": {
-      "theme_deck": "Deck",
-      "theme_blueprint": "Blueprint"
-    },
-    "modules": {
-      "experience": "01 — Experience",
-      "tech": "02 — Stack",
-      "projects": "03 — Projects",
-      "contact": "04 — Contact"
-    },
-    "hero": {
-      "id": "Santiago, Dominican Republic"
-    },
-    "projects": {
-      "open": "Open project"
-    },
-    "contact": {
-      "channel": "Direct line"
-    }
+    "label": "Main",
+    "work": "Work",
+    "method": "Method",
+    "about": "About",
+    "contact": "Contact",
+    "home": "Franklin Martinez, home",
+    "skip": "Skip to content",
+    "theme": "Switch between light and dark",
+    "other_lang": "Español",
+    "other_lang_short": "ES"
   },
   "hero": {
-    "subtitle": "Full-stack engineer",
-    "statement": "I build products end to end, from the database to the screen. Lately that's been tax and compliance software for the Dominican market.",
-    "about": {
-      "p1": "I grew up taking things apart to see how they worked, and I build software the same way. I start with the problem and the people who actually have it, and let that decide the rest.",
-      "p2": "Most of what I build deals with messy real-world rules like taxes, compliance, and internal operations, where getting the small details right matters more than the tech stack. I also help my team adopt AI tools in a way that actually pays off, and I mentor the junior developers around me."
+    "title": "Models pick. Code decides. The figures prove it.",
+    "byline": "Full-Stack AI Engineer in Santiago, Dominican Republic. Open to remote roles."
+  },
+  "work": {
+    "title": "Selected work",
+    "deep_dive": "Read the deep dive",
+    "live": "Live demo",
+    "source": "Source",
+    "justask": {
+      "lead": "Turns what a person types into an app's own state: a search result, a table filter, a filled record card. Code finds the candidates, a model picks one label per question with a probability for every label, and a field it isn't sure of stays empty for the person to fill (Fig. 1).",
+      "m_exact": "picks exact, round 4 of the search eval",
+      "m_held": "ambiguous requests held",
+      "m_p95": "p95 latency",
+      "m_cap": "of model spend a day, the demo's cap"
+    },
+    "docmatch": {
+      "lead": "Invoice reconciliation for accounts payable. A vision model reads the invoice, deterministic code checks what it read and matches it against the purchase order and the receiving record, and anything that doesn't add up goes to a person (Fig. 2). Every stage has its number in a benchmark table that names the commit behind it (Fig. 3).",
+      "status": "In progress: extraction, matching, entity resolution and the review pipeline are done.",
+      "note_ci": "A CI gate fails any pull request that lowers field or line-item F1.",
+      "m_p95": "p95 from upload to approval, cheapest backend",
+      "m_cost": "per document",
+      "m_review": "of documents sent to a person"
+    },
+    "dgii": {
+      "lead": "A TypeScript library for the DGII, the Dominican tax authority. It validates RNC, cédula, NCF and e-NCF numbers offline, and looks up taxpayers by scraping DGII's web pages with retries and a circuit breaker, because DGII has no public API and shut down its SOAP service in January 2025. Fig. 4 is the library itself, running in this page.",
+      "note_skill": "It ships an agent skill, so coding agents learn the library with one command:",
+      "m_cedulas": "cédulas on the whitelist: real numbers that break the algorithm",
+      "m_rncs": "RNCs on the whitelist",
+      "m_downloads": "npm downloads, all time"
+    },
+    "also": "Also building",
+    "domiprop": {
+      "lead": "Rental management for Dominican landlords: expense tracking, the monthly 606 purchase report, lease contracts under Ley 85-25, and reminders before tax deadlines. Built with Next.js, NestJS, Prisma and PostgreSQL. Pre-launch.",
+      "caption": "Fig. 5. The DomiProp dashboard."
+    },
+    "brook": {
+      "lead": "A mobile app in development (Expo, TypeScript) that turns the links people save from TikTok, Instagram and the web into a searchable library, each link sorted into typed fields with a confidence badge.",
+      "link": "The landing page"
     }
   },
-  "sections": {
-    "experience_title": "Work experience",
-    "tech_title": "Technologies",
-    "projects_title": "Selected projects",
-    "contact_title": "Get in touch"
-  },
-  "practice": {
-    "title": "How I work with AI",
-    "intro": "Picking technologies is table stakes now. With the right workflow anyone can ship in any stack. What sets the work apart is the system I build around the model, so I can take a brief and deliver a finished product fast without dropping quality.",
-    "items": {
-      "prd": {
-        "title": "From PRD to shipped product",
-        "body": "Hand me a brief or a PRD and I deliver the whole thing: data model, backend, API, and a UI that non-technical people can actually use. Written research and a plan go in, a working product and a QA guide come out, with little back-and-forth."
-      },
-      "quality": {
-        "title": "Quality is enforced, not hoped for",
-        "body": "Every project carries codified rules and edit hooks. Each change typechecks, lints, and validates the schema before it lands, so a type error or a stray console.log never reaches a commit."
-      },
-      "models": {
-        "title": "The right model for the job",
-        "body": "I split work across AI models, deep reasoning to plan and fast models to execute, so delivery stays fast without trading away rigor."
-      }
+  "fig1": {
+    "label": "Fig. 1",
+    "caption": "justask, my library that turns a typed request into an app's own state. Three requests sent to its live demo on October 11, 2026, replayed with their real responses. Bars are the model's probability for each pick; a pick below its gate leaves the field empty.",
+    "pick": "Pick a request",
+    "replay": "Replay",
+    "card": "New expense",
+    "vendor": "Vendor",
+    "tags": "Tags",
+    "date": "Date",
+    "amount": "Amount",
+    "gate": "gate",
+    "empty": "Left empty for you",
+    "empty_why": "No vendor is named. Best vendor guess: {name} at {p}.",
+    "try": "Try it live",
+    "tag_labels": {
+      "meals": "Meals",
+      "travel": "Travel",
+      "client": "Client",
+      "office": "Office"
     }
+  },
+  "fig2": {
+    "label": "Fig. 2",
+    "caption": "A synthetic invoice from docmatch's CI corpus, with its labeled fields drawn where they sit on the page, then the gate's two rules. The gate needs no model and no label. A reading that fails is kept and never retried, because retrying would shop for a passing answer.",
+    "replay": "Replay",
+    "invoice": "Invoice",
+    "extract": "Extract",
+    "gate": "Gate",
+    "dates_sane": "Dates sane",
+    "dates_detail": "Issued 03/04/26, due 04/03/26",
+    "totals_agree": "Totals agree",
+    "totals_detail": "Not checkable: the invoice shows no amount due, and an unreadable or absent value never fails a rule",
+    "passed": "passed",
+    "not_checkable": "not checkable",
+    "verdict": "Verdict: passed, one rule checked and none failed",
+    "next": "Next: resolve each line to the catalog, then match the invoice against its purchase order and receiving record.",
+    "fields": {
+      "vendor_name": "Vendor",
+      "document_id": "Invoice number",
+      "date_issue": "Issued",
+      "date_due": "Due",
+      "amount_total_tax": "Tax",
+      "amount_total_gross": "Total"
+    }
+  },
+  "fig3": {
+    "label": "Fig. 3",
+    "caption": "Three extraction backends on a fixed subset of 100 pinned documents. Each row links the commit that produced it.",
+    "backend": "Backend",
+    "f1": "Field F1",
+    "cost": "Cost per doc",
+    "commit": "Commit"
+  },
+  "fig4": {
+    "label": "Fig. 4",
+    "caption": "dgii-ts 0.3.0 from npm, imported by this page. The steps show the check-digit arithmetic; the verdict is the library's own. The example numbers are invented.",
+    "input": "An RNC, cédula, NCF or e-NCF",
+    "examples": "Examples",
+    "ex_rnc": "An RNC",
+    "ex_cedula": "A cédula",
+    "ex_ncf": "An e-NCF",
+    "ex_typo": "A typo",
+    "digit": "Digit",
+    "weight": "Weight",
+    "product": "Product",
+    "sum": "Sum",
+    "check": "Check digit",
+    "expected": "expected",
+    "got": "got",
+    "valid": "Valid",
+    "invalid": "Not valid",
+    "waiting": "Type a number, or pick an example.",
+    "rnc_rule": "RNC: digits 1 to 8 times weights 7, 9, 8, 6, 5, 4, 3, 2. The remainder of the sum over 11 gives the check digit.",
+    "cedula_rule": "Cédula: Luhn. Digits 1 to 10 alternate weights 1 and 2, products over 9 lose 9, and the check digit tops the sum up to a multiple of 10.",
+    "ncf_rule": "NCF and e-NCF carry no check digit: the library checks the series letter, the type code and the length.",
+    "whitelist": "The library accepts this number from its list of known numbers that break the algorithm.",
+    "type": "Type"
+  },
+  "method": {
+    "title": "Method",
+    "rules_title": "Rules before results.",
+    "rules": "When a model makes a decision in something I build, I write down how it will be judged before the first call: a frozen eval set, pass lines, a gate that is measured rather than guessed. Failed rounds stay in the record.",
+    "brief_title": "From a brief to a shipped product.",
+    "brief": "Research and a plan go in, and a working product with a QA guide comes out: the data model, the API, and an interface that people without a technical background can use.",
+    "tooling_title": "Quality enforced by the tooling.",
+    "tooling": "Every repo carries written rules and edit hooks, so each change typechecks, lints and validates its schema before it lands. Deep models plan, fast models execute, and the same rules hold both.",
+    "tools": "Tools",
+    "product_work": "Product work",
+    "ai_work": "AI work"
   },
   "experience": {
+    "title": "Experience",
     "exp1": {
-      "date": "February 2026 - Present",
-      "title": "Full-Stack AI Engineer,",
+      "date": "February 2026 to now",
+      "title": "Full-Stack AI Engineer",
       "company": "Nubeteck, S.R.L.",
-      "desc": "I own products end to end, from the data model to the frontend. I build a commercial financial-management platform that we sell to clients, including multi-currency budgeting with approval workflows, and I keep maintaining and extending it as it grows. I also take on the harder integrations, like payment providers such as Lemon Squeezy. On top of that, I lead how the team adopts AI tools like Claude Code, Cursor CLI, Antigravity CLI, and Codex, and I mentor our interns and junior developers."
+      "desc": "I own a commercial financial-management platform end to end, from the data model to the frontend, and take on the harder integrations, such as payment providers. I also lead the team's adoption of AI coding tools and mentor our interns and junior developers."
     },
     "exp2": {
-      "date": "April 2023 - February 2026",
-      "title": "Software Developer,",
+      "date": "April 2023 to February 2026",
+      "title": "Software Developer",
       "company": "Nubeteck, S.R.L.",
-      "desc": "I helped build a shared design system used across the company's products, tuned the app's data layers so the interface felt faster and more responsive, and mentored junior developers."
+      "desc": "I helped build a shared design system used across the company's products, tuned the data layers so the interface felt faster, and mentored junior developers."
     }
   },
-  "projects": {
-    "view_all_btn": "View all projects",
-    "show_less_btn": "Show less projects",
-    "back_to_projects": "Back to projects",
-    "published_on": "Published on ",
-    "overview": "Overview",
-    "challenges": "Challenges",
-    "key_learnings": "Key Learnings",
-    "tech_stack": "Tech stack",
-    "links": "Links",
-    "view_live": "View live project",
-    "view_source": "View source code",
-    "work_together": "Let's work together"
+  "about": {
+    "title": "About",
+    "p2": "Most of what I build deals with messy real-world rules, like taxes, compliance and internal operations, where getting the small details right matters more than the stack.",
+    "outside_title": "Outside work.",
+    "outside": "I play basketball and run {link}, a YouTube channel about myths and legendary history."
   },
   "contact": {
-    "subtitle": "Have a project, or just want to connect? My inbox is open.",
-    "form": {
-      "name_placeholder": "Your name",
-      "email_placeholder": "Your email",
-      "message_placeholder": "Your message",
-      "name_label": "Name",
-      "email_label": "Email",
-      "message_label": "Message",
-      "send_btn": "Send message",
-      "sending_btn": "Sending...",
-      "success_msg": "Signal received — reply within 24h",
-      "error_msg": "Sorry, there was an error sending your message. Please try again.",
-      "name_required": "Name is required",
-      "email_required": "Email is required",
-      "email_invalid": "Please enter a valid email address",
-      "message_required": "Message is required"
-    }
+    "title": "Contact",
+    "lead": "Write to {email}. I reply within a day or two."
   },
-  "social": {
-    "github": "GitHub profile",
-    "linkedin": "LinkedIn profile",
-    "x": "X profile",
-    "email": "Email"
-  },
-  "a11y": {
-    "scroll_to_top": "Scroll to top",
-    "section_index": "Section index",
-    "view_project": "Open project: {title}",
-    "project_label": "Project: {title}",
-    "project_screenshot": "Screenshot of {title}"
-  },
-  "footer": {
-    "credits": "Designed & built by Franklin Martinez"
+  "projects": {
+    "back": "All work",
+    "links": "Links",
+    "stack": "Built with",
+    "view_live": "Live",
+    "view_source": "Source",
+    "contact": "Talk about this project",
+    "abstract": "Abstract."
   },
   "error": {
     "404": {
-      "title": "404 - Page not found",
-      "image_alt": "404 - Page not found",
-      "heading": "Oops! Page not found",
-      "description": "The page you're looking for seems to have gone on an adventure. Let's get you back on track!",
-      "reasons": {
-        "title": "This might have happened because:",
-        "typo": "There's a typo in the URL",
-        "moved": "The page has been moved or deleted",
-        "outdated": "You followed an outdated link"
-      },
-      "actions": {
-        "home": "Go home",
-        "projects": "View projects",
-        "contact": "Get in touch",
-        "previous": "Go back"
-      }
+      "title": "Page not found",
+      "heading": "This page isn't here.",
+      "description": "The link may be old, or the page moved during the redesign.",
+      "home": "Go to the home page",
+      "work": "See the work"
     }
-  },
-  "loading": "Loading..."
+  }
 }

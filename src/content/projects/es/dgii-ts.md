@@ -1,49 +1,64 @@
 ---
 title: "dgii-ts"
 subtitle: "Librería open source de validación e integración con la DGII para TypeScript"
-description:
-  - "dgii-ts es una librería open source de TypeScript para trabajar con identificadores fiscales dominicanos como el RNC, la cédula, el NCF y el e-NCF. Los valida y los consulta contra la DGII, la autoridad tributaria del país."
-  - "La construí porque la DGII no publica un API público estable. Durante años los desarrolladores se han apoyado en scrapers frágiles de páginas ASP.NET viejas cuyas URLs cambian de lugar cada cierto tiempo, lo que rompe sin avisar cada integración que depende de ellas. dgii-ts esconde todo eso detrás de un único cliente tipado, hecho para seguir funcionando cuando la fuente falla."
-challenges: "El verdadero reto es que te estás integrando con un sistema que no quiere que lo integren. La DGII no tiene API REST, apagó su viejo servicio SOAP en enero de 2025, y las páginas ASP.NET que sí sirve cambian sin aviso. Mi respuesta fue construirla por capas: validación de dígito verificador offline que nunca toca la red, una capa de scraping para consultas en vivo, y un cliente con circuit breaker y reintentos con backoff para que un fallo del origen no se lleve todo por delante."
-learnings: "Esta me enseñó a tratar el fallo como el caso normal, no como la excepción. Como la fuente de datos es poco confiable por diseño, lo interesante estuvo todo en los respaldos, en la degradación elegante y en una ruta offline que siempre funciona. Publicarla en npm bajo licencia MIT y con CI también me hizo cuidar mucho más un API público limpio, el versionado y una documentación que otro desarrollador pueda seguir de verdad."
+description: "dgii-ts es una librería open source de TypeScript para trabajar con identificadores fiscales dominicanos como el RNC, la cédula, el NCF y el e-NCF. Los valida y los consulta contra la DGII, la autoridad tributaria del país."
 githubUrl: "https://github.com/franklinmdev/dgii-ts"
+npmUrl: "https://www.npmjs.com/package/dgii-ts"
 tags:
   - "TypeScript"
   - "Node.js"
   - "Web scraping"
   - "Circuit breaker"
   - "Validación offline"
-featured: false
 publishDate: "2026-05-20"
-iconAsset: "@/assets/projects/dgii-ts-icon.svg"
 ---
 
-Un conjunto de herramientas tipado y confiable para los identificadores
-fiscales dominicanos, liberado como open source para que otros desarrolladores
-no tengan que reconstruir los mismos scrapers frágiles que todo el mundo
-reinventa.
+## El problema
 
-## Instalación
+La DGII, la autoridad tributaria dominicana, no tiene una API REST pública, y
+apagó su viejo servicio SOAP en enero de 2025. Todo lo que necesita verificar un
+RNC o un NCF dominicano ha dependido de scrapers de viejas páginas ASP.NET cuyas
+URL cambian de lugar, y eso rompe en silencio cada integración que depende de
+ellas.
+
+## El diseño
+
+dgii-ts esconde todo eso detrás de un cliente tipado construido por capas:
+validación offline del dígito verificador para RNC, cédula, NCF (serie B) y
+e-NCF (serie E) que nunca toca la red; consultas en vivo que hacen scraping de
+las páginas de la DGII cuando hacen falta datos actuales; un cliente con circuit
+breaker y reintentos con backoff, para que una mala respuesta no se propague; y
+una importación masiva del dataset diario de RNC de la DGII.
+
+<div class="noted">
+<p>La Fig. 4 de arriba es la propia librería, importada desde npm y corriendo en
+esta página. La aritmética del dígito verificador se dibuja paso a paso, y el
+veredicto es el de la librería. Un número que no cumple el algoritmo puede ser
+real igual: dgii-ts trae listas blancas de cédulas y RNC que la DGII emitió de
+todos modos, tomadas de python-stdnum.</p>
+<aside class="sidenote measured-note">
+<dl>
+<div><dt>578</dt><dd>cédulas en la lista blanca</dd></div>
+<div><dt>23</dt><dd>RNC en la lista blanca</dd></div>
+</dl>
+<p class="source">
+<time datetime="2026-03-19">2026-03-19</time>,
+<a
+href="https://github.com/franklinmdev/dgii-ts/blob/ff60bd9/src/validators/cedula-whitelist.ts"
+>cedula-whitelist.ts en ff60bd9</a>;
+<a
+href="https://github.com/franklinmdev/dgii-ts/blob/ff60bd9/src/validators/rnc-whitelist.ts"
+>rnc-whitelist.ts</a>
+</p>
+</aside>
+</div>
+
+## Lo que se publica
 
 ```bash
 npm install dgii-ts
 ```
 
-Está en [npm](https://www.npmjs.com/package/dgii-ts) bajo licencia MIT.
-
-## Qué hace
-
-- Validación offline de los dígitos verificadores del RNC, la cédula, el NCF
-  (serie B) y el e-NCF (serie E), sin llamadas de red
-- Consultas en vivo que hacen scraping de las páginas ASP.NET de la DGII cuando
-  necesitas datos en tiempo real
-- Un cliente resiliente con circuit breaker y reintentos con backoff, para que
-  una respuesta mala no se propague en cascada
-- Importación masiva del archivo diario de RNC de la DGII
-
-## Por qué importa
-
-La DGII no tiene un API REST público, y apagó su viejo servicio SOAP en enero
-de 2025. Cualquier cosa que necesite verificar un RNC o NCF dominicano ha tenido
-que depender de endpoints frágiles y sin documentar. dgii-ts lo convierte en una
-sola dependencia con una superficie limpia y documentada.
+En [npm](https://www.npmjs.com/package/dgii-ts) con licencia MIT y CI, más un
+skill para agentes, para que un agente de código use los validadores offline
+antes de ir a la red.

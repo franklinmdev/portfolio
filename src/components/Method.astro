@@ -1,0 +1,59 @@
+---
+export interface Props {
+  t: (key: string) => string
+}
+
+const { t } = Astro.props
+
+const points = ["rules", "brief", "tooling"] as const
+const tools = {
+  product: [
+    "TypeScript",
+    "React",
+    "Next.js",
+    "NestJS",
+    ".NET",
+    "PostgreSQL",
+    "Prisma",
+    "Cloudflare Workers",
+  ],
+  ai: [
+    "Claude Code",
+    "Codex",
+    "Cursor CLI",
+    "OpenAI and Gemini APIs",
+    "Python",
+    "pgvector",
+  ],
+}
+---
+
+<section
+  id="method"
+  class="page-grid border-rule-strong mt-20 border-t pt-12"
+  aria-labelledby="method-title"
+>
+  <h2 id="method-title" class="section-title">{t("method.title")}</h2>
+  <div class="hidden lg:block"></div>
+  <div class="mt-4 space-y-5">
+    {
+      points.map((p) => (
+        <p>
+          <span class="font-semibold">{t(`method.${p}_title`)}</span>{" "}
+          {t(`method.${p}`)}
+        </p>
+      ))
+    }
+  </div>
+  <aside class="in-margin mt-6 lg:mt-5">
+    <p class="sidenote text-foreground font-medium">{t("method.tools")}</p>
+    <p class="sidenote mt-2">
+      <span class="text-foreground">{t("method.product_work")}:</span>
+      {tools.product.join(", ")}.
+    </p>
+    <p class="sidenote mt-2">
+      <span class="text-foreground">{t("method.ai_work")}:</span>
+      {tools.ai.join(", ")}.
+    </p>
+  </aside>
+</section>

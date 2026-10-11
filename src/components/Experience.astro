@@ -1,56 +1,43 @@
 ---
-import { createTranslations, getLangFromUrl } from "@/i18n/utils"
-
-const lang = getLangFromUrl(Astro.url)
-const t = createTranslations(lang)
-
-interface ExperienceItem {
-  readonly id: string
-  readonly translationKey: string
+export interface Props {
+  t: (key: string) => string
 }
 
-const experienceItems: readonly ExperienceItem[] = [
-  {
-    id: "exp1",
-    translationKey: "experience.exp1",
-  },
-  {
-    id: "exp2",
-    translationKey: "experience.exp2",
-  },
-] as const
+const { t } = Astro.props
+const items = ["exp1", "exp2"] as const
 ---
 
-<section id="experience" class="scroll-mt-24 py-8 lg:pt-0 lg:pb-12">
-  <span class="experience-title module-label">
-    {t("hud.modules.experience")}
-  </span>
-  <h2 class="experience-title module-title text-foreground mt-3 mb-12">
-    {t("sections.experience_title")}
+<section
+  id="experience"
+  class="page-grid border-rule-strong mt-20 border-t pt-12"
+  aria-labelledby="experience-title"
+>
+  <h2 id="experience-title" class="section-title">
+    {t("experience.title")}
   </h2>
-
-  <div class="space-y-0">
-    {
-      experienceItems.map((item, index) => (
-        <div
-          class={`timeline-item experience-item ${index === experienceItems.length - 1 ? "last-item" : ""}`}
-          style={`animation-delay: ${0.6 + index * 0.2}s`}
-        >
-          <div class="timeline-dot" />
-          <p class="text-muted-foreground mb-1 font-mono text-xs font-medium tracking-wide uppercase tabular-nums">
-            {t(`${item.translationKey}.date`)}
-          </p>
-          <h3 class="text-foreground mb-1 text-xl font-semibold">
-            {t(`${item.translationKey}.title`)}
-            <span class="text-muted-foreground font-normal">
-              {t(`${item.translationKey}.company`)}
-            </span>
+  <div class="hidden lg:block"></div>
+  {
+    items.map((id, i) => (
+      <>
+        <div class:list={[i === 0 ? "mt-4" : "mt-8"]}>
+          <h3 class="font-serif text-xl font-semibold">
+            {t(`experience.${id}.title`)}
           </h3>
-          <p class="text-muted-foreground leading-relaxed">
-            {t(`${item.translationKey}.desc`)}
+          <p class="text-muted-foreground mt-0.5 font-sans text-[0.9375rem] lg:hidden">
+            {t(`experience.${id}.company`)}, {t(`experience.${id}.date`)}
           </p>
+          <p class="mt-2">{t(`experience.${id}.desc`)}</p>
         </div>
-      ))
-    }
-  </div>
+        <aside
+          class:list={["in-margin hidden lg:block", i === 0 ? "mt-5" : "mt-9"]}
+        >
+          <p class="sidenote">
+            <span class="text-foreground">{t(`experience.${id}.company`)}</span>
+            <br />
+            {t(`experience.${id}.date`)}
+          </p>
+        </aside>
+      </>
+    ))
+  }
 </section>

@@ -1,307 +1,140 @@
 ---
-import { Image } from "astro:assets"
-import avatar from "@/assets/avatar.webp"
 import { getRelativeLocaleUrl } from "astro:i18n"
 import {
   createTranslations,
   getLangFromUrl,
-  languages,
   removeLocalePrefix,
 } from "@/i18n/utils"
 import type { Language } from "@/i18n/utils"
-import ThemeToggle from "@/components/react/ThemeToggle"
+import { MoonIcon, SunIcon } from "@phosphor-icons/react"
 
 const lang = getLangFromUrl(Astro.url)
 const t = createTranslations(lang)
-const themeLabel = lang === "es" ? "Cambiar tema" : "Toggle theme"
-const deckLabel = t("hud.status.theme_deck")
-const blueprintLabel = t("hud.status.theme_blueprint")
-
-const isHomePage =
-  removeLocalePrefix(Astro.url.pathname) === "/" ||
-  removeLocalePrefix(Astro.url.pathname) === ""
 
 const homeUrl = getRelativeLocaleUrl(lang, "/")
-const experienceUrl = isHomePage ? "#experience" : `${homeUrl}#experience`
-const projectsUrl = isHomePage ? "#projects" : `${homeUrl}#projects`
-const contactUrl = isHomePage ? "#contact" : `${homeUrl}#contact`
+const isHome = removeLocalePrefix(Astro.url.pathname).replace(/\/$/, "") === ""
+const anchor = (id: string) => (isHome ? `#${id}` : `${homeUrl}#${id}`)
 
 const otherLang = (lang === "en" ? "es" : "en") as Language
-const currentPath = removeLocalePrefix(Astro.url.pathname)
-const otherLangUrl = getRelativeLocaleUrl(otherLang, currentPath)
-const otherLangName = languages[otherLang]
+const otherLangUrl = getRelativeLocaleUrl(
+  otherLang,
+  removeLocalePrefix(Astro.url.pathname)
+)
+
+const links = [
+  { id: "work", label: t("nav.work") },
+  { id: "method", label: t("nav.method") },
+  { id: "about", label: t("nav.about") },
+  { id: "contact", label: t("nav.contact") },
+]
 ---
 
-<header
-  id="header"
-  class="border-border/70 bg-background/75 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-md"
+<a
+  href="#content"
+  class="bg-foreground text-background sr-only z-[60] px-3 py-2 font-sans text-sm focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
 >
-  <div class="container mx-auto max-w-6xl px-4 py-3 sm:px-6 lg:px-8">
-    <nav class="flex items-center justify-between">
+  {t("nav.skip")}
+</a>
+<header
+  class="border-border bg-background/92 sticky top-0 z-50 border-b backdrop-blur-sm"
+>
+  <div class="page flex h-14 items-center justify-between gap-4">
+    <a
+      href={homeUrl}
+      class="font-serif text-[1.0625rem] font-semibold tracking-tight"
+      aria-label={t("nav.home")}
+    >
+      Franklin Martinez
+    </a>
+    <nav aria-label={t("nav.label")} class="flex items-center gap-1 sm:gap-2">
+      <ul class="hidden items-center gap-1 md:flex">
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={anchor(l.id)}
+                class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center px-2.5 font-sans text-[0.875rem] transition-colors duration-150"
+              >
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
       <a
-        href={homeUrl}
-        id="avatar-home-btn"
-        class="group text-foreground flex cursor-pointer items-center gap-3"
-        aria-label="Go to homepage"
+        href={otherLangUrl}
+        hreflang={otherLang}
+        lang={otherLang}
+        data-lang-switch={otherLang}
+        aria-label={`${t("nav.other_lang_short")}, ${t("nav.other_lang")}`}
+        class="text-muted-foreground hover:text-foreground inline-flex min-h-11 min-w-11 items-center justify-center font-sans text-[0.8125rem] font-medium transition-colors duration-150"
       >
-        <Image
-          src={avatar}
-          width={80}
-          height={80}
-          alt="Franklin Martinez"
-          priority
-          loading="eager"
-          quality={100}
-          class="ring-border group-hover:ring-primary/60 h-9 w-9 rounded-sm ring-1 transition-all duration-300 group-hover:ring-2"
-        />
-        <span
-          class="text-muted-foreground group-hover:text-foreground hidden font-mono text-[0.6875rem] font-semibold tracking-[0.18em] uppercase transition-colors sm:block"
-        >
-          Franklin Martinez
-        </span>
+        {t("nav.other_lang_short")}
       </a>
-      <div class="hidden items-center gap-6 md:flex">
-        <a
-          href={experienceUrl}
-          class="nav-link text-muted-foreground hover:text-primary font-mono text-xs font-medium tracking-wide uppercase transition-colors"
-          data-section="experience"
-          data-astro-prefetch
-        >
-          {t("nav.experience")}
-        </a>
-        <a
-          href={projectsUrl}
-          class="nav-link text-muted-foreground hover:text-primary font-mono text-xs font-medium tracking-wide uppercase transition-colors"
-          data-section="projects"
-          data-astro-prefetch
-        >
-          {t("nav.projects")}
-        </a>
-        <a
-          href={contactUrl}
-          class="nav-link border-border bg-secondary text-foreground hover:border-primary/50 hover:text-primary inline-block rounded-sm border px-3 py-1.5 font-mono text-xs font-medium tracking-wide uppercase transition-colors"
-          data-section="contact"
-          data-astro-prefetch
-        >
-          {t("nav.contact")}
-        </a>
-        <div class="border-border flex items-center gap-2 border-l pl-4">
-          <a
-            href={otherLangUrl}
-            class="text-muted-foreground hover:border-primary/40 hover:text-primary border-border grid size-9 cursor-pointer place-items-center rounded-sm border bg-transparent font-mono text-xs font-semibold uppercase transition-colors"
-            title={`Switch to ${otherLangName}`}
-            data-lang-switch
-            data-target-lang={otherLang}
-            data-astro-prefetch
-          >
-            {otherLang.toUpperCase()}
-          </a>
-          <ThemeToggle
-            client:load
-            label={themeLabel}
-            deckLabel={deckLabel}
-            blueprintLabel={blueprintLabel}
-          />
-        </div>
-      </div>
-      <div class="flex items-center gap-1.5 md:hidden">
-        <ThemeToggle
-          client:load
-          label={themeLabel}
-          deckLabel={deckLabel}
-          blueprintLabel={blueprintLabel}
-        />
-        <button
-          id="mobile-menu-btn"
-          class="text-foreground hover:border-primary/40 hover:text-primary border-border flex h-10 w-10 items-center justify-center rounded-sm border bg-transparent transition-colors"
-          aria-label="Toggle mobile menu"
-        >
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            >
-            </path>
-          </svg>
-        </button>
-      </div>
+      <button
+        type="button"
+        id="theme-toggle"
+        aria-label={t("nav.theme")}
+        title={t("nav.theme")}
+        class="text-muted-foreground hover:text-foreground inline-flex size-11 items-center justify-center transition-colors duration-150"
+      >
+        <MoonIcon aria-hidden="true" className="size-[18px] dark:hidden" />
+        <SunIcon aria-hidden="true" className="hidden size-[18px] dark:block" />
+      </button>
     </nav>
   </div>
-  <div
-    id="mobile-menu"
-    class="border-border hidden border-t px-4 pb-4 sm:px-6 md:hidden lg:px-8"
+  <nav
+    aria-label={t("nav.label")}
+    class="page border-border border-t md:hidden"
   >
-    <a
-      href={experienceUrl}
-      class="mobile-nav-link text-muted-foreground block py-3 font-mono text-sm uppercase transition-colors"
-      data-section="experience"
-      data-astro-prefetch
-    >
-      {t("nav.experience")}
-    </a>
-    <a
-      href={projectsUrl}
-      class="mobile-nav-link text-muted-foreground block py-3 font-mono text-sm uppercase transition-colors"
-      data-section="projects"
-      data-astro-prefetch
-    >
-      {t("nav.projects")}
-    </a>
-    <a
-      href={contactUrl}
-      class="mobile-nav-link border-border bg-secondary text-foreground hover:border-primary/50 hover:text-primary mt-3 block rounded-sm border px-3 py-3 text-center font-mono text-sm font-medium uppercase transition-colors"
-      data-section="contact"
-      data-astro-prefetch
-    >
-      {t("nav.contact")}
-    </a>
-    <a
-      href={otherLangUrl}
-      class="text-muted-foreground hover:text-primary mt-3 block w-full cursor-pointer py-3 text-center font-mono text-sm font-medium uppercase transition-colors"
-      title={`Switch to ${otherLangName}`}
-      data-lang-switch
-      data-target-lang={otherLang}
-      data-astro-prefetch
-    >
-      {otherLang.toUpperCase()}
-    </a>
-  </div>
+    <ul class="-mx-2 flex">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={anchor(l.id)}
+              class="text-muted-foreground hover:text-foreground inline-flex min-h-10 items-center px-2 font-sans text-[0.875rem] transition-colors duration-150"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
 </header>
 
 <script>
-  import { navigate } from "astro:transitions/client"
+  const BG = { light: "#fbfcfd", dark: "#131418" } as const
 
-  let activeObserver: IntersectionObserver | null = null
-
-  function initializeHeader() {
-    document.querySelectorAll("[data-lang-switch]").forEach((link) => {
-      if (!(link instanceof HTMLAnchorElement)) return
-      if (link.dataset.listenerAdded === "true") return
-
-      link.addEventListener("click", (event) => {
-        event.preventDefault()
-        // Remember the explicit choice so the "/" redirect honours it on a
-        // full reload instead of falling back to the browser language.
-        const targetLang = link.dataset.targetLang
-        if (targetLang) {
-          try {
-            localStorage.setItem("preferred-lang", targetLang)
-          } catch {
-            /* localStorage unavailable: choice simply is not persisted */
-          }
-        }
-        const href = link.href
-        const currentHash = window.location.hash
-        const targetUrl = new URL(href)
-        if (currentHash) {
-          targetUrl.hash = currentHash
-        }
-        navigate(targetUrl.pathname + targetUrl.hash)
-      })
-      link.dataset.listenerAdded = "true"
+  function bind() {
+    document.getElementById("theme-toggle")?.addEventListener("click", () => {
+      const root = document.documentElement
+      const dark = !root.classList.contains("dark")
+      root.classList.toggle("dark", dark)
+      try {
+        localStorage.setItem("theme", dark ? "dark" : "light")
+      } catch {
+        /* storage unavailable: the choice lasts for this page only */
+      }
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute("content", dark ? BG.dark : BG.light)
     })
 
-    const updateActiveNavigation = (activeSection: string) => {
-      document
-        .querySelectorAll(".nav-link, .mobile-nav-link")
-        .forEach((link) => {
-          const section = link.getAttribute("data-section")
-          const isContact = section === "contact"
-          const isActive = section === activeSection
-
-          if (isContact) {
-            link.classList.toggle("border-primary/60", isActive)
-            link.classList.toggle("text-primary", isActive)
-          } else {
-            link.classList.toggle("text-primary", isActive)
-            link.classList.toggle("font-semibold", isActive)
-            link.classList.toggle("text-muted-foreground", !isActive)
+    document
+      .querySelectorAll<HTMLAnchorElement>("[data-lang-switch]")
+      .forEach((a) =>
+        a.addEventListener("click", () => {
+          try {
+            localStorage.setItem("preferred-lang", a.dataset.langSwitch ?? "en")
+          } catch {
+            /* storage unavailable */
           }
         })
-
-      // Catalog rail: a single filled square marks the current section.
-      document.querySelectorAll("[data-rail-section]").forEach((link) => {
-        const section = link.getAttribute("data-rail-section")
-        link.classList.toggle("is-active", section === activeSection)
-        if (section === activeSection) {
-          link.setAttribute("aria-current", "true")
-        } else {
-          link.removeAttribute("aria-current")
-        }
-      })
-    }
-
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn")
-    const mobileMenu = document.getElementById("mobile-menu")
-    if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.onclick = () => mobileMenu.classList.toggle("hidden")
-
-      const mobileNavLinks = mobileMenu.querySelectorAll("a")
-      mobileNavLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.add("hidden")
-        })
-      })
-    }
-
-    const avatarHomeBtn = document.getElementById("avatar-home-btn")
-    if (avatarHomeBtn instanceof HTMLAnchorElement) {
-      avatarHomeBtn.onclick = () => {
-        if (mobileMenu) mobileMenu.classList.add("hidden")
-      }
-    }
-
-    // Disconnect any observer left over from a previous page before
-    // creating a new one, so client navigations don't leak observers.
-    activeObserver?.disconnect()
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const intersecting = entries.filter((e) => e.isIntersecting)
-        if (intersecting.length === 0) return
-
-        intersecting.sort(
-          (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
-        )
-        const activeEntry = intersecting[0]
-        if (!activeEntry) return
-
-        const sectionId = activeEntry.target.id
-
-        let activeSection = "home"
-        if (sectionId.includes("experience")) activeSection = "experience"
-        else if (sectionId.includes("technologies"))
-          activeSection = "technologies"
-        else if (sectionId.includes("projects")) activeSection = "projects"
-        else if (sectionId.includes("contact")) activeSection = "contact"
-
-        updateActiveNavigation(activeSection)
-      },
-      { root: null, rootMargin: "-80px 0px -40% 0px", threshold: 0.1 }
-    )
-    activeObserver = observer
-
-    setTimeout(() => {
-      const sections = document.querySelectorAll(
-        "#home, [id*='experience'], [id*='technologies'], [id*='projects'], [id*='contact']"
       )
-      if (sections.length > 0) {
-        sections.forEach((section) => observer.observe(section))
-        if (window.scrollY === 0) updateActiveNavigation("home")
-      }
-    }, 100)
   }
 
-  document.addEventListener("DOMContentLoaded", initializeHeader)
-  document.addEventListener("astro:after-swap", initializeHeader)
-  document.addEventListener("astro:before-swap", () => {
-    activeObserver?.disconnect()
-    activeObserver = null
-  })
+  bind()
+  document.addEventListener("astro:after-swap", bind)
 </script>

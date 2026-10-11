@@ -1,53 +1,56 @@
 ---
-import SocialLinks from "@/components/SocialLinks.astro"
+import JustAskFigure from "@/components/JustAskFigure.astro"
+import { ArrowUpRightIcon } from "@phosphor-icons/react"
 
 export interface Props {
   t: (key: string) => string
+  lang: "en" | "es"
 }
 
-const { t } = Astro.props
+const { t, lang } = Astro.props
+
+const links = [
+  {
+    label: "franklinmdev@hotmail.com",
+    href: "mailto:franklinmdev@hotmail.com",
+  },
+  { label: "GitHub", href: "https://github.com/franklinmdev", external: true },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/franklin-martinez-0a697a253/",
+    external: true,
+  },
+]
 ---
 
-<!-- Sticky hero column -->
-<div
-  id="home"
-  class="pt-24 pb-16 xl:sticky xl:top-0 xl:flex xl:max-h-screen xl:w-2/5 xl:flex-col xl:justify-between xl:py-28 2xl:w-[38%]"
->
-  <div class="space-y-10">
-    <!-- Identity -->
-    <div>
-      <span
-        class="hero-headline text-muted-foreground mb-5 block font-mono text-[0.6875rem] font-semibold tracking-[0.16em] uppercase"
-      >
-        {t("hud.hero.id")}
-      </span>
-      <h1
-        class="hero-headline text-foreground mb-4 text-4xl font-semibold sm:text-5xl lg:text-6xl xl:text-5xl"
-      >
-        Franklin <span class="sr-only">"franklinmdev"</span> Martinez
-      </h1>
-      <p
-        class="hero-subtitle text-muted-foreground mb-8 font-mono text-sm font-medium tracking-wide sm:text-base"
-      >
-        {t("hero.subtitle")}
-      </p>
-
-      <!-- The one real large-type statement — his actual proof. -->
-      <p
-        class="hero-headline text-foreground measure text-xl leading-snug font-medium text-balance sm:text-2xl xl:text-xl 2xl:text-2xl"
-      >
-        {t("hero.statement")}
-      </p>
-    </div>
-
-    <div
-      class="hero-about text-muted-foreground measure space-y-4 text-base leading-relaxed"
+<section class="page-grid pt-12 pb-2 sm:pt-16 lg:pt-20" aria-labelledby="title">
+  <div>
+    <h1
+      id="title"
+      class="text-[2.375rem] leading-[1.06] tracking-[-0.025em] sm:text-[3.25rem] lg:text-[3.75rem]"
     >
-      <p>{t("hero.about.p1")}</p>
-      <p>{t("hero.about.p2")}</p>
-    </div>
+      {t("hero.title")}
+    </h1>
+    <p class="text-muted-foreground mt-5 font-sans text-[0.9375rem]">
+      {t("hero.byline")}
+    </p>
+    <ul class="mt-2 flex flex-wrap gap-x-5 font-sans text-[0.9375rem]">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              class="link inline-flex min-h-8 items-center gap-0.5"
+              href={l.href}
+            >
+              {l.label}
+              {l.external && (
+                <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+              )}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
-
-  <!-- Social links -->
-  <SocialLinks t={t} />
-</div>
+  <JustAskFigure t={t} lang={lang} />
+</section>

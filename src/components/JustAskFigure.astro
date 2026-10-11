@@ -1,0 +1,287 @@
+---
+import { recordings } from "@/data/justask-recordings"
+import type { Recording } from "@/data/justask-recordings"
+import {
+  ArrowCounterClockwiseIcon,
+  ArrowUpRightIcon,
+} from "@phosphor-icons/react"
+
+export interface Props {
+  t: (key: string) => string
+  lang: "en" | "es"
+}
+
+const { t, lang } = Astro.props
+
+// Fig. 1 is static: three cards are rendered at build time from the recorded
+// responses, and the checked radio decides which one shows. No React on the
+// first screen.
+const LIVE_URL = "https://justask-demo.franklinmdev.workers.dev"
+const STAGGER_MS = 170
+// The held case opens first: a field the model is unsure of stays empty.
+const DEFAULT = recordings[lang].findIndex((r) => r.vendor.name === null)
+
+const dateOf = (rec: Recording) =>
+  new Intl.DateTimeFormat(lang, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${rec.date.iso}T00:00:00Z`))
+const amountOf = (rec: Recording) =>
+  new Intl.NumberFormat(lang, {
+    style: "currency",
+    currency: rec.amount.currency,
+  }).format(rec.amount.value)
+
+interface Line {
+  text: string
+  quote?: string
+  mono?: boolean
+  empty?: boolean
+}
+interface Row {
+  label: string
+  lines: { line: Line; meter: { p: number; gate: number; dim?: boolean } }[]
+  why?: string
+}
+
+// Each card is a list of rows, each row a value line over a probability bar.
+function rowsOf(rec: Recording): Row[] {
+  const vendor: Row = rec.vendor.name
+    ? {
+        label: t("fig1.vendor"),
+        lines: [
+          {
+            line: { text: rec.vendor.name },
+            meter: { p: rec.vendor.p, gate: rec.vendor.gate },
+          },
+        ],
+      }
+    : {
+        label: t("fig1.vendor"),
+        lines: rec.vendor.guess
+          ? [
+              {
+                line: { text: t("fig1.empty"), empty: true },
+                meter: {
+                  p: rec.vendor.guess.p,
+                  gate: rec.vendor.gate,
+                  dim: true,
+                },
+              },
+            ]
+          : [],
+        ...(rec.vendor.guess && {
+          why: t("fig1.empty_why")
+            .replace("{name}", rec.vendor.guess.name)
+            .replace("{p}", rec.vendor.guess.p.toFixed(2)),
+        }),
+      }
+  return [
+    vendor,
+    {
+      label: t("fig1.tags"),
+      lines: rec.tags.map((tag) => ({
+        line: { text: t(`fig1.tag_labels.${tag.id}`) },
+        meter: { p: tag.p, gate: rec.tagGate },
+      })),
+    },
+    {
+      label: t("fig1.date"),
+      lines: [
+        {
+          line: { text: dateOf(rec), quote: rec.date.text },
+          meter: { p: rec.date.p, gate: rec.date.gate },
+        },
+      ],
+    },
+    {
+      label: t("fig1.amount"),
+      lines: [
+        {
+          line: { text: amountOf(rec), quote: rec.amount.text, mono: true },
+          meter: { p: rec.amount.p, gate: rec.amount.gate },
+        },
+      ],
+    },
+  ]
+}
+
+const cards = recordings[lang].map((rec) => {
+  let step = 0
+  return {
+    rec,
+    rows: rowsOf(rec).map((row) => ({
+      ...row,
+      lines: row.lines.map((l) => ({
+        ...l,
+        textDelay: step * STAGGER_MS,
+        barDelay: step++ * STAGGER_MS,
+      })),
+    })),
+  }
+})
+---
+
+<figure
+  class="span-all mt-10 mb-2"
+  data-plotted="false"
+  data-autoplot
+  aria-labelledby="fig1-caption"
+>
+  <div
+    class="figure grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-12"
+  >
+    <div aria-live="polite">
+      {
+        cards.map(({ rec, rows }, i) => (
+          <div
+            data-card={i}
+            class="border-border bg-figure border px-4 py-4 sm:px-6"
+          >
+            <div class="flex items-center justify-between gap-4">
+              <p class="font-sans text-[0.9375rem] font-semibold">
+                {t("fig1.card")}
+              </p>
+              <button
+                type="button"
+                data-replay
+                class="apparatus hover:text-foreground inline-flex min-h-11 items-center gap-1.5 transition-colors duration-150"
+              >
+                <ArrowCounterClockwiseIcon
+                  aria-hidden="true"
+                  className="size-4"
+                />
+                {t("fig1.replay")}
+              </button>
+            </div>
+            <p class="border-border mt-1 border-b pb-4 font-serif text-lg">
+              “{rec.request}”
+            </p>
+
+            <dl>
+              {rows.map((row) => (
+                <div class="border-border grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 border-t py-3 first:border-t-0 sm:grid-cols-[6.5rem_minmax(0,1fr)]">
+                  <dt class="apparatus pt-0.5">{row.label}</dt>
+                  <dd>
+                    {row.lines.map(({ line, meter, textDelay, barDelay }) => (
+                      <div class="mb-1 last:mb-0">
+                        <p
+                          class:list={[
+                            "settle",
+                            line.empty && "text-muted-foreground",
+                          ]}
+                          style={`transition-delay:${textDelay}ms`}
+                        >
+                          {line.empty ? (
+                            <span class="border-rule-strong inline-block min-w-40 border-b border-dashed pr-2">
+                              {line.text}
+                            </span>
+                          ) : line.mono ? (
+                            <span class="data text-base">{line.text}</span>
+                          ) : (
+                            line.text
+                          )}
+                          {line.quote && (
+                            <>
+                              {" "}
+                              <span class="apparatus">“{line.quote}”</span>
+                            </>
+                          )}
+                        </p>
+                        <div class="mt-1.5 flex items-center gap-3">
+                          <div
+                            class="bg-border relative h-1.5 flex-1"
+                            role="img"
+                            aria-label={`${meter.p.toFixed(2)}, ${t("fig1.gate")} ${meter.gate.toFixed(2)}`}
+                          >
+                            <div
+                              class:list={[
+                                "grow-x absolute inset-0",
+                                meter.p >= meter.gate && !meter.dim
+                                  ? "bg-measure"
+                                  : "bg-measure/45",
+                              ]}
+                              style={`--to:${meter.p};transition-delay:${barDelay}ms`}
+                            />
+                            <div
+                              class="bg-foreground absolute -top-1 -bottom-1 w-px"
+                              style={`left:${meter.gate * 100}%`}
+                              aria-hidden="true"
+                            />
+                          </div>
+                          <span class="data measured w-10 text-right">
+                            {meter.p.toFixed(2)}
+                          </span>
+                          <span class="apparatus hidden w-16 sm:inline">
+                            {t("fig1.gate")} {meter.gate.toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                    {row.why && <p class="apparatus mt-1.5">{row.why}</p>}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))
+      }
+    </div>
+
+    <div>
+      <p class="apparatus mb-3" id="fig1-pick">{t("fig1.pick")}</p>
+      <div role="radiogroup" aria-labelledby="fig1-pick">
+        {
+          cards.map(({ rec }, i) => (
+            <label class="border-border text-muted-foreground has-[:checked]:text-foreground flex min-h-11 w-full cursor-pointer items-start gap-3 border-t py-3 font-sans text-[0.9375rem] leading-snug transition-colors duration-150 last:border-b">
+              <input
+                type="radio"
+                name="fig1-pick"
+                value={i}
+                data-pick={i}
+                checked={i === DEFAULT}
+                class="peer sr-only"
+              />
+              <span
+                aria-hidden="true"
+                class="border-rule-strong peer-checked:bg-foreground peer-checked:border-foreground peer-focus-visible:outline-ring mt-1.5 size-2 shrink-0 border transition-colors duration-150 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-[5px]"
+              />
+              {rec.request}
+            </label>
+          ))
+        }
+      </div>
+      <a
+        href={LIVE_URL}
+        class="link mt-5 inline-flex items-center gap-1 font-sans text-[0.9375rem]"
+      >
+        {t("fig1.try")}
+        <ArrowUpRightIcon aria-hidden="true" className="size-4" />
+      </a>
+    </div>
+  </div>
+  <figcaption id="fig1-caption" class="caption">
+    <b>{t("fig1.label")}.</b>
+    {t("fig1.caption")}
+  </figcaption>
+</figure>
+
+<style>
+  /* The checked radio picks the card. */
+  [data-card] {
+    display: none;
+  }
+  figure:has([data-pick="0"]:checked) [data-card="0"],
+  figure:has([data-pick="1"]:checked) [data-card="1"],
+  figure:has([data-pick="2"]:checked) [data-card="2"] {
+    display: block;
+  }
+  @supports not selector(:has(a)) {
+    [data-card="1"] {
+      display: block;
+    }
+  }
+</style>

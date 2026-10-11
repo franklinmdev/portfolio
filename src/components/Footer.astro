@@ -1,14 +1,5 @@
----
-import { getTranslationFromUrl } from "@/i18n/utils"
-
-const t = getTranslationFromUrl(Astro.url)
----
-
-<footer class="border-border mt-20 border-t px-4 pt-8 pb-10 sm:px-6 lg:px-8">
-  <p
-    class="text-muted-foreground flex items-center justify-center gap-2 text-center font-mono text-xs tracking-wide"
-  >
-    <span class="text-muted-foreground/60 select-none">//</span>
-    {t("footer.credits")}
+<footer class="border-rule-strong mt-24 border-t">
+  <p class="page text-muted-foreground py-8 font-sans text-[0.8125rem]">
+    © {new Date().getFullYear()} Franklin Martinez
   </p>
 </footer>

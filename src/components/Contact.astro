@@ -1,0 +1,24 @@
+---
+export interface Props {
+  t: (key: string) => string
+}
+
+const { t } = Astro.props
+const [before = "", after = ""] = t("contact.lead").split("{email}")
+---
+
+<section
+  id="contact"
+  class="page-grid border-rule-strong mt-20 border-t pt-12"
+  aria-labelledby="contact-title"
+>
+  <h2 id="contact-title" class="section-title">{t("contact.title")}</h2>
+  <div class="hidden lg:block"></div>
+  <p class="mt-4">
+    {before}<a
+      class="link"
+      href="mailto:franklinmdev@hotmail.com"
+      set:text="franklinmdev@hotmail.com"
+    />{after}
+  </p>
+</section>

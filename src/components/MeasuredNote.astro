@@ -1,0 +1,38 @@
+---
+// A measured note: the numbers behind a paragraph, in the margin. Amber mono
+// for the value, a sans label, then the date and the source of each number.
+import type { Source } from "@/data/measured"
+
+export interface Props {
+  rows: { value: string; label: string }[]
+  sources?: Source[]
+  class?: string
+}
+
+const { rows, sources = [], class: className } = Astro.props
+---
+
+<aside class:list={["in-margin sidenote measured-note", className]}>
+  <dl>
+    {
+      rows.map((r) => (
+        <div>
+          <dt>{r.value}</dt>
+          <dd>{r.label}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  {
+    sources.length > 0 && (
+      <p class="source">
+        {sources.map((s, i) => [
+          i > 0 && "; ",
+          s.date && <time datetime={s.date}>{s.date}</time>,
+          s.date && s.source && ", ",
+          s.source && <a href={s.source.href}>{s.source.label}</a>,
+        ])}
+      </p>
+    )
+  }
+</aside>

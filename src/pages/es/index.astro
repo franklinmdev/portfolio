@@ -2,14 +2,17 @@
 import avatarImage from "@/assets/avatar.webp"
 import HomePage from "@/components/HomePage.astro"
 import Layout from "@/layouts/Layout.astro"
+import { createTranslations } from "@/i18n/utils"
+
+const t = createTranslations("es")
 ---
 
 <Layout
-  title='Franklin "franklinmdev" Martinez – Ingeniero full-stack'
-  description="Franklin Martinez (franklinmdev) es un ingeniero full-stack que construye software fiscal y de cumplimiento para el mercado dominicano, de principio a fin desde la base de datos hasta la pantalla."
+  title={t("meta.title")}
+  description={t("meta.description")}
   image={{
     url: avatarImage.src,
-    alt: "Franklin Martinez - retrato de ingeniero full-stack",
+    alt: "Franklin Martinez",
   }}
 >
   <HomePage lang="es" />
