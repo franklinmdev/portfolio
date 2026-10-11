@@ -237,5 +237,16 @@ const links = (items: { label: string; href: string }[], slug: string) => [
   <div class="mt-10">
     <h4 class="font-serif text-xl font-semibold">brook</h4>
     <p class="mt-2">{t("work.brook.lead")}</p>
+    <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
+      <li>
+        <a
+          class="link inline-flex min-h-8 items-center gap-0.5"
+          href="https://brook.franklinmdev.workers.dev"
+        >
+          {t("work.brook.link")}
+          <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+        </a>
+      </li>
+    </ul>
   </div>
 </section>

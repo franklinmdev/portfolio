@@ -51,7 +51,8 @@
       "caption": "Fig. 5. El panel de DomiProp."
     },
     "brook": {
-      "lead": "Una aplicación móvil en desarrollo (Expo, TypeScript) que convierte los enlaces que la gente guarda de TikTok, Instagram y la web en una biblioteca donde se puede buscar, con cada enlace clasificado en campos tipados y una insignia de confianza. Antes de construirla estoy corriendo una prueba de demanda de dos semanas: una página con lista de espera, con los criterios para abandonarla escritos antes del lanzamiento."
+      "lead": "Una aplicación móvil en desarrollo (Expo, TypeScript) que convierte los enlaces que la gente guarda de TikTok, Instagram y la web en una biblioteca donde se puede buscar, con cada enlace clasificado en campos tipados y una insignia de confianza. Antes de construirla estoy corriendo una prueba de demanda de dos semanas: una página con lista de espera, con los criterios para abandonarla escritos antes del lanzamiento.",
+      "link": "La página de lanzamiento"
     }
   },
   "fig1": {
