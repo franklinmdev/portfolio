@@ -51,7 +51,7 @@
       "caption": "Fig. 5. The DomiProp dashboard."
     },
     "brook": {
-      "lead": "A mobile app in development (Expo, TypeScript) that turns the links people save from TikTok, Instagram and the web into a searchable library, each link sorted into typed fields with a confidence badge. Before building it, I'm running a two-week demand test: a landing page and a waitlist, with the kill lines written before launch.",
+      "lead": "A mobile app in development (Expo, TypeScript) that turns the links people save from TikTok, Instagram and the web into a searchable library, each link sorted into typed fields with a confidence badge.",
       "link": "The landing page"
     }
   },
