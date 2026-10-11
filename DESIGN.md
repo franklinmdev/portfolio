@@ -19,11 +19,13 @@ figure you can run, and the proof sits in the margin.
   buttons, labels), Commit Mono for measured data only (probabilities, F1,
   costs, IDs, digits). Reason: a paper is serif prose with a sans apparatus;
   Franklin Gothic is the classic print sans, and it carries the owner's name.
-- Color strategy: ink on paper, achromatic, plus one crimson
-  (`oklch(0.53 0.2 5)` light, `oklch(0.72 0.16 5)` dark) used only for
-  measured values: a probability bar, a plotted point, the number that
-  decides. Never on chrome, never decorative. Reason: color carries meaning,
-  and here the meaning is "this was measured".
+- Color strategy: ink on paper, achromatic, plus one sepia amber, hue 90,
+  used only for measured values: a probability bar, a plotted point, the
+  number that decides. Fills `oklch(0.66 0.13 90)` light and
+  `oklch(0.8 0.14 90)` dark; text and labels on fills use the deeper
+  `oklch(0.48 0.1 90)` light and `oklch(0.82 0.14 90)` dark for contrast.
+  Never on chrome, never decorative. Reason: color carries meaning, and here
+  the meaning is "this was measured"; amber reads as pencil on graph paper.
 - Ground: light is cool white paper `oklch(0.99 0.002 250)`, never cream;
   dark is the same paper projected, graphite `oklch(0.175 0.006 260)`. The
   site opens in the OS preference with a toggle.
@@ -61,8 +63,11 @@ classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.prose`.
 - Datasheet (2026-05 to 2026-10): IBM Plex + JetBrains Mono, cyan; shallow,
   and its fonts are now spent.
 - warm-editorial, refined-dark, editorial-mono (2026-05).
+- Crimson hue 5 accent (2026-10-11): read as pink on the dark ground. True
+  red is blocked by DomiProp's orange 47 on the same page. Ink only and olive
+  115 were the other candidates.
 
 ## Benchmarks
 
 - Edward Tufte's books: sidenotes as the proof channel.
-- Distill.pub (https://distill.pub): figures you can operate inside prose.
+- Distill.pub (<https://distill.pub>): figures you can operate inside prose.

@@ -225,7 +225,7 @@ export default function DocmatchFigure({ t }: Props) {
                     height: `calc(${(y1 - y0) * 100}% + 0.8%)`,
                   }}
                 >
-                  <span className="bg-measure text-background absolute -top-[1.5px] -left-[1.5px] -translate-y-full px-[0.6cqw] font-sans [font-size:1.7cqw] leading-normal font-semibold">
+                  <span className="bg-measure-ink text-background absolute -top-[1.5px] -left-[1.5px] -translate-y-full px-[0.6cqw] font-sans [font-size:1.7cqw] leading-normal font-semibold">
                     {i + 1}
                   </span>
                 </div>

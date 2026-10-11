@@ -17,7 +17,7 @@
   },
   "hero": {
     "title": "Construyo sistemas con LLM, y los mido antes de confiar en ellos.",
-    "byline": "Full-Stack AI Engineer en Nubeteck, República Dominicana",
+    "byline": "Full-Stack AI Engineer, República Dominicana",
     "abstract_label": "Resumen.",
     "abstract": "Llevo tres años y medio construyendo software empresarial con TypeScript, React y .NET, y desde febrero de 2026 trabajo como Full-Stack AI Engineer. En mi tiempo libre construyo sistemas con LLM que se juzgan con benchmarks, no con demos. Las figuras de esta página funcionan: una reproduce respuestas reales de una demo en vivo, otra es una librería corriendo en tu navegador y otra grafica un benchmark que puedes rastrear hasta su commit.",
     "note_open": "Disponible para roles remotos en IA aplicada e ingeniería de producto con IA.",

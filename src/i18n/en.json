@@ -17,7 +17,7 @@
   },
   "hero": {
     "title": "I build LLM systems, and I measure them before I trust them.",
-    "byline": "Full-Stack AI Engineer at Nubeteck, Dominican Republic",
+    "byline": "Full-Stack AI Engineer, Dominican Republic",
     "abstract_label": "Abstract.",
     "abstract": "For three and a half years I've built business software with TypeScript, React and .NET, and since February 2026 I work as a Full-Stack AI Engineer. On my own time I build LLM systems that get judged by benchmarks instead of demos. The figures on this page run: one replays real responses from a live demo, one is a library running in your browser, and one plots a benchmark you can trace back to its commit.",
     "note_open": "Open to remote roles in applied AI and AI product engineering.",

@@ -9,8 +9,8 @@
 
 /* Figure 1: a research paper whose figures run, with the proof in the
    margin. Serif prose, a sans apparatus (nav, captions, sidenotes), mono for
-   measured data only. Ink on paper plus one crimson, used only for measured
-   values. See DESIGN.md. */
+   measured data only. Ink on paper plus one sepia amber, used only for
+   measured values. See DESIGN.md. */
 
 @theme {
   --font-serif:
@@ -44,11 +44,12 @@
   --color-ring: var(--ring);
   --color-measure: var(--measure);
   --color-measure-soft: var(--measure-soft);
+  --color-measure-ink: var(--measure-ink);
   --color-figure: var(--figure);
   --color-rule-strong: var(--rule-strong);
 }
 
-/* LIGHT: cool white paper, ink. Crimson only where something was measured. */
+/* LIGHT: cool white paper, ink. Sepia amber only where something was measured. */
 :root {
   --background: oklch(0.99 0.002 250);
   --foreground: oklch(0.21 0.01 260);
@@ -63,10 +64,12 @@
   --muted-foreground: oklch(0.46 0.01 260);
   --accent: oklch(0.95 0.003 250);
   --accent-foreground: oklch(0.21 0.01 260);
-  --measure: oklch(0.53 0.2 5);
-  --measure-soft: oklch(0.53 0.2 5 / 0.1);
-  --destructive: oklch(0.53 0.2 5);
-  --alert: oklch(0.53 0.2 5);
+  /* Bars and fills use the amber; text uses the deeper sepia for contrast. */
+  --measure: oklch(0.66 0.13 90);
+  --measure-soft: oklch(0.66 0.13 90 / 0.16);
+  --measure-ink: oklch(0.48 0.1 90);
+  --destructive: oklch(0.48 0.1 90);
+  --alert: oklch(0.48 0.1 90);
   --success: oklch(0.21 0.01 260);
   --border: oklch(0.21 0.01 260 / 0.13);
   --rule-strong: oklch(0.21 0.01 260 / 0.55);
@@ -89,10 +92,11 @@
   --muted-foreground: oklch(0.72 0.008 255);
   --accent: oklch(0.23 0.007 260);
   --accent-foreground: oklch(0.93 0.004 250);
-  --measure: oklch(0.72 0.16 5);
-  --measure-soft: oklch(0.72 0.16 5 / 0.14);
-  --destructive: oklch(0.72 0.16 5);
-  --alert: oklch(0.72 0.16 5);
+  --measure: oklch(0.8 0.14 90);
+  --measure-soft: oklch(0.8 0.14 90 / 0.16);
+  --measure-ink: oklch(0.82 0.14 90);
+  --destructive: oklch(0.82 0.14 90);
+  --alert: oklch(0.82 0.14 90);
   --success: oklch(0.93 0.004 250);
   --border: oklch(0.93 0.004 250 / 0.12);
   --rule-strong: oklch(0.93 0.004 250 / 0.5);
@@ -153,7 +157,7 @@
 
   input,
   textarea {
-    caret-color: var(--measure);
+    caret-color: var(--measure-ink);
   }
 
   img,
@@ -290,7 +294,7 @@
     font-size: 0.875em;
   }
   .measured {
-    color: var(--measure);
+    color: var(--measure-ink);
   }
 
   .section-title {
