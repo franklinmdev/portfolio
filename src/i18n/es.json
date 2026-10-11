@@ -1,155 +1,222 @@
 {
+  "meta": {
+    "title": "Franklin Martinez, ingeniero de IA aplicada",
+    "description": "Franklin Martinez construye sistemas con LLM y los mide antes de confiar en ellos: justask, docmatch y dgii-ts, con figuras que funcionan y los números detrás."
+  },
   "nav": {
-    "experience": "Experiencia",
-    "projects": "Proyectos",
-    "contact": "Contacto"
-  },
-  "rail": {
-    "stack": "Stack"
-  },
-  "tech": {
-    "groups": {
-      "languages": "Lenguajes",
-      "frontend": "Frontend",
-      "backend": "Backend y datos",
-      "workflow": "Flujo de trabajo"
-    }
-  },
-  "hud": {
-    "status": {
-      "theme_deck": "Consola",
-      "theme_blueprint": "Plano"
-    },
-    "modules": {
-      "experience": "01 — Experiencia",
-      "tech": "02 — Stack",
-      "projects": "03 — Proyectos",
-      "contact": "04 — Contacto"
-    },
-    "hero": {
-      "id": "Santiago, República Dominicana"
-    },
-    "projects": {
-      "open": "Abrir proyecto"
-    },
-    "contact": {
-      "channel": "Línea directa"
-    }
+    "label": "Principal",
+    "work": "Trabajo",
+    "method": "Método",
+    "about": "Sobre mí",
+    "contact": "Contacto",
+    "home": "Franklin Martinez, inicio",
+    "skip": "Ir al contenido",
+    "theme": "Cambiar entre claro y oscuro",
+    "other_lang": "English",
+    "other_lang_short": "EN"
   },
   "hero": {
-    "subtitle": "Ingeniero full-stack",
-    "statement": "Construyo productos de principio a fin, desde la base de datos hasta la pantalla. Últimamente eso ha sido software fiscal y de cumplimiento para el mercado dominicano.",
-    "about": {
-      "p1": "Crecí desarmando cosas para ver cómo funcionaban, y construyo software de la misma forma. Empiezo por el problema y por las personas que de verdad lo tienen, y dejo que eso decida el resto.",
-      "p2": "La mayor parte de lo que construyo tiene que ver con reglas del mundo real bastante enredadas, como impuestos, cumplimiento y operaciones internas, donde acertar en los detalles pequeños importa más que el stack. También ayudo a mi equipo a sacarle provecho real a las herramientas de IA, y acompaño a los desarrolladores junior que tengo cerca."
+    "title": "Construyo sistemas con LLM, y los mido antes de confiar en ellos.",
+    "byline": "Full-Stack AI Engineer en Nubeteck, República Dominicana",
+    "abstract_label": "Resumen.",
+    "abstract": "Llevo tres años y medio construyendo software empresarial con TypeScript, React y .NET, y desde febrero de 2026 trabajo como Full-Stack AI Engineer. En mi tiempo libre construyo sistemas con LLM que se juzgan con benchmarks, no con demos. Las figuras de esta página funcionan: una reproduce respuestas reales de una demo en vivo, otra es una librería corriendo en tu navegador y otra grafica un benchmark que puedes rastrear hasta su commit.",
+    "note_open": "Disponible para roles remotos en IA aplicada e ingeniería de producto con IA.",
+    "note_figures": "Las figuras 1 a 4 son interactivas. Cada número enlaza a su fuente.",
+    "email": "Escríbeme",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "work": {
+    "title": "Trabajo seleccionado",
+    "deep_dive": "Leer a fondo",
+    "live": "Demo en vivo",
+    "source": "Código",
+    "justask": {
+      "lead": "Convierte lo que una persona escribe en el estado de tu propia aplicación: un resultado de búsqueda, un filtro de tabla, una ficha llena. El código encuentra los candidatos, un modelo elige una etiqueta por pregunta con una probabilidad para cada etiqueta, y el campo del que no está seguro se queda vacío para que la persona lo llene (Fig. 1).",
+      "note_demo": "La demo en vivo funciona en inglés y en español, con límite de uso y un tope de 1 dólar al día en gasto de modelo.",
+      "note_eval": "Cada set de evaluación se congela con un checksum, con sus líneas de aprobación escritas, antes de la primera llamada al modelo. Ronda 4 de la evaluación de búsqueda: 24 de 24 elecciones exactas, ninguna inventada, 6 de 6 pedidos ambiguos retenidos, p95 de 380 ms.",
+      "note_eval_link": "El registro de evaluaciones, rondas fallidas incluidas",
+      "note_npm": "En npm como @justask/core, MIT."
+    },
+    "docmatch": {
+      "lead": "Conciliación de facturas para cuentas por pagar. Un modelo de visión lee la factura, código determinista revisa lo que leyó y la cruza con la orden de compra y la recepción de mercancía, y lo que no cuadra pasa a una persona (Fig. 2). Cada etapa tiene su número en una tabla de benchmarks que nombra el commit que lo produjo (Fig. 3).",
+      "status": "En progreso: la extracción, el cruce, la resolución de entidades y la revisión humana están terminados.",
+      "note_ci": "Una verificación en CI compara el F1 por campo y por línea de cada backend contra la base del merge, y rechaza el pull request que baje cualquiera de los dos.",
+      "note_data": "Los documentos del benchmark no se pueden redistribuir, así que la Fig. 2 usa las facturas sintéticas del corpus de CI."
+    },
+    "dgii": {
+      "lead": "Una librería en TypeScript para la DGII. Valida RNC, cédula, NCF y e-NCF sin conexión, y consulta contribuyentes leyendo las páginas web de la DGII con reintentos y un circuit breaker, porque la DGII no tiene API pública y cerró su servicio SOAP en enero de 2025. La Fig. 4 es la librería misma, corriendo en esta página.",
+      "note_npm": "En npm como dgii-ts, MIT.",
+      "note_skill": "Incluye una skill para agentes, así los agentes de código aprenden la librería con un comando:"
+    },
+    "also": "También en construcción",
+    "domiprop": {
+      "lead": "Gestión de alquileres para propietarios dominicanos: control de gastos, el formato 606 mensual, contratos de arrendamiento bajo la Ley 85-25 y recordatorios antes de cada fecha fiscal. Hecho con Next.js, NestJS, Prisma y PostgreSQL. Antes del lanzamiento.",
+      "caption": "Fig. 5. El panel de DomiProp."
+    },
+    "brook": {
+      "lead": "Una aplicación móvil en desarrollo (Expo, TypeScript) que convierte los enlaces que la gente guarda de TikTok, Instagram y la web en una biblioteca donde se puede buscar. Cada enlace se clasifica por tipo, como una receta, un lugar o un producto, en campos con una insignia de confianza. Antes de construir la aplicación estoy corriendo una prueba de demanda de dos semanas: una página con lista de espera en un Cloudflare Worker, con los criterios para abandonarla escritos antes del lanzamiento.",
+      "link": "La página de lanzamiento"
     }
   },
-  "sections": {
-    "experience_title": "Experiencia laboral",
-    "tech_title": "Tecnologías",
-    "projects_title": "Proyectos destacados",
-    "contact_title": "Ponte en contacto"
-  },
-  "practice": {
-    "title": "Cómo trabajo con IA",
-    "intro": "Elegir tecnologías ya es lo mínimo. Con el flujo correcto, cualquiera puede entregar en cualquier stack. Lo que marca la diferencia es el sistema que armo alrededor del modelo, para tomar un brief y entregar un producto terminado rápido sin bajar la calidad.",
-    "items": {
-      "prd": {
-        "title": "Del PRD al producto entregado",
-        "body": "Dame un brief o un PRD y entrego todo: modelo de datos, backend, API y una interfaz que la gente no técnica de verdad puede usar. Entran investigación y un plan escritos, y sale un producto funcionando con su guía de QA, con poco ida y vuelta."
-      },
-      "quality": {
-        "title": "La calidad se exige, no se espera",
-        "body": "Cada proyecto lleva reglas codificadas y hooks de edición. Cada cambio pasa el typecheck, el linter y la validación de esquema antes de entrar, así un error de tipos o un console.log perdido nunca llega a un commit."
-      },
-      "models": {
-        "title": "El modelo correcto para cada tarea",
-        "body": "Reparto el trabajo entre modelos de IA, el razonamiento profundo planifica y los modelos rápidos ejecutan, así la entrega sigue siendo rápida sin sacrificar el rigor."
-      }
+  "fig1": {
+    "label": "Fig. 1",
+    "caption": "Tres pedidos enviados a la demo en vivo de justask el 11 de octubre de 2026, reproducidos con sus respuestas reales. Las barras muestran la probabilidad que el modelo le da a cada elección. Un campo cuya elección no pasa su umbral se queda vacío.",
+    "pick": "Elige un pedido",
+    "replay": "Repetir",
+    "card": "Nuevo gasto",
+    "vendor": "Proveedor",
+    "tags": "Etiquetas",
+    "date": "Fecha",
+    "amount": "Monto",
+    "gate": "umbral",
+    "empty": "Vacío para que lo llenes",
+    "empty_why": "No se nombra ningún proveedor. Mejor candidato: {name} con {p}.",
+    "try": "Probarla en vivo",
+    "tag_labels": {
+      "meals": "Comidas",
+      "travel": "Viajes",
+      "client": "Cliente",
+      "office": "Oficina"
     }
+  },
+  "fig2": {
+    "label": "Fig. 2",
+    "caption": "Una factura sintética del corpus de CI de docmatch, con sus campos etiquetados dibujados donde están en la página, y luego las dos reglas de la verificación. La verificación no necesita modelo ni etiquetas. Una lectura que falla se guarda y nunca se reintenta, porque reintentar sería buscar una respuesta que pase.",
+    "replay": "Repetir",
+    "invoice": "Factura",
+    "extract": "Extracción",
+    "gate": "Verificación",
+    "dates_sane": "Fechas coherentes",
+    "dates_detail": "Emitida 03/04/26, vence 04/03/26",
+    "totals_agree": "Totales que cuadran",
+    "totals_detail": "No se puede verificar: la factura no muestra monto a pagar, y un valor ausente o ilegible nunca hace fallar una regla",
+    "passed": "pasa",
+    "not_checkable": "no verificable",
+    "verdict": "Resultado: pasa, una regla verificada y ninguna falló",
+    "next": "Después: resolver cada línea contra el catálogo y cruzar la factura con su orden de compra y su recepción.",
+    "fields": {
+      "vendor_name": "Proveedor",
+      "document_id": "Número de factura",
+      "date_issue": "Emitida",
+      "date_due": "Vence",
+      "amount_total_tax": "Impuesto",
+      "amount_total_gross": "Total"
+    }
+  },
+  "fig3": {
+    "label": "Fig. 3",
+    "caption": "F1 por campo contra costo por documento, en un subconjunto fijo de 100 documentos. Arriba y a la izquierda es mejor. Cada fila enlaza el commit que la produjo.",
+    "x": "Costo por documento (USD)",
+    "y": "F1 por campo",
+    "backend": "Backend",
+    "f1": "F1 por campo",
+    "cost": "Costo por doc.",
+    "commit": "Commit"
+  },
+  "fig4": {
+    "label": "Fig. 4",
+    "caption": "dgii-ts 0.3.0 desde npm, importada por esta página. Los pasos muestran la aritmética del dígito verificador; el resultado es el de la librería. Los números de ejemplo son inventados.",
+    "input": "Un RNC, cédula, NCF o e-NCF",
+    "examples": "Ejemplos",
+    "ex_rnc": "Un RNC",
+    "ex_cedula": "Una cédula",
+    "ex_ncf": "Un e-NCF",
+    "ex_typo": "Un error de tipeo",
+    "digit": "Dígito",
+    "weight": "Peso",
+    "product": "Producto",
+    "sum": "Suma",
+    "check": "Dígito verificador",
+    "expected": "esperado",
+    "got": "recibido",
+    "valid": "Válido",
+    "invalid": "No válido",
+    "waiting": "Escribe un número o elige un ejemplo.",
+    "rnc_rule": "RNC: los dígitos 1 a 8 por los pesos 7, 9, 8, 6, 5, 4, 3, 2. El residuo de la suma entre 11 da el dígito verificador.",
+    "cedula_rule": "Cédula: Luhn. Los dígitos 1 a 10 alternan pesos 1 y 2, a los productos mayores que 9 se les resta 9, y el dígito verificador completa la suma hasta un múltiplo de 10.",
+    "ncf_rule": "El NCF y el e-NCF no tienen dígito verificador: la librería revisa la letra de la serie, el código de tipo y el largo.",
+    "whitelist": "La librería acepta este número desde su lista de números conocidos que no cumplen el algoritmo.",
+    "type": "Tipo"
+  },
+  "method": {
+    "title": "Método",
+    "rules_title": "Las reglas antes que los resultados.",
+    "rules": "Cuando un modelo toma una decisión en algo que construyo, escribo cómo se va a juzgar antes de la primera llamada: un set de evaluación congelado, líneas de aprobación, un umbral medido y no adivinado. Las rondas fallidas se quedan en el registro.",
+    "brief_title": "De un brief a un producto en producción.",
+    "brief": "Entran la investigación y un plan, y sale un producto funcionando con su guía de QA: el modelo de datos, la API y una interfaz que puede usar gente sin formación técnica.",
+    "tooling_title": "Calidad que imponen las herramientas.",
+    "tooling": "Cada repositorio lleva reglas escritas y hooks de edición, así cada cambio pasa el chequeo de tipos, el lint y la validación del esquema antes de entrar. Los modelos profundos planifican, los rápidos ejecutan, y las mismas reglas aplican a ambos.",
+    "tools": "Herramientas",
+    "product_work": "Producto",
+    "ai_work": "IA"
   },
   "experience": {
+    "title": "Experiencia",
     "exp1": {
-      "date": "Febrero 2026 - Presente",
-      "title": "Ingeniero Full-Stack AI,",
+      "date": "Febrero de 2026 a hoy",
+      "title": "Full-Stack AI Engineer",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Soy dueño de los productos de principio a fin, del modelo de datos al frontend. Construyo una plataforma de gestión financiera que vendemos a nuestros clientes, con lógica presupuestaria multi-moneda y flujos de aprobación, y la sigo manteniendo y ampliando a medida que crece. También me encargo de las integraciones más difíciles, como proveedores de pago tipo Lemon Squeezy. Además, lidero cómo el equipo adopta herramientas de IA como Claude Code, Cursor CLI, Antigravity CLI y Codex, y acompaño a nuestros pasantes y desarrolladores junior."
+      "desc": "Me encargo de productos de principio a fin, desde el modelo de datos hasta el frontend. Construyo una plataforma comercial de gestión financiera que vendemos a clientes, con presupuestos en varias monedas y flujos de aprobación, y me tocan las integraciones más difíciles, como los proveedores de pago. También lidero cómo el equipo adopta herramientas de IA para programar, como Claude Code, Cursor CLI y Codex, y soy mentor de los pasantes y desarrolladores junior."
     },
     "exp2": {
-      "date": "Abril 2023 - Febrero 2026",
-      "title": "Desarrollador de Software,",
+      "date": "Abril de 2023 a febrero de 2026",
+      "title": "Desarrollador de software",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Ayudé a construir un sistema de diseño compartido que se usa en los productos de la empresa, ajusté las capas de datos para que la interfaz se sintiera más rápida y fluida, y acompañé a desarrolladores junior."
+      "desc": "Ayudé a construir un sistema de diseño compartido entre los productos de la empresa, optimicé las capas de datos para que la interfaz se sintiera más rápida y fui mentor de desarrolladores junior."
     }
   },
-  "projects": {
-    "view_all_btn": "Ver todos los proyectos",
-    "show_less_btn": "Mostrar menos proyectos",
-    "back_to_projects": "Volver a proyectos",
-    "published_on": "Publicado el ",
-    "overview": "Resumen",
-    "challenges": "Desafíos",
-    "key_learnings": "Aprendizajes clave",
-    "tech_stack": "Stack tecnológico",
-    "links": "Enlaces",
-    "view_live": "Ver proyecto en vivo",
-    "view_source": "Ver código fuente",
-    "work_together": "Trabajemos juntos"
+  "about": {
+    "title": "Sobre mí",
+    "caption": "Fig. 6. Franklin Martinez.",
+    "p1": "Crecí desarmando cosas para ver cómo funcionaban, y construyo software de la misma forma: empiezo por el problema y por la gente que de verdad lo tiene, y dejo que eso decida el resto.",
+    "p2": "Casi todo lo que construyo trata con reglas del mundo real que son complicadas, como impuestos, cumplimiento y operaciones internas, donde acertar en los detalles importa más que la tecnología.",
+    "outside_title": "Fuera del trabajo.",
+    "outside": "Tengo {link}, un canal de YouTube que cuenta las historias más antiguas del mundo: mitos, monstruos e historia legendaria. El sistema de producción detrás también es mío, en Python y Remotion: cada afirmación del guion enlaza su fuente, cada nombre que dice el narrador tiene la pronunciación verificada, y cada episodio se detiene antes de gastar más de su presupuesto en modelos de pago."
   },
   "contact": {
-    "subtitle": "¿Tienes un proyecto o solo quieres conectar? Estoy disponible para conversar.",
+    "title": "Contacto",
+    "lead": "Lo más rápido es el correo: {email}. O déjame un mensaje aquí y te respondo por correo.",
     "form": {
       "name_placeholder": "Tu nombre",
-      "email_placeholder": "Tu correo electrónico",
-      "message_placeholder": "Tu mensaje",
+      "email_placeholder": "tu@empresa.com",
+      "message_placeholder": "¿En qué estás trabajando?",
       "name_label": "Nombre",
       "email_label": "Correo electrónico",
       "message_label": "Mensaje",
       "send_btn": "Enviar mensaje",
-      "sending_btn": "Enviando...",
-      "success_msg": "Señal recibida — te respondo en 24 h",
-      "error_msg": "Lo siento, hubo un error al enviar tu mensaje. Por favor intenta de nuevo.",
-      "name_required": "El nombre es requerido",
-      "email_required": "El correo electrónico es requerido",
-      "email_invalid": "Por favor ingresa una dirección de correo válida",
-      "message_required": "El mensaje es requerido"
+      "sending_btn": "Enviando",
+      "success_msg": "Enviado. Te respondo al correo en uno o dos días.",
+      "error_msg": "El mensaje no se pudo enviar. Escríbeme directo a franklinmdev@hotmail.com.",
+      "name_required": "Escribe tu nombre.",
+      "email_required": "Escribe tu correo para poder responderte.",
+      "email_invalid": "Ese correo parece incompleto.",
+      "message_required": "Escribe un mensaje."
     }
   },
-  "social": {
-    "github": "Perfil de GitHub",
-    "linkedin": "Perfil de LinkedIn",
-    "x": "Perfil de X",
-    "email": "Correo electrónico"
+  "references": {
+    "title": "Referencias",
+    "colophon": "Compuesto en Source Serif 4, Libre Franklin y Commit Mono. Hecho con Astro y React, publicado en GitHub Pages.",
+    "youtube": "Arkhelon en YouTube"
+  },
+  "projects": {
+    "back": "Todo el trabajo",
+    "links": "Enlaces",
+    "stack": "Hecho con",
+    "view_live": "En vivo",
+    "view_source": "Código",
+    "contact": "Hablar de este proyecto"
   },
   "a11y": {
-    "scroll_to_top": "Volver arriba",
-    "section_index": "Índice de secciones",
-    "view_project": "Abrir proyecto: {title}",
-    "project_label": "Proyecto: {title}",
-    "project_screenshot": "Captura de {title}"
-  },
-  "footer": {
-    "credits": "Diseñado y construido por Franklin Martinez"
+    "scroll_to_top": "Volver arriba"
   },
   "error": {
     "404": {
-      "title": "404 - Página no encontrada",
-      "image_alt": "404 - Página no encontrada",
-      "heading": "¡Ups! Página no encontrada",
-      "description": "La página que buscas parece haberse ido de aventura. ¡Te ayudamos a volver al camino correcto!",
-      "reasons": {
-        "title": "Esto podría haber pasado porque:",
-        "typo": "Hay un error tipográfico en la URL",
-        "moved": "La página ha sido movida o eliminada",
-        "outdated": "Seguiste un enlace desactualizado"
-      },
-      "actions": {
-        "home": "Ir al inicio",
-        "projects": "Ver proyectos",
-        "contact": "Contactar",
-        "previous": "Volver atrás"
-      }
+      "title": "Página no encontrada",
+      "heading": "Esta página no está aquí.",
+      "description": "Puede que el enlace sea viejo, o que la página se haya movido con el rediseño.",
+      "home": "Ir al inicio",
+      "work": "Ver el trabajo"
     }
-  },
-  "loading": "Cargando..."
+  }
 }

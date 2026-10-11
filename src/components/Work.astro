@@ -1,0 +1,270 @@
+---
+import domipropDark from "@/assets/projects/domiprop-dashboard-dark.png"
+import domipropLight from "@/assets/projects/domiprop-dashboard-light.png"
+import BenchmarkPlot from "@/components/BenchmarkPlot.astro"
+import DgiiFigure from "@/components/react/DgiiFigure"
+import DocmatchFigure from "@/components/react/DocmatchFigure"
+import JustAskFigure from "@/components/react/JustAskFigure"
+import { recordings } from "@/data/justask-recordings"
+import enStrings from "@/i18n/en.json"
+import esStrings from "@/i18n/es.json"
+import { ArrowUpRightIcon } from "@phosphor-icons/react"
+import { Picture } from "astro:assets"
+import { getRelativeLocaleUrl } from "astro:i18n"
+
+export interface Props {
+  t: (key: string) => string
+  lang: "en" | "es"
+}
+
+const { t, lang } = Astro.props
+const s = lang === "es" ? esStrings : enStrings
+const deepDive = (slug: string) =>
+  getRelativeLocaleUrl(lang, `/projects/${slug}`)
+
+const JUSTASK_LIVE = "https://justask-demo.franklinmdev.workers.dev"
+
+const projects = {
+  justask: [
+    { label: t("work.live"), href: JUSTASK_LIVE },
+    {
+      label: t("work.source"),
+      href: "https://github.com/franklinmdev/justask",
+    },
+  ],
+  docmatch: [
+    {
+      label: t("work.source"),
+      href: "https://github.com/franklinmdev/docmatch",
+    },
+  ],
+  dgii: [
+    { label: "npm", href: "https://www.npmjs.com/package/dgii-ts" },
+    {
+      label: t("work.source"),
+      href: "https://github.com/franklinmdev/dgii-ts",
+    },
+  ],
+}
+---
+
+<section
+  id="work"
+  class="page-grid border-rule-strong mt-16 border-t pt-12"
+  aria-labelledby="work-title"
+>
+  <h2 id="work-title" class="section-title">{t("work.title")}</h2>
+  <div class="hidden lg:block"></div>
+
+  {/* justask */}
+  <div class="mt-4">
+    <h3 class="text-[1.625rem] leading-tight">justask</h3>
+    <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
+      {
+        projects.justask.map((l) => (
+          <li>
+            <a
+              class="link inline-flex min-h-8 items-center gap-0.5"
+              href={l.href}
+            >
+              {l.label}
+              <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          class="link inline-flex min-h-8 items-center"
+          href={deepDive("justask")}
+        >
+          {t("work.deep_dive")}
+        </a>
+      </li>
+    </ul>
+    <p class="mt-4">{t("work.justask.lead")}<sup class="note-ref">1</sup></p>
+  </div>
+  <aside class="in-margin mt-4 lg:mt-14">
+    <p class="sidenote">
+      <sup class="note-ref ml-0">1</sup>
+      {t("work.justask.note_eval")}
+      <a
+        href="https://github.com/franklinmdev/justask/blob/main/docs/search-eval.md"
+        set:text={t("work.justask.note_eval_link")}
+      />.
+    </p>
+    <p class="sidenote mt-3">
+      {t("work.justask.note_demo")}
+      <a
+        href="https://www.npmjs.com/package/@justask/core"
+        set:text={t("work.justask.note_npm")}
+      />
+    </p>
+  </aside>
+  <JustAskFigure
+    client:visible
+    lang={lang}
+    recordings={recordings[lang]}
+    tagLabels={s.fig1.tag_labels}
+    liveUrl={JUSTASK_LIVE}
+    t={s.fig1}
+  />
+
+  {/* docmatch */}
+  <div class="mt-16">
+    <h3 class="text-[1.625rem] leading-tight">docmatch</h3>
+    <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
+      {
+        projects.docmatch.map((l) => (
+          <li>
+            <a
+              class="link inline-flex min-h-8 items-center gap-0.5"
+              href={l.href}
+            >
+              {l.label}
+              <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          class="link inline-flex min-h-8 items-center"
+          href={deepDive("docmatch")}
+        >
+          {t("work.deep_dive")}
+        </a>
+      </li>
+    </ul>
+    <p class="mt-4">{t("work.docmatch.lead")}<sup class="note-ref">2</sup></p>
+    <p class="text-muted-foreground mt-3 font-sans text-[0.9375rem]">
+      {t("work.docmatch.status")}
+    </p>
+  </div>
+  <aside class="in-margin mt-4 lg:mt-14">
+    <p class="sidenote">
+      <sup class="note-ref ml-0">2</sup>
+      <a
+        href="https://github.com/franklinmdev/docmatch/blob/main/.github/workflows/regression.yml"
+        set:text={t("work.docmatch.note_ci")}
+      />
+    </p>
+    <p class="sidenote mt-3">{t("work.docmatch.note_data")}</p>
+  </aside>
+  <DocmatchFigure client:visible t={s.fig2} />
+  <BenchmarkPlot t={t} lang={lang} />
+
+  {/* dgii-ts */}
+  <div class="mt-16">
+    <h3 class="text-[1.625rem] leading-tight">dgii-ts</h3>
+    <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
+      {
+        projects.dgii.map((l) => (
+          <li>
+            <a
+              class="link inline-flex min-h-8 items-center gap-0.5"
+              href={l.href}
+            >
+              {l.label}
+              <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          class="link inline-flex min-h-8 items-center"
+          href={deepDive("dgii-ts")}
+        >
+          {t("work.deep_dive")}
+        </a>
+      </li>
+    </ul>
+    <p class="mt-4">{t("work.dgii.lead")}<sup class="note-ref">3</sup></p>
+  </div>
+  <aside class="in-margin mt-4 lg:mt-14">
+    <p class="sidenote">
+      <sup class="note-ref ml-0">3</sup>
+      {t("work.dgii.note_skill")}
+      <code class="data text-foreground mt-1 block break-all">
+        npx skills add franklinmdev/dgii-ts --skill dgii-ts
+      </code>
+    </p>
+    <p class="sidenote mt-3">
+      <a
+        href="https://www.npmjs.com/package/dgii-ts"
+        set:text={t("work.dgii.note_npm")}
+      />
+    </p>
+  </aside>
+  <DgiiFigure client:visible t={s.fig4} />
+
+  {/* Also building */}
+  <h3 class="mt-16 text-[1.375rem] leading-tight">{t("work.also")}</h3>
+  <div class="hidden lg:block"></div>
+
+  <div class="mt-5">
+    <h4 class="font-serif text-xl font-semibold">
+      <a class="link no-underline" href={deepDive("domiprop")}>DomiProp</a>
+    </h4>
+    <p class="mt-2">{t("work.domiprop.lead")}</p>
+    <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
+      <li>
+        <a
+          class="link inline-flex min-h-8 items-center gap-0.5"
+          href="https://domiprop.com.do"
+        >
+          domiprop.com.do
+          <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+        </a>
+      </li>
+      <li>
+        <a
+          class="link inline-flex min-h-8 items-center"
+          href={deepDive("domiprop")}
+        >
+          {t("work.deep_dive")}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <figure class="in-margin mt-5 lg:mt-7" aria-labelledby="fig5-caption">
+    <div class="border-border border">
+      <Picture
+        src={domipropLight}
+        formats={["avif", "webp"]}
+        widths={[480, 720]}
+        sizes="(min-width: 1024px) 240px, 100vw"
+        alt=""
+        class="h-auto w-full dark:hidden"
+      />
+      <Picture
+        src={domipropDark}
+        formats={["avif", "webp"]}
+        widths={[480, 720]}
+        sizes="(min-width: 1024px) 240px, 100vw"
+        alt=""
+        class="hidden h-auto w-full dark:block"
+      />
+    </div>
+    <figcaption id="fig5-caption" class="caption">
+      {t("work.domiprop.caption")}
+    </figcaption>
+  </figure>
+
+  <div class="mt-10">
+    <h4 class="font-serif text-xl font-semibold">brook</h4>
+    <p class="mt-2">{t("work.brook.lead")}</p>
+    <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
+      <li>
+        <a
+          class="link inline-flex min-h-8 items-center gap-0.5"
+          href="https://brook.franklinmdev.workers.dev"
+        >
+          {t("work.brook.link")}
+          <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

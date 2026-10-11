@@ -1,32 +1,28 @@
 @import "tailwindcss";
-@import "@fontsource-variable/ibm-plex-sans";
-@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/source-serif-4/opsz.css";
+@import "@fontsource-variable/source-serif-4/opsz-italic.css";
+@import "@fontsource-variable/libre-franklin";
+@import "@fontsource/commit-mono/400.css";
 
 /* shadcn/ui dark variant: dark: utilities key off an ancestor .dark class. */
 @custom-variant dark (&:is(.dark *));
 
-/* ── Concept D · Cyberdeck — "Engineer's instrument panel / datasheet" ───────
-   A precision instrument rendered as a component DATASHEET: quiet, measured,
-   confidently typeset. The person's VOICE is the content; engineering
-   precision is only the FRAME. IBM Plex Sans carries reading prose; JetBrains
-   Mono is rationed to catalog numbers, dates, stat figures, tech chips and
-   form inputs. ONE anchor hue (~200); cyan is meaning-only (current section,
-   primary action, links, focus). Dark = the deck; light = the printed
-   datasheet run of the same document (paper + ink), not an inverted deck. */
+/* Figure 1: a research paper whose figures run, with the proof in the
+   margin. Serif prose, a sans apparatus (nav, captions, sidenotes), mono for
+   measured data only. Ink on paper plus one crimson, used only for measured
+   values. See DESIGN.md. */
 
 @theme {
+  --font-serif:
+    "Source Serif 4 Variable", "Source Serif 4", ui-serif, Georgia, serif;
   --font-sans:
-    "IBM Plex Sans Variable", "IBM Plex Sans", ui-sans-serif, system-ui,
+    "Libre Franklin Variable", "Libre Franklin", ui-sans-serif, system-ui,
     sans-serif;
-  --font-mono:
-    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular,
-    "SF Mono", monospace;
+  --font-mono: "Commit Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --animate-fade-in-slide-up: fadeInSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Semantic tokens resolve to var(--token) and flip with the .dark scope. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -46,512 +42,118 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-measure: var(--measure);
+  --color-measure-soft: var(--measure-soft);
+  --color-figure: var(--figure);
+  --color-rule-strong: var(--rule-strong);
 }
 
-/* LIGHT — printed datasheet: warm off-white paper, ink-black text. The anchor
-   accent is re-tuned darker (still hue ~235-245) and used only for meaning.
-   Real lightness step so cards read as paper laid on paper. */
+/* LIGHT: cool white paper, ink. Crimson only where something was measured. */
 :root {
-  --background: oklch(0.95 0.008 90);
-  --foreground: oklch(0.24 0.01 250);
-  --card: oklch(0.99 0.004 90);
-  --card-foreground: oklch(0.24 0.01 250);
-  --primary: oklch(0.46 0.13 240);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.92 0.006 90);
-  --secondary-foreground: oklch(0.3 0.01 250);
-  --muted: oklch(0.93 0.006 90);
-  --muted-foreground: oklch(0.42 0.015 250);
-  --accent: oklch(0.9 0.01 240);
-  --accent-foreground: oklch(0.3 0.04 245);
-  --destructive: oklch(0.52 0.2 27);
-  --alert: oklch(0.52 0.2 27);
-  --success: oklch(0.5 0.12 160);
-  /* ink hairline rules */
-  --border: oklch(0.24 0.01 250 / 0.16);
-  --input: oklch(0.24 0.01 250 / 0.2);
-  --ring: oklch(0.46 0.13 240);
-  /* Syntax tokens — must clear AA (≥4.5:1) on near-white card. */
-  --syntax-string: oklch(0.44 0.12 145);
-  --syntax-variable: oklch(0.42 0.13 250);
+  --background: oklch(0.99 0.002 250);
+  --foreground: oklch(0.21 0.01 260);
+  --card: oklch(0.99 0.002 250);
+  --card-foreground: oklch(0.21 0.01 260);
+  --figure: oklch(0.965 0.003 250);
+  --primary: oklch(0.21 0.01 260);
+  --primary-foreground: oklch(0.99 0.002 250);
+  --secondary: oklch(0.95 0.003 250);
+  --secondary-foreground: oklch(0.21 0.01 260);
+  --muted: oklch(0.95 0.003 250);
+  --muted-foreground: oklch(0.46 0.01 260);
+  --accent: oklch(0.95 0.003 250);
+  --accent-foreground: oklch(0.21 0.01 260);
+  --measure: oklch(0.53 0.2 5);
+  --measure-soft: oklch(0.53 0.2 5 / 0.1);
+  --destructive: oklch(0.53 0.2 5);
+  --alert: oklch(0.53 0.2 5);
+  --success: oklch(0.21 0.01 260);
+  --border: oklch(0.21 0.01 260 / 0.13);
+  --rule-strong: oklch(0.21 0.01 260 / 0.55);
+  --input: oklch(0.21 0.01 260 / 0.22);
+  --ring: oklch(0.21 0.01 260);
 }
 
-/* DARK — command deck: near-black with a faint blue cast. Perceptible ramp
-   between bg / card / secondary so surfaces have real depth. Signal cyan is
-   the single accent, reserved for meaning. */
+/* DARK: the same paper, projected. Graphite, not black. */
 .dark {
-  --background: oklch(0.14 0.015 240);
-  --foreground: oklch(0.92 0.025 200);
-  --card: oklch(0.2 0.02 240);
-  --card-foreground: oklch(0.92 0.025 200);
-  --primary: oklch(0.82 0.14 195);
-  --primary-foreground: oklch(0.12 0.02 240);
-  --secondary: oklch(0.24 0.022 240);
-  --secondary-foreground: oklch(0.92 0.025 200);
-  --muted: oklch(0.23 0.02 240);
-  --muted-foreground: oklch(0.7 0.035 215);
-  --accent: oklch(0.26 0.025 220);
-  --accent-foreground: oklch(0.88 0.04 200);
-  --destructive: oklch(0.68 0.19 25);
-  --alert: oklch(0.68 0.19 25);
-  --success: oklch(0.72 0.13 162);
-  /* anchor-hue hairline, kept neutral-cool so it is not "cyan everywhere" */
-  --border: oklch(0.72 0.03 215 / 0.16);
-  --input: oklch(0.72 0.03 215 / 0.14);
-  --ring: oklch(0.82 0.14 195);
-  /* Syntax tokens — deck (near-black card); both pass AA. */
-  --syntax-string: oklch(0.83 0.1 150);
-  --syntax-variable: oklch(0.78 0.1 205);
+  --background: oklch(0.175 0.006 260);
+  --foreground: oklch(0.93 0.004 250);
+  --card: oklch(0.175 0.006 260);
+  --card-foreground: oklch(0.93 0.004 250);
+  --figure: oklch(0.205 0.007 260);
+  --primary: oklch(0.93 0.004 250);
+  --primary-foreground: oklch(0.175 0.006 260);
+  --secondary: oklch(0.23 0.007 260);
+  --secondary-foreground: oklch(0.93 0.004 250);
+  --muted: oklch(0.23 0.007 260);
+  --muted-foreground: oklch(0.72 0.008 255);
+  --accent: oklch(0.23 0.007 260);
+  --accent-foreground: oklch(0.93 0.004 250);
+  --measure: oklch(0.72 0.16 5);
+  --measure-soft: oklch(0.72 0.16 5 / 0.14);
+  --destructive: oklch(0.72 0.16 5);
+  --alert: oklch(0.72 0.16 5);
+  --success: oklch(0.93 0.004 250);
+  --border: oklch(0.93 0.004 250 / 0.12);
+  --rule-strong: oklch(0.93 0.004 250 / 0.5);
+  --input: oklch(0.93 0.004 250 / 0.2);
+  --ring: oklch(0.93 0.004 250);
 }
 
-@keyframes fadeInSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes spin-smooth {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* The single intentional terminal caret (contact channel + success line). */
-@keyframes blink-cursor {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-.spin-smooth {
-  animation: spin-smooth 1s linear infinite;
-}
-
-.blink-cursor {
-  animation: blink-cursor 1.1s step-end infinite;
-}
-
-/* ── Component utilities ──────────────────────────────────────────────────── */
-@layer components {
-  /* Reading measure for prose blocks. */
-  .measure {
-    max-width: 65ch;
-  }
-
-  /* Module catalog label: "01 — Experience" style. Mono, muted, measured —
-     a calm catalog number, not SYS theatrics. */
-  .module-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted-foreground);
-  }
-
-  /* Section heading: the companion sans, confident weight. */
-  .module-title {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem);
-    line-height: 1.1;
-  }
-
-  /* Datasheet panel: a plain elevated surface (no corner brackets). */
-  .panel {
-    position: relative;
-    background-color: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 0.25rem;
-    box-shadow:
-      0 1px 2px oklch(0 0 0 / 0.06),
-      0 10px 28px -14px oklch(0 0 0 / 0.18);
-  }
-
-  .dark .panel {
-    box-shadow:
-      0 1px 0 0 oklch(1 0 0 / 0.05) inset,
-      0 14px 34px -18px oklch(0 0 0 / 0.75);
-  }
-
-  /* Panel header strip: a labeled caption above a hairline, console-style. */
-  .panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.5rem 0.875rem;
-    border-bottom: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted-foreground);
-  }
-
-  /* ── Catalog rail (signature spine) ─────────────────────────────────────── */
-  /* A single thin hairline down the left margin carrying mono catalog
-     numbers; a small FILLED SQUARE marks the current section (cyan = meaning).
-     The section label stays tucked away and unfurls only for the current /
-     hovered entry, so the resting state is a quiet numeric index that fits the
-     gutter. This ONE spine replaces all the old HUD brackets + SYS labels +
-     telemetry bar. */
-  .catalog-rail {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 1.5rem;
-    z-index: 30;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.75rem;
-    padding-block: 6rem;
-    pointer-events: none;
-  }
-
-  /* xl–2xl : the spine shows in a left lane that HomePage reserves via
-     xl:pl-20. That lane is what keeps it off the hero copy at 1280px, where
-     the centred 80rem container fills the viewport and has no outer gutter. */
-  @media (min-width: 1280px) {
-    .catalog-rail {
-      display: flex;
-    }
-  }
-
-  /* 2xl+ : the real outer gutter opens up, so the rail anchors beside the
-     container (and labels can unfurl) and HomePage drops the reserved lane. */
-  @media (min-width: 1536px) {
-    .catalog-rail {
-      left: max(1.5rem, calc((100vw - 80rem) / 2 - 7rem));
-    }
-  }
-
-  .catalog-rail::before {
-    content: "";
-    position: absolute;
-    top: 6rem;
-    bottom: 6rem;
-    left: 0.19rem;
-    width: 1px;
-    background-color: var(--border);
-  }
-
-  .catalog-link {
-    pointer-events: auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted-foreground);
-    opacity: 0.55;
-    transition:
-      color 0.2s ease,
-      opacity 0.2s ease;
-  }
-
-  .catalog-link:hover,
-  .catalog-link.is-active {
-    opacity: 1;
-    color: var(--foreground);
-  }
-
-  .catalog-marker {
-    width: 0.4rem;
-    height: 0.4rem;
-    flex-shrink: 0;
-    background-color: var(--muted-foreground);
-    transition:
-      background-color 0.2s ease,
-      transform 0.2s ease;
-  }
-
-  .catalog-link.is-active .catalog-marker {
-    background-color: var(--primary);
-  }
-
-  /* The text label: collapsed by default. It only unfurls at 2xl, where the
-     outer gutter is wide enough that an expanded label clears the content. */
-  .catalog-label {
-    max-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    opacity: 0;
-    transition:
-      max-width 0.28s ease,
-      opacity 0.2s ease;
-  }
-
-  @media (min-width: 1536px) {
-    .catalog-link:hover .catalog-label,
-    .catalog-link.is-active .catalog-label {
-      max-width: 8rem;
-      opacity: 1;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .catalog-label {
-      transition: none;
-    }
-  }
-
-  /* Tech chips — mono figures, muted by default; anchor on hover only. */
-  .tech-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: var(--secondary);
-    color: var(--muted-foreground);
-    padding: 0.25rem 0.6rem;
-    border: 1px solid var(--border);
-    border-radius: 0.125rem;
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transition:
-      transform 0.18s ease,
-      color 0.18s ease,
-      border-color 0.18s ease;
-  }
-
-  .tech-tag:hover {
-    color: var(--foreground);
-    border-color: color-mix(in oklch, var(--foreground) 28%, transparent);
-    transform: translateY(-2px);
-  }
-
-  /* Blinking terminal caret — the one intentional motion accent. */
-  .caret {
-    display: inline-block;
-    width: 0.5em;
-    height: 1.05em;
-    margin-left: 0.1em;
-    transform: translateY(0.12em);
-    background-color: var(--primary);
-    animation: blink-cursor 1.1s step-end infinite;
-  }
-
-  .form-input,
-  .form-textarea {
-    @apply border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20 w-full rounded border px-3 font-mono text-sm transition-colors focus:ring-2 focus:outline-none lg:px-4 lg:py-3 lg:text-base;
-  }
-
-  .form-textarea {
-    @apply min-h-20 resize-none lg:min-h-24;
-  }
-
-  .icon-container {
-    @apply border-border bg-secondary shrink-0 rounded border p-2 sm:p-2.5;
-  }
-
-  /* Status dot — neutral structural marker (muted, not accent). */
-  .status-dot {
-    width: 0.375rem;
-    height: 0.375rem;
-    border-radius: 9999px;
-    background-color: currentColor;
-  }
-
-  /* Markdown prose */
-  .prose h2 {
-    @apply text-foreground mt-8 mb-4 text-2xl font-semibold;
-  }
-  .prose h3 {
-    @apply text-foreground mt-6 mb-3 text-xl font-semibold;
-  }
-  .prose p {
-    @apply text-muted-foreground mb-4 leading-relaxed;
-  }
-  .prose ul,
-  .prose ol {
-    @apply text-muted-foreground mb-4;
-  }
-  .prose li {
-    @apply mb-2 leading-relaxed;
-  }
-  .prose strong {
-    @apply text-foreground font-semibold;
-  }
-  .prose code {
-    @apply bg-secondary text-foreground rounded px-1 py-0.5 text-sm;
-    font-family: var(--font-mono);
-  }
-  .prose pre {
-    @apply border-border bg-card overflow-x-auto rounded border p-4;
-  }
-  .prose blockquote {
-    @apply border-border text-muted-foreground border-l-2 pl-4 italic;
-  }
-}
-
-/* ── Base ─────────────────────────────────────────────────────────────────── */
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
-
   html {
+    color-scheme: light;
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color-scheme: light;
+    text-rendering: optimizeLegibility;
   }
-
   html.dark {
     color-scheme: dark;
   }
 
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.6;
     background-color: var(--background);
     color: var(--foreground);
-    line-height: 1.7;
-    overflow-x: hidden;
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
+    font-optical-sizing: auto;
   }
 
-  /* A single faint top wash — atmosphere without a full grid or scanlines.
-     Anchor-hue, very low opacity, so the page has air at the masthead and is
-     otherwise clean paper / deck. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    background-image: radial-gradient(
-      60% 38% at 50% 0%,
-      color-mix(in oklch, var(--primary) 7%, transparent),
-      transparent 72%
-    );
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+    font-weight: 600;
+    letter-spacing: -0.015em;
   }
 
-  .dark body::before {
-    background-image: radial-gradient(
-      60% 38% at 50% 0%,
-      color-mix(in oklch, var(--primary) 9%, transparent),
-      transparent 72%
-    );
+  p {
+    text-wrap: pretty;
   }
 
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+  ::selection {
+    background: var(--measure-soft);
+    color: var(--foreground);
   }
-  ::-webkit-scrollbar-track {
-    background: var(--background);
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 1px;
   }
-  ::-webkit-scrollbar-thumb {
-    background: var(--muted);
-    border-radius: 2px;
-    border: 3px solid var(--background);
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--muted-foreground);
-  }
+
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--muted) var(--background);
+    scrollbar-color: var(--rule-strong) transparent;
   }
 
-  /* Hero + section reveal — one gentle staggered entrance. */
-  .hero-headline,
-  .hero-subtitle,
-  .hero-about,
-  .hero-socials,
-  .experience-title,
-  .experience-item {
-    opacity: 0;
-    animation: fadeInSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-  .hero-about {
-    animation-delay: 0.4s;
-  }
-  .hero-socials {
-    animation-delay: 0.55s;
-  }
-  .experience-title {
-    animation-delay: 0.2s;
-  }
-
-  /* Timeline — dots/rules demoted to muted structural chrome. */
-  .timeline-item {
-    position: relative;
-    padding-left: 1.5rem;
-    padding-bottom: 2rem;
-  }
-  .timeline-item:not(:last-child)::before {
-    content: "";
-    position: absolute;
-    left: 0.1875rem;
-    top: 0.75rem;
-    bottom: -0.5rem;
-    width: 1px;
-    background-color: var(--border);
-  }
-  .timeline-item.last-item {
-    padding-bottom: 0;
-  }
-  .timeline-dot {
-    position: absolute;
-    left: -0.0625rem;
-    top: 0.4rem;
-    width: 0.5rem;
-    height: 0.5rem;
-    background-color: var(--muted-foreground);
-    transform: rotate(45deg);
-  }
-
-  /* Terminal / IDE syntax tokens. */
-  .keyword {
-    color: var(--primary);
-  }
-  .string {
-    color: var(--syntax-string);
-  }
-  .comment {
-    color: var(--muted-foreground);
-    font-style: italic;
-  }
-  .variable {
-    color: var(--syntax-variable);
-  }
-
-  *:focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-  }
-
-  @media (max-width: 639px) {
-    a,
-    button {
-      min-height: 44px;
-      min-width: 44px;
-    }
+  input,
+  textarea {
+    caret-color: var(--measure);
   }
 
   img,
@@ -564,37 +166,302 @@
     html {
       scroll-behavior: auto;
     }
-    .hero-headline,
-    .hero-subtitle,
-    .hero-about,
-    .hero-socials,
-    .experience-title,
-    .experience-item {
-      animation: none;
-      opacity: 1;
-    }
-    .blink-cursor,
-    .caret {
-      animation: none;
-      opacity: 1;
-    }
-    * {
-      transition-duration: 0.01ms !important;
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
+  }
+}
+
+@layer components {
+  /* Fig. 6: the portrait cutout sits on graph paper drawn in the rule color. */
+  .portrait-ground {
+    background-color: var(--figure);
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 1rem 1rem;
+    background-position: -1px -1px;
+  }
+
+  /* The page: a reading column and a margin column. Figures span both. */
+  .page {
+    margin-inline: auto;
+    width: 100%;
+    /* The grid's width (40rem + 3.5rem gap + 15rem) plus the gutters. */
+    max-width: calc(58.5rem + 2 * 2rem);
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .page {
+      padding-inline: 2rem;
     }
   }
 
-  @media (max-width: 479px) {
-    body {
-      font-size: 15px;
-      line-height: 1.65;
+  .page-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 3.5rem;
+  }
+  @media (min-width: 1024px) {
+    .page-grid {
+      grid-template-columns: minmax(0, 40rem) minmax(0, 15rem);
+    }
+    /* An island's figure sits inside <astro-island>, which is display:
+       contents, so it is still a grid item but not a direct child. */
+    .page-grid > .span-all,
+    .page-grid > astro-island > .span-all {
+      grid-column: 1 / -1;
+    }
+    .page-grid > .in-margin {
+      grid-column: 2;
     }
   }
 
-  @media (min-width: 1280px) {
-    html {
-      scroll-padding-top: 6.25rem;
+  /* Sans apparatus text: captions, sidenotes, labels. */
+  .apparatus {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--muted-foreground);
+  }
+
+  .sidenote {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: var(--muted-foreground);
+    border-top: 1px solid var(--border);
+    padding-top: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  @media (min-width: 1024px) {
+    .sidenote {
+      border-top: 0;
+      padding-top: 0.2rem;
+      margin-top: 0;
+    }
+  }
+  .sidenote a,
+  .prose a,
+  .link {
+    color: var(--foreground);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: var(--rule-strong);
+    transition: text-decoration-color 120ms ease;
+  }
+  @media (hover: hover) {
+    .sidenote a:hover,
+    .prose a:hover,
+    .link:hover {
+      text-decoration-color: var(--foreground);
+    }
+  }
+
+  .note-ref {
+    font-family: var(--font-sans);
+    font-size: 0.7em;
+    font-weight: 600;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 0.1em;
+    color: var(--muted-foreground);
+  }
+
+  /* A figure: hairline rules top and bottom, caption below. No card. */
+  .figure {
+    border-block: 1px solid var(--rule-strong);
+    padding-block: 1.25rem;
+  }
+  .caption {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--muted-foreground);
+    margin-top: 0.75rem;
+    max-width: 44rem;
+  }
+  .caption b {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  .data {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.875em;
+  }
+  .measured {
+    color: var(--measure);
+  }
+
+  .section-title {
+    font-size: clamp(1.625rem, 2.6vw, 2rem);
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+
+  .measure {
+    max-width: 40rem;
+  }
+
+  /* Prose for deep dives (markdown body). */
+  .prose {
+    max-width: 40rem;
+  }
+  .prose > * + * {
+    margin-top: 1.1em;
+  }
+  .prose h2 {
+    font-size: 1.625rem;
+    line-height: 1.2;
+    margin-top: 2.2em;
+  }
+  .prose h3 {
+    font-size: 1.25rem;
+    margin-top: 1.8em;
+  }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.25em;
+  }
+  .prose ul {
+    list-style: disc;
+  }
+  .prose ol {
+    list-style: decimal;
+  }
+  .prose li + li {
+    margin-top: 0.4em;
+  }
+  .prose li::marker {
+    color: var(--muted-foreground);
+  }
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--figure);
+    padding: 0.1em 0.3em;
+    border-radius: 2px;
+  }
+  .prose pre {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    background: var(--figure) !important;
+    border-block: 1px solid var(--rule-strong);
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  .prose pre code {
+    background: none;
+    padding: 0;
+  }
+  .prose table {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    border-collapse: collapse;
+    border-block: 1px solid var(--rule-strong);
+    font-variant-numeric: tabular-nums;
+  }
+  .prose th,
+  .prose td {
+    text-align: left;
+    padding: 0.5rem 0.75rem 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .prose th {
+    font-weight: 600;
+  }
+  .prose blockquote {
+    border-left: 1px solid var(--rule-strong);
+    padding-left: 1rem;
+    color: var(--muted-foreground);
+  }
+
+  /* Buttons: ink-filled primary, hairline secondary. 2px radius, never pill. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding-inline: 1.1rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-radius: 2px;
+    border: 1px solid var(--foreground);
+    transition:
+      background-color 120ms ease,
+      color 120ms ease,
+      border-color 120ms ease;
+  }
+  .btn-primary {
+    background: var(--foreground);
+    color: var(--background);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--foreground);
+    border-color: var(--input);
+  }
+  @media (hover: hover) {
+    .btn-primary:hover {
+      background: color-mix(in oklch, var(--foreground) 85%, var(--background));
+    }
+    .btn-ghost:hover {
+      border-color: var(--foreground);
+    }
+  }
+}
+
+/* The motion signature: the figure plots itself. Figures toggle
+   [data-plotted] when they enter view; under reduced motion they render
+   their final state. */
+@layer utilities {
+  .grow-x {
+    transform-origin: left center;
+    transform: scaleX(var(--to, 1));
+    transition: transform 650ms var(--ease-out-expo);
+  }
+  [data-plotted="false"] .grow-x {
+    transform: scaleX(0);
+  }
+
+  .settle {
+    transition:
+      opacity 400ms var(--ease-out-expo),
+      transform 500ms var(--ease-out-expo);
+  }
+  [data-plotted="false"] .settle {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .draw {
+    stroke-dasharray: var(--len, 1000);
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 900ms var(--ease-out-expo);
+  }
+  [data-plotted="false"] .draw {
+    stroke-dashoffset: var(--len, 1000);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grow-x,
+    .settle,
+    .draw {
+      transition: opacity 150ms linear;
+    }
+    [data-plotted="false"] .grow-x {
+      transform: scaleX(var(--to, 1));
+    }
+    [data-plotted="false"] .settle {
+      transform: none;
+      opacity: 1;
+    }
+    [data-plotted="false"] .draw {
+      stroke-dashoffset: 0;
     }
   }
 }

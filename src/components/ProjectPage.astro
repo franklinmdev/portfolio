@@ -1,11 +1,14 @@
 ---
-import ProjectBody from "@/components/ProjectBody.astro"
-import ProjectHeader from "@/components/ProjectHeader.astro"
-import ProjectNav from "@/components/ProjectNav.astro"
-import ProjectSidebar from "@/components/ProjectSidebar.astro"
+import BenchmarkPlot from "@/components/BenchmarkPlot.astro"
+import DgiiFigure from "@/components/react/DgiiFigure"
+import DocmatchFigure from "@/components/react/DocmatchFigure"
+import JustAskFigure from "@/components/react/JustAskFigure"
 import ScrollToTop from "@/components/react/ScrollToTop"
-import enTranslations from "@/i18n/en.json"
-import esTranslations from "@/i18n/es.json"
+import { recordings } from "@/data/justask-recordings"
+import enStrings from "@/i18n/en.json"
+import esStrings from "@/i18n/es.json"
+import { createTranslations, getProjectSlug } from "@/i18n/utils"
+import { ArrowLeftIcon, ArrowUpRightIcon } from "@phosphor-icons/react"
 import { Picture } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
 import { getRelativeLocaleUrl } from "astro:i18n"
@@ -16,79 +19,125 @@ export interface Props {
 }
 
 const { project, lang } = Astro.props
-const translations = lang === "es" ? esTranslations : enTranslations
-const t = translations.projects
+const { data } = project
+const slug = getProjectSlug(project.id)
+const t = createTranslations(lang)
+const s = lang === "es" ? esStrings : enStrings
+const home = getRelativeLocaleUrl(lang, "/")
 
-const baseUrl = getRelativeLocaleUrl(lang, "/")
-const url = (hash: string) => `${baseUrl}${hash}`
-const projectsUrl = url("#projects")
-const contactUrl = url("#contact")
-const pageImage = project.data.image
-const pageImageDark = project.data.imageDark
-const screenshotAlt = `${lang === "es" ? "Captura de pantalla de" : "Screenshot of"} ${project.data.title}`
+const links = [
+  data.liveUrl && { label: t("projects.view_live"), href: data.liveUrl },
+  data.githubUrl && { label: t("projects.view_source"), href: data.githubUrl },
+  data.npmUrl && { label: "npm", href: data.npmUrl },
+].filter((l): l is { label: string; href: string } => Boolean(l))
 ---
 
-<main
-  class="mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12"
->
-  <div class="pt-24 pb-16">
-    <ProjectHeader
-      project={project}
-      lang={lang}
-      t={t}
-      projectsUrl={projectsUrl}
-    />
+<main id="content" class="page">
+  <article class="page-grid pt-10 sm:pt-14">
+    <div>
+      <a
+        href={`${home}#work`}
+        class="apparatus hover:text-foreground inline-flex min-h-11 items-center gap-1.5 transition-colors duration-150"
+      >
+        <ArrowLeftIcon aria-hidden="true" className="size-4" />
+        {t("projects.back")}
+      </a>
+      <h1
+        class="mt-4 text-[2.5rem] leading-[1.06] tracking-[-0.025em] sm:text-[3.25rem]"
+      >
+        {data.title}
+      </h1>
+      <p class="text-muted-foreground mt-3 font-sans text-[1rem]">
+        {data.subtitle}
+      </p>
+      <p class="measure mt-7">
+        <span class="font-sans text-[0.9375rem] font-semibold">
+          {t("hero.abstract_label")}
+        </span>
+        {data.description}
+      </p>
+    </div>
+    <aside class="in-margin mt-8 lg:mt-[7.5rem]">
+      {
+        links.length > 0 && (
+          <>
+            <p class="sidenote text-foreground font-medium">
+              {t("projects.links")}
+            </p>
+            <ul class="sidenote mt-1 space-y-0.5">
+              {links.map((l) => (
+                <li>
+                  <a class="inline-flex items-center gap-0.5" href={l.href}>
+                    {l.label}
+                    <ArrowUpRightIcon aria-hidden="true" className="size-3" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+      <p class="sidenote text-foreground mt-4 font-medium">
+        {t("projects.stack")}
+      </p>
+      <p class="sidenote mt-1">{data.tags.join(", ")}.</p>
+    </aside>
 
     {
-      pageImage && (
-        <div class="panel mb-12 overflow-hidden">
-          <div class={pageImageDark ? "dark:hidden" : ""}>
+      slug === "justask" && (
+        <JustAskFigure
+          client:visible
+          lang={lang}
+          recordings={recordings[lang]}
+          tagLabels={s.fig1.tag_labels}
+          liveUrl={data.liveUrl ?? ""}
+          t={s.fig1}
+        />
+      )
+    }
+    {slug === "docmatch" && <DocmatchFigure client:visible t={s.fig2} />}
+    {slug === "dgii-ts" && <DgiiFigure client:visible t={s.fig4} />}
+    {
+      data.image && (
+        <figure class="span-all mt-8 mb-2">
+          <div class="border-border border">
             <Picture
-              src={pageImage}
-              formats={["avif", "webp", "png"]}
-              alt={screenshotAlt}
-              class="h-auto w-full"
-              width={1600}
-              layout="constrained"
-              widths={[320, 640, 768, 1024, 1200, 1600]}
-              quality={85}
-              sizes="(max-width: 1024px) 100vw, 768px"
+              src={data.image}
+              formats={["avif", "webp"]}
+              widths={[640, 1024, 1600]}
+              sizes="(min-width: 1120px) 1120px, 100vw"
+              alt=""
+              class:list={["h-auto w-full", data.imageDark && "dark:hidden"]}
               loading="eager"
-              fetchpriority="high"
             />
-          </div>
-          {pageImageDark && (
-            <div class="hidden dark:block">
+            {data.imageDark && (
               <Picture
-                src={pageImageDark}
-                formats={["avif", "webp", "png"]}
-                alt={screenshotAlt}
-                class="h-auto w-full"
-                width={1600}
-                layout="constrained"
-                widths={[320, 640, 768, 1024, 1200, 1600]}
-                quality={85}
-                sizes="(max-width: 1024px) 100vw, 768px"
+                src={data.imageDark}
+                formats={["avif", "webp"]}
+                widths={[640, 1024, 1600]}
+                sizes="(min-width: 1120px) 1120px, 100vw"
+                alt=""
+                class="hidden h-auto w-full dark:block"
                 loading="eager"
-                fetchpriority="high"
               />
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+          <figcaption class="caption">{s.work.domiprop.caption}</figcaption>
+        </figure>
       )
     }
 
-    <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
-      <div class="space-y-8 lg:col-span-2">
-        <ProjectBody project={project} t={t} />
-      </div>
-      <div class="lg:col-span-1">
-        <ProjectSidebar project={project} t={t} />
-      </div>
+    <div class="prose mt-10">
+      <slot name="content" />
     </div>
+    <div class="hidden lg:block"></div>
 
-    <ProjectNav projectsUrl={projectsUrl} contactUrl={contactUrl} t={t} />
-  </div>
+    {slug === "docmatch" && <BenchmarkPlot t={t} lang={lang} />}
+
+    <p class="border-rule-strong mt-14 border-t pt-6">
+      <a class="link" href={`${home}#contact`}>{t("projects.contact")}</a>
+    </p>
+  </article>
 </main>
 
-<ScrollToTop client:idle label={translations.a11y.scroll_to_top} />
+<ScrollToTop client:idle label={t("a11y.scroll_to_top")} />

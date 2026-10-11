@@ -1,0 +1,170 @@
+---
+import { benchmark, commitUrl } from "@/data/docmatch"
+
+export interface Props {
+  t: (key: string) => string
+  lang: "en" | "es"
+}
+
+const { t, lang } = Astro.props
+
+// Axes chosen to frame the three rows, not to start at zero.
+const X_MAX = 0.012
+const Y_MIN = 0.5
+const Y_MAX = 0.65
+const xTicks = [0, 0.004, 0.008, 0.012]
+const yTicks = [0.5, 0.55, 0.6, 0.65]
+const x = (v: number) => (v / X_MAX) * 100
+const y = (v: number) => ((v - Y_MIN) / (Y_MAX - Y_MIN)) * 100
+const usd = (v: number, digits = 3) =>
+  new Intl.NumberFormat(lang, {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: digits,
+  }).format(v)
+---
+
+<figure
+  class="span-all mt-8 mb-2"
+  data-plotted="false"
+  data-autoplot
+  aria-labelledby="fig3-caption"
+>
+  <div class="figure">
+    <div
+      class="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-x-3 sm:grid-cols-[3rem_minmax(0,1fr)]"
+    >
+      <p class="apparatus col-span-2 mb-3" aria-hidden="true">
+        {t("fig3.y")}
+      </p>
+      <div class="relative" aria-hidden="true">
+        {
+          yTicks.map((v) => (
+            <span
+              class="data text-muted-foreground absolute right-0 translate-y-1/2 text-xs"
+              style={`bottom:${y(v)}%`}
+            >
+              {v.toFixed(2)}
+            </span>
+          ))
+        }
+      </div>
+      <div
+        class="border-rule-strong relative aspect-[4/3] border-b border-l sm:aspect-[2.4/1]"
+        aria-hidden="true"
+      >
+        {
+          yTicks
+            .slice(1)
+            .map((v) => (
+              <div
+                class="bg-border absolute right-0 left-0 h-px"
+                style={`bottom:${y(v)}%`}
+              />
+            ))
+        }
+        {
+          benchmark.map((row, i) => (
+            <div
+              class="settle absolute"
+              style={`left:${x(row.cost)}%;bottom:${y(row.f1)}%;transition-delay:${200 + i * 160}ms`}
+            >
+              <span class="bg-measure absolute top-0 left-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full" />
+              <span
+                class:list={[
+                  "absolute bottom-2.5 font-sans text-[0.75rem] leading-tight whitespace-nowrap sm:text-[0.8125rem]",
+                  x(row.cost) > 60 ? "right-2" : "left-2",
+                ]}
+              >
+                <span class="text-foreground font-medium">{row.backend}</span>
+                <span class="data measured ml-1">{row.f1.toFixed(3)}</span>
+              </span>
+            </div>
+          ))
+        }
+      </div>
+      <div></div>
+      <div class="relative h-6" aria-hidden="true">
+        {
+          xTicks.map((v, i) => (
+            <span
+              class:list={[
+                "data text-muted-foreground absolute top-1.5 text-xs",
+                i === 0
+                  ? ""
+                  : i === xTicks.length - 1
+                    ? "-translate-x-full"
+                    : "-translate-x-1/2",
+              ]}
+              style={`left:${x(v)}%`}
+            >
+              {usd(v)}
+            </span>
+          ))
+        }
+      </div>
+      <p class="apparatus col-span-2 mt-2 text-right" aria-hidden="true">
+        {t("fig3.x")}
+      </p>
+    </div>
+
+    <table class="mt-6 w-full border-collapse font-sans text-[0.875rem]">
+      <thead>
+        <tr class="border-rule-strong text-muted-foreground border-b text-left">
+          <th class="py-2 pr-3 font-normal">{t("fig3.backend")}</th>
+          <th class="py-2 pr-3 text-right font-normal">{t("fig3.f1")}</th>
+          <th class="py-2 pr-3 text-right font-normal">{t("fig3.cost")}</th>
+          <th class="py-2 text-right font-normal">{t("fig3.commit")}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          benchmark.map((row) => (
+            <tr class="border-border border-b">
+              <td class="py-2 pr-3">
+                {row.backend}
+                <span
+                  class="text-muted-foreground block text-xs"
+                  set:text={row.detail}
+                />
+              </td>
+              <td class="data measured py-2 pr-3 text-right">
+                {row.f1.toFixed(3)}
+              </td>
+              <td class="data py-2 pr-3 text-right">{usd(row.cost, 5)}</td>
+              <td class="py-2 text-right">
+                <a class="link data" href={commitUrl(row.commit)}>
+                  {row.commit}
+                </a>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <figcaption id="fig3-caption" class="caption">
+    <b>{t("fig3.label")}.</b>
+    {t("fig3.caption")}
+  </figcaption>
+</figure>
+
+<script>
+  // A static figure plots itself the same way the islands do.
+  function plot() {
+    const figs = document.querySelectorAll<HTMLElement>("[data-autoplot]")
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue
+          ;(e.target as HTMLElement).dataset.plotted = "true"
+          io.unobserve(e.target)
+        }
+      },
+      { threshold: 0.3 }
+    )
+    figs.forEach((f) => io.observe(f))
+  }
+  plot()
+  document.addEventListener("astro:after-swap", plot)
+</script>

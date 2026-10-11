@@ -2,14 +2,17 @@
 import avatarImage from "@/assets/avatar.webp"
 import HomePage from "@/components/HomePage.astro"
 import Layout from "@/layouts/Layout.astro"
+import { createTranslations } from "@/i18n/utils"
+
+const t = createTranslations("en")
 ---
 
 <Layout
-  title='Franklin "franklinmdev" Martinez – Full-Stack Engineer'
-  description="Franklin Martinez (franklinmdev) is a full-stack engineer building tax and compliance software for the Dominican market, end to end from the database to the screen."
+  title={t("meta.title")}
+  description={t("meta.description")}
   image={{
     url: avatarImage.src,
-    alt: "Franklin Martinez - Full-Stack Engineer profile picture",
+    alt: "Franklin Martinez",
   }}
 >
   <script is:inline slot="head">

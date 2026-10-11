@@ -1,0 +1,50 @@
+---
+import portrait from "@/assets/portrait.webp"
+import { Image } from "astro:assets"
+
+export interface Props {
+  t: (key: string) => string
+}
+
+const { t } = Astro.props
+const [before = "", after = ""] = t("about.outside").split("{link}")
+---
+
+<section
+  id="about"
+  class="page-grid border-rule-strong mt-20 border-t pt-12"
+  aria-labelledby="about-title"
+>
+  <h2 id="about-title" class="section-title">{t("about.title")}</h2>
+  <div class="hidden lg:block"></div>
+  <div class="mt-4 space-y-5">
+    <p>{t("about.p1")}</p>
+    <p>{t("about.p2")}</p>
+    <p>
+      <span class="font-semibold">{t("about.outside_title")}</span>
+      {before}<a
+        class="link"
+        href="https://www.youtube.com/@arkhelon"
+        set:text="Arkhelon"
+      />{after}
+    </p>
+  </div>
+  <figure
+    class="in-margin mt-6 max-w-60 lg:mt-5"
+    aria-labelledby="fig6-caption"
+  >
+    <div class="portrait-ground border-border border">
+      <Image
+        src={portrait}
+        widths={[240, 480]}
+        sizes="240px"
+        alt={t("about.caption").replace(/^Fig\. 6\. /, "")}
+        class="block h-auto w-full"
+        loading="lazy"
+      />
+    </div>
+    <figcaption id="fig6-caption" class="caption">
+      {t("about.caption")}
+    </figcaption>
+  </figure>
+</section>

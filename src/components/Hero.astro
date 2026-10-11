@@ -1,5 +1,5 @@
 ---
-import SocialLinks from "@/components/SocialLinks.astro"
+import { ArrowUpRightIcon, EnvelopeSimpleIcon } from "@phosphor-icons/react"
 
 export interface Props {
   t: (key: string) => string
@@ -8,46 +8,50 @@ export interface Props {
 const { t } = Astro.props
 ---
 
-<!-- Sticky hero column -->
-<div
-  id="home"
-  class="pt-24 pb-16 xl:sticky xl:top-0 xl:flex xl:max-h-screen xl:w-2/5 xl:flex-col xl:justify-between xl:py-28 2xl:w-[38%]"
->
-  <div class="space-y-10">
-    <!-- Identity -->
-    <div>
-      <span
-        class="hero-headline text-muted-foreground mb-5 block font-mono text-[0.6875rem] font-semibold tracking-[0.16em] uppercase"
-      >
-        {t("hud.hero.id")}
-      </span>
-      <h1
-        class="hero-headline text-foreground mb-4 text-4xl font-semibold sm:text-5xl lg:text-6xl xl:text-5xl"
-      >
-        Franklin <span class="sr-only">"franklinmdev"</span> Martinez
-      </h1>
-      <p
-        class="hero-subtitle text-muted-foreground mb-8 font-mono text-sm font-medium tracking-wide sm:text-base"
-      >
-        {t("hero.subtitle")}
-      </p>
-
-      <!-- The one real large-type statement — his actual proof. -->
-      <p
-        class="hero-headline text-foreground measure text-xl leading-snug font-medium text-balance sm:text-2xl xl:text-xl 2xl:text-2xl"
-      >
-        {t("hero.statement")}
-      </p>
-    </div>
-
-    <div
-      class="hero-about text-muted-foreground measure space-y-4 text-base leading-relaxed"
+<section class="page-grid pt-14 pb-4 sm:pt-20 lg:pt-24" aria-labelledby="title">
+  <div>
+    <h1
+      id="title"
+      class="text-[2.375rem] leading-[1.06] tracking-[-0.025em] sm:text-[3.25rem] lg:text-[3.75rem]"
     >
-      <p>{t("hero.about.p1")}</p>
-      <p>{t("hero.about.p2")}</p>
+      {t("hero.title")}
+    </h1>
+    <p class="text-muted-foreground mt-5 font-sans text-[0.9375rem]">
+      Franklin Martinez. {t("hero.byline")}
+    </p>
+  </div>
+  <aside class="in-margin self-end">
+    <p class="sidenote">
+      <span class="text-foreground font-medium">{t("hero.note_open")}</span>
+    </p>
+  </aside>
+
+  <div class="mt-8">
+    <p class="measure">
+      <span class="font-sans text-[0.9375rem] font-semibold">
+        {t("hero.abstract_label")}
+      </span>
+      {t("hero.abstract")}
+    </p>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a href="mailto:franklinmdev@hotmail.com" class="btn btn-primary">
+        <EnvelopeSimpleIcon aria-hidden="true" className="size-[18px]" />
+        {t("hero.email")}
+      </a>
+      <a href="https://github.com/franklinmdev" class="btn btn-ghost">
+        {t("hero.github")}
+        <ArrowUpRightIcon aria-hidden="true" className="size-4" />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/franklin-martinez-0a697a253/"
+        class="btn btn-ghost"
+      >
+        {t("hero.linkedin")}
+        <ArrowUpRightIcon aria-hidden="true" className="size-4" />
+      </a>
     </div>
   </div>
-
-  <!-- Social links -->
-  <SocialLinks t={t} />
-</div>
+  <aside class="in-margin mt-8">
+    <p class="sidenote">{t("hero.note_figures")}</p>
+  </aside>
+</section>

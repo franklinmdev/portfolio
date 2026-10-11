@@ -28,7 +28,7 @@ const ScrollToTop = ({ label }: ScrollToTopProps) => {
     <button
       type="button"
       id="scroll-to-top"
-      className={`border-border bg-card/90 text-foreground hover:border-primary hover:text-primary focus-visible:ring-ring fixed right-4 bottom-10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-sm border shadow-lg backdrop-blur transition-all focus-visible:ring-2 focus-visible:outline-none sm:right-8 sm:bottom-12 2xl:h-14 2xl:w-14 ${
+      className={`border-rule-strong bg-background text-muted-foreground hover:text-foreground fixed right-4 bottom-6 flex size-11 cursor-pointer items-center justify-center rounded-[2px] border transition-[opacity,transform,color] duration-200 sm:right-8 sm:bottom-8 ${
         visible
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"

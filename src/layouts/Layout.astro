@@ -63,7 +63,7 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
             : window.matchMedia("(prefers-color-scheme: dark)").matches
           document.documentElement.classList.toggle("dark", dark)
           const meta = document.querySelector('meta[name="theme-color"]')
-          if (meta) meta.setAttribute("content", dark ? "#0c0f16" : "#f3f1ec")
+          if (meta) meta.setAttribute("content", dark ? "#131418" : "#fbfcfd")
         }
         apply()
         document.addEventListener("astro:after-swap", apply)
@@ -71,8 +71,7 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     </script>
     <meta
       name="description"
-      content={description ||
-        "Franklin Martinez - Software Engineer and Web Developer Portfolio"}
+      content={description || "Franklin Martinez, applied AI engineer"}
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -95,7 +94,7 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
 
     <!-- Enhanced SEO & PWA Meta -->
     {/* Single dynamic theme-color; the inline script keeps it in sync. */}
-    <meta name="theme-color" content="#0c0f16" />
+    <meta name="theme-color" content="#fbfcfd" />
     <meta name="color-scheme" content="dark light" />
     <meta name="robots" content="index,follow" />
     <meta
@@ -171,9 +170,9 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
         name: "Franklin Martinez",
         alternateName: "franklinmdev",
         description:
-          "Software engineer specialising in React, Astro & TypeScript.",
+          "Full-Stack AI Engineer who builds LLM systems and measures them before trusting them.",
         image: new URL(avatarImage.src, Astro.site),
-        jobTitle: "Software Engineer & Web Developer",
+        jobTitle: "Full-Stack AI Engineer",
         worksFor: {
           "@type": "Organization",
           name: "Nubeteck S.R.L.",
@@ -190,18 +189,19 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
           addressCountry: "DO",
         },
         knowsAbout: [
-          "React",
-          "Next.js",
-          "Astro",
+          "Large language models",
+          "LLM evaluation",
+          "Document extraction",
           "TypeScript",
-          "Tailwind CSS",
-          "Full-stack Development",
+          "React",
+          "Full-stack development",
         ],
         url: "https://franklinmdev.me",
         sameAs: [
           "https://github.com/franklinmdev",
           "https://www.linkedin.com/in/franklin-martinez-0a697a253/",
           "https://x.com/franklinmdev",
+          "https://www.youtube.com/@arkhelon",
         ],
       })}
     />

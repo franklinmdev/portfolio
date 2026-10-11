@@ -1,11 +1,7 @@
 ---
 title: "DomiProp"
 subtitle: "Gestión de propiedades centrada en el cumplimiento para arrendadores dominicanos"
-description:
-  - "DomiProp es un software de gestión de propiedades construido alrededor de un problema que la mayoría de las apps ignora: cómo se grava y se regula de verdad el ingreso por alquiler en República Dominicana. Aquí un arrendador tiene que lidiar con el ISR y el IPI, llevar los registros de gastos del Formato 606, redactar contratos que cumplan con la Ley 85-25 y, a partir de 2026, pasar a la facturación electrónica obligatoria (e-CF, bajo la Ley 32-23)."
-  - 'Así que en lugar de armar otro registro de alquileres genérico, pensé DomiProp como un "contador digital". Convierte esas obligaciones en una rutina mensual guiada: una calculadora de ISR, un organizador de gastos que calza con el Formato 606, generación de contratos, recordatorios de vencimientos y un panel de ingresos y rendimiento. Un arrendador puede mantenerse al día con todo eso sin tener que contratar a un contador a tiempo completo.'
-challenges: "Lo difícil nunca fue el CRUD, fue el dominio. Las reglas fiscales y de cumplimiento dominicanas son específicas, a veces ambiguas, y cambian seguido, y el mandato de e-CF tiene una fecha límite real en 2026. Tuve que modelar todo eso con cuidado, mantenerlo correcto a medida que las reglas cambian, y aun así dejarlo lo bastante simple para arrendadores que no son técnicos y para los contadores con quienes comparten un espacio de trabajo. Encima corre como un monorepo de TypeScript con un API en NestJS y Prisma, una app en Next.js y un sitio de marketing en Astro, así que los datos tienen que mantenerse consistentes en los tres."
-learnings: "La lección más grande fue que el conocimiento del dominio es el producto de verdad. El código vale tanto como acierta en las reglas de ISR, IPI y e-CF. También mejoré mucho en entregar por fases contra una fecha límite real en vez de intentar construirlo todo de una vez, y en diseñar para dos usuarios muy distintos, arrendadores y contadores, que terminan trabajando sobre los mismos datos."
+description: "DomiProp es un software de gestión de propiedades construido alrededor de un problema que la mayoría de las apps ignora: cómo se grava y se regula de verdad el ingreso por alquiler en República Dominicana. Aquí un arrendador tiene que lidiar con el ISR y el IPI, llevar los registros de gastos del Formato 606, redactar contratos que cumplan con la Ley 85-25 y, a partir de 2026, pasar a la facturación electrónica obligatoria (e-CF, bajo la Ley 32-23)."
 image: "@/assets/projects/domiprop-dashboard-light.png"
 imageDark: "@/assets/projects/domiprop-dashboard-dark.png"
 liveUrl: "https://domiprop.com.do/"
@@ -18,10 +14,15 @@ tags:
   - "PostgreSQL"
   - "Astro"
   - "Tailwind CSS"
-featured: true
 publishDate: "2026-05-18"
-iconAsset: "@/assets/projects/domiprop-logo.png"
 ---
+
+Así que en lugar de armar otro registro de alquileres genérico, pensé DomiProp
+como un "contador digital". Convierte esas obligaciones en una rutina mensual
+guiada: una calculadora de ISR, un organizador de gastos que calza con el
+Formato 606, generación de contratos, recordatorios de vencimientos y un panel
+de ingresos y rendimiento. Un arrendador puede mantenerse al día con todo eso
+sin tener que contratar a un contador a tiempo completo.
 
 DomiProp es el proyecto que muestro cuando quiero demostrar que puedo llevar un
 producto real desde una base de datos vacía hasta algo en vivo, en un dominio
@@ -53,3 +54,24 @@ backend y el frontend.
 DomiProp está construido y preparándose para sus primeros usuarios de cara a la
 fecha límite del e-CF en 2026. El código es privado, así que esta página enlaza
 al producto en vivo en vez de a un repositorio.
+
+## Lo difícil
+
+Lo difícil nunca fue el CRUD, fue el dominio. Las reglas fiscales y de
+cumplimiento dominicanas son específicas, a veces ambiguas, y cambian seguido,
+y el mandato de e-CF tiene una fecha límite real en 2026. Tuve que modelar todo
+eso con cuidado, mantenerlo correcto a medida que las reglas cambian, y aun así
+dejarlo lo bastante simple para arrendadores que no son técnicos y para los
+contadores con quienes comparten un espacio de trabajo. Encima corre como un
+monorepo de TypeScript con un API en NestJS y Prisma, una app en Next.js y un
+sitio de marketing en Astro, así que los datos tienen que mantenerse
+consistentes en los tres.
+
+## Lo que me enseñó
+
+La lección más grande fue que el conocimiento del dominio es el producto de
+verdad. El código vale tanto como acierta en las reglas de ISR, IPI y e-CF.
+También mejoré mucho en entregar por fases contra una fecha límite real en vez
+de intentar construirlo todo de una vez, y en diseñar para dos usuarios muy
+distintos, arrendadores y contadores, que terminan trabajando sobre los mismos
+datos.

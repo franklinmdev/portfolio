@@ -1,11 +1,11 @@
 ---
-import CatalogRail from "@/components/CatalogRail.astro"
+import About from "@/components/About.astro"
+import Contact from "@/components/Contact.astro"
 import Experience from "@/components/Experience.astro"
 import Hero from "@/components/Hero.astro"
-import Projects from "@/components/Projects.astro"
-import ContactForm from "@/components/react/ContactForm.tsx"
+import Method from "@/components/Method.astro"
 import ScrollToTop from "@/components/react/ScrollToTop"
-import Technologies from "@/components/Technologies.astro"
+import Work from "@/components/Work.astro"
 import { createTranslations } from "@/i18n/utils"
 
 export interface Props {
@@ -16,59 +16,13 @@ const { lang } = Astro.props
 const t = createTranslations(lang)
 ---
 
-<!-- Signature spine: catalog rail down the left margin (xl+). -->
-<CatalogRail t={t} />
-
-<!-- Main Container with better responsive handling -->
-<div
-  class="mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:pr-12 xl:pl-20 2xl:pl-12"
->
-  <div class="xl:flex xl:justify-between xl:gap-20">
-    <!-- Left Column: Hero Section -->
-    <Hero t={t} />
-
-    <!-- Right Column: Main Content -->
-    <main class="xl:w-3/5 2xl:w-[62%]">
-      <div class="xl:pt-28">
-        <!-- Content Sections -->
-        <div class="space-y-11 md:space-y-14 xl:space-y-11 2xl:space-y-14">
-          <Experience />
-
-          <hr class="border-border hidden xl:block" />
-
-          <Technologies />
-
-          <hr class="border-border hidden xl:block" />
-
-          <Projects />
-
-          <ContactForm
-            client:visible
-            translations={{
-              title: t("sections.contact_title"),
-              subtitle: t("contact.subtitle"),
-              moduleLabel: t("hud.modules.contact"),
-              channel: t("hud.contact.channel"),
-              namePlaceholder: t("contact.form.name_placeholder"),
-              emailPlaceholder: t("contact.form.email_placeholder"),
-              messagePlaceholder: t("contact.form.message_placeholder"),
-              nameLabel: t("contact.form.name_label"),
-              emailLabel: t("contact.form.email_label"),
-              messageLabel: t("contact.form.message_label"),
-              sendButton: t("contact.form.send_btn"),
-              sendingButton: t("contact.form.sending_btn"),
-              successMessage: t("contact.form.success_msg"),
-              errorMessage: t("contact.form.error_msg"),
-              nameRequired: t("contact.form.name_required"),
-              emailRequired: t("contact.form.email_required"),
-              emailInvalid: t("contact.form.email_invalid"),
-              messageRequired: t("contact.form.message_required"),
-            }}
-          />
-        </div>
-      </div>
-    </main>
-  </div>
-</div>
+<main id="content" class="page">
+  <Hero t={t} />
+  <Work t={t} lang={lang} />
+  <Method t={t} />
+  <Experience t={t} />
+  <About t={t} />
+  <Contact t={t} />
+</main>
 
 <ScrollToTop client:idle label={t("a11y.scroll_to_top")} />

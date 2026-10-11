@@ -8,9 +8,8 @@ const projects = defineCollection({
     z.object({
       title: z.string(),
       subtitle: z.string(),
-      description: z.array(z.string()).or(z.string()),
-      challenges: z.string(),
-      learnings: z.string(),
+      // One paragraph: the abstract under the title and the meta description.
+      description: z.string(),
       // Optional: library/utility projects may have no screenshot, and a
       // project may expose only one of live URL / source (private repo, or a
       // live site that has been taken down). Missing links are hidden, not
@@ -21,10 +20,9 @@ const projects = defineCollection({
       imageDark: image().optional(),
       liveUrl: z.string().optional(),
       githubUrl: z.string().optional(),
+      npmUrl: z.string().optional(),
       tags: z.array(z.string()),
-      featured: z.boolean().default(false),
       publishDate: z.coerce.date(),
-      iconAsset: image().optional(),
     }),
 })
 
