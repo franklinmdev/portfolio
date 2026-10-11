@@ -1,6 +1,4 @@
 ---
-import ContactForm from "@/components/react/ContactForm"
-
 export interface Props {
   t: (key: string) => string
 }
@@ -16,32 +14,11 @@ const [before = "", after = ""] = t("contact.lead").split("{email}")
 >
   <h2 id="contact-title" class="section-title">{t("contact.title")}</h2>
   <div class="hidden lg:block"></div>
-  <div class="mt-4">
-    <p>
-      {before}<a
-        class="link"
-        href="mailto:franklinmdev@hotmail.com"
-        set:text="franklinmdev@hotmail.com"
-      />{after}
-    </p>
-    <ContactForm
-      client:visible
-      translations={{
-        namePlaceholder: t("contact.form.name_placeholder"),
-        emailPlaceholder: t("contact.form.email_placeholder"),
-        messagePlaceholder: t("contact.form.message_placeholder"),
-        nameLabel: t("contact.form.name_label"),
-        emailLabel: t("contact.form.email_label"),
-        messageLabel: t("contact.form.message_label"),
-        sendButton: t("contact.form.send_btn"),
-        sendingButton: t("contact.form.sending_btn"),
-        successMessage: t("contact.form.success_msg"),
-        errorMessage: t("contact.form.error_msg"),
-        nameRequired: t("contact.form.name_required"),
-        emailRequired: t("contact.form.email_required"),
-        emailInvalid: t("contact.form.email_invalid"),
-        messageRequired: t("contact.form.message_required"),
-      }}
-    />
-  </div>
+  <p class="mt-4">
+    {before}<a
+      class="link"
+      href="mailto:franklinmdev@hotmail.com"
+      set:text="franklinmdev@hotmail.com"
+    />{after}
+  </p>
 </section>

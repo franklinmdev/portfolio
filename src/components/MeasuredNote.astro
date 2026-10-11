@@ -1,0 +1,34 @@
+---
+// A measured note: the numbers behind a paragraph, in the margin. Amber mono
+// for the value, a sans label, then the date and the commit that produced it.
+export interface Props {
+  rows: { value: string; label: string }[]
+  date?: string
+  source?: { label: string; href: string }
+  class?: string
+}
+
+const { rows, date, source, class: className } = Astro.props
+---
+
+<aside class:list={["in-margin sidenote measured-note", className]}>
+  <dl>
+    {
+      rows.map((r) => (
+        <div>
+          <dt>{r.value}</dt>
+          <dd>{r.label}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  {
+    (date || source) && (
+      <p class="source">
+        {date && <time datetime={date}>{date}</time>}
+        {date && source && ", "}
+        {source && <a href={source.href}>{source.label}</a>}
+      </p>
+    )
+  }
+</aside>

@@ -16,15 +16,8 @@
     "other_lang_short": "EN"
   },
   "hero": {
-    "title": "Construyo sistemas con LLM, y los mido antes de confiar en ellos.",
-    "byline": "Full-Stack AI Engineer, República Dominicana",
-    "abstract_label": "Resumen.",
-    "abstract": "Llevo tres años y medio construyendo software empresarial con TypeScript, React y .NET, y desde febrero de 2026 trabajo como Full-Stack AI Engineer. En mi tiempo libre construyo sistemas con LLM que se juzgan con benchmarks, no con demos. Las figuras de esta página funcionan: una reproduce respuestas reales de una demo en vivo, otra es una librería corriendo en tu navegador y otra grafica un benchmark que puedes rastrear hasta su commit.",
-    "note_open": "Disponible para roles remotos en IA aplicada e ingeniería de producto con IA.",
-    "note_figures": "Las figuras 1 a 4 son interactivas. Cada número enlaza a su fuente.",
-    "email": "Escríbeme",
-    "github": "GitHub",
-    "linkedin": "LinkedIn"
+    "title": "Los modelos eligen. El código decide. Las figuras lo demuestran.",
+    "byline": "Full-Stack AI Engineer en Santiago, República Dominicana. Disponible para roles remotos."
   },
   "work": {
     "title": "Trabajo seleccionado",
@@ -33,21 +26,24 @@
     "source": "Código",
     "justask": {
       "lead": "Convierte lo que una persona escribe en el estado de tu propia aplicación: un resultado de búsqueda, un filtro de tabla, una ficha llena. El código encuentra los candidatos, un modelo elige una etiqueta por pregunta con una probabilidad para cada etiqueta, y el campo del que no está seguro se queda vacío para que la persona lo llene (Fig. 1).",
-      "note_demo": "La demo en vivo funciona en inglés y en español, con límite de uso y un tope de 1 dólar al día en gasto de modelo.",
-      "note_eval": "Cada set de evaluación se congela con un checksum, con sus líneas de aprobación escritas, antes de la primera llamada al modelo. Ronda 4 de la evaluación de búsqueda: 24 de 24 elecciones exactas, ninguna inventada, 6 de 6 pedidos ambiguos retenidos, p95 de 380 ms.",
-      "note_eval_link": "El registro de evaluaciones, rondas fallidas incluidas",
-      "note_npm": "En npm como @justask/core, MIT."
+      "m_exact": "elecciones exactas, ronda 4 de la evaluación de búsqueda",
+      "m_held": "pedidos ambiguos retenidos",
+      "m_p95": "latencia p95",
+      "m_cap": "de gasto de modelo al día, el tope de la demo"
     },
     "docmatch": {
       "lead": "Conciliación de facturas para cuentas por pagar. Un modelo de visión lee la factura, código determinista revisa lo que leyó y la cruza con la orden de compra y la recepción de mercancía, y lo que no cuadra pasa a una persona (Fig. 2). Cada etapa tiene su número en una tabla de benchmarks que nombra el commit que lo produjo (Fig. 3).",
       "status": "En progreso: la extracción, el cruce, la resolución de entidades y la revisión humana están terminados.",
-      "note_ci": "Una verificación en CI compara el F1 por campo y por línea de cada backend contra la base del merge, y rechaza el pull request que baje cualquiera de los dos.",
-      "note_data": "Los documentos del benchmark no se pueden redistribuir, así que la Fig. 2 usa las facturas sintéticas del corpus de CI."
+      "note_ci": "Una verificación en CI rechaza cualquier pull request que baje el F1 por campo o por línea.",
+      "m_p95": "p95 de la carga a la aprobación, backend más barato",
+      "m_cost": "por documento",
+      "m_review": "de los documentos pasan a una persona"
     },
     "dgii": {
       "lead": "Una librería en TypeScript para la DGII. Valida RNC, cédula, NCF y e-NCF sin conexión, y consulta contribuyentes leyendo las páginas web de la DGII con reintentos y un circuit breaker, porque la DGII no tiene API pública y cerró su servicio SOAP en enero de 2025. La Fig. 4 es la librería misma, corriendo en esta página.",
-      "note_npm": "En npm como dgii-ts, MIT.",
-      "note_skill": "Incluye una skill para agentes, así los agentes de código aprenden la librería con un comando:"
+      "note_skill": "Incluye una skill para agentes, así los agentes de código aprenden la librería con un comando:",
+      "m_cedulas": "cédulas en la lista blanca: números reales que no cumplen el algoritmo",
+      "m_rncs": "RNC en la lista blanca"
     },
     "also": "También en construcción",
     "domiprop": {
@@ -55,13 +51,12 @@
       "caption": "Fig. 5. El panel de DomiProp."
     },
     "brook": {
-      "lead": "Una aplicación móvil en desarrollo (Expo, TypeScript) que convierte los enlaces que la gente guarda de TikTok, Instagram y la web en una biblioteca donde se puede buscar. Cada enlace se clasifica por tipo, como una receta, un lugar o un producto, en campos con una insignia de confianza. Antes de construir la aplicación estoy corriendo una prueba de demanda de dos semanas: una página con lista de espera en un Cloudflare Worker, con los criterios para abandonarla escritos antes del lanzamiento.",
-      "link": "La página de lanzamiento"
+      "lead": "Una aplicación móvil en desarrollo (Expo, TypeScript) que convierte los enlaces que la gente guarda de TikTok, Instagram y la web en una biblioteca donde se puede buscar, con cada enlace clasificado en campos tipados y una insignia de confianza. Antes de construirla estoy corriendo una prueba de demanda de dos semanas: una página con lista de espera, con los criterios para abandonarla escritos antes del lanzamiento."
     }
   },
   "fig1": {
     "label": "Fig. 1",
-    "caption": "Tres pedidos enviados a la demo en vivo de justask el 11 de octubre de 2026, reproducidos con sus respuestas reales. Las barras muestran la probabilidad que el modelo le da a cada elección. Un campo cuya elección no pasa su umbral se queda vacío.",
+    "caption": "justask, mi librería que convierte un pedido escrito en el estado de una app. Tres pedidos enviados a su demo en vivo el 11 de octubre de 2026, reproducidos con sus respuestas reales. Las barras son la probabilidad del modelo para cada elección; una elección por debajo de su umbral deja el campo vacío.",
     "pick": "Elige un pedido",
     "replay": "Repetir",
     "card": "Nuevo gasto",
@@ -106,9 +101,7 @@
   },
   "fig3": {
     "label": "Fig. 3",
-    "caption": "F1 por campo contra costo por documento, en un subconjunto fijo de 100 documentos. Arriba y a la izquierda es mejor. Cada fila enlaza el commit que la produjo.",
-    "x": "Costo por documento (USD)",
-    "y": "F1 por campo",
+    "caption": "Tres backends de extracción en un subconjunto fijo de 100 documentos. Cada fila enlaza el commit que la produjo.",
     "backend": "Backend",
     "f1": "F1 por campo",
     "cost": "Costo por doc.",
@@ -157,7 +150,7 @@
       "date": "Febrero de 2026 a hoy",
       "title": "Full-Stack AI Engineer",
       "company": "Nubeteck, S.R.L.",
-      "desc": "Me encargo de productos de principio a fin, desde el modelo de datos hasta el frontend. Construyo una plataforma comercial de gestión financiera que vendemos a clientes, con presupuestos en varias monedas y flujos de aprobación, y me tocan las integraciones más difíciles, como los proveedores de pago. También lidero cómo el equipo adopta herramientas de IA para programar, como Claude Code, Cursor CLI y Codex, y soy mentor de los pasantes y desarrolladores junior."
+      "desc": "Me encargo de principio a fin de una plataforma comercial de gestión financiera, desde el modelo de datos hasta el frontend, y me tocan las integraciones más difíciles, como los proveedores de pago. También lidero cómo el equipo adopta herramientas de IA para programar y soy mentor de los pasantes y desarrolladores junior."
     },
     "exp2": {
       "date": "Abril de 2023 a febrero de 2026",
@@ -168,31 +161,13 @@
   },
   "about": {
     "title": "Sobre mí",
-    "caption": "Fig. 6. Franklin Martinez.",
-    "p1": "Crecí desarmando cosas para ver cómo funcionaban, y construyo software de la misma forma: empiezo por el problema y por la gente que de verdad lo tiene, y dejo que eso decida el resto.",
     "p2": "Casi todo lo que construyo trata con reglas del mundo real que son complicadas, como impuestos, cumplimiento y operaciones internas, donde acertar en los detalles importa más que la tecnología.",
     "outside_title": "Fuera del trabajo.",
     "outside": "Juego baloncesto y tengo {link}, un canal de YouTube sobre mitos e historia legendaria."
   },
   "contact": {
     "title": "Contacto",
-    "lead": "Lo más rápido es el correo: {email}. O déjame un mensaje aquí y te respondo por correo.",
-    "form": {
-      "name_placeholder": "Tu nombre",
-      "email_placeholder": "tu@empresa.com",
-      "message_placeholder": "¿En qué estás trabajando?",
-      "name_label": "Nombre",
-      "email_label": "Correo electrónico",
-      "message_label": "Mensaje",
-      "send_btn": "Enviar mensaje",
-      "sending_btn": "Enviando",
-      "success_msg": "Enviado. Te respondo al correo en uno o dos días.",
-      "error_msg": "El mensaje no se pudo enviar. Escríbeme directo a franklinmdev@hotmail.com.",
-      "name_required": "Escribe tu nombre.",
-      "email_required": "Escribe tu correo para poder responderte.",
-      "email_invalid": "Ese correo parece incompleto.",
-      "message_required": "Escribe un mensaje."
-    }
+    "lead": "Escríbeme a {email}. Respondo en uno o dos días."
   },
   "projects": {
     "back": "Todo el trabajo",
@@ -200,10 +175,8 @@
     "stack": "Hecho con",
     "view_live": "En vivo",
     "view_source": "Código",
-    "contact": "Hablar de este proyecto"
-  },
-  "a11y": {
-    "scroll_to_top": "Volver arriba"
+    "contact": "Hablar de este proyecto",
+    "abstract": "Resumen."
   },
   "error": {
     "404": {

@@ -34,18 +34,25 @@ figure you can run, and the proof sits in the margin.
   margin column on desktop; figures span both. Depth: flat; hairline rules
   only.
 - Motion signature: the figure plots itself. Bars grow to their measured
-  value, fields fill in order, boxes draw onto the invoice, points settle on
-  the plot, digits get weighed one by one. Placements: Fig. 1 to Fig. 4 only;
-  chrome stays still. Under reduced motion every figure shows its final
-  state.
-- Unexpected move: the margin. Sidenotes, keyed by superscript numbers,
-  carry the proof (commit links, eval rules, npm, live links). On mobile they
-  fold in under their paragraph.
+  value, fields fill in order, boxes draw onto the invoice, table rows settle
+  one by one, digits get weighed one by one. Placements: Fig. 1 to Fig. 4
+  only; chrome stays still. Under reduced motion every figure shows its final
+  state. Static figures (Fig. 1, Fig. 3) opt in with `data-autoplot`; the
+  shared script lives in `Layout.astro`.
+- Unexpected move: the measured column. Every number on the page sits in the
+  margin in amber Commit Mono with a sans label, the date it was measured and
+  a link to the commit (`MeasuredNote.astro`, `.measured-note`; raw `.noted`
+  HTML blocks in the deep dives). The prose carries the claim, the margin
+  carries the number. On mobile the column folds in under its paragraph.
+- First screen: the h1 is a claim ("Models pick. Code decides. The figures
+  prove it."), one byline line, three text links, then Fig. 1 running on the
+  held case. No abstract, no buttons, nothing that only describes.
 
 ## Tokens
 
 `src/styles/global.css`: `:root` (light), `.dark`, `@theme`. Component
-classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.prose`.
+classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.measured-note`,
+`.noted`, `.prose`.
 
 ## Rules for new surfaces
 
@@ -63,6 +70,9 @@ classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.prose`.
 - Datasheet (2026-05 to 2026-10): IBM Plex + JetBrains Mono, cyan; shallow,
   and its fonts are now spent.
 - warm-editorial, refined-dark, editorial-mono (2026-05).
+- Fig. 3 as a scatter plot (2026-10-11): the table already held the commit
+  links; the plot doubled the height for three points. Table only.
+- Contact form (2026-10-11): a mailto line says the same with no island.
 - Crimson hue 5 accent (2026-10-11): read as pink on the dark ground. True
   red is blocked by DomiProp's orange 47 on the same page. Ink only and olive
   115 were the other candidates.

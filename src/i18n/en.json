@@ -16,15 +16,8 @@
     "other_lang_short": "ES"
   },
   "hero": {
-    "title": "I build LLM systems, and I measure them before I trust them.",
-    "byline": "Full-Stack AI Engineer, Dominican Republic",
-    "abstract_label": "Abstract.",
-    "abstract": "For three and a half years I've built business software with TypeScript, React and .NET, and since February 2026 I work as a Full-Stack AI Engineer. On my own time I build LLM systems that get judged by benchmarks instead of demos. The figures on this page run: one replays real responses from a live demo, one is a library running in your browser, and one plots a benchmark you can trace back to its commit.",
-    "note_open": "Open to remote roles in applied AI and AI product engineering.",
-    "note_figures": "Figures 1 to 4 are interactive. Every number links its source.",
-    "email": "Email me",
-    "github": "GitHub",
-    "linkedin": "LinkedIn"
+    "title": "Models pick. Code decides. The figures prove it.",
+    "byline": "Full-Stack AI Engineer in Santiago, Dominican Republic. Open to remote roles."
   },
   "work": {
     "title": "Selected work",
@@ -33,21 +26,24 @@
     "source": "Source",
     "justask": {
       "lead": "Turns what a person types into an app's own state: a search result, a table filter, a filled record card. Code finds the candidates, a model picks one label per question with a probability for every label, and a field it isn't sure of stays empty for the person to fill (Fig. 1).",
-      "note_demo": "The live demo runs in English and Spanish, rate limited and capped at $1 of model spend a day.",
-      "note_eval": "Each eval set is frozen by checksum, with its pass lines written, before the first model call. Round 4 of the search eval: 24 of 24 picks exact, none invented, 6 of 6 ambiguous requests held, p95 380 ms.",
-      "note_eval_link": "The eval log, failed rounds included",
-      "note_npm": "On npm as @justask/core, MIT."
+      "m_exact": "picks exact, round 4 of the search eval",
+      "m_held": "ambiguous requests held",
+      "m_p95": "p95 latency",
+      "m_cap": "of model spend a day, the demo's cap"
     },
     "docmatch": {
       "lead": "Invoice reconciliation for accounts payable. A vision model reads the invoice, deterministic code checks what it read and matches it against the purchase order and the receiving record, and anything that doesn't add up goes to a person (Fig. 2). Every stage has its number in a benchmark table that names the commit behind it (Fig. 3).",
       "status": "In progress: extraction, matching, entity resolution and the review pipeline are done.",
-      "note_ci": "A CI gate compares field and line-item F1 for every backend against the merge base and fails a pull request that lowers either.",
-      "note_data": "The benchmark documents can't be redistributed, so Fig. 2 uses the synthetic invoices from the CI corpus."
+      "note_ci": "A CI gate fails any pull request that lowers field or line-item F1.",
+      "m_p95": "p95 from upload to approval, cheapest backend",
+      "m_cost": "per document",
+      "m_review": "of documents sent to a person"
     },
     "dgii": {
       "lead": "A TypeScript library for the DGII, the Dominican tax authority. It validates RNC, cédula, NCF and e-NCF numbers offline, and looks up taxpayers by scraping DGII's web pages with retries and a circuit breaker, because DGII has no public API and shut down its SOAP service in January 2025. Fig. 4 is the library itself, running in this page.",
-      "note_npm": "On npm as dgii-ts, MIT.",
-      "note_skill": "It ships an agent skill, so coding agents learn the library with one command:"
+      "note_skill": "It ships an agent skill, so coding agents learn the library with one command:",
+      "m_cedulas": "cédulas on the whitelist: real numbers that break the algorithm",
+      "m_rncs": "RNCs on the whitelist"
     },
     "also": "Also building",
     "domiprop": {
@@ -55,13 +51,12 @@
       "caption": "Fig. 5. The DomiProp dashboard."
     },
     "brook": {
-      "lead": "A mobile app in development (Expo, TypeScript) that turns the links people save from TikTok, Instagram and the web into a searchable library. Each link is sorted by type, such as a recipe, a place or a product, into typed fields with a confidence badge. Before building the app, I'm running a two-week demand test: a landing page and waitlist on one Cloudflare Worker, with the kill lines written before launch.",
-      "link": "The landing page"
+      "lead": "A mobile app in development (Expo, TypeScript) that turns the links people save from TikTok, Instagram and the web into a searchable library, each link sorted into typed fields with a confidence badge. Before building it, I'm running a two-week demand test: a landing page and a waitlist, with the kill lines written before launch."
     }
   },
   "fig1": {
     "label": "Fig. 1",
-    "caption": "Three requests sent to justask's live demo on October 11, 2026, replayed with their real responses. Bars show the model's probability for each pick. A field whose pick falls below its gate stays empty.",
+    "caption": "justask, my library that turns a typed request into an app's own state. Three requests sent to its live demo on October 11, 2026, replayed with their real responses. Bars are the model's probability for each pick; a pick below its gate leaves the field empty.",
     "pick": "Pick a request",
     "replay": "Replay",
     "card": "New expense",
@@ -106,9 +101,7 @@
   },
   "fig3": {
     "label": "Fig. 3",
-    "caption": "Field F1 against cost per document, on a fixed subset of 100 pinned documents. Up and to the left is better. Each row links the commit that produced it.",
-    "x": "Cost per document (USD)",
-    "y": "Field F1",
+    "caption": "Three extraction backends on a fixed subset of 100 pinned documents. Each row links the commit that produced it.",
     "backend": "Backend",
     "f1": "Field F1",
     "cost": "Cost per doc",
@@ -157,7 +150,7 @@
       "date": "February 2026 to now",
       "title": "Full-Stack AI Engineer",
       "company": "Nubeteck, S.R.L.",
-      "desc": "I own products end to end, from the data model to the frontend. I build a commercial financial-management platform we sell to clients, including multi-currency budgeting with approval workflows, and I take on the harder integrations, such as payment providers. I also lead how the team adopts AI coding tools like Claude Code, Cursor CLI and Codex, and I mentor our interns and junior developers."
+      "desc": "I own a commercial financial-management platform end to end, from the data model to the frontend, and take on the harder integrations, such as payment providers. I also lead the team's adoption of AI coding tools and mentor our interns and junior developers."
     },
     "exp2": {
       "date": "April 2023 to February 2026",
@@ -168,31 +161,13 @@
   },
   "about": {
     "title": "About",
-    "caption": "Fig. 6. Franklin Martinez.",
-    "p1": "I grew up taking things apart to see how they worked, and I build software the same way: I start with the problem and the people who actually have it, and let that decide the rest.",
     "p2": "Most of what I build deals with messy real-world rules, like taxes, compliance and internal operations, where getting the small details right matters more than the stack.",
     "outside_title": "Outside work.",
     "outside": "I play basketball and run {link}, a YouTube channel about myths and legendary history."
   },
   "contact": {
     "title": "Contact",
-    "lead": "Email is fastest: {email}. Or leave a message here and I'll reply by email.",
-    "form": {
-      "name_placeholder": "Your name",
-      "email_placeholder": "you@company.com",
-      "message_placeholder": "What are you working on?",
-      "name_label": "Name",
-      "email_label": "Email",
-      "message_label": "Message",
-      "send_btn": "Send message",
-      "sending_btn": "Sending",
-      "success_msg": "Sent. I'll reply to your email within a day or two.",
-      "error_msg": "The message didn't go through. Email me directly at franklinmdev@hotmail.com.",
-      "name_required": "Add your name.",
-      "email_required": "Add your email so I can reply.",
-      "email_invalid": "That email doesn't look complete.",
-      "message_required": "Write a message."
-    }
+    "lead": "Write to {email}. I reply within a day or two."
   },
   "projects": {
     "back": "All work",
@@ -200,10 +175,8 @@
     "stack": "Built with",
     "view_live": "Live",
     "view_source": "Source",
-    "contact": "Talk about this project"
-  },
-  "a11y": {
-    "scroll_to_top": "Scroll to top"
+    "contact": "Talk about this project",
+    "abstract": "Abstract."
   },
   "error": {
     "404": {

@@ -13,11 +13,10 @@ A modern, high-performance portfolio website built with
 - **⚡ Lightning Fast**: Built with Astro for optimal performance and minimal JavaScript
 - **🎨 Modern Design**: Responsive dark theme with smooth animations and hover effects
 - **🔧 Interactive Components**: React components for dynamic features
-  (contact form, spotlight effect)
+  (project figures, spotlight effect)
 - **📱 Mobile First**: Perfect responsive design across all devices
 - **♿ Accessible**: WCAG compliant with proper ARIA labels and semantic HTML
 - **🌟 Visual Effects**: Interactive mouse spotlight and smooth scroll animations
-- **📧 Contact Form**: Functional contact form with validation
 - **🚀 Auto-Deploy**: Continuous deployment via GitHub Actions
 - **📈 SEO Optimized**: Meta tags, structured data, and performance optimized
 - **🛡️ Type Safety**: Strictest TypeScript configuration, no usage of
@@ -29,8 +28,6 @@ A modern, high-performance portfolio website built with
 - **Frontend:** [React 19](https://react.dev/) for interactive components
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) with custom theme
 - **Icons:** [Lucide React](https://lucide.dev/) for modern iconography
-- **UI Components:** Custom components with
-  [shadcn/ui](https://ui.shadcn.com/) setup
 - **Code Quality:** ESLint + Prettier with Astro and TypeScript support
 - **Deployment:** GitHub Pages with custom domain
 - **CI/CD:** GitHub Actions for automated deployment
@@ -92,11 +89,9 @@ portfolio/
 │   │   └── projects/              # Project-specific assets
 │   ├── components/
 │   │   ├── react/                 # React interactive components
-│   │   │   ├── ContactForm.tsx    # Contact form with validation
 │   │   │   ├── ProjectCard.tsx    # Project card component
 │   │   │   ├── ProjectsSection.tsx# Grid of project cards
 │   │   │   └── Spotlight.tsx      # Mouse spotlight effect
-│   │   ├── ui/                    # shadcn/ui components
 │   │   ├── Experience.astro       # Work experience timeline
 │   │   ├── Footer.astro           # Site footer
 │   │   ├── Header.astro           # Navigation header
@@ -121,7 +116,6 @@ portfolio/
 │   ├── layouts/
 │   │   └── Layout.astro           # Main site layout
 │   ├── lib/
-│   │   ├── email.ts               # EmailJS sending logic
 │   │   └── utils.ts               # Utility functions
 │   ├── pages/
 │   │   ├── 404.astro              # Main 404 page (English, used for /404)
@@ -139,7 +133,6 @@ portfolio/
 │   └── workflows/
 │       └── deploy.yml             # GitHub Actions deployment
 ├── astro.config.mjs               # Astro configuration
-├── components.json                # shadcn/ui configuration
 ├── eslint.config.js               # ESLint configuration
 ├── tsconfig.json                  # TypeScript configuration (strictest)
 └── LICENSE                        # MIT License
@@ -177,7 +170,6 @@ portfolio/
 - **Experience Timeline**: Interactive timeline with hover effects
 - **Technology Tags**: Animated badges with hover states
 - **Project Cards**: Grid layout with smooth hover animations
-- **Contact Form**: Validated form with success states
 
 ## 🚀 Deployment
 

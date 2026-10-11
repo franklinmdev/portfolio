@@ -4,7 +4,6 @@ import Contact from "@/components/Contact.astro"
 import Experience from "@/components/Experience.astro"
 import Hero from "@/components/Hero.astro"
 import Method from "@/components/Method.astro"
-import ScrollToTop from "@/components/react/ScrollToTop"
 import Work from "@/components/Work.astro"
 import { createTranslations } from "@/i18n/utils"
 
@@ -17,12 +16,10 @@ const t = createTranslations(lang)
 ---
 
 <main id="content" class="page">
-  <Hero t={t} />
+  <Hero t={t} lang={lang} />
   <Work t={t} lang={lang} />
   <Method t={t} />
   <Experience t={t} />
   <About t={t} />
   <Contact t={t} />
 </main>
-
-<ScrollToTop client:idle label={t("a11y.scroll_to_top")} />

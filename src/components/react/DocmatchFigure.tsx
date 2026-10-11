@@ -123,14 +123,14 @@ export default function DocmatchFigure({ t }: Props) {
       <div className="figure grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
         {/* The invoice, drawn from the labels' own positions. */}
         <div
-          className="border-border bg-background [container-type:inline-size] relative aspect-[8.5/11] w-full border font-sans leading-tight"
+          className="border-border bg-background [container-type:inline-size] relative aspect-[8.5/13] w-full border font-sans leading-tight sm:aspect-[8.5/11]"
           role="img"
           aria-label={`${t.invoice} INV-1001, Northwind Paper Co, 237.50 USD`}
         >
-          <div className="absolute inset-0 [font-size:2.5cqw]">
+          <div className="absolute inset-0 [font-size:3.2cqw] sm:[font-size:2.5cqw]">
             <Placed
               bbox={[0.08, 0.04, 0.5, 0.08]}
-              className="[font-size:3.4cqw] font-semibold tracking-wide"
+              className="[font-size:4cqw] font-semibold tracking-wide sm:[font-size:3.4cqw]"
             >
               {t.invoice}
             </Placed>
@@ -147,7 +147,7 @@ export default function DocmatchFigure({ t }: Props) {
                   bbox={f.bbox}
                   className={cn(
                     f.type === "vendor_name" &&
-                      "[font-size:2.6cqw] font-semibold",
+                      "[font-size:3.3cqw] font-semibold sm:[font-size:2.6cqw]",
                     f.type.startsWith("amount") && "data justify-end"
                   )}
                 >
@@ -225,7 +225,7 @@ export default function DocmatchFigure({ t }: Props) {
                     height: `calc(${(y1 - y0) * 100}% + 0.8%)`,
                   }}
                 >
-                  <span className="bg-measure-ink text-background absolute -top-[1.5px] -left-[1.5px] -translate-y-full px-[0.6cqw] font-sans [font-size:1.7cqw] leading-normal font-semibold">
+                  <span className="bg-measure-ink text-background absolute -top-[1.5px] -left-[1.5px] -translate-y-full px-[0.6cqw] font-sans [font-size:2.3cqw] leading-normal font-semibold sm:[font-size:1.7cqw]">
                     {i + 1}
                   </span>
                 </div>
@@ -257,8 +257,8 @@ export default function DocmatchFigure({ t }: Props) {
               <li
                 key={f.type}
                 className={cn(
-                  "border-border grid grid-cols-[1.5rem_8rem_minmax(0,1fr)] items-baseline gap-2 border-t py-2 font-sans text-[0.9375rem] transition-opacity duration-300",
-                  phase > i ? "opacity-100" : "opacity-25"
+                  "border-border grid grid-cols-[1.5rem_8rem_minmax(0,1fr)] items-baseline gap-2 border-t py-2 font-sans text-[0.9375rem] transition-[opacity,visibility] duration-300",
+                  phase > i ? "visible opacity-100" : "invisible opacity-0"
                 )}
               >
                 <span className="data measured text-xs">{i + 1}</span>
@@ -299,10 +299,10 @@ export default function DocmatchFigure({ t }: Props) {
               <li
                 key={rule.name}
                 className={cn(
-                  "border-border border-t py-2.5 font-sans text-[0.9375rem] transition-[opacity,transform] duration-300 ease-[var(--ease-out-expo)]",
+                  "border-border border-t py-2.5 font-sans text-[0.9375rem] transition-[opacity,transform,visibility] duration-300 ease-[var(--ease-out-expo)]",
                   rulesShown > i
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-1 opacity-0"
+                    ? "visible translate-y-0 opacity-100"
+                    : "invisible translate-y-1 opacity-0"
                 )}
               >
                 <div className="flex items-center justify-between gap-3">
@@ -332,38 +332,32 @@ export default function DocmatchFigure({ t }: Props) {
           </ul>
           <p
             className={cn(
-              "border-rule-strong mt-1 border-t pt-3 font-sans text-[0.9375rem] font-semibold transition-opacity duration-300",
-              rulesShown >= 3 ? "opacity-100" : "opacity-0"
+              "border-rule-strong mt-1 border-t pt-3 font-sans text-[0.9375rem] font-semibold transition-[opacity,visibility] duration-300",
+              rulesShown >= 3 ? "visible opacity-100" : "invisible opacity-0"
             )}
           >
             {t.verdict}
           </p>
 
           <ol
-            className="mt-auto flex flex-wrap items-center gap-x-1.5 gap-y-1 pt-6"
+            className="apparatus mt-auto flex flex-wrap items-center gap-x-1.5 gap-y-1 pt-6"
             aria-label="Status"
           >
             {STATUSES.map((s, i) => (
               <li key={s} className="flex items-center gap-1.5">
                 <span
                   className={cn(
-                    "data px-1.5 py-0.5 text-xs transition-colors duration-300",
-                    i < statusReached
-                      ? "bg-foreground text-background"
-                      : "border-border text-muted-foreground border border-dashed"
+                    "transition-colors duration-300",
+                    i === statusReached - 1 && "text-foreground font-medium"
                   )}
+                  aria-current={i === statusReached - 1 ? "step" : undefined}
                 >
                   {s}
                 </span>
-                <ArrowRightIcon
-                  aria-hidden="true"
-                  className="text-muted-foreground size-3"
-                />
+                <ArrowRightIcon aria-hidden="true" className="size-3" />
               </li>
             ))}
-            <li className="data text-muted-foreground border-border border border-dashed px-1.5 py-0.5 text-xs">
-              approved | needs_review
-            </li>
+            <li>approved | needs_review</li>
           </ol>
           <p className="apparatus mt-2">{t.next}</p>
         </div>

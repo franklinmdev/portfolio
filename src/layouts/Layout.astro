@@ -173,10 +173,6 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
           "Full-Stack AI Engineer who builds LLM systems and measures them before trusting them.",
         image: new URL(avatarImage.src, Astro.site),
         jobTitle: "Full-Stack AI Engineer",
-        worksFor: {
-          "@type": "Organization",
-          name: "Nubeteck S.R.L.",
-        },
         alumniOf: {
           "@type": "CollegeOrUniversity",
           name: "Universidad Central del Este",
@@ -208,11 +204,61 @@ const esHref = new URL(`/es${normalizedPath}`, Astro.site)
     {/* eslint-enable astro/no-set-html-directive */}
 
     <ClientRouter fallback="swap" />
+    <noscript></noscript>{
+      /* Without JS a figure shows its final state instead of waiting to plot. */
+    }
+    <style>
+      [data-plotted="false"] .grow-x {
+        transform: scaleX(var(--to, 1));
+      }
+      [data-plotted="false"] .settle {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
   </head>
-  <body class="antialiased">
-    <Header />
-    <slot />
-    <Footer />
-    <WebMCP client:idle />
-  </body>
 </html>
+<body class="antialiased">
+  <Header />
+  <slot />
+  <Footer />
+  <WebMCP client:idle />
+  <script>
+    // The motion signature: a static figure plots itself when it enters
+    // view, and replays on request. Islands handle their own; static
+    // figures opt in with [data-autoplot].
+    function plot(fig: HTMLElement) {
+      fig.dataset.plotted = "true"
+    }
+    function replay(fig: HTMLElement) {
+      fig.dataset.plotted = "false"
+      // Two frames so the reset state paints before the transition runs.
+      requestAnimationFrame(() => requestAnimationFrame(() => plot(fig)))
+    }
+    function bind() {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue
+            plot(e.target as HTMLElement)
+            io.unobserve(e.target)
+          }
+        },
+        { threshold: 0.2 }
+      )
+      document
+        .querySelectorAll<HTMLElement>("[data-autoplot]")
+        .forEach((fig) => {
+          io.observe(fig)
+          fig
+            .querySelectorAll<HTMLElement>("[data-replay]")
+            .forEach((b) => b.addEventListener("click", () => replay(fig)))
+          fig
+            .querySelectorAll<HTMLInputElement>("input[type=radio]")
+            .forEach((r) => r.addEventListener("change", () => replay(fig)))
+        })
+    }
+    bind()
+    document.addEventListener("astro:after-swap", bind)
+  </script>
+</body>

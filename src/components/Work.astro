@@ -1,11 +1,11 @@
 ---
 import domipropDark from "@/assets/projects/domiprop-dashboard-dark.png"
 import domipropLight from "@/assets/projects/domiprop-dashboard-light.png"
-import BenchmarkPlot from "@/components/BenchmarkPlot.astro"
+import BenchmarkTable from "@/components/BenchmarkTable.astro"
+import MeasuredNote from "@/components/MeasuredNote.astro"
 import DgiiFigure from "@/components/react/DgiiFigure"
 import DocmatchFigure from "@/components/react/DocmatchFigure"
-import JustAskFigure from "@/components/react/JustAskFigure"
-import { recordings } from "@/data/justask-recordings"
+import { measured } from "@/data/measured"
 import enStrings from "@/i18n/en.json"
 import esStrings from "@/i18n/es.json"
 import { ArrowUpRightIcon } from "@phosphor-icons/react"
@@ -46,6 +46,43 @@ const projects = {
     },
   ],
 }
+
+// Each project's measured note: the numbers in the margin, with the commit
+// that produced them. Sources live in src/data/measured.ts.
+const notes = {
+  justask: {
+    rows: [
+      { value: measured.justask.exact.value, label: t("work.justask.m_exact") },
+      { value: measured.justask.held.value, label: t("work.justask.m_held") },
+      { value: measured.justask.p95.value, label: t("work.justask.m_p95") },
+      { value: measured.justask.cap.value, label: t("work.justask.m_cap") },
+    ],
+    ...measured.justask.exact.source,
+  },
+  docmatch: {
+    rows: [
+      { value: measured.docmatch.p95.value, label: t("work.docmatch.m_p95") },
+      { value: measured.docmatch.cost.value, label: t("work.docmatch.m_cost") },
+      {
+        value: measured.docmatch.review.value,
+        label: t("work.docmatch.m_review"),
+      },
+    ],
+    ...measured.docmatch.p95.source,
+  },
+  dgii: {
+    rows: [
+      { value: measured.dgii.cedulas.value, label: t("work.dgii.m_cedulas") },
+      { value: measured.dgii.rncs.value, label: t("work.dgii.m_rncs") },
+    ],
+    ...measured.dgii.cedulas.source,
+  },
+}
+
+const links = (items: { label: string; href: string }[], slug: string) => [
+  ...items,
+  { label: t("work.deep_dive"), href: deepDive(slug) },
+]
 ---
 
 <section
@@ -61,142 +98,83 @@ const projects = {
     <h3 class="text-[1.625rem] leading-tight">justask</h3>
     <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
       {
-        projects.justask.map((l) => (
+        links(projects.justask, "justask").map((l) => (
           <li>
             <a
               class="link inline-flex min-h-8 items-center gap-0.5"
               href={l.href}
             >
               {l.label}
-              <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+              {l.href.startsWith("http") && (
+                <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+              )}
             </a>
           </li>
         ))
       }
-      <li>
-        <a
-          class="link inline-flex min-h-8 items-center"
-          href={deepDive("justask")}
-        >
-          {t("work.deep_dive")}
-        </a>
-      </li>
     </ul>
-    <p class="mt-4">{t("work.justask.lead")}<sup class="note-ref">1</sup></p>
+    <p class="mt-4">{t("work.justask.lead")}</p>
   </div>
-  <aside class="in-margin mt-4 lg:mt-14">
-    <p class="sidenote">
-      <sup class="note-ref ml-0">1</sup>
-      {t("work.justask.note_eval")}
-      <a
-        href="https://github.com/franklinmdev/justask/blob/main/docs/search-eval.md"
-        set:text={t("work.justask.note_eval_link")}
-      />.
-    </p>
-    <p class="sidenote mt-3">
-      {t("work.justask.note_demo")}
-      <a
-        href="https://www.npmjs.com/package/@justask/core"
-        set:text={t("work.justask.note_npm")}
-      />
-    </p>
-  </aside>
-  <JustAskFigure
-    client:visible
-    lang={lang}
-    recordings={recordings[lang]}
-    tagLabels={s.fig1.tag_labels}
-    liveUrl={JUSTASK_LIVE}
-    t={s.fig1}
-  />
+  <MeasuredNote class="mt-4 lg:mt-14" {...notes.justask} />
 
   {/* docmatch */}
   <div class="mt-16">
     <h3 class="text-[1.625rem] leading-tight">docmatch</h3>
     <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
       {
-        projects.docmatch.map((l) => (
+        links(projects.docmatch, "docmatch").map((l) => (
           <li>
             <a
               class="link inline-flex min-h-8 items-center gap-0.5"
               href={l.href}
             >
               {l.label}
-              <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+              {l.href.startsWith("http") && (
+                <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+              )}
             </a>
           </li>
         ))
       }
-      <li>
-        <a
-          class="link inline-flex min-h-8 items-center"
-          href={deepDive("docmatch")}
-        >
-          {t("work.deep_dive")}
-        </a>
-      </li>
     </ul>
-    <p class="mt-4">{t("work.docmatch.lead")}<sup class="note-ref">2</sup></p>
+    <p class="mt-4">{t("work.docmatch.lead")}</p>
     <p class="text-muted-foreground mt-3 font-sans text-[0.9375rem]">
       {t("work.docmatch.status")}
     </p>
   </div>
-  <aside class="in-margin mt-4 lg:mt-14">
-    <p class="sidenote">
-      <sup class="note-ref ml-0">2</sup>
-      <a
-        href="https://github.com/franklinmdev/docmatch/blob/main/.github/workflows/regression.yml"
-        set:text={t("work.docmatch.note_ci")}
-      />
-    </p>
-    <p class="sidenote mt-3">{t("work.docmatch.note_data")}</p>
-  </aside>
+  <MeasuredNote class="mt-4 lg:mt-14" {...notes.docmatch} />
   <DocmatchFigure client:visible t={s.fig2} />
-  <BenchmarkPlot t={t} lang={lang} />
+  <BenchmarkTable t={t} lang={lang} />
 
   {/* dgii-ts */}
   <div class="mt-16">
     <h3 class="text-[1.625rem] leading-tight">dgii-ts</h3>
     <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
       {
-        projects.dgii.map((l) => (
+        links(projects.dgii, "dgii-ts").map((l) => (
           <li>
             <a
               class="link inline-flex min-h-8 items-center gap-0.5"
               href={l.href}
             >
               {l.label}
-              <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+              {l.href.startsWith("http") && (
+                <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+              )}
             </a>
           </li>
         ))
       }
-      <li>
-        <a
-          class="link inline-flex min-h-8 items-center"
-          href={deepDive("dgii-ts")}
-        >
-          {t("work.deep_dive")}
-        </a>
-      </li>
     </ul>
-    <p class="mt-4">{t("work.dgii.lead")}<sup class="note-ref">3</sup></p>
-  </div>
-  <aside class="in-margin mt-4 lg:mt-14">
-    <p class="sidenote">
-      <sup class="note-ref ml-0">3</sup>
+    <p class="mt-4">{t("work.dgii.lead")}</p>
+    <p class="text-muted-foreground mt-3 font-sans text-[0.9375rem]">
       {t("work.dgii.note_skill")}
       <code class="data text-foreground mt-1 block break-all">
         npx skills add franklinmdev/dgii-ts --skill dgii-ts
       </code>
     </p>
-    <p class="sidenote mt-3">
-      <a
-        href="https://www.npmjs.com/package/dgii-ts"
-        set:text={t("work.dgii.note_npm")}
-      />
-    </p>
-  </aside>
+  </div>
+  <MeasuredNote class="mt-4 lg:mt-14" {...notes.dgii} />
   <DgiiFigure client:visible t={s.fig4} />
 
   {/* Also building */}
@@ -255,16 +233,5 @@ const projects = {
   <div class="mt-10">
     <h4 class="font-serif text-xl font-semibold">brook</h4>
     <p class="mt-2">{t("work.brook.lead")}</p>
-    <ul class="mt-2 flex flex-wrap gap-x-4 font-sans text-[0.875rem]">
-      <li>
-        <a
-          class="link inline-flex min-h-8 items-center gap-0.5"
-          href="https://brook.franklinmdev.workers.dev"
-        >
-          {t("work.brook.link")}
-          <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
-        </a>
-      </li>
-    </ul>
   </div>
 </section>

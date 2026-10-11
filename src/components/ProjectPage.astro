@@ -1,10 +1,8 @@
 ---
-import BenchmarkPlot from "@/components/BenchmarkPlot.astro"
+import BenchmarkTable from "@/components/BenchmarkTable.astro"
+import JustAskFigure from "@/components/JustAskFigure.astro"
 import DgiiFigure from "@/components/react/DgiiFigure"
 import DocmatchFigure from "@/components/react/DocmatchFigure"
-import JustAskFigure from "@/components/react/JustAskFigure"
-import ScrollToTop from "@/components/react/ScrollToTop"
-import { recordings } from "@/data/justask-recordings"
 import enStrings from "@/i18n/en.json"
 import esStrings from "@/i18n/es.json"
 import { createTranslations, getProjectSlug } from "@/i18n/utils"
@@ -52,7 +50,7 @@ const links = [
       </p>
       <p class="measure mt-7">
         <span class="font-sans text-[0.9375rem] font-semibold">
-          {t("hero.abstract_label")}
+          {t("projects.abstract")}
         </span>
         {data.description}
       </p>
@@ -83,18 +81,7 @@ const links = [
       <p class="sidenote mt-1">{data.tags.join(", ")}.</p>
     </aside>
 
-    {
-      slug === "justask" && (
-        <JustAskFigure
-          client:visible
-          lang={lang}
-          recordings={recordings[lang]}
-          tagLabels={s.fig1.tag_labels}
-          liveUrl={data.liveUrl ?? ""}
-          t={s.fig1}
-        />
-      )
-    }
+    {slug === "justask" && <JustAskFigure t={t} lang={lang} />}
     {slug === "docmatch" && <DocmatchFigure client:visible t={s.fig2} />}
     {slug === "dgii-ts" && <DgiiFigure client:visible t={s.fig4} />}
     {
@@ -127,17 +114,14 @@ const links = [
       )
     }
 
-    <div class="prose mt-10">
+    <div class="prose span-all mt-10">
       <slot name="content" />
     </div>
-    <div class="hidden lg:block"></div>
 
-    {slug === "docmatch" && <BenchmarkPlot t={t} lang={lang} />}
+    {slug === "docmatch" && <BenchmarkTable t={t} lang={lang} />}
 
     <p class="border-rule-strong mt-14 border-t pt-6">
       <a class="link" href={`${home}#contact`}>{t("projects.contact")}</a>
     </p>
   </article>
 </main>
-
-<ScrollToTop client:idle label={t("a11y.scroll_to_top")} />

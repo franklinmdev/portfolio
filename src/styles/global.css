@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "@fontsource-variable/source-serif-4/opsz.css";
-@import "@fontsource-variable/source-serif-4/opsz-italic.css";
 @import "@fontsource-variable/libre-franklin";
 @import "@fontsource/commit-mono/400.css";
 
@@ -174,7 +173,6 @@
 }
 
 @layer components {
-  /* Fig. 6: the portrait cutout sits on graph paper drawn in the rule color. */
   /* The page: a reading column and a margin column. Figures span both. */
   .page {
     margin-inline: auto;
@@ -261,6 +259,49 @@
     color: var(--muted-foreground);
   }
 
+  /* The measured column: every number on the page sits in the margin in
+     amber mono, with the date it was measured and a link to the commit. */
+  .measured-note dl > div + div {
+    margin-top: 0.4rem;
+  }
+  .measured-note dt {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.9375rem;
+    line-height: 1.3;
+    color: var(--measure-ink);
+  }
+  .measured-note dd {
+    margin-top: 0.1rem;
+  }
+  .measured-note .source {
+    margin-top: 0.6rem;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.75rem;
+  }
+  .measured-note .source a {
+    text-decoration-color: var(--rule-strong);
+  }
+
+  /* In a deep dive, a paragraph and its measured note travel together:
+     side by side on desktop, the note under the paragraph on mobile. */
+  .noted > p + p {
+    margin-top: 1.1em;
+  }
+  @media (min-width: 1024px) {
+    .noted {
+      display: grid;
+      grid-template-columns: minmax(0, 40rem) minmax(0, 15rem);
+      column-gap: 3.5rem;
+      align-items: start;
+    }
+    .noted > .sidenote {
+      grid-column: 2;
+      grid-row: 1 / span 20;
+    }
+  }
+
   /* A figure: hairline rules top and bottom, caption below. No card. */
   .figure {
     border-block: 1px solid var(--rule-strong);
@@ -299,7 +340,7 @@
   }
 
   /* Prose for deep dives (markdown body). */
-  .prose {
+  .prose > :not(.noted) {
     max-width: 40rem;
   }
   .prose > * + * {

@@ -1,14 +1,29 @@
 ---
-import { ArrowUpRightIcon, EnvelopeSimpleIcon } from "@phosphor-icons/react"
+import JustAskFigure from "@/components/JustAskFigure.astro"
+import { ArrowUpRightIcon } from "@phosphor-icons/react"
 
 export interface Props {
   t: (key: string) => string
+  lang: "en" | "es"
 }
 
-const { t } = Astro.props
+const { t, lang } = Astro.props
+
+const links = [
+  {
+    label: "franklinmdev@hotmail.com",
+    href: "mailto:franklinmdev@hotmail.com",
+  },
+  { label: "GitHub", href: "https://github.com/franklinmdev", external: true },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/franklin-martinez-0a697a253/",
+    external: true,
+  },
+]
 ---
 
-<section class="page-grid pt-14 pb-4 sm:pt-20 lg:pt-24" aria-labelledby="title">
+<section class="page-grid pt-12 pb-2 sm:pt-16 lg:pt-20" aria-labelledby="title">
   <div>
     <h1
       id="title"
@@ -17,41 +32,25 @@ const { t } = Astro.props
       {t("hero.title")}
     </h1>
     <p class="text-muted-foreground mt-5 font-sans text-[0.9375rem]">
-      Franklin Martinez. {t("hero.byline")}
+      {t("hero.byline")}
     </p>
+    <ul class="mt-2 flex flex-wrap gap-x-5 font-sans text-[0.9375rem]">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              class="link inline-flex min-h-8 items-center gap-0.5"
+              href={l.href}
+            >
+              {l.label}
+              {l.external && (
+                <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+              )}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
-  <aside class="in-margin self-end">
-    <p class="sidenote">
-      <span class="text-foreground font-medium">{t("hero.note_open")}</span>
-    </p>
-  </aside>
-
-  <div class="mt-8">
-    <p class="measure">
-      <span class="font-sans text-[0.9375rem] font-semibold">
-        {t("hero.abstract_label")}
-      </span>
-      {t("hero.abstract")}
-    </p>
-    <div class="mt-7 flex flex-wrap gap-3">
-      <a href="mailto:franklinmdev@hotmail.com" class="btn btn-primary">
-        <EnvelopeSimpleIcon aria-hidden="true" className="size-[18px]" />
-        {t("hero.email")}
-      </a>
-      <a href="https://github.com/franklinmdev" class="btn btn-ghost">
-        {t("hero.github")}
-        <ArrowUpRightIcon aria-hidden="true" className="size-4" />
-      </a>
-      <a
-        href="https://www.linkedin.com/in/franklin-martinez-0a697a253/"
-        class="btn btn-ghost"
-      >
-        {t("hero.linkedin")}
-        <ArrowUpRightIcon aria-hidden="true" className="size-4" />
-      </a>
-    </div>
-  </div>
-  <aside class="in-margin mt-8">
-    <p class="sidenote">{t("hero.note_figures")}</p>
-  </aside>
+  <JustAskFigure t={t} lang={lang} />
 </section>
