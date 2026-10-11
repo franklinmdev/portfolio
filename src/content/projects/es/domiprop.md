@@ -43,5 +43,7 @@ fiscal no puede desviarse en silencio entre el backend y el frontend.
 
 ## Dónde está
 
-Construido y preparándose para sus primeros usuarios antes del plazo del e-CF de 2026. El código es privado, así que esta página enlaza al producto en vivo en
+Construido y preparándose para sus primeros usuarios antes del plazo del e-CF
+de 2026. El código es privado, así que esta página enlaza al producto en vivo
+en
 lugar de a un repositorio.

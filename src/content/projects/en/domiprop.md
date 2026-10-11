@@ -34,7 +34,9 @@ the shape the DGII wants for Formato 606, lease contracts that comply with Ley
 dashboard for income, expenses, ISR withheld and occupancy, and shared
 workspaces so a landlord can invite their accountant to work on the same data.
 
-It's a pnpm monorepo: a NestJS and Prisma API on PostgreSQL, a Next.js (React 19) web app and an Astro marketing site, all in TypeScript. The shape of the
+It's a pnpm monorepo: a NestJS and Prisma API on PostgreSQL, a Next.js
+(React 19) web app and an Astro marketing site, all in TypeScript. The shape
+of the
 data is defined once and shared, so the tax logic can't quietly drift apart
 between the backend and the frontend.
 

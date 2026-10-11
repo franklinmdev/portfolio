@@ -5,7 +5,7 @@ import BenchmarkTable from "@/components/BenchmarkTable.astro"
 import MeasuredNote from "@/components/MeasuredNote.astro"
 import DgiiFigure from "@/components/react/DgiiFigure"
 import DocmatchFigure from "@/components/react/DocmatchFigure"
-import { measured } from "@/data/measured"
+import { measured, type Measured } from "@/data/measured"
 import enStrings from "@/i18n/en.json"
 import esStrings from "@/i18n/es.json"
 import { ArrowUpRightIcon } from "@phosphor-icons/react"
@@ -49,6 +49,10 @@ const projects = {
 
 // Each project's measured note: the numbers in the margin, with the commit
 // that produced them. Sources live in src/data/measured.ts.
+const sourceOf = (m: Measured) => ({
+  ...(m.date && { date: m.date }),
+  ...(m.source && { source: m.source }),
+})
 const notes = {
   justask: {
     rows: [
@@ -57,7 +61,7 @@ const notes = {
       { value: measured.justask.p95.value, label: t("work.justask.m_p95") },
       { value: measured.justask.cap.value, label: t("work.justask.m_cap") },
     ],
-    ...measured.justask.exact.source,
+    ...sourceOf(measured.justask.exact),
   },
   docmatch: {
     rows: [
@@ -68,14 +72,14 @@ const notes = {
         label: t("work.docmatch.m_review"),
       },
     ],
-    ...measured.docmatch.p95.source,
+    ...sourceOf(measured.docmatch.p95),
   },
   dgii: {
     rows: [
       { value: measured.dgii.cedulas.value, label: t("work.dgii.m_cedulas") },
       { value: measured.dgii.rncs.value, label: t("work.dgii.m_rncs") },
     ],
-    ...measured.dgii.cedulas.source,
+    ...sourceOf(measured.dgii.cedulas),
   },
 }
 

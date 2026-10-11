@@ -57,7 +57,16 @@ README dice claramente que es una revisión limitada, no una defensa.</p>
 <div><dt>380 ms</dt><dd>latencia p95</dd></div>
 <div><dt>8 de 470</dt><dd>campos llenados con confianza y mal en el QA, 1,7 %</dd></div>
 </dl>
-<p class="source"><!-- src:justask-eval --></p>
+<p class="source">
+<time datetime="2026-09-23">2026-09-23</time>,
+<a
+href="https://github.com/franklinmdev/justask/blob/ce451bb/docs/search-eval.md"
+>search-eval.md en ce451bb</a>;
+<time datetime="2026-10-01">2026-10-01</time>,
+<a
+href="https://github.com/franklinmdev/justask/blob/6bf952a/README.md"
+>README en 6bf952a</a>
+</p>
 </aside>
 </div>
 
@@ -73,7 +82,12 @@ de ella.</p>
 <dl>
 <div><dt>1 dólar</dt><dd>de gasto de modelo al día, el tope de la demo</dd></div>
 </dl>
-<p class="source"><!-- src:justask-cap --></p>
+<p class="source">
+<time datetime="2026-09-25">2026-09-25</time>,
+<a
+href="https://github.com/franklinmdev/justask/blob/f2aa3b6/demo/server/budget.ts"
+>budget.ts en f2aa3b6</a>
+</p>
 </aside>
 </div>
 

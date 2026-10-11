@@ -55,7 +55,16 @@ not a defence.</p>
 <div><dt>380 ms</dt><dd>p95 latency</dd></div>
 <div><dt>8 of 470</dt><dd>fills confident and wrong in pre-launch QA, 1.7%</dd></div>
 </dl>
-<p class="source"><!-- src:justask-eval --></p>
+<p class="source">
+<time datetime="2026-09-23">2026-09-23</time>,
+<a
+href="https://github.com/franklinmdev/justask/blob/ce451bb/docs/search-eval.md"
+>search-eval.md at ce451bb</a>;
+<time datetime="2026-10-01">2026-10-01</time>,
+<a
+href="https://github.com/franklinmdev/justask/blob/6bf952a/README.md"
+>README at 6bf952a</a>
+</p>
 </aside>
 </div>
 
@@ -70,7 +79,12 @@ spend. Fig. 1 above replays three real responses recorded from it.</p>
 <dl>
 <div><dt>$1</dt><dd>of model spend a day, the demo's cap</dd></div>
 </dl>
-<p class="source"><!-- src:justask-cap --></p>
+<p class="source">
+<time datetime="2026-09-25">2026-09-25</time>,
+<a
+href="https://github.com/franklinmdev/justask/blob/f2aa3b6/demo/server/budget.ts"
+>budget.ts at f2aa3b6</a>
+</p>
 </aside>
 </div>
 

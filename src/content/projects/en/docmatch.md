@@ -66,7 +66,19 @@ the cheapest backend.</p>
 <div><dt>0.484</dt><dd>review rate</dd></div>
 <div><dt>$1.59</dt><dd>the whole measurement</dd></div>
 </dl>
-<p class="source"><!-- src:docmatch-phases --></p>
+<p class="source">
+<time datetime="2026-09-21">2026-09-21</time> and
+<time datetime="2026-09-25">2026-09-25</time>, README at
+<a
+href="https://github.com/franklinmdev/docmatch/blob/2d926e5/README.md"
+>2d926e5</a>,
+<a
+href="https://github.com/franklinmdev/docmatch/blob/c75567f/README.md"
+>c75567f</a> and
+<a
+href="https://github.com/franklinmdev/docmatch/blob/301ce3e/README.md"
+>301ce3e</a>
+</p>
 </aside>
 </div>
 

@@ -69,7 +69,19 @@ HTTP, con el backend más barato.</p>
 <div><dt>0,484</dt><dd>tasa de revisión</dd></div>
 <div><dt>1,59 dólares</dt><dd>toda la medición</dd></div>
 </dl>
-<p class="source"><!-- src:docmatch-phases --></p>
+<p class="source">
+<time datetime="2026-09-21">2026-09-21</time> y
+<time datetime="2026-09-25">2026-09-25</time>, README en
+<a
+href="https://github.com/franklinmdev/docmatch/blob/2d926e5/README.md"
+>2d926e5</a>,
+<a
+href="https://github.com/franklinmdev/docmatch/blob/c75567f/README.md"
+>c75567f</a> y
+<a
+href="https://github.com/franklinmdev/docmatch/blob/301ce3e/README.md"
+>301ce3e</a>
+</p>
 </aside>
 </div>
 

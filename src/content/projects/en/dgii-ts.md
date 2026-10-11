@@ -40,7 +40,15 @@ python-stdnum.</p>
 <div><dt>578</dt><dd>cédulas on the whitelist</dd></div>
 <div><dt>23</dt><dd>RNCs on the whitelist</dd></div>
 </dl>
-<p class="source"><!-- src:dgii-whitelist --></p>
+<p class="source">
+<time datetime="2026-03-19">2026-03-19</time>,
+<a
+href="https://github.com/franklinmdev/dgii-ts/blob/ff60bd9/src/validators/cedula-whitelist.ts"
+>cedula-whitelist.ts at ff60bd9</a>;
+<a
+href="https://github.com/franklinmdev/dgii-ts/blob/ff60bd9/src/validators/rnc-whitelist.ts"
+>rnc-whitelist.ts</a>
+</p>
 </aside>
 </div>
 

@@ -25,9 +25,11 @@ const { rows, date, source, class: className } = Astro.props
   {
     (date || source) && (
       <p class="source">
-        {date && <time datetime={date}>{date}</time>}
-        {date && source && ", "}
-        {source && <a href={source.href}>{source.label}</a>}
+        {[
+          date && <time datetime={date}>{date}</time>,
+          date && source && ", ",
+          source && <a href={source.href}>{source.label}</a>,
+        ]}
       </p>
     )
   }

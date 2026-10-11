@@ -41,7 +41,15 @@ todos modos, tomadas de python-stdnum.</p>
 <div><dt>578</dt><dd>cédulas en la lista blanca</dd></div>
 <div><dt>23</dt><dd>RNC en la lista blanca</dd></div>
 </dl>
-<p class="source"><!-- src:dgii-whitelist --></p>
+<p class="source">
+<time datetime="2026-03-19">2026-03-19</time>,
+<a
+href="https://github.com/franklinmdev/dgii-ts/blob/ff60bd9/src/validators/cedula-whitelist.ts"
+>cedula-whitelist.ts en ff60bd9</a>;
+<a
+href="https://github.com/franklinmdev/dgii-ts/blob/ff60bd9/src/validators/rnc-whitelist.ts"
+>rnc-whitelist.ts</a>
+</p>
 </aside>
 </div>
 
