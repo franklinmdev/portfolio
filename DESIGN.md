@@ -83,6 +83,8 @@ classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.measured-note`,
   is the term recruiters search; the Experience entry keeps the formal title.
 - City and "building financial software since 2023" in the byline
   (2026-10-17): revealed too much about where he works.
+- A résumé link in the byline (2026-10-17): the owner chose GitHub, LinkedIn
+  and email only.
 - "Open to remote roles" in the byline (2026-10-17): read as needy and as a
   public notice to the current employer.
 - Commit links and dates on the home page (2026-10-17): noise to most
