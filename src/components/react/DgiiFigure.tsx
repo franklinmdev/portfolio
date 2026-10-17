@@ -218,8 +218,8 @@ export default function DgiiFigure({ t }: Props) {
 
           {checked && (
             <>
-              <div className="overflow-x-auto">
-                <table className="data w-full min-w-[22rem] table-fixed border-collapse text-center text-base">
+              <div>
+                <table className="data w-full table-fixed border-collapse text-center text-base">
                   <tbody>
                     <tr>
                       <th
@@ -232,7 +232,7 @@ export default function DgiiFigure({ t }: Props) {
                         <td
                           key={i}
                           className={cn(
-                            "border-border border-b py-1.5 text-lg",
+                            "border-border border-b py-1.5 text-base sm:text-lg",
                             i === a.digits.length - 1 &&
                               "border-foreground border-l"
                           )}
@@ -325,7 +325,7 @@ export default function DgiiFigure({ t }: Props) {
 
           {lib && a.kind !== "partial" && a.kind !== "empty" && (
             <div className="border-border mt-5 flex flex-col gap-2 border-t pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <code className="data text-muted-foreground min-w-0 overflow-x-auto text-sm whitespace-nowrap">
+              <code className="data text-muted-foreground min-w-0 text-sm break-all whitespace-pre-wrap">
                 {a.call}
                 <span aria-hidden="true"> → </span>
                 <span className="text-foreground">{formatResult(lib)}</span>

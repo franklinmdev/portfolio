@@ -5,7 +5,7 @@
   },
   "nav": {
     "label": "Principal",
-    "work": "Trabajo",
+    "work": "Proyectos",
     "method": "Cómo trabajo",
     "contact": "Contacto",
     "home": "Franklin Martinez, inicio",
@@ -37,14 +37,14 @@
       "note_ci": "Una verificación en CI rechaza cualquier pull request que baje el F1 por campo o por línea.",
       "m_p95": "de la carga a la aprobación, en el 95% de las facturas",
       "m_cost": "por factura, cerca de un cuarto de centavo",
-      "run": "Verlo funcionar: una factura revisada paso a paso"
+      "run": "Ver la Fig. 2 en acción: una factura revisada paso a paso"
     },
     "dgii": {
-      "lead": "Una librería en TypeScript para la DGII. Valida RNC, cédula, NCF y e-NCF sin conexión, y consulta contribuyentes leyendo las páginas web de la DGII con reintentos y un circuit breaker, porque la DGII no tiene API pública y cerró su servicio SOAP en enero de 2025. La Fig. 3 es la librería misma, corriendo en esta página.",
+      "lead": "Una librería en TypeScript para la DGII. Valida RNC, cédula, NCF y e-NCF sin conexión, y consulta contribuyentes leyendo las páginas web de la DGII con reintentos y un circuit breaker, porque la DGII no tiene API pública y cerró su servicio SOAP en enero de 2025. La Fig. 3, aquí abajo, es la librería misma, corriendo en esta página.",
       "note_skill": "Incluye una skill para agentes, así los agentes de código aprenden la librería con un comando:",
       "m_cedulas": "cédulas reales que fallan el dígito verificador y aun así son válidas",
       "m_downloads": "descargas en npm, en total",
-      "run": "Verlo funcionar: valida tú mismo un RNC o una cédula"
+      "run": "Ver la Fig. 3 en acción: valida tú mismo un RNC o una cédula"
     },
     "also": "En desarrollo",
     "domiprop": {
@@ -77,7 +77,8 @@
       "office": "Oficina"
     },
     "intro": "justask es mi librería de código abierto. Escribes un pedido y llena el formulario, dejando en blanco lo que no tiene claro. Elige un pedido para verla funcionar.",
-    "numbers": "Mostrar los números"
+    "numbers": "Mostrar los números",
+    "hint_blank": "Proveedor poco claro, así que deja ese campo en blanco"
   },
   "fig2": {
     "label": "Fig. 2",

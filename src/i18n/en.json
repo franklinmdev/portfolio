@@ -5,7 +5,7 @@
   },
   "nav": {
     "label": "Main",
-    "work": "Work",
+    "work": "Projects",
     "method": "How I work",
     "contact": "Contact",
     "home": "Franklin Martinez, home",
@@ -37,14 +37,14 @@
       "note_ci": "A CI gate fails any pull request that lowers field or line-item F1.",
       "m_p95": "from upload to approval, for 95% of invoices",
       "m_cost": "per invoice, about a quarter of a cent",
-      "run": "See it run: an invoice checked step by step"
+      "run": "See Fig. 2 run: an invoice checked step by step"
     },
     "dgii": {
-      "lead": "A TypeScript library for the DGII, the Dominican tax authority. It validates RNC, cédula, NCF and e-NCF numbers offline, and looks up taxpayers by scraping DGII's web pages with retries and a circuit breaker, because DGII has no public API and shut down its SOAP service in January 2025. Fig. 3 is the library itself, running in this page.",
+      "lead": "A TypeScript library for the DGII, the Dominican tax authority. It validates RNC, cédula, NCF and e-NCF numbers offline, and looks up taxpayers by scraping DGII's web pages with retries and a circuit breaker, because DGII has no public API and shut down its SOAP service in January 2025. Fig. 3, below, is the library itself, running in this page.",
       "note_skill": "It ships an agent skill, so coding agents learn the library with one command:",
       "m_cedulas": "real cédulas that fail the check-digit rule and still pass",
       "m_downloads": "npm downloads, all time",
-      "run": "See it run: check an RNC or a cédula yourself"
+      "run": "See Fig. 3 run: check an RNC or a cédula yourself"
     },
     "also": "In development",
     "domiprop": {
@@ -77,7 +77,8 @@
       "office": "Office"
     },
     "intro": "justask is my open-source library. Type a request and it fills the form, leaving blank anything it isn't sure of. Pick a request to see it work.",
-    "numbers": "Show the numbers"
+    "numbers": "Show the numbers",
+    "hint_blank": "Unclear vendor, so it leaves that field blank"
   },
   "fig2": {
     "label": "Fig. 2",
