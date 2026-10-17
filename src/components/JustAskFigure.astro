@@ -258,6 +258,7 @@ const cards = recordings[lang].map((rec) => {
       </div>
       <div class="mt-4 flex flex-col items-start gap-1">
         <label
+          data-numbers-toggle
           class="has-[:focus-visible]:outline-ring inline-flex min-h-11 cursor-pointer items-center gap-2.5 font-sans text-[0.9375rem] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2"
         >
           <input type="checkbox" data-numbers class="peer sr-only" />
@@ -301,8 +302,15 @@ const cards = recordings[lang].map((rec) => {
   }
   /* Probabilities and gates stay behind "Show the numbers": the bar alone
      says how sure the model was. */
-  .num {
-    display: none;
+  @supports selector(:has(a)) {
+    .num {
+      display: none;
+    }
+  }
+  @supports not selector(:has(a)) {
+    [data-numbers-toggle] {
+      display: none;
+    }
   }
   figure:has([data-numbers]:checked) .num {
     display: block;

@@ -315,6 +315,14 @@
   details.run[open] > summary {
     border-color: var(--foreground);
   }
+  details.run figure.span-all {
+    margin-top: 1.5rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    details.run .caret {
+      transition: none;
+    }
+  }
 
   /* In a deep dive, a paragraph and its measured note travel together:
      side by side on desktop, the note under the paragraph on mobile. */

@@ -50,7 +50,19 @@ figure you can run, and the proof sits in the margin.
   byline of role and country only (no city, no employer hint, never an
   availability line), three text links, then one sentence on what justask is
   and Fig. 1 opening on a request it fills completely. The held case is one
-  click away. No abstract, no buttons, no eyebrow, nothing that only describes.
+  click away. No abstract, no call-to-action buttons, no eyebrow, nothing that
+  only describes.
+- Figure controls look operable: Fig. 1's requests are bordered options
+  (2px radius, never pills), above the card on mobile so the first action is
+  on the first screen. The bars stay visible; probabilities and gates wait
+  behind "Show the numbers", because a stranger reads a bar but not "gate
+  0.70".
+- Home page length: Fig. 2 and Fig. 3 sit behind a "See it run" disclosure
+  on the home page and hydrate only when opened. The deep dives show them
+  open. Order: work, experience, how I work, about, contact; the nav lists
+  work, experience, how I work, contact.
+- Contact is the one main action: the email at display size with a copy
+  button, because many visitors have no mail app behind a mailto link.
 
 ## Tokens
 
@@ -81,12 +93,18 @@ classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.measured-note`,
   before they ship." (2026-10-17): three lines on desktop, four on mobile.
 - "Full-Stack AI Engineer" in the byline and title (2026-10-17): "AI Engineer"
   is the term recruiters search; the Experience entry keeps the formal title.
+  The Spanish byline keeps "AI Engineer" in English on purpose: it is the
+  title he is searched by, not UI copy.
 - City and "building financial software since 2023" in the byline
   (2026-10-17): revealed too much about where he works.
 - A résumé link in the byline (2026-10-17): the owner chose GitHub, LinkedIn
   and email only.
 - "Open to remote roles" in the byline (2026-10-17): read as needy and as a
   public notice to the current employer.
+- Amber on chrome to give the page a visual peak (2026-10-17): the accent
+  means "measured"; spending it on links or buttons would dilute that.
+- "Selected work" and "Also building" as headings (2026-10-17): template
+  words; "Open source" and "In development" say what the reader gets.
 - Commit links and dates on the home page (2026-10-17): noise to most
   visitors; they live in the deep dives.
 - Fig. 3 as a scatter plot (2026-10-11): the table already held the commit

@@ -7,7 +7,6 @@
     "label": "Main",
     "work": "Work",
     "method": "How I work",
-    "about": "About",
     "contact": "Contact",
     "home": "Franklin Martinez, home",
     "skip": "Skip to content",
@@ -174,7 +173,8 @@
     "title": "Contact",
     "lead": "I reply within a day or two.",
     "copy": "Copy",
-    "copied": "Copied"
+    "copied": "Copied",
+    "copy_failed": "Press Ctrl+C to copy"
   },
   "projects": {
     "back": "All work",
