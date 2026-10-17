@@ -31,7 +31,7 @@ breaker y reintentos con backoff, para que una mala respuesta no se propague; y
 una importación masiva del dataset diario de RNC de la DGII.
 
 <div class="noted">
-<p>La Fig. 4 de arriba es la propia librería, importada desde npm y corriendo en
+<p>La Fig. 3 de arriba es la propia librería, importada desde npm y corriendo en
 esta página. La aritmética del dígito verificador se dibuja paso a paso, y el
 veredicto es el de la librería. Un número que no cumple el algoritmo puede ser
 real igual: dgii-ts trae listas blancas de cédulas y RNC que la DGII emitió de
@@ -59,6 +59,19 @@ href="https://github.com/franklinmdev/dgii-ts/blob/ff60bd9/src/validators/rnc-wh
 npm install dgii-ts
 ```
 
-En [npm](https://www.npmjs.com/package/dgii-ts) con licencia MIT y CI, más un
-skill para agentes, para que un agente de código use los validadores offline
-antes de ir a la red.
+<div class="noted">
+<p>En <a href="https://www.npmjs.com/package/dgii-ts">npm</a> con licencia MIT y
+CI, más un skill para agentes, para que un agente de código use los
+validadores offline antes de ir a la red.</p>
+<aside class="sidenote measured-note">
+<dl>
+<div><dt>3,157</dt><dd>descargas en npm, en total</dd></div>
+</dl>
+<p class="source">
+<time datetime="2026-10-10">2026-10-10</time>,
+<a
+href="https://api.npmjs.org/downloads/point/2026-04-07:2026-10-10/dgii-ts"
+>API de npm</a>
+</p>
+</aside>
+</div>

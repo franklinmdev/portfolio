@@ -37,16 +37,20 @@ figure you can run, and the proof sits in the margin.
   value, fields fill in order, boxes draw onto the invoice, table rows settle
   one by one, digits get weighed one by one. Placements: Fig. 1 to Fig. 4
   only; chrome stays still. Under reduced motion every figure shows its final
-  state. Static figures (Fig. 1, Fig. 3) opt in with `data-autoplot`; the
+  state. Static figures (Fig. 1, Fig. 5) opt in with `data-autoplot`; the
   shared script lives in `Layout.astro`.
-- Unexpected move: the measured column. Every number on the page sits in the
-  margin in amber Commit Mono with a sans label, the date it was measured and
-  a link to the commit (`MeasuredNote.astro`, `.measured-note`; raw `.noted`
-  HTML blocks in the deep dives). The prose carries the claim, the margin
-  carries the number. On mobile the column folds in under its paragraph.
-- First screen: the h1 is a claim ("Models pick. Code decides. The figures
-  prove it."), one byline line, three text links, then Fig. 1 running on the
-  held case. No abstract, no buttons, nothing that only describes.
+- Unexpected move: the measured column. Numbers sit in the margin in amber
+  Commit Mono with a sans label (`MeasuredNote.astro`, `.measured-note`; raw
+  `.noted` HTML blocks in the deep dives). The prose carries the claim, the
+  margin carries the number. On mobile the column folds in under its
+  paragraph. The home page shows only numbers a stranger can judge, in plain
+  labels; the deep dives add the date and the commit link for each one, and
+  carry the expert numbers (F1, review rate) and Fig. 5, the benchmark table.
+- First screen: the h1 says what he builds in plain words, one byline line
+  (role, city, years in financial software; never an availability line), three
+  text links, then one sentence on what justask is and Fig. 1 opening on a
+  request it fills completely. The held case is one click away. No abstract,
+  no buttons, no eyebrow, nothing that only describes.
 
 ## Tokens
 
@@ -70,6 +74,13 @@ classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.measured-note`,
 - Datasheet (2026-05 to 2026-10): IBM Plex + JetBrains Mono, cyan; shallow,
   and its fonts are now spent.
 - warm-editorial, refined-dark, editorial-mono (2026-05).
+- "Models pick. Code decides. The figures prove it." as the h1 (2026-10-17):
+  a riddle to a recruiter; "the figures" pointed at things not yet seen. Not
+  kept as a kicker either: eyebrows are banned below.
+- "Open to remote roles" in the byline (2026-10-17): read as needy and as a
+  public notice to the current employer.
+- Commit links and dates on the home page (2026-10-17): noise to most
+  visitors; they live in the deep dives.
 - Fig. 3 as a scatter plot (2026-10-11): the table already held the commit
   links; the plot doubled the height for three points. Table only.
 - Contact form (2026-10-11): a mailto line says the same with no island.

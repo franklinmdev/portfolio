@@ -38,8 +38,11 @@ alias `@/*` → `src/*`.
   the plot-on-scroll motion with `data-autoplot`; the shared script lives in
   `Layout.astro`.
 - Numbers shown on the site come from `src/data/measured.ts` (value, date,
-  commit link) and render through `MeasuredNote.astro`. In the deep dives
-  they are raw HTML `.noted` blocks in the markdown.
+  commit link) and render through `MeasuredNote.astro`. The home page shows
+  values and plain labels only; the deep dives, raw HTML `.noted` blocks in
+  the markdown, add the date and commit link. Figures are numbered across the
+  site: 1 justask, 2 docmatch, 3 dgii-ts, 4 DomiProp, 5 the benchmark table
+  (docmatch deep dive only).
 
 ### Layout owns the document head
 

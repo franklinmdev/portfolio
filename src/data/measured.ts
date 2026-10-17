@@ -64,11 +64,9 @@ export const measured = {
   docmatch: {
     p95: { value: "10.03 s", ...PIPELINE } as Measured,
     cost: { value: "$0.00236", ...PIPELINE } as Measured,
-    review: { value: "0.484", ...PIPELINE } as Measured,
   },
   dgii: {
     cedulas: { value: "578", ...WHITELIST } as Measured,
-    rncs: { value: "23", ...WHITELIST } as Measured,
     downloads: { value: "3,157", ...NPM_DOWNLOADS } as Measured,
   },
 }

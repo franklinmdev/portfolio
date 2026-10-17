@@ -18,8 +18,9 @@ const { t, lang } = Astro.props
 // first screen.
 const LIVE_URL = "https://justask-demo.franklinmdev.workers.dev"
 const STAGGER_MS = 170
-// The held case opens first: a field the model is unsure of stays empty.
-const DEFAULT = recordings[lang].findIndex((r) => r.vendor.name === null)
+// A request it fills completely opens first, so a cold visitor sees it work.
+// The held case, where a field stays empty, is one click away.
+const DEFAULT = 0
 
 const dateOf = (rec: Recording) =>
   new Intl.DateTimeFormat(lang, {
@@ -131,6 +132,7 @@ const cards = recordings[lang].map((rec) => {
   data-autoplot
   aria-labelledby="fig1-caption"
 >
+  <p class="mb-5 max-w-[40rem]">{t("fig1.intro")}</p>
   <div
     class="figure grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-12"
   >
@@ -215,7 +217,7 @@ const cards = recordings[lang].map((rec) => {
                           <span class="data measured w-10 text-right">
                             {meter.p.toFixed(2)}
                           </span>
-                          <span class="apparatus hidden w-16 sm:inline">
+                          <span class="apparatus hidden shrink-0 whitespace-nowrap sm:inline">
                             {t("fig1.gate")} {meter.gate.toFixed(2)}
                           </span>
                         </div>
@@ -280,7 +282,7 @@ const cards = recordings[lang].map((rec) => {
     display: block;
   }
   @supports not selector(:has(a)) {
-    [data-card="1"] {
+    [data-card="0"] {
       display: block;
     }
   }

@@ -1,11 +1,10 @@
 ---
 import domipropDark from "@/assets/projects/domiprop-dashboard-dark.png"
 import domipropLight from "@/assets/projects/domiprop-dashboard-light.png"
-import BenchmarkTable from "@/components/BenchmarkTable.astro"
 import MeasuredNote from "@/components/MeasuredNote.astro"
 import DgiiFigure from "@/components/react/DgiiFigure"
 import DocmatchFigure from "@/components/react/DocmatchFigure"
-import { measured, type Measured } from "@/data/measured"
+import { measured } from "@/data/measured"
 import enStrings from "@/i18n/en.json"
 import esStrings from "@/i18n/es.json"
 import { ArrowUpRightIcon } from "@phosphor-icons/react"
@@ -47,20 +46,8 @@ const projects = {
   ],
 }
 
-// Each project's measured note: the numbers in the margin, with the commit
-// that produced them. Sources live in src/data/measured.ts.
-// One source per distinct link, in row order.
-const sourcesOf = (...ms: Measured[]) => ({
-  sources: ms
-    .filter(
-      (m, i) =>
-        m.source && ms.findIndex((n) => n.source?.href === m.source?.href) === i
-    )
-    .map((m) => ({
-      ...(m.date && { date: m.date }),
-      ...(m.source && { source: m.source }),
-    })),
-})
+// Each project's measured note: plain numbers a stranger can judge. Dates and
+// commit links for each one live in the deep dives (src/data/measured.ts).
 const notes = {
   justask: {
     rows: [
@@ -69,29 +56,21 @@ const notes = {
       { value: measured.justask.p95.value, label: t("work.justask.m_p95") },
       { value: measured.justask.cap.value, label: t("work.justask.m_cap") },
     ],
-    ...sourcesOf(measured.justask.exact, measured.justask.cap),
   },
   docmatch: {
     rows: [
       { value: measured.docmatch.p95.value, label: t("work.docmatch.m_p95") },
       { value: measured.docmatch.cost.value, label: t("work.docmatch.m_cost") },
-      {
-        value: measured.docmatch.review.value,
-        label: t("work.docmatch.m_review"),
-      },
     ],
-    ...sourcesOf(measured.docmatch.p95),
   },
   dgii: {
     rows: [
-      { value: measured.dgii.cedulas.value, label: t("work.dgii.m_cedulas") },
-      { value: measured.dgii.rncs.value, label: t("work.dgii.m_rncs") },
       {
         value: measured.dgii.downloads.value,
         label: t("work.dgii.m_downloads"),
       },
+      { value: measured.dgii.cedulas.value, label: t("work.dgii.m_cedulas") },
     ],
-    ...sourcesOf(measured.dgii.cedulas, measured.dgii.downloads),
   },
 }
 
@@ -160,7 +139,6 @@ const links = (items: { label: string; href: string }[], slug: string) => [
   </div>
   <MeasuredNote class="mt-4 lg:mt-14" {...notes.docmatch} />
   <DocmatchFigure client:visible t={s.fig2} />
-  <BenchmarkTable t={t} lang={lang} />
 
   {/* dgii-ts */}
   <div class="mt-16">
