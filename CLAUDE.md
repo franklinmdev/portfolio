@@ -31,7 +31,9 @@ alias `@/*` → `src/*`.
   They receive either `lang` or a translation function `t` as props.
 - `src/components/react/*.tsx` are interactive islands, hydrated explicitly:
   `Spotlight` and `WebMCP` use `client:idle`, the project figures
-  (`DocmatchFigure`, `DgiiFigure`) use `client:visible`. Match this: never
+  (`DocmatchFigure`, `DgiiFigure`) use `client:visible`. On the home page
+  those two sit inside a closed `<details class="run">`, so they hydrate only
+  when opened. Match this: never
   hydrate eagerly without reason. Fig. 1 (`JustAskFigure.astro`) and Fig. 3
   (`BenchmarkTable.astro`) are static on purpose: they sit on or near the
   first screen, so React stays off the critical path. Static figures opt into

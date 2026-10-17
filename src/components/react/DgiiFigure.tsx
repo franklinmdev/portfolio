@@ -325,7 +325,7 @@ export default function DgiiFigure({ t }: Props) {
 
           {lib && a.kind !== "partial" && a.kind !== "empty" && (
             <div className="border-border mt-5 flex flex-col gap-2 border-t pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <code className="data text-muted-foreground min-w-0 text-sm break-all whitespace-pre-wrap">
+              <code className="data text-muted-foreground min-w-0 text-sm break-words whitespace-pre-wrap">
                 {a.call}
                 <span aria-hidden="true"> → </span>
                 <span className="text-foreground">{formatResult(lib)}</span>

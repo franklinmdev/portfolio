@@ -65,6 +65,11 @@ const EMAIL = "franklinmdev@hotmail.com"
         const copyIcon = btn.querySelector("[data-icon=copy]")
         const doneIcon = btn.querySelector("[data-icon=done]")
         const idle = label?.textContent ?? ""
+        const mac = /Mac|iPhone|iPad/.test(navigator.userAgent)
+        const failed = (btn.dataset.failedLabel ?? idle).replace(
+          "Ctrl+C",
+          mac ? "Cmd+C" : "Ctrl+C"
+        )
         let timer: ReturnType<typeof setTimeout> | undefined
 
         const show = (text: string, done: boolean) => {
@@ -87,7 +92,7 @@ const EMAIL = "franklinmdev@hotmail.com"
             show(btn.dataset.copiedLabel ?? idle, true)
           } catch {
             if (email) window.getSelection()?.selectAllChildren(email)
-            show(btn.dataset.failedLabel ?? idle, false)
+            show(failed, false)
           }
         })
       })

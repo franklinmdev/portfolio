@@ -54,13 +54,16 @@ figure you can run, and the proof sits in the margin.
   only describes.
 - Figure controls look operable: Fig. 1's requests are bordered options
   (2px radius, never pills), above the card on mobile so the first action is
-  on the first screen. The bars stay visible; probabilities and gates wait
-  behind "Show the numbers", because a stranger reads a bar but not "gate
-  0.70".
+  on the first screen; a pick there scrolls the card into view. The held
+  request carries a one-line hint, so the "unsure" case is findable. Bars and
+  the gate tick stay visible; the probabilities and gate values wait behind
+  "Show the numbers", because a stranger reads a bar but not "gate 0.70".
 - Home page length: Fig. 2 and Fig. 3 sit behind a "See it run" disclosure
   on the home page and hydrate only when opened. The deep dives show them
-  open. Order: work, experience, how I work, about, contact; the nav lists
-  work, experience, how I work, contact.
+  open, each disclosure names its figure. Order: open source, in development,
+  experience, how I work, about, contact; the nav lists projects, experience,
+  how I work, contact. The header is sticky from md up only: on mobile its
+  two rows cost 13% of the screen.
 - Contact is the one main action: the email at display size with a copy
   button, because many visitors have no mail app behind a mailto link.
 
