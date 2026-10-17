@@ -46,11 +46,11 @@ figure you can run, and the proof sits in the margin.
   paragraph. The home page shows only numbers a stranger can judge, in plain
   labels; the deep dives add the date and the commit link for each one, and
   carry the expert numbers (F1, review rate) and Fig. 5, the benchmark table.
-- First screen: the h1 says what he builds in plain words, one byline line
-  (role, city, years in financial software; never an availability line), three
-  text links, then one sentence on what justask is and Fig. 1 opening on a
-  request it fills completely. The held case is one click away. No abstract,
-  no buttons, no eyebrow, nothing that only describes.
+- First screen: a one-line h1 that says what he builds in plain words, a
+  byline of role and country only (no city, no employer hint, never an
+  availability line), three text links, then one sentence on what justask is
+  and Fig. 1 opening on a request it fills completely. The held case is one
+  click away. No abstract, no buttons, no eyebrow, nothing that only describes.
 
 ## Tokens
 
@@ -77,6 +77,12 @@ classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.measured-note`,
 - "Models pick. Code decides. The figures prove it." as the h1 (2026-10-17):
   a riddle to a recruiter; "the figures" pointed at things not yet seen. Not
   kept as a kicker either: eyebrows are banned below.
+- "I build AI features that know when they're unsure, and I measure them
+  before they ship." (2026-10-17): three lines on desktop, four on mobile.
+- "Full-Stack AI Engineer" in the byline and title (2026-10-17): "AI Engineer"
+  is the term recruiters search; the Experience entry keeps the formal title.
+- City and "building financial software since 2023" in the byline
+  (2026-10-17): revealed too much about where he works.
 - "Open to remote roles" in the byline (2026-10-17): read as needy and as a
   public notice to the current employer.
 - Commit links and dates on the home page (2026-10-17): noise to most

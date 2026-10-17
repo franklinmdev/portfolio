@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Franklin Martinez, Full-Stack AI Engineer",
+    "title": "Franklin Martinez, AI Engineer",
     "description": "Franklin Martinez builds LLM systems and measures them before trusting them: justask, docmatch and dgii-ts, with live figures and the numbers behind them."
   },
   "nav": {
@@ -16,8 +16,8 @@
     "other_lang_short": "ES"
   },
   "hero": {
-    "title": "I build AI features that know when they're unsure, and I measure them before they ship.",
-    "byline": "Full-Stack AI Engineer in Santiago, Dominican Republic, building financial software since 2023."
+    "title": "I build AI that knows when it's unsure.",
+    "byline": "AI Engineer, Dominican Republic."
   },
   "work": {
     "title": "Selected work",

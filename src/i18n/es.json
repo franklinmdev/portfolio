@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Franklin Martinez, Full-Stack AI Engineer",
+    "title": "Franklin Martinez, AI Engineer",
     "description": "Franklin Martinez construye sistemas con LLM y los mide antes de confiar en ellos: justask, docmatch y dgii-ts, con figuras que funcionan y los números detrás."
   },
   "nav": {
@@ -16,8 +16,8 @@
     "other_lang_short": "EN"
   },
   "hero": {
-    "title": "Construyo funciones de IA que saben cuándo no están seguras, y las mido antes de lanzarlas.",
-    "byline": "Full-Stack AI Engineer en Santiago, República Dominicana. Desarrollo software financiero desde 2023."
+    "title": "Construyo IA que sabe cuándo no está segura.",
+    "byline": "AI Engineer, República Dominicana."
   },
   "work": {
     "title": "Trabajo seleccionado",
