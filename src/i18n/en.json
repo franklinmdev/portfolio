@@ -1,55 +1,55 @@
 {
   "meta": {
-    "title": "Franklin Martinez, applied AI engineer",
+    "title": "Franklin Martinez, AI Engineer",
     "description": "Franklin Martinez builds LLM systems and measures them before trusting them: justask, docmatch and dgii-ts, with live figures and the numbers behind them."
   },
   "nav": {
     "label": "Main",
-    "work": "Work",
-    "method": "Method",
-    "about": "About",
+    "work": "Projects",
+    "method": "How I work",
     "contact": "Contact",
     "home": "Franklin Martinez, home",
     "skip": "Skip to content",
     "theme": "Switch between light and dark",
     "other_lang": "Español",
-    "other_lang_short": "ES"
+    "other_lang_short": "ES",
+    "experience": "Experience"
   },
   "hero": {
-    "title": "Models pick. Code decides. The figures prove it.",
-    "byline": "Full-Stack AI Engineer in Santiago, Dominican Republic. Open to remote roles."
+    "title": "I build AI that knows when it's unsure.",
+    "byline": "AI Engineer, Dominican Republic."
   },
   "work": {
-    "title": "Selected work",
+    "title": "Open source",
     "deep_dive": "Read the deep dive",
     "live": "Live demo",
     "source": "Source",
     "justask": {
       "lead": "Turns what a person types into an app's own state: a search result, a table filter, a filled record card. Code finds the candidates, a model picks one label per question with a probability for every label, and a field it isn't sure of stays empty for the person to fill (Fig. 1).",
-      "m_exact": "picks exact, round 4 of the search eval",
-      "m_held": "ambiguous requests held",
-      "m_p95": "p95 latency",
-      "m_cap": "of model spend a day, the demo's cap"
+      "m_exact": "correct picks, none invented",
+      "m_held": "unclear requests left for the person",
+      "m_p95": "to answer, for 95% of requests",
+      "m_cap": "a day in model spend, the demo's cap"
     },
     "docmatch": {
-      "lead": "Invoice reconciliation for accounts payable. A vision model reads the invoice, deterministic code checks what it read and matches it against the purchase order and the receiving record, and anything that doesn't add up goes to a person (Fig. 2). Every stage has its number in a benchmark table that names the commit behind it (Fig. 3).",
+      "lead": "Invoice reconciliation for accounts payable. A vision model reads the invoice, deterministic code checks what it read and matches it against the purchase order and the receiving record, and anything that doesn't add up goes to a person (Fig. 2). The deep dive has the benchmark behind every stage.",
       "status": "In progress: extraction, matching, entity resolution and the review pipeline are done.",
       "note_ci": "A CI gate fails any pull request that lowers field or line-item F1.",
-      "m_p95": "p95 from upload to approval, cheapest backend",
-      "m_cost": "per document",
-      "m_review": "of documents sent to a person"
+      "m_p95": "from upload to approval, for 95% of invoices",
+      "m_cost": "per invoice, about a quarter of a cent",
+      "run": "See Fig. 2 run: an invoice checked step by step"
     },
     "dgii": {
-      "lead": "A TypeScript library for the DGII, the Dominican tax authority. It validates RNC, cédula, NCF and e-NCF numbers offline, and looks up taxpayers by scraping DGII's web pages with retries and a circuit breaker, because DGII has no public API and shut down its SOAP service in January 2025. Fig. 4 is the library itself, running in this page.",
+      "lead": "A TypeScript library for the DGII, the Dominican tax authority. It validates RNC, cédula, NCF and e-NCF numbers offline, and looks up taxpayers by scraping DGII's web pages with retries and a circuit breaker, because DGII has no public API and shut down its SOAP service in January 2025. Fig. 3, below, is the library itself, running in this page.",
       "note_skill": "It ships an agent skill, so coding agents learn the library with one command:",
-      "m_cedulas": "cédulas on the whitelist: real numbers that break the algorithm",
-      "m_rncs": "RNCs on the whitelist",
-      "m_downloads": "npm downloads, all time"
+      "m_cedulas": "real cédulas that fail the check-digit rule and still pass",
+      "m_downloads": "npm downloads, all time",
+      "run": "See Fig. 3 run: check an RNC or a cédula yourself"
     },
-    "also": "Also building",
+    "also": "In development",
     "domiprop": {
       "lead": "Rental management for Dominican landlords: expense tracking, the monthly 606 purchase report, lease contracts under Ley 85-25, and reminders before tax deadlines. Built with Next.js, NestJS, Prisma and PostgreSQL. Pre-launch.",
-      "caption": "Fig. 5. The DomiProp dashboard."
+      "caption": "Fig. 4. The DomiProp dashboard."
     },
     "brook": {
       "lead": "A mobile app in development (Expo, TypeScript) that turns the links people save from TikTok, Instagram and the web into a searchable library, each link sorted into typed fields with a confidence badge.",
@@ -58,7 +58,7 @@
   },
   "fig1": {
     "label": "Fig. 1",
-    "caption": "justask, my library that turns a typed request into an app's own state. Three requests sent to its live demo on October 11, 2026, replayed with their real responses. Bars are the model's probability for each pick; a pick below its gate leaves the field empty.",
+    "caption": "Three requests sent to the live demo on October 11, 2026, replayed with their real responses. Bars are the model's probability for each pick; a pick below its gate leaves the field empty.",
     "pick": "Pick a request",
     "replay": "Replay",
     "card": "New expense",
@@ -75,7 +75,10 @@
       "travel": "Travel",
       "client": "Client",
       "office": "Office"
-    }
+    },
+    "intro": "justask is my open-source library. Type a request and it fills the form, leaving blank anything it isn't sure of. Pick a request to see it work.",
+    "numbers": "Show the numbers",
+    "hint_blank": "Unclear vendor, so it leaves that field blank"
   },
   "fig2": {
     "label": "Fig. 2",
@@ -102,7 +105,7 @@
     }
   },
   "fig3": {
-    "label": "Fig. 3",
+    "label": "Fig. 5",
     "caption": "Three extraction backends on a fixed subset of 100 pinned documents. Each row links the commit that produced it.",
     "backend": "Backend",
     "f1": "Field F1",
@@ -110,7 +113,7 @@
     "commit": "Commit"
   },
   "fig4": {
-    "label": "Fig. 4",
+    "label": "Fig. 3",
     "caption": "dgii-ts 0.3.0 from npm, imported by this page. The steps show the check-digit arithmetic; the verdict is the library's own. The example numbers are invented.",
     "input": "An RNC, cédula, NCF or e-NCF",
     "examples": "Examples",
@@ -135,7 +138,7 @@
     "type": "Type"
   },
   "method": {
-    "title": "Method",
+    "title": "How I work",
     "rules_title": "Rules before results.",
     "rules": "When a model makes a decision in something I build, I write down how it will be judged before the first call: a frozen eval set, pass lines, a gate that is measured rather than guessed. Failed rounds stay in the record.",
     "brief_title": "From a brief to a shipped product.",
@@ -169,7 +172,10 @@
   },
   "contact": {
     "title": "Contact",
-    "lead": "Write to {email}. I reply within a day or two."
+    "lead": "I reply within a day or two.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copy_failed": "Press Ctrl+C to copy"
   },
   "projects": {
     "back": "All work",

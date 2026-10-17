@@ -1,55 +1,55 @@
 {
   "meta": {
-    "title": "Franklin Martinez, ingeniero de IA aplicada",
+    "title": "Franklin Martinez, AI Engineer",
     "description": "Franklin Martinez construye sistemas con LLM y los mide antes de confiar en ellos: justask, docmatch y dgii-ts, con figuras que funcionan y los números detrás."
   },
   "nav": {
     "label": "Principal",
-    "work": "Trabajo",
-    "method": "Método",
-    "about": "Sobre mí",
+    "work": "Proyectos",
+    "method": "Cómo trabajo",
     "contact": "Contacto",
     "home": "Franklin Martinez, inicio",
     "skip": "Ir al contenido",
     "theme": "Cambiar entre claro y oscuro",
     "other_lang": "English",
-    "other_lang_short": "EN"
+    "other_lang_short": "EN",
+    "experience": "Experiencia"
   },
   "hero": {
-    "title": "Los modelos eligen. El código decide. Las figuras lo demuestran.",
-    "byline": "Full-Stack AI Engineer en Santiago, República Dominicana. Disponible para roles remotos."
+    "title": "Construyo IA que sabe cuándo no está segura.",
+    "byline": "AI Engineer, República Dominicana."
   },
   "work": {
-    "title": "Trabajo seleccionado",
+    "title": "Código abierto",
     "deep_dive": "Leer a fondo",
     "live": "Demo en vivo",
     "source": "Código",
     "justask": {
       "lead": "Convierte lo que una persona escribe en el estado de tu propia aplicación: un resultado de búsqueda, un filtro de tabla, una ficha llena. El código encuentra los candidatos, un modelo elige una etiqueta por pregunta con una probabilidad para cada etiqueta, y el campo del que no está seguro se queda vacío para que la persona lo llene (Fig. 1).",
-      "m_exact": "elecciones exactas, ronda 4 de la evaluación de búsqueda",
-      "m_held": "pedidos ambiguos retenidos",
-      "m_p95": "latencia p95",
-      "m_cap": "de gasto de modelo al día, el tope de la demo"
+      "m_exact": "elecciones correctas, ninguna inventada",
+      "m_held": "pedidos ambiguos dejados a la persona",
+      "m_p95": "para responder, en el 95% de los pedidos",
+      "m_cap": "al día en gasto de modelo, el tope de la demo"
     },
     "docmatch": {
-      "lead": "Conciliación de facturas para cuentas por pagar. Un modelo de visión lee la factura, código determinista revisa lo que leyó y la cruza con la orden de compra y la recepción de mercancía, y lo que no cuadra pasa a una persona (Fig. 2). Cada etapa tiene su número en una tabla de benchmarks que nombra el commit que lo produjo (Fig. 3).",
+      "lead": "Conciliación de facturas para cuentas por pagar. Un modelo de visión lee la factura, código determinista revisa lo que leyó y la cruza con la orden de compra y la recepción de mercancía, y lo que no cuadra pasa a una persona (Fig. 2). El análisis a fondo tiene el benchmark de cada etapa.",
       "status": "En progreso: la extracción, el cruce, la resolución de entidades y la revisión humana están terminados.",
       "note_ci": "Una verificación en CI rechaza cualquier pull request que baje el F1 por campo o por línea.",
-      "m_p95": "p95 de la carga a la aprobación, backend más barato",
-      "m_cost": "por documento",
-      "m_review": "de los documentos pasan a una persona"
+      "m_p95": "de la carga a la aprobación, en el 95% de las facturas",
+      "m_cost": "por factura, cerca de un cuarto de centavo",
+      "run": "Ver la Fig. 2 en acción: una factura revisada paso a paso"
     },
     "dgii": {
-      "lead": "Una librería en TypeScript para la DGII. Valida RNC, cédula, NCF y e-NCF sin conexión, y consulta contribuyentes leyendo las páginas web de la DGII con reintentos y un circuit breaker, porque la DGII no tiene API pública y cerró su servicio SOAP en enero de 2025. La Fig. 4 es la librería misma, corriendo en esta página.",
+      "lead": "Una librería en TypeScript para la DGII. Valida RNC, cédula, NCF y e-NCF sin conexión, y consulta contribuyentes leyendo las páginas web de la DGII con reintentos y un circuit breaker, porque la DGII no tiene API pública y cerró su servicio SOAP en enero de 2025. La Fig. 3, aquí abajo, es la librería misma, corriendo en esta página.",
       "note_skill": "Incluye una skill para agentes, así los agentes de código aprenden la librería con un comando:",
-      "m_cedulas": "cédulas en la lista blanca: números reales que no cumplen el algoritmo",
-      "m_rncs": "RNC en la lista blanca",
-      "m_downloads": "descargas en npm, en total"
+      "m_cedulas": "cédulas reales que fallan el dígito verificador y aun así son válidas",
+      "m_downloads": "descargas en npm, en total",
+      "run": "Ver la Fig. 3 en acción: valida tú mismo un RNC o una cédula"
     },
-    "also": "También en construcción",
+    "also": "En desarrollo",
     "domiprop": {
       "lead": "Gestión de alquileres para propietarios dominicanos: control de gastos, el formato 606 mensual, contratos de arrendamiento bajo la Ley 85-25 y recordatorios antes de cada fecha fiscal. Hecho con Next.js, NestJS, Prisma y PostgreSQL. Antes del lanzamiento.",
-      "caption": "Fig. 5. El panel de DomiProp."
+      "caption": "Fig. 4. El panel de DomiProp."
     },
     "brook": {
       "lead": "Una aplicación móvil en desarrollo (Expo, TypeScript) que convierte los enlaces que la gente guarda de TikTok, Instagram y la web en una biblioteca donde se puede buscar, con cada enlace clasificado en campos tipados y una insignia de confianza.",
@@ -58,7 +58,7 @@
   },
   "fig1": {
     "label": "Fig. 1",
-    "caption": "justask, mi librería que convierte un pedido escrito en el estado de una app. Tres pedidos enviados a su demo en vivo el 11 de octubre de 2026, reproducidos con sus respuestas reales. Las barras son la probabilidad del modelo para cada elección; una elección por debajo de su umbral deja el campo vacío.",
+    "caption": "Tres pedidos enviados a la demo en vivo el 11 de octubre de 2026, reproducidos con sus respuestas reales. Las barras son la probabilidad del modelo para cada elección; una elección por debajo de su umbral deja el campo vacío.",
     "pick": "Elige un pedido",
     "replay": "Repetir",
     "card": "Nuevo gasto",
@@ -75,7 +75,10 @@
       "travel": "Viajes",
       "client": "Cliente",
       "office": "Oficina"
-    }
+    },
+    "intro": "justask es mi librería de código abierto. Escribes un pedido y llena el formulario, dejando en blanco lo que no tiene claro. Elige un pedido para verla funcionar.",
+    "numbers": "Mostrar los números",
+    "hint_blank": "Proveedor poco claro, así que deja ese campo en blanco"
   },
   "fig2": {
     "label": "Fig. 2",
@@ -102,7 +105,7 @@
     }
   },
   "fig3": {
-    "label": "Fig. 3",
+    "label": "Fig. 5",
     "caption": "Tres backends de extracción en un subconjunto fijo de 100 documentos. Cada fila enlaza el commit que la produjo.",
     "backend": "Backend",
     "f1": "F1 por campo",
@@ -110,7 +113,7 @@
     "commit": "Commit"
   },
   "fig4": {
-    "label": "Fig. 4",
+    "label": "Fig. 3",
     "caption": "dgii-ts 0.3.0 desde npm, importada por esta página. Los pasos muestran la aritmética del dígito verificador; el resultado es el de la librería. Los números de ejemplo son inventados.",
     "input": "Un RNC, cédula, NCF o e-NCF",
     "examples": "Ejemplos",
@@ -135,7 +138,7 @@
     "type": "Tipo"
   },
   "method": {
-    "title": "Método",
+    "title": "Cómo trabajo",
     "rules_title": "Las reglas antes que los resultados.",
     "rules": "Cuando un modelo toma una decisión en algo que construyo, escribo cómo se va a juzgar antes de la primera llamada: un set de evaluación congelado, líneas de aprobación, un umbral medido y no adivinado. Las rondas fallidas se quedan en el registro.",
     "brief_title": "De un brief a un producto en producción.",
@@ -169,7 +172,10 @@
   },
   "contact": {
     "title": "Contacto",
-    "lead": "Escríbeme a {email}. Respondo en uno o dos días."
+    "lead": "Respondo en uno o dos días.",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "copy_failed": "Presiona Ctrl+C para copiar"
   },
   "projects": {
     "back": "Todo el trabajo",

@@ -22,10 +22,10 @@ export interface AgentProfile {
 
 export const agentProfile: AgentProfile = {
   name: "Franklin Martinez",
-  role: "Full-Stack AI Engineer",
-  location: "Santiago, Dominican Republic",
+  role: "AI Engineer",
+  location: "Dominican Republic",
   summary:
-    "Full-stack AI engineer who builds LLM systems and measures them before trusting them: frozen eval sets, measured gates, and benchmarks tied to commits. Also ships complete web applications end to end, from the data model to a UI non-technical users can use. Claude Code, Cursor CLI, Antigravity CLI, and Codex are daily drivers.",
+    "AI engineer who builds LLM systems and measures them before trusting them: frozen eval sets, measured gates, and benchmarks tied to commits. Also ships complete web applications end to end, from the data model to a UI non-technical users can use. Claude Code, Cursor CLI, Antigravity CLI, and Codex are daily drivers.",
   howIWork: [
     "From PRD to shipped product: written research and a plan go in, a working product and a QA guide come out, with little back-and-forth.",
     "Quality is enforced, not hoped for: codified rules and edit hooks typecheck, lint, and validate every change before it lands.",

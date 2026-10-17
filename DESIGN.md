@@ -37,16 +37,35 @@ figure you can run, and the proof sits in the margin.
   value, fields fill in order, boxes draw onto the invoice, table rows settle
   one by one, digits get weighed one by one. Placements: Fig. 1 to Fig. 4
   only; chrome stays still. Under reduced motion every figure shows its final
-  state. Static figures (Fig. 1, Fig. 3) opt in with `data-autoplot`; the
+  state. Static figures (Fig. 1, Fig. 5) opt in with `data-autoplot`; the
   shared script lives in `Layout.astro`.
-- Unexpected move: the measured column. Every number on the page sits in the
-  margin in amber Commit Mono with a sans label, the date it was measured and
-  a link to the commit (`MeasuredNote.astro`, `.measured-note`; raw `.noted`
-  HTML blocks in the deep dives). The prose carries the claim, the margin
-  carries the number. On mobile the column folds in under its paragraph.
-- First screen: the h1 is a claim ("Models pick. Code decides. The figures
-  prove it."), one byline line, three text links, then Fig. 1 running on the
-  held case. No abstract, no buttons, nothing that only describes.
+- Unexpected move: the measured column. Numbers sit in the margin in amber
+  Commit Mono with a sans label (`MeasuredNote.astro`, `.measured-note`; raw
+  `.noted` HTML blocks in the deep dives). The prose carries the claim, the
+  margin carries the number. On mobile the column folds in under its
+  paragraph. The home page shows only numbers a stranger can judge, in plain
+  labels; the deep dives add the date and the commit link for each one, and
+  carry the expert numbers (F1, review rate) and Fig. 5, the benchmark table.
+- First screen: a one-line h1 that says what he builds in plain words, a
+  byline of role and country only (no city, no employer hint, never an
+  availability line), three text links, then one sentence on what justask is
+  and Fig. 1 opening on a request it fills completely. The held case is one
+  click away. No abstract, no call-to-action buttons, no eyebrow, nothing that
+  only describes.
+- Figure controls look operable: Fig. 1's requests are bordered options
+  (2px radius, never pills), above the card on mobile so the first action is
+  on the first screen; a pick there scrolls the card into view. The held
+  request carries a one-line hint, so the "unsure" case is findable. Bars and
+  the gate tick stay visible; the probabilities and gate values wait behind
+  "Show the numbers", because a stranger reads a bar but not "gate 0.70".
+- Home page length: Fig. 2 and Fig. 3 sit behind a "See it run" disclosure
+  on the home page and hydrate only when opened. The deep dives show them
+  open, each disclosure names its figure. Order: open source, in development,
+  experience, how I work, about, contact; the nav lists projects, experience,
+  how I work, contact. The header is sticky from md up only: on mobile its
+  two rows cost 13% of the screen.
+- Contact is the one main action: the email at display size with a copy
+  button, because many visitors have no mail app behind a mailto link.
 
 ## Tokens
 
@@ -70,6 +89,27 @@ classes: `.page-grid`, `.figure`, `.caption`, `.sidenote`, `.measured-note`,
 - Datasheet (2026-05 to 2026-10): IBM Plex + JetBrains Mono, cyan; shallow,
   and its fonts are now spent.
 - warm-editorial, refined-dark, editorial-mono (2026-05).
+- "Models pick. Code decides. The figures prove it." as the h1 (2026-10-17):
+  a riddle to a recruiter; "the figures" pointed at things not yet seen. Not
+  kept as a kicker either: eyebrows are banned below.
+- "I build AI features that know when they're unsure, and I measure them
+  before they ship." (2026-10-17): three lines on desktop, four on mobile.
+- "Full-Stack AI Engineer" in the byline and title (2026-10-17): "AI Engineer"
+  is the term recruiters search; the Experience entry keeps the formal title.
+  The Spanish byline keeps "AI Engineer" in English on purpose: it is the
+  title he is searched by, not UI copy.
+- City and "building financial software since 2023" in the byline
+  (2026-10-17): revealed too much about where he works.
+- A résumé link in the byline (2026-10-17): the owner chose GitHub, LinkedIn
+  and email only.
+- "Open to remote roles" in the byline (2026-10-17): read as needy and as a
+  public notice to the current employer.
+- Amber on chrome to give the page a visual peak (2026-10-17): the accent
+  means "measured"; spending it on links or buttons would dilute that.
+- "Selected work" and "Also building" as headings (2026-10-17): template
+  words; "Open source" and "In development" say what the reader gets.
+- Commit links and dates on the home page (2026-10-17): noise to most
+  visitors; they live in the deep dives.
 - Fig. 3 as a scatter plot (2026-10-11): the table already held the commit
   links; the plot doubled the height for three points. Table only.
 - Contact form (2026-10-11): a mailto line says the same with no island.

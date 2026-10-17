@@ -43,7 +43,7 @@ until that number exists.
 
 <div class="noted">
 <p><b>Extraction.</b> Three backends compared on a pinned subset of 100 documents
-(Fig. 3). The cheapest model also scored the highest field F1.</p>
+(Fig. 5). The cheapest model also scored the highest field F1.</p>
 <p><b>Matching.</b> A generator injects labeled discrepancies into purchase
 orders and receiving records. On the injected set, precision and recall are
 near perfect for every discrepancy type. End to end, from the image, precision

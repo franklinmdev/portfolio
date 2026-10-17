@@ -81,7 +81,7 @@ const links = [
       <p class="sidenote mt-1">{data.tags.join(", ")}.</p>
     </aside>
 
-    {slug === "justask" && <JustAskFigure t={t} lang={lang} />}
+    {slug === "justask" && <JustAskFigure t={t} lang={lang} intro={false} />}
     {slug === "docmatch" && <DocmatchFigure client:visible t={s.fig2} />}
     {slug === "dgii-ts" && <DgiiFigure client:visible t={s.fig4} />}
     {

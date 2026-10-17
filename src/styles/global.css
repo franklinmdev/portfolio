@@ -104,10 +104,16 @@
 }
 
 @layer base {
+  /* The header sticks from md up only, so only there does it need room. */
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
+  }
   html {
     color-scheme: light;
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 1rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -285,6 +291,43 @@
   }
   .measured-note .source a {
     text-decoration-color: var(--rule-strong);
+  }
+
+  /* On mobile the measured note folds under its paragraph as a two-column
+     strip with a rule above it, so the numbers stay with their project. */
+  @media (max-width: 1023px) {
+    .measured-note dl {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem 1.25rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+    }
+    .measured-note dl > div + div {
+      margin-top: 0;
+    }
+  }
+
+  /* A home-page figure behind "See it run". The island hydrates on open. */
+  details.run > summary::-webkit-details-marker {
+    display: none;
+  }
+  details.run .caret {
+    transition: transform 150ms var(--ease-out-expo, ease-out);
+  }
+  details.run[open] .caret {
+    transform: rotate(180deg);
+  }
+  details.run[open] > summary {
+    border-color: var(--foreground);
+  }
+  details.run figure.span-all {
+    margin-top: 1.5rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    details.run .caret {
+      transition: none;
+    }
   }
 
   /* In a deep dive, a paragraph and its measured note travel together:

@@ -30,7 +30,7 @@ one bad response doesn't cascade; and a bulk import of the DGII's daily RNC
 dataset.
 
 <div class="noted">
-<p>Fig. 4 above is the library itself, imported from npm and running in this
+<p>Fig. 3 above is the library itself, imported from npm and running in this
 page. The check-digit arithmetic is drawn step by step, and the verdict is the
 library's own. A number that breaks the algorithm can still be real: dgii-ts
 carries whitelists of cédulas and RNCs that the DGII issued anyway, taken from
@@ -58,6 +58,19 @@ href="https://github.com/franklinmdev/dgii-ts/blob/ff60bd9/src/validators/rnc-wh
 npm install dgii-ts
 ```
 
-On [npm](https://www.npmjs.com/package/dgii-ts) under MIT, with CI, plus an
-agent skill so a coding agent uses the offline validators before it reaches for
-the network.
+<div class="noted">
+<p>On <a href="https://www.npmjs.com/package/dgii-ts">npm</a> under MIT, with CI,
+plus an agent skill so a coding agent uses the offline validators before it
+reaches for the network.</p>
+<aside class="sidenote measured-note">
+<dl>
+<div><dt>3,157</dt><dd>npm downloads, all time</dd></div>
+</dl>
+<p class="source">
+<time datetime="2026-10-10">2026-10-10</time>,
+<a
+href="https://api.npmjs.org/downloads/point/2026-04-07:2026-10-10/dgii-ts"
+>npm API</a>
+</p>
+</aside>
+</div>

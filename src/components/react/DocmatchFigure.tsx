@@ -187,13 +187,13 @@ export default function DocmatchFigure({ t }: Props) {
                 className="absolute right-[8%] left-[4%] flex gap-[2%]"
                 style={{ top: `${line._y * 100}%` }}
               >
-                <span className="text-muted-foreground w-[13%] shrink-0">
+                <span className="text-muted-foreground hidden w-[13%] shrink-0 whitespace-nowrap sm:inline">
                   {"code" in line ? line.code : ""}
                 </span>
                 <span className="data w-[5%] shrink-0 text-right">
                   {line.quantity}
                 </span>
-                <span className="text-muted-foreground w-[6%] shrink-0">
+                <span className="text-muted-foreground w-[7%] shrink-0 whitespace-nowrap">
                   {line.units_of_measure}
                 </span>
                 <span className="min-w-0 flex-1 truncate">
@@ -225,7 +225,7 @@ export default function DocmatchFigure({ t }: Props) {
                     height: `calc(${(y1 - y0) * 100}% + 0.8%)`,
                   }}
                 >
-                  <span className="bg-measure-ink text-background absolute -top-[1.5px] -left-[1.5px] -translate-y-full px-[0.6cqw] font-sans [font-size:2.3cqw] leading-normal font-semibold sm:[font-size:1.7cqw]">
+                  <span className="bg-measure-ink text-background absolute -top-[1.5px] -right-[1.5px] translate-x-full px-[0.6cqw] font-sans [font-size:max(0.5625rem,2.3cqw)] leading-normal font-semibold sm:[font-size:max(0.5625rem,1.7cqw)]">
                     {i + 1}
                   </span>
                 </div>

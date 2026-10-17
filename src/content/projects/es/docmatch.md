@@ -44,7 +44,7 @@ que ese número existe.
 
 <div class="noted">
 <p><b>Extracción.</b> Tres backends comparados en un subconjunto fijo de 100
-documentos (Fig. 3). El modelo más barato también sacó el F1 de campos más
+documentos (Fig. 5). El modelo más barato también sacó el F1 de campos más
 alto.</p>
 <p><b>Cruce.</b> Un generador inyecta discrepancias etiquetadas en órdenes de
 compra y registros de recepción. En ese set, la precisión y el recall son casi
