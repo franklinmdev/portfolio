@@ -6,21 +6,22 @@
   "nav": {
     "label": "Main",
     "work": "Work",
-    "method": "Method",
+    "method": "How I work",
     "about": "About",
     "contact": "Contact",
     "home": "Franklin Martinez, home",
     "skip": "Skip to content",
     "theme": "Switch between light and dark",
     "other_lang": "Español",
-    "other_lang_short": "ES"
+    "other_lang_short": "ES",
+    "experience": "Experience"
   },
   "hero": {
     "title": "I build AI that knows when it's unsure.",
     "byline": "AI Engineer, Dominican Republic."
   },
   "work": {
-    "title": "Selected work",
+    "title": "Open source",
     "deep_dive": "Read the deep dive",
     "live": "Live demo",
     "source": "Source",
@@ -36,15 +37,17 @@
       "status": "In progress: extraction, matching, entity resolution and the review pipeline are done.",
       "note_ci": "A CI gate fails any pull request that lowers field or line-item F1.",
       "m_p95": "from upload to approval, for 95% of invoices",
-      "m_cost": "per invoice, about a quarter of a cent"
+      "m_cost": "per invoice, about a quarter of a cent",
+      "run": "See it run: an invoice checked step by step"
     },
     "dgii": {
       "lead": "A TypeScript library for the DGII, the Dominican tax authority. It validates RNC, cédula, NCF and e-NCF numbers offline, and looks up taxpayers by scraping DGII's web pages with retries and a circuit breaker, because DGII has no public API and shut down its SOAP service in January 2025. Fig. 3 is the library itself, running in this page.",
       "note_skill": "It ships an agent skill, so coding agents learn the library with one command:",
       "m_cedulas": "real cédulas that fail the check-digit rule and still pass",
-      "m_downloads": "npm downloads, all time"
+      "m_downloads": "npm downloads, all time",
+      "run": "See it run: check an RNC or a cédula yourself"
     },
-    "also": "Also building",
+    "also": "In development",
     "domiprop": {
       "lead": "Rental management for Dominican landlords: expense tracking, the monthly 606 purchase report, lease contracts under Ley 85-25, and reminders before tax deadlines. Built with Next.js, NestJS, Prisma and PostgreSQL. Pre-launch.",
       "caption": "Fig. 4. The DomiProp dashboard."
@@ -74,7 +77,8 @@
       "client": "Client",
       "office": "Office"
     },
-    "intro": "justask is my open-source library. Type a request and it fills the form, leaving blank anything it isn't sure of. Pick a request to see it work."
+    "intro": "justask is my open-source library. Type a request and it fills the form, leaving blank anything it isn't sure of. Pick a request to see it work.",
+    "numbers": "Show the numbers"
   },
   "fig2": {
     "label": "Fig. 2",
@@ -134,7 +138,7 @@
     "type": "Type"
   },
   "method": {
-    "title": "Method",
+    "title": "How I work",
     "rules_title": "Rules before results.",
     "rules": "When a model makes a decision in something I build, I write down how it will be judged before the first call: a frozen eval set, pass lines, a gate that is measured rather than guessed. Failed rounds stay in the record.",
     "brief_title": "From a brief to a shipped product.",
@@ -168,7 +172,9 @@
   },
   "contact": {
     "title": "Contact",
-    "lead": "Write to {email}. I reply within a day or two."
+    "lead": "I reply within a day or two.",
+    "copy": "Copy",
+    "copied": "Copied"
   },
   "projects": {
     "back": "All work",

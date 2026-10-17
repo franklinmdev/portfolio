@@ -287,6 +287,35 @@
     text-decoration-color: var(--rule-strong);
   }
 
+  /* On mobile the measured note folds under its paragraph as a two-column
+     strip with a rule above it, so the numbers stay with their project. */
+  @media (max-width: 1023px) {
+    .measured-note dl {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem 1.25rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+    }
+    .measured-note dl > div + div {
+      margin-top: 0;
+    }
+  }
+
+  /* A home-page figure behind "See it run". The island hydrates on open. */
+  details.run > summary::-webkit-details-marker {
+    display: none;
+  }
+  details.run .caret {
+    transition: transform 150ms var(--ease-out-expo, ease-out);
+  }
+  details.run[open] .caret {
+    transform: rotate(180deg);
+  }
+  details.run[open] > summary {
+    border-color: var(--foreground);
+  }
+
   /* In a deep dive, a paragraph and its measured note travel together:
      side by side on desktop, the note under the paragraph on mobile. */
   .noted > p + p {

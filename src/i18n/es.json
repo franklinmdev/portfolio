@@ -6,21 +6,22 @@
   "nav": {
     "label": "Principal",
     "work": "Trabajo",
-    "method": "Método",
+    "method": "Cómo trabajo",
     "about": "Sobre mí",
     "contact": "Contacto",
     "home": "Franklin Martinez, inicio",
     "skip": "Ir al contenido",
     "theme": "Cambiar entre claro y oscuro",
     "other_lang": "English",
-    "other_lang_short": "EN"
+    "other_lang_short": "EN",
+    "experience": "Experiencia"
   },
   "hero": {
     "title": "Construyo IA que sabe cuándo no está segura.",
     "byline": "AI Engineer, República Dominicana."
   },
   "work": {
-    "title": "Trabajo seleccionado",
+    "title": "Código abierto",
     "deep_dive": "Leer a fondo",
     "live": "Demo en vivo",
     "source": "Código",
@@ -36,15 +37,17 @@
       "status": "En progreso: la extracción, el cruce, la resolución de entidades y la revisión humana están terminados.",
       "note_ci": "Una verificación en CI rechaza cualquier pull request que baje el F1 por campo o por línea.",
       "m_p95": "de la carga a la aprobación, en el 95% de las facturas",
-      "m_cost": "por factura, cerca de un cuarto de centavo"
+      "m_cost": "por factura, cerca de un cuarto de centavo",
+      "run": "Verlo funcionar: una factura revisada paso a paso"
     },
     "dgii": {
       "lead": "Una librería en TypeScript para la DGII. Valida RNC, cédula, NCF y e-NCF sin conexión, y consulta contribuyentes leyendo las páginas web de la DGII con reintentos y un circuit breaker, porque la DGII no tiene API pública y cerró su servicio SOAP en enero de 2025. La Fig. 3 es la librería misma, corriendo en esta página.",
       "note_skill": "Incluye una skill para agentes, así los agentes de código aprenden la librería con un comando:",
       "m_cedulas": "cédulas reales que fallan el dígito verificador y aun así son válidas",
-      "m_downloads": "descargas en npm, en total"
+      "m_downloads": "descargas en npm, en total",
+      "run": "Verlo funcionar: valida tú mismo un RNC o una cédula"
     },
-    "also": "También en construcción",
+    "also": "En desarrollo",
     "domiprop": {
       "lead": "Gestión de alquileres para propietarios dominicanos: control de gastos, el formato 606 mensual, contratos de arrendamiento bajo la Ley 85-25 y recordatorios antes de cada fecha fiscal. Hecho con Next.js, NestJS, Prisma y PostgreSQL. Antes del lanzamiento.",
       "caption": "Fig. 4. El panel de DomiProp."
@@ -74,7 +77,8 @@
       "client": "Cliente",
       "office": "Oficina"
     },
-    "intro": "justask es mi librería de código abierto. Escribes un pedido y llena el formulario, dejando en blanco lo que no tiene claro. Elige un pedido para verla funcionar."
+    "intro": "justask es mi librería de código abierto. Escribes un pedido y llena el formulario, dejando en blanco lo que no tiene claro. Elige un pedido para verla funcionar.",
+    "numbers": "Mostrar los números"
   },
   "fig2": {
     "label": "Fig. 2",
@@ -134,7 +138,7 @@
     "type": "Tipo"
   },
   "method": {
-    "title": "Método",
+    "title": "Cómo trabajo",
     "rules_title": "Las reglas antes que los resultados.",
     "rules": "Cuando un modelo toma una decisión en algo que construyo, escribo cómo se va a juzgar antes de la primera llamada: un set de evaluación congelado, líneas de aprobación, un umbral medido y no adivinado. Las rondas fallidas se quedan en el registro.",
     "brief_title": "De un brief a un producto en producción.",
@@ -168,7 +172,9 @@
   },
   "contact": {
     "title": "Contacto",
-    "lead": "Escríbeme a {email}. Respondo en uno o dos días."
+    "lead": "Respondo en uno o dos días.",
+    "copy": "Copiar",
+    "copied": "Copiado"
   },
   "projects": {
     "back": "Todo el trabajo",

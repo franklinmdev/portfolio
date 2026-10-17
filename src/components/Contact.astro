@@ -1,10 +1,12 @@
 ---
+import { CheckIcon, CopyIcon } from "@phosphor-icons/react"
+
 export interface Props {
   t: (key: string) => string
 }
 
 const { t } = Astro.props
-const [before = "", after = ""] = t("contact.lead").split("{email}")
+const EMAIL = "franklinmdev@hotmail.com"
 ---
 
 <section
@@ -14,11 +16,60 @@ const [before = "", after = ""] = t("contact.lead").split("{email}")
 >
   <h2 id="contact-title" class="section-title">{t("contact.title")}</h2>
   <div class="hidden lg:block"></div>
-  <p class="mt-4">
-    {before}<a
-      class="link"
-      href="mailto:franklinmdev@hotmail.com"
-      set:text="franklinmdev@hotmail.com"
-    />{after}
-  </p>
+  <div class="mt-2">
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+      <a
+        class="link font-serif text-[1.5rem] leading-tight break-all sm:text-[2rem]"
+        href={`mailto:${EMAIL}`}
+        set:text={EMAIL}
+      />
+      <button
+        type="button"
+        data-copy={EMAIL}
+        data-copied-label={t("contact.copied")}
+        class="border-rule-strong [@media(hover:hover)]:hover:border-foreground inline-flex min-h-11 items-center gap-1.5 rounded-[2px] border px-3 font-sans text-[0.875rem] transition-colors duration-150"
+      >
+        <CopyIcon aria-hidden="true" className="size-4" data-icon="copy" />
+        <CheckIcon
+          aria-hidden="true"
+          className="hidden size-4"
+          data-icon="done"
+        />
+        <span data-label aria-live="polite">{t("contact.copy")}</span>
+      </button>
+    </div>
+    <p class="text-muted-foreground mt-3 font-sans text-[0.9375rem]">
+      {t("contact.lead")}
+    </p>
+  </div>
 </section>
+
+<script>
+  function bindCopy() {
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-copy]")
+      .forEach((btn) => {
+        if (btn.dataset.bound) return
+        btn.dataset.bound = "1"
+        const label = btn.querySelector<HTMLElement>("[data-label]")
+        const idle = label?.textContent ?? ""
+        btn.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(btn.dataset.copy ?? "")
+          } catch {
+            return
+          }
+          if (label) label.textContent = btn.dataset.copiedLabel ?? idle
+          btn.querySelector("[data-icon=copy]")?.classList.add("hidden")
+          btn.querySelector("[data-icon=done]")?.classList.remove("hidden")
+          setTimeout(() => {
+            if (label) label.textContent = idle
+            btn.querySelector("[data-icon=copy]")?.classList.remove("hidden")
+            btn.querySelector("[data-icon=done]")?.classList.add("hidden")
+          }, 2000)
+        })
+      })
+  }
+  bindCopy()
+  document.addEventListener("astro:after-swap", bindCopy)
+</script>

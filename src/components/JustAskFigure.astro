@@ -209,15 +209,15 @@ const cards = recordings[lang].map((rec) => {
                               style={`--to:${meter.p};transition-delay:${barDelay}ms`}
                             />
                             <div
-                              class="bg-foreground absolute -top-1 -bottom-1 w-px"
+                              class="num bg-foreground absolute -top-1 -bottom-1 w-px"
                               style={`left:${meter.gate * 100}%`}
                               aria-hidden="true"
                             />
                           </div>
-                          <span class="data measured w-10 text-right">
+                          <span class="num data measured w-10 text-right">
                             {meter.p.toFixed(2)}
                           </span>
-                          <span class="apparatus hidden shrink-0 whitespace-nowrap sm:inline">
+                          <span class="num gate apparatus shrink-0 whitespace-nowrap">
                             {t("fig1.gate")} {meter.gate.toFixed(2)}
                           </span>
                         </div>
@@ -233,12 +233,12 @@ const cards = recordings[lang].map((rec) => {
       }
     </div>
 
-    <div>
+    <div class="order-first lg:order-none">
       <p class="apparatus mb-3" id="fig1-pick">{t("fig1.pick")}</p>
-      <div role="radiogroup" aria-labelledby="fig1-pick">
+      <div role="radiogroup" aria-labelledby="fig1-pick" class="grid gap-2">
         {
           cards.map(({ rec }, i) => (
-            <label class="border-border text-muted-foreground has-[:checked]:text-foreground flex min-h-11 w-full cursor-pointer items-start gap-3 border-t py-3 font-sans text-[0.9375rem] leading-snug transition-colors duration-150 last:border-b">
+            <label class="border-rule-strong text-muted-foreground has-[:checked]:border-foreground has-[:checked]:bg-figure has-[:checked]:text-foreground has-[:focus-visible]:outline-ring [@media(hover:hover)]:hover:border-foreground [@media(hover:hover)]:hover:text-foreground flex min-h-11 w-full cursor-pointer items-start gap-3 rounded-[2px] border px-3 py-2.5 font-sans text-[0.9375rem] leading-snug transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2">
               <input
                 type="radio"
                 name="fig1-pick"
@@ -249,20 +249,33 @@ const cards = recordings[lang].map((rec) => {
               />
               <span
                 aria-hidden="true"
-                class="border-rule-strong peer-checked:bg-foreground peer-checked:border-foreground peer-focus-visible:outline-ring mt-1.5 size-2 shrink-0 border transition-colors duration-150 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-[5px]"
+                class="border-rule-strong peer-checked:bg-foreground peer-checked:border-foreground mt-1.5 size-2 shrink-0 border transition-colors duration-150"
               />
               {rec.request}
             </label>
           ))
         }
       </div>
-      <a
-        href={LIVE_URL}
-        class="link mt-5 inline-flex items-center gap-1 font-sans text-[0.9375rem]"
-      >
-        {t("fig1.try")}
-        <ArrowUpRightIcon aria-hidden="true" className="size-4" />
-      </a>
+      <div class="mt-4 flex flex-col items-start gap-1">
+        <label
+          class="has-[:focus-visible]:outline-ring inline-flex min-h-11 cursor-pointer items-center gap-2.5 font-sans text-[0.9375rem] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2"
+        >
+          <input type="checkbox" data-numbers class="peer sr-only" />
+          <span
+            aria-hidden="true"
+            class="border-rule-strong peer-checked:bg-foreground peer-checked:border-foreground size-3 shrink-0 border transition-colors duration-150"
+          >
+          </span>
+          {t("fig1.numbers")}
+        </label>
+        <a
+          href={LIVE_URL}
+          class="link inline-flex min-h-11 items-center gap-1 font-sans text-[0.9375rem]"
+        >
+          {t("fig1.try")}
+          <ArrowUpRightIcon aria-hidden="true" className="size-4" />
+        </a>
+      </div>
     </div>
   </div>
   <figcaption id="fig1-caption" class="caption">
@@ -284,6 +297,22 @@ const cards = recordings[lang].map((rec) => {
   @supports not selector(:has(a)) {
     [data-card="0"] {
       display: block;
+    }
+  }
+  /* Probabilities and gates stay behind "Show the numbers": the bar alone
+     says how sure the model was. */
+  .num {
+    display: none;
+  }
+  figure:has([data-numbers]:checked) .num {
+    display: block;
+  }
+  figure:has([data-numbers]:checked) span.num {
+    display: inline;
+  }
+  @media (max-width: 639px) {
+    figure:has([data-numbers]:checked) span.num.gate {
+      display: none;
     }
   }
 </style>

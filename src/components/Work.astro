@@ -7,7 +7,7 @@ import DocmatchFigure from "@/components/react/DocmatchFigure"
 import { measured } from "@/data/measured"
 import enStrings from "@/i18n/en.json"
 import esStrings from "@/i18n/es.json"
-import { ArrowUpRightIcon } from "@phosphor-icons/react"
+import { ArrowUpRightIcon, CaretDownIcon } from "@phosphor-icons/react"
 import { Picture } from "astro:assets"
 import { getRelativeLocaleUrl } from "astro:i18n"
 
@@ -138,7 +138,15 @@ const links = (items: { label: string; href: string }[], slug: string) => [
     </p>
   </div>
   <MeasuredNote class="mt-4 lg:mt-14" {...notes.docmatch} />
-  <DocmatchFigure client:visible t={s.fig2} />
+  <details class="run span-all mt-6">
+    <summary
+      class="border-rule-strong [@media(hover:hover)]:hover:border-foreground flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 rounded-[2px] border px-4 py-3 font-sans text-[0.9375rem] transition-colors duration-150"
+    >
+      {t("work.docmatch.run")}
+      <CaretDownIcon aria-hidden="true" className="caret size-4 shrink-0" />
+    </summary>
+    <DocmatchFigure client:visible t={s.fig2} />
+  </details>
 
   {/* dgii-ts */}
   <div class="mt-16">
@@ -169,7 +177,15 @@ const links = (items: { label: string; href: string }[], slug: string) => [
     </p>
   </div>
   <MeasuredNote class="mt-4 lg:mt-14" {...notes.dgii} />
-  <DgiiFigure client:visible t={s.fig4} />
+  <details class="run span-all mt-6">
+    <summary
+      class="border-rule-strong [@media(hover:hover)]:hover:border-foreground flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 rounded-[2px] border px-4 py-3 font-sans text-[0.9375rem] transition-colors duration-150"
+    >
+      {t("work.dgii.run")}
+      <CaretDownIcon aria-hidden="true" className="caret size-4 shrink-0" />
+    </summary>
+    <DgiiFigure client:visible t={s.fig4} />
+  </details>
 
   {/* Also building */}
   <h3 class="mt-16 text-[1.375rem] leading-tight">{t("work.also")}</h3>
